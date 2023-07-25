@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
-import { CourseModel } from 'src/database/models/course.model';
+import { CourseModel } from './entities/course.model';
 import { ModelClass } from 'objection';
 
 @Injectable()

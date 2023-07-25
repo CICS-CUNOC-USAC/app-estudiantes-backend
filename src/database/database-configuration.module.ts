@@ -2,7 +2,7 @@ import * as Knex from 'knex';
 import { Model } from 'objection';
 import { Global, Module } from '@nestjs/common';
 import * as dotenv from 'dotenv';
-import { CourseModel } from './models/course.model';
+import { CourseModel } from 'src/modules/course/entities/course.model';
 
 dotenv.config();
 
