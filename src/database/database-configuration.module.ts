@@ -3,11 +3,12 @@ import { Model } from 'objection';
 import { Global, Module } from '@nestjs/common';
 import * as dotenv from 'dotenv';
 import { CourseModel } from 'src/modules/course/entities/course.model';
+import { CareerModel } from 'src/modules/career/entities/career.model';
 
 dotenv.config();
 
 // Insert database models here
-const models = [CourseModel];
+const models = [CourseModel, CareerModel];
 
 const modelProviders = models.map((model) => {
   return {

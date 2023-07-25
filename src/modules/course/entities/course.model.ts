@@ -1,10 +1,10 @@
 import { Model } from 'objection';
 
 export class CourseModel extends Model {
-  static tableName = 'curso';
+  static tableName = 'courses';
 
-  codigo: string;
-  nombre: string;
-  descripcion: string;
-  creditos: number;
+  code: number;
+  name: string;
+  description: string;
+  credits: number;
 }
