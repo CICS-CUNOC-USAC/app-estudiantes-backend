@@ -139,6 +139,8 @@ export async function seed(knex: Knex): Promise<any> {
       { code: '769' , name: 'Maquinas Hidraulicas', description: "", credits: 4 },
       //Mecanica
       { code: '688' , name: 'Termodinamica 2', description: "", credits: 5 },
+      //Mecanica-Industrial
+      { code: '796' , name: 'Microeconomia', description: "", credits: 3 },
       //Sistemas
       { code: '2813' , name: 'Teoria de Sistemas 2', description: "", credits: 5 },
       { code: '950' , name: 'Estadistica 2', description: "", credits: 5 },
