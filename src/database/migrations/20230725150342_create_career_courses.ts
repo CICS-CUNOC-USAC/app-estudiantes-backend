@@ -7,7 +7,7 @@ export async function up(knex: Knex.Knex) {
       .references('code')
       .inTable('careers')
       .onDelete('CASCADE');
-    t.integer('course_code')
+    t.string('course_code')
       .notNullable()
       .references('code')
       .inTable('courses')

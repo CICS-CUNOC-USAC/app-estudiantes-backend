@@ -3,7 +3,7 @@ import * as Knex from 'knex';
 export async function up(knex: Knex.Knex) {
   return knex.schema.createTable('courses_prerequisites', (t) => {
     t.increments('id').primary();
-    t.integer('course_code')
+    t.string('course_code')
       .notNullable()
       .references('code')
       .inTable('courses')
