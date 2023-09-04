@@ -1,9 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CreateCareerDto } from './dto/create-career.dto';
 import { UpdateCareerDto } from './dto/update-career.dto';
+import { CareerModel } from './entities/career.model';
+import { ModelClass } from 'objection';
 
 @Injectable()
 export class CareerService {
+  constructor(
+    @Inject(CareerModel.name)
+    private careerModel: ModelClass<CareerModel>,
+  ) {}
   create(createCareerDto: CreateCareerDto) {
     return 'This action adds a new career';
   }
@@ -12,8 +18,8 @@ export class CareerService {
     return `This action returns all career`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} career`;
+  async findOne(careerCode: number) {
+    return this.careerModel.query().select().where('code', careerCode);
   }
 
   update(id: number, updateCareerDto: UpdateCareerDto) {
