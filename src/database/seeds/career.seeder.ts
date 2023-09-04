@@ -11,7 +11,5 @@ export async function seed(knex: Knex): Promise<any> {
 
   return knex('careers')
     .del()
-    .then(function () {
-      return knex('careers').insert(careers);
-    });
+    .then(() => knex('careers').insert(careers));
 }

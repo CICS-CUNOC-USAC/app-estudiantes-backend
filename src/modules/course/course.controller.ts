@@ -1,9 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { CourseService } from './course.service';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 
-@Controller('course')
+@Controller('courses')
 export class CourseController {
   constructor(private readonly courseService: CourseService) {}
 
@@ -20,6 +28,21 @@ export class CourseController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.courseService.findOne(+id);
+  }
+  /*
+    TODO:
+    - Versioning doesn't work for our purposes, let's try nesting the routes manually inside
+    the Get decorator
+  */
+  @Get(':semesterNumber')
+  findAllByCareerAndSemester(
+    @Param('semesterNumber') semesterNumber: string,
+    @Param('careerCode') careerCode: string,
+  ) {
+    return this.courseService.findAllByCareerAndSemester(
+      +semesterNumber,
+      +careerCode,
+    );
   }
 
   @Patch(':id')

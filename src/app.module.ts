@@ -4,6 +4,7 @@ import { DatabaseConfigurationModule } from './database/database-configuration.m
 import { CourseModule } from './modules/course/course.module';
 import { CareerModule } from './modules/career/career.module';
 import { DatabaseTransactionModule } from './database/transaction/database-transaction.module';
+import { CareerCoursesModule } from './modules/career_courses/career_courses.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { DatabaseTransactionModule } from './database/transaction/database-trans
     DatabaseTransactionModule,
     CourseModule,
     CareerModule,
+    CareerCoursesModule,
   ],
 })
 export class AppModule {}
