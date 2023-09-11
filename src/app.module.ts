@@ -10,6 +10,7 @@ import { UsersModule } from './modules/users/users.module';
 import { ProfilesModule } from './modules/profiles/profiles.module';
 import { StaffsModule } from './modules/staffs/staffs.module';
 import { GeneralAuthModule } from './modules/auth/general/general-auth.module';
+import { StaffAuthModule } from './modules/auth/staff/staff-auth.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { GeneralAuthModule } from './modules/auth/general/general-auth.module';
     // Auth
     GeneralAuthModule,
     RegularAuthModule,
+    StaffAuthModule,
     // Database
     DatabaseConfigurationModule,
     DatabaseTransactionModule,
