@@ -1,3 +1,5 @@
+<!-- Naming convention: https://flank.github.io/flank/pr_titles/ -->
+
 ## Description
 
 <!--- Describe your changes in detail -->
