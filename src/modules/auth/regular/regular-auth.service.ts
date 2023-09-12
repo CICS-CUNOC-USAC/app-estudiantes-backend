@@ -1,15 +1,77 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserModel } from 'src/modules/users/entities/user.model';
 import { UsersService } from 'src/modules/users/users.service';
+import { SignUpDto } from '../dto/sign-up.dto';
+import { DatabaseTransactionService } from 'src/database/transaction/database-transaction.service';
+import { IGeneralError } from 'src/core/interfaces/response/error/general-error.interface';
+import { ProfilesService } from 'src/modules/profiles/profiles.service';
+import * as bcrypt from 'bcrypt';
 
 // This class is responsible for the authentication of regular users (students)
 @Injectable()
 export class RegularAuthService {
   constructor(
     private readonly usersService: UsersService,
+    private readonly profilesService: ProfilesService,
     private jwtService: JwtService,
-  ) {}
+    private readonly dbTrxService: DatabaseTransactionService,
+  ) {
+    this.logger = new Logger(RegularAuthService.name);
+  }
+
+  logger: Logger;
+
+  /**
+   * Creates a new profile with its user and logs the user in
+   * @param {SignUpDto} Data to create the new profile with
+   * @returns {Promise<object>} User and token
+   */
+  async signUp(signUpDto: SignUpDto): Promise<object> {
+    // Deconstruct the DTO
+    const { user: createUserDto, ...profileDto } = signUpDto;
+
+    // Save the profile and user
+    return this.dbTrxService.databaseTransaction(async (trx) => {
+      // Check first if the user already exists
+      const user: UserModel | undefined = await this.usersService.findByEmail(
+        createUserDto.email,
+        trx,
+      );
+
+      // Return error if the user already exists
+      if (user !== undefined) {
+        const error: IGeneralError = {
+          statusCode: 400,
+          message: [
+            {
+              email: 'Email already exists',
+            },
+          ],
+          error: 'Bad Request',
+        };
+        throw new BadRequestException(error);
+      }
+
+      // Create the profile along with the user
+      const profile = await this.profilesService.create(
+        createUserDto,
+        profileDto,
+        trx,
+      );
+
+      // Get the created user
+      const createdUser = await this.usersService.findAndReturnById(
+        profile.user.id,
+        trx,
+      );
+
+      // Return the auth token and the user
+      const token = await this.jwtService.signAsync(createdUser.toJSON());
+
+      return { user: createdUser, token };
+    }, this.logger);
+  }
 
   /**
    * Generates a JWT token for the user and returns it along with the user
@@ -63,8 +125,10 @@ export class RegularAuthService {
     enteredPassword: string,
     hashedPassword: string,
   ): Promise<boolean> {
-    // We will implement bycrypt later, let's just compare plain for now
-    const match = enteredPassword === hashedPassword;
+    const match: boolean = await bcrypt.compare(
+      enteredPassword || '',
+      hashedPassword || '',
+    );
     return match;
   }
 }
