@@ -5,7 +5,7 @@ export async function up(knex: Knex.Knex) {
     t.increments('id').primary();
     t.string('email', 100).notNullable();
     t.string('ra', 20).notNullable();
-    t.string('encrypted_password', 100).notNullable();
+    t.text('encrypted_password').notNullable();
     t.integer('profile_id')
       .notNullable()
       .references('id')
@@ -17,5 +17,5 @@ export async function up(knex: Knex.Knex) {
 }
 
 export async function down(knex: Knex.Knex) {
-  return knex.schema;
+  return knex.schema.dropTable('users');
 }
