@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { StaffModel } from 'src/modules/staffs/entities/staff.model';
 import { StaffsService } from 'src/modules/staffs/staffs.service';
+import * as bcrypt from 'bcrypt';
 
 // This class is responsible for the authentication of staffs users (admins)
 @Injectable()
@@ -63,8 +64,10 @@ export class StaffAuthService {
     enteredPassword: string,
     hashedPassword: string,
   ): Promise<boolean> {
-    // We will implement bycrypt later, let's just compare plain for now
-    const match = enteredPassword === hashedPassword;
+    const match: boolean = await bcrypt.compare(
+      enteredPassword || '',
+      hashedPassword || '',
+    );
     return match;
   }
 }
