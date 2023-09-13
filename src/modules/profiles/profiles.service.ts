@@ -1,11 +1,37 @@
-import { Injectable } from '@nestjs/common';
-import { CreateProfileDto } from './dto/create-profile.dto';
+import { Inject, Injectable } from '@nestjs/common';
 import { UpdateProfileDto } from './dto/update-profile.dto';
+import { CreateUserDto } from '../users/dto/create-user.dto';
+import { ModelClass, Transaction } from 'objection';
+import { ProfileModel } from './entities/profile.model';
+import { DatabaseTransactionService } from 'src/database/transaction/database-transaction.service';
+import { UsersService } from '../users/users.service';
 
 @Injectable()
 export class ProfilesService {
-  create(createProfileDto: CreateProfileDto) {
-    return 'This action adds a new profile';
+  constructor(
+    @Inject(ProfileModel.name)
+    private readonly profileModel: ModelClass<ProfileModel>,
+    private readonly usersService: UsersService,
+    private readonly dbTrxService: DatabaseTransactionService,
+  ) {}
+
+  async create(
+    createUserDto: CreateUserDto,
+    profileDto: object,
+    trx?: Transaction | null,
+  ): Promise<ProfileModel> {
+    // Create the new profile
+    const profile = await this.profileModel
+      .query(trx)
+      .select('id')
+      .insert(profileDto);
+
+    await this.usersService.create(profile.$id(), createUserDto, trx);
+
+    return await this.profileModel
+      .query(trx)
+      .findById(profile.$id())
+      .withGraphFetched('user');
   }
 
   findAll() {

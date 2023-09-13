@@ -4,6 +4,7 @@ import { StaffsController } from './staffs.controller';
 
 @Module({
   controllers: [StaffsController],
-  providers: [StaffsService]
+  providers: [StaffsService],
+  exports: [StaffsService],
 })
 export class StaffsModule {}
