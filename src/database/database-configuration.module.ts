@@ -5,11 +5,21 @@ import * as dotenv from 'dotenv';
 import { CourseModel } from 'src/modules/course/entities/course.model';
 import { CareerModel } from 'src/modules/career/entities/career.model';
 import { CareerCourseModel } from 'src/modules/career_courses/entities/career_course.entity';
+import { UserModel } from 'src/modules/users/entities/user.model';
+import { ProfileModel } from 'src/modules/profiles/entities/profile.model';
+import { StaffModel } from 'src/modules/staffs/entities/staff.model';
 
 dotenv.config();
 
 // Insert database models here
-const models = [CourseModel, CareerModel, CareerCourseModel];
+const models = [
+  CourseModel,
+  CareerModel,
+  CareerCourseModel,
+  UserModel,
+  ProfileModel,
+  StaffModel,
+];
 
 const modelProviders = models.map((model) => {
   return {

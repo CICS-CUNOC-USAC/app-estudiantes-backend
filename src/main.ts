@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { NotFoundInterceptor } from './core/interceptors/not-found.interceptor';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -10,6 +11,8 @@ async function bootstrap() {
   // Set up interceptor that evaluates if a response is undefined
   // for a GET / UPDATE / DELETE endpoint, and returns Not Found error
   app.useGlobalInterceptors(new NotFoundInterceptor());
+  // Set up global validation pipe for checking DTOs
+  app.useGlobalPipes(new ValidationPipe({ transform: true }));
 
   const docConfig = new DocumentBuilder()
     .setTitle('Backend - Aplicación para estudiantes del CUNOC')
