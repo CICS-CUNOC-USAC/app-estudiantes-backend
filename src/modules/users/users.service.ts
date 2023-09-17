@@ -3,12 +3,15 @@ import { UserModel } from './entities/user.model';
 import { ModelClass, Transaction } from 'objection';
 import { CreateUserDto } from './dto/create-user.dto';
 import * as bcrypt from 'bcrypt';
+import { BaseService } from 'src/core/utils/base-service';
 
 @Injectable()
-export class UsersService {
+export class UsersService extends BaseService {
   constructor(
     @Inject(UserModel.name) private userModel: ModelClass<UserModel>,
-  ) {}
+  ) {
+    super(UsersService.name);
+  }
 
   /**
    * Creates a new user with the given data

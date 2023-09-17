@@ -22,7 +22,7 @@ export class StaffAuthController {
   @Post('login')
   async login(@Request() req, @Response() res) {
     const { staff, token } = await this.staffAuthService.login(req.user);
-    return res.set({ Authorization: `Bearer ${token}` }).send(staff);
+    return res.set({ Authorization: `Bearer ${token}` }).send({ staff, token });
   }
 
   @UseGuards(StaffLoginJwtAuthGuard)

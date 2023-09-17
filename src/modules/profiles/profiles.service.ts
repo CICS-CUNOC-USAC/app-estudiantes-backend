@@ -5,15 +5,18 @@ import { ModelClass, Transaction } from 'objection';
 import { ProfileModel } from './entities/profile.model';
 import { DatabaseTransactionService } from 'src/database/transaction/database-transaction.service';
 import { UsersService } from '../users/users.service';
+import { BaseService } from 'src/core/utils/base-service';
 
 @Injectable()
-export class ProfilesService {
+export class ProfilesService extends BaseService {
   constructor(
     @Inject(ProfileModel.name)
     private readonly profileModel: ModelClass<ProfileModel>,
     private readonly usersService: UsersService,
     private readonly dbTrxService: DatabaseTransactionService,
-  ) {}
+  ) {
+    super(ProfilesService.name);
+  }
 
   async create(
     createUserDto: CreateUserDto,

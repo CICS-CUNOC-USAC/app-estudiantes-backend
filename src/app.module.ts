@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseConfigurationModule } from './database/database-configuration.module';
 import { CourseModule } from './modules/course/course.module';
@@ -11,6 +11,7 @@ import { ProfilesModule } from './modules/profiles/profiles.module';
 import { StaffsModule } from './modules/staffs/staffs.module';
 import { GeneralAuthModule } from './modules/auth/general/general-auth.module';
 import { StaffAuthModule } from './modules/auth/staff/staff-auth.module';
+import { AppLoggerMiddleware } from './core/middlewares/logger.middleware';
 
 @Module({
   imports: [
@@ -31,4 +32,8 @@ import { StaffAuthModule } from './modules/auth/staff/staff-auth.module';
     StaffsModule,
   ],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(AppLoggerMiddleware).forRoutes('*');
+  }
+}

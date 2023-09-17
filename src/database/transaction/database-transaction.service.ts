@@ -11,13 +11,13 @@ import { IGeneralError } from 'src/core/interfaces/response/error/general-error.
 
 @Injectable()
 export class DatabaseTransactionService {
-  async databaseTransaction(
-    executeFunction: (t: Transaction) => Promise<object>,
+  async databaseTransaction<T>(
+    executeFunction: (t: Transaction) => Promise<T>,
     logger?: Logger,
-  ): Promise<object> {
+  ): Promise<T> {
     const transaction: Transaction = await Model.startTransaction();
     try {
-      const res: object = await executeFunction(transaction);
+      const res: T = await executeFunction(transaction);
       await transaction.commit();
       return res;
     } catch (err) {
