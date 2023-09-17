@@ -1,12 +1,15 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ModelClass, Transaction } from 'objection';
 import { StaffModel } from './entities/staff.model';
+import { BaseService } from 'src/core/utils/base-service';
 
 @Injectable()
-export class StaffsService {
+export class StaffsService extends BaseService {
   constructor(
     @Inject(StaffModel.name) private staffModel: ModelClass<StaffModel>,
-  ) {}
+  ) {
+    super(StaffsService.name);
+  }
 
   /**
    * Finds and returns an staff by email, or undefined if no staff is found

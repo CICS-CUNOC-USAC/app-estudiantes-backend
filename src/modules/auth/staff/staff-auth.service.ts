@@ -3,14 +3,17 @@ import { JwtService } from '@nestjs/jwt';
 import { StaffModel } from 'src/modules/staffs/entities/staff.model';
 import { StaffsService } from 'src/modules/staffs/staffs.service';
 import * as bcrypt from 'bcrypt';
+import { BaseService } from 'src/core/utils/base-service';
 
 // This class is responsible for the authentication of staffs users (admins)
 @Injectable()
-export class StaffAuthService {
+export class StaffAuthService extends BaseService {
   constructor(
     private readonly staffsService: StaffsService,
     private jwtService: JwtService,
-  ) {}
+  ) {
+    super(StaffAuthService.name);
+  }
 
   /**
    * Generates a JWT token for the staff user and returns it along with the user

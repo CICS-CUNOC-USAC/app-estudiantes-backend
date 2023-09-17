@@ -24,7 +24,7 @@ export class RegularAuthController {
     const response = await this.regularAuthService.signUp(signUpDto);
     const token = response['token'];
     const user = response['user'];
-    return res.set({ Authorization: `Bearer ${token}` }).send(user);
+    return res.set({ Authorization: `Bearer ${token}` }).send({ user, token });
   }
 
   @UseGuards(RegularLoginLocalAuthGuard)
@@ -32,7 +32,7 @@ export class RegularAuthController {
   @Post('login')
   async login(@Request() req, @Response() res) {
     const { user, token } = await this.regularAuthService.login(req.user);
-    return res.set({ Authorization: `Bearer ${token}` }).send(user);
+    return res.set({ Authorization: `Bearer ${token}` }).send({ user, token });
   }
 
   @UseGuards(RegularLoginJwtAuthGuard)

@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, Logger } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserModel } from 'src/modules/users/entities/user.model';
 import { UsersService } from 'src/modules/users/users.service';
@@ -7,32 +7,37 @@ import { DatabaseTransactionService } from 'src/database/transaction/database-tr
 import { IGeneralError } from 'src/core/interfaces/response/error/general-error.interface';
 import { ProfilesService } from 'src/modules/profiles/profiles.service';
 import * as bcrypt from 'bcrypt';
+import { BaseService } from 'src/core/utils/base-service';
 
 // This class is responsible for the authentication of regular users (students)
 @Injectable()
-export class RegularAuthService {
+export class RegularAuthService extends BaseService {
   constructor(
     private readonly usersService: UsersService,
     private readonly profilesService: ProfilesService,
     private jwtService: JwtService,
     private readonly dbTrxService: DatabaseTransactionService,
   ) {
-    this.logger = new Logger(RegularAuthService.name);
+    super(RegularAuthService.name);
   }
-
-  logger: Logger;
 
   /**
    * Creates a new profile with its user and logs the user in
    * @param {SignUpDto} Data to create the new profile with
    * @returns {Promise<object>} User and token
    */
-  async signUp(signUpDto: SignUpDto): Promise<object> {
+  async signUp(signUpDto: SignUpDto): Promise<{
+    user: UserModel;
+    token: string;
+  }> {
     // Deconstruct the DTO
     const { user: createUserDto, ...profileDto } = signUpDto;
 
     // Save the profile and user
-    return this.dbTrxService.databaseTransaction(async (trx) => {
+    return this.dbTrxService.databaseTransaction<{
+      user: UserModel;
+      token: string;
+    }>(async (trx) => {
       // Check first if the user already exists
       const user: UserModel | undefined = await this.usersService.findByEmail(
         createUserDto.email,

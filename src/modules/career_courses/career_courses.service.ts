@@ -3,13 +3,16 @@ import { CreateCareerCourseDto } from './dto/create-career_course.dto';
 import { UpdateCareerCourseDto } from './dto/update-career_course.dto';
 import { ModelClass } from 'objection';
 import { CareerCourseModel } from './entities/career_course.entity';
+import { BaseService } from 'src/core/utils/base-service';
 
 @Injectable()
-export class CareerCoursesService {
+export class CareerCoursesService extends BaseService {
   constructor(
     @Inject(CareerCourseModel.name)
     private careerCourseModel: ModelClass<CareerCourseModel>,
-  ) {}
+  ) {
+    super(CareerCoursesService.name);
+  }
   create(createCareerCourseDto: CreateCareerCourseDto) {
     return 'This action adds a new careerCourse';
   }
