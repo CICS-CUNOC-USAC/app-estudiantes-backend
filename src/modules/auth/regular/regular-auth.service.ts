@@ -55,6 +55,10 @@ export class RegularAuthService extends BaseService {
           ],
           error: 'Bad Request',
         };
+        if (user.ra === createUserDto.ra)
+          error.message.push({
+            ra: 'RA already exists',
+          });
         throw new BadRequestException(error);
       }
 
