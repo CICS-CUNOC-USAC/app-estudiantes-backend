@@ -1,9 +1,10 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { UserModel } from './entities/user.model';
 import { ModelClass, Transaction } from 'objection';
 import { CreateUserDto } from './dto/create-user.dto';
 import * as bcrypt from 'bcrypt';
 import { BaseService } from 'src/core/utils/base-service';
+import { IGeneralError } from 'src/core/interfaces/response/error/general-error.interface';
 
 @Injectable()
 export class UsersService extends BaseService {
@@ -32,6 +33,58 @@ export class UsersService extends BaseService {
       encrypted_password: encryptedPassword,
       profile_id: profileId,
     });
+  }
+
+  /**
+   * Updates the email of an user
+   * @param {number} id ID of the user to update
+   * @param {string} email New email to set to the user
+   * @param {Transaction} trx Transaction to use for the operation
+   */
+  async updateEmail(
+    id: number,
+    email: string,
+    trx?: Transaction,
+  ): Promise<void> {
+    // First, validate if the email is already in use
+    const user = await this.findByEmail(email, trx);
+    if (user) {
+      // First check if the entered email is the same as the current one and don't update if it is
+      if (user.email === email) {
+        return;
+      }
+      // If the email is different but it is already in use, throw an error
+      const error: IGeneralError = {
+        statusCode: 400,
+        message: [
+          {
+            email: 'Email is already in use',
+          },
+        ],
+        error: 'Bad Request',
+      };
+      throw new BadRequestException(error);
+    }
+    await this.userModel.query(trx).findById(id).patch({ email });
+  }
+
+  /**
+   * Updated the password of an user
+   * @param {number} id ID of the user to update
+   * @param {string} password New password to set to the user
+   * @param {Transaction} trx Transaction to use for the operation
+   * @returns {Promise<void>}
+   */
+  async updatePassword(
+    id: number,
+    newPassword: string,
+    trx?: Transaction,
+  ): Promise<void> {
+    const newEncryptedPassword = await this.hashPassword(newPassword);
+    await this.userModel
+      .query(trx)
+      .findById(id)
+      .patch({ encrypted_password: newEncryptedPassword });
   }
 
   /**

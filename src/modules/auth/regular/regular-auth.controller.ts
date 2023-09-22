@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Post,
+  Put,
   Request,
   Response,
   UseGuards,
@@ -13,6 +14,7 @@ import { LoginDto } from '../dto/login.dto';
 import { RegularLoginLocalAuthGuard } from 'src/core/guards/local-regular-auth.guard';
 import { RegularLoginJwtAuthGuard } from 'src/core/guards/jwt-regular-auth.guard';
 import { SignUpDto } from '../dto/sign-up.dto';
+import { UpdateRegularProfileDto } from '../dto/update-profile-regular.dto';
 
 @ApiTags('regular login')
 @Controller('auth')
@@ -39,5 +41,16 @@ export class RegularAuthController {
   @Get('me')
   async getProfile(@Request() req) {
     return this.regularAuthService.myProfile(req.user);
+  }
+
+  @UseGuards(RegularLoginJwtAuthGuard)
+  @Put('me')
+  async updateProfile(@Request() req, @Body() body: UpdateRegularProfileDto) {
+    return this.regularAuthService.update(
+      req.user['id'],
+      req.user['profile_id'],
+      body,
+    );
+    // return this.regularAuthService.updateProfile(req.user, body);
   }
 }
