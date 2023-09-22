@@ -1,5 +1,5 @@
 export interface IGeneralError {
   statusCode: number;
-  message: object[];
+  message: object[] | string;
   error: string;
 }

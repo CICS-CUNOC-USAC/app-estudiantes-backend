@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserModel } from 'src/modules/users/entities/user.model';
 import { UsersService } from 'src/modules/users/users.service';
@@ -8,11 +8,18 @@ import { IGeneralError } from 'src/core/interfaces/response/error/general-error.
 import { ProfilesService } from 'src/modules/profiles/profiles.service';
 import * as bcrypt from 'bcrypt';
 import { BaseService } from 'src/core/utils/base-service';
+import { UpdateRegularProfileDto } from '../dto/update-profile-regular.dto';
+import { ModelClass } from 'objection';
+import { ProfileModel } from 'src/modules/profiles/entities/profile.model';
 
 // This class is responsible for the authentication of regular users (students)
 @Injectable()
 export class RegularAuthService extends BaseService {
   constructor(
+    @Inject(ProfileModel.name)
+    private readonly profileModel: ModelClass<ProfileModel>,
+    @Inject(UserModel.name)
+    private readonly userModel: ModelClass<UserModel>,
     private readonly usersService: UsersService,
     private readonly profilesService: ProfilesService,
     private jwtService: JwtService,
@@ -56,7 +63,7 @@ export class RegularAuthService extends BaseService {
           error: 'Bad Request',
         };
         if (user.ra === createUserDto.ra)
-          error.message.push({
+          (error.message as object[]).push({
             ra: 'RA already exists',
           });
         throw new BadRequestException(error);
@@ -99,6 +106,42 @@ export class RegularAuthService extends BaseService {
     const userWithProfile = await this.usersService.findAndReturnById(user.id);
     delete userWithProfile.encrypted_password;
     return userWithProfile;
+  }
+
+  /**
+   * Updates the user's profile
+   * @param updateProfileDto Data to update the profile with
+   * @param profileId ID of the profile to update
+   */
+  async update(
+    userId: number,
+    profileId: number,
+    updateProfileDto: UpdateRegularProfileDto,
+  ) {
+    const { user: userDto, ...profileDto } = updateProfileDto;
+    // If there is data to update only the profile (not user), if applies
+    return this.dbTrxService.databaseTransaction(async (trx) => {
+      if (profileDto) {
+        await this.profileModel
+          .query(trx)
+          .findById(profileId)
+          .patch(profileDto);
+      }
+      // update the password if applies
+      if (userDto) {
+        const { email, password } = userDto;
+        if (email) {
+          // todo: update email (if applies, and verify if it already exists)
+          await this.usersService.updateEmail(userId, email, trx);
+        }
+        if (password) {
+          // todo: update password (if applies)
+          await this.usersService.updatePassword(userId, password, trx);
+        }
+      }
+      // Return the updated profile
+      return this.usersService.findAndReturnById(userId, trx);
+    }, this.logger);
   }
 
   /**
