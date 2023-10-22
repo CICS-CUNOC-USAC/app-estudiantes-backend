@@ -139,12 +139,6 @@ export async function seed(knex: Knex): Promise<any> {
     { code: '674', name: 'Matematica Aplicada 3', description: '', credits: 5 },
     { code: '148', name: 'Fisica 3', description: '', credits: 6 },
     { code: '694', name: 'Contabilidad 1', description: '', credits: 3 },
-    {
-      code: '2806',
-      name: 'Principios de Metodologia',
-      description: '',
-      credits: 3,
-    },
     { code: '094', name: 'Ecologia', description: '', credits: 3 },
     {
       code: '087',
@@ -169,7 +163,7 @@ export async function seed(knex: Knex): Promise<any> {
       credits: 5,
     },
     {
-      code: 'B',
+      code: '2806',
       name: 'Principios de Metrologia',
       description: '',
       credits: 3,
@@ -245,7 +239,6 @@ export async function seed(knex: Knex): Promise<any> {
     { code: '150', name: 'Fisica 4', description: '', credits: 6 },
     { code: '779', name: 'Contabilidad 2', description: '', credits: 3 },
     { code: '2670', name: 'Gestion de Desastres', description: '', credits: 3 },
-    { code: '1073', name: 'Topografia 3', description: '', credits: 6 },
     {
       code: '794',
       name: 'Programacion de Computadoras 2',
@@ -265,6 +258,7 @@ export async function seed(knex: Knex): Promise<any> {
       credits: 5,
     },
     //Civil
+    { code: '1073', name: 'Topografia 3', description: '', credits: 6 },
     {
       code: '679',
       name: 'Materiales de Construccion',
@@ -395,7 +389,6 @@ export async function seed(knex: Knex): Promise<any> {
       description: '',
       credits: 5,
     },
-    { code: '906', name: 'Analisis Mecanico', description: '', credits: 5 },
     {
       code: '944',
       name: 'Administracion de Empresas 2',
@@ -403,6 +396,7 @@ export async function seed(knex: Knex): Promise<any> {
       credits: 3,
     },
     //Civil
+    { code: '906', name: 'Analisis Mecanico', description: '', credits: 5 },
     { code: '1074', name: 'Transportes', description: '', credits: 4 },
     { code: '1075', name: 'Vias Terrestres 2', description: '', credits: 6 },
     {
@@ -530,18 +524,18 @@ export async function seed(knex: Knex): Promise<any> {
     },
     { code: '2570', name: 'Etica Profesional', description: '', credits: 4 },
     {
+      code: '2837',
+      name: 'Seminario de Investigacion',
+      description: '',
+      credits: 4,
+    }, //TODO: REVISAR, EN SISTEMAS VALE 3 CREDITOS, NO 4
+    //Civil
+    {
       code: '911',
       name: 'Costos Presupuestos y Avaluos',
       description: '',
       credits: 6,
     },
-    {
-      code: 'D',
-      name: 'Seminario de Investigacion',
-      description: '',
-      credits: 4,
-    }, //TODO: REVISAR, NO TIENE CODIGO
-    //Civil
     { code: '1062', name: 'Ingenieria Sismica', description: '', credits: 5 },
     {
       code: '1054',
@@ -682,12 +676,6 @@ export async function seed(knex: Knex): Promise<any> {
       name: 'Preparacion y Evaluacion de Proyectos 1',
       description: '',
       credits: 4,
-    },
-    {
-      code: '2837',
-      name: 'Seminario de Investigacion',
-      description: '',
-      credits: 3,
     },
     {
       code: '918',
