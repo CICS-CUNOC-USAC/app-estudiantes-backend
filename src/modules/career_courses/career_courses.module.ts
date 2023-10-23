@@ -7,5 +7,6 @@ import { CourseModule } from '../course/course.module';
   controllers: [CareerCoursesController],
   providers: [CareerCoursesService],
   imports: [CourseModule],
+  exports: [CareerCoursesService],
 })
 export class CareerCoursesModule {}

@@ -11,6 +11,9 @@ export class CareerCourseModel extends Model {
   field: number;
   mandatory: boolean;
 
+  career: CareerModel | null;
+  course: CourseModel | null;
+
   static get relationMappings(): RelationMappings | RelationMappingsThunk {
     return {
       career: {
