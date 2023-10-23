@@ -12,6 +12,7 @@ import { StaffsModule } from './modules/staffs/staffs.module';
 import { GeneralAuthModule } from './modules/auth/general/general-auth.module';
 import { StaffAuthModule } from './modules/auth/staff/staff-auth.module';
 import { AppLoggerMiddleware } from './core/middlewares/logger.middleware';
+import { UserCoursesProgressModule } from './modules/user-courses-progress/user-courses-progress.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { AppLoggerMiddleware } from './core/middlewares/logger.middleware';
     UsersModule,
     ProfilesModule,
     StaffsModule,
+    UserCoursesProgressModule,
   ],
 })
 export class AppModule {

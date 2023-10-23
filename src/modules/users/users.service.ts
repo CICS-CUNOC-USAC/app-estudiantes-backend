@@ -30,6 +30,7 @@ export class UsersService extends BaseService {
     await this.userModel.query(trx).insert({
       email: createUserDto.email,
       ra: createUserDto.ra,
+      career_code: createUserDto.career_code,
       encrypted_password: encryptedPassword,
       profile_id: profileId,
     });
@@ -98,6 +99,7 @@ export class UsersService extends BaseService {
     const user = await this.userModel
       .query(trx)
       .withGraphFetched('profile')
+      .withGraphFetched('career')
       .findOne({ email });
     return user;
   }
@@ -115,6 +117,7 @@ export class UsersService extends BaseService {
     const user = await this.userModel
       .query(trx)
       .withGraphFetched('profile')
+      .withGraphFetched('career')
       .findById(id);
     delete user.encrypted_password;
     return user;

@@ -30,6 +30,7 @@ export class StaffsService extends BaseService {
    */
   async findAndReturnById(id: string, trx?: Transaction): Promise<StaffModel> {
     const staff = await this.staffModel.query(trx).findById(id);
+    delete staff.encrypted_password;
     return staff;
   }
 }

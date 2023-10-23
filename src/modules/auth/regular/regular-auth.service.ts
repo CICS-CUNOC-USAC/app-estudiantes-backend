@@ -11,6 +11,7 @@ import { BaseService } from 'src/core/utils/base-service';
 import { UpdateRegularProfileDto } from '../dto/update-profile-regular.dto';
 import { ModelClass } from 'objection';
 import { ProfileModel } from 'src/modules/profiles/entities/profile.model';
+import { UserCoursesProgressService } from 'src/modules/user-courses-progress/user-courses-progress.service';
 
 // This class is responsible for the authentication of regular users (students)
 @Injectable()
@@ -22,6 +23,7 @@ export class RegularAuthService extends BaseService {
     private readonly userModel: ModelClass<UserModel>,
     private readonly usersService: UsersService,
     private readonly profilesService: ProfilesService,
+    private readonly userCoursesProgressService: UserCoursesProgressService,
     private jwtService: JwtService,
     private readonly dbTrxService: DatabaseTransactionService,
   ) {
@@ -82,6 +84,13 @@ export class RegularAuthService extends BaseService {
         trx,
       );
 
+      // Also initialize the user's career progress (user_courses_progress)
+      console.log(createdUser.id);
+      await this.userCoursesProgressService.create(
+        createdUser.id,
+        createdUser.career_code,
+        trx,
+      );
       // Return the auth token and the user
       const token = await this.jwtService.signAsync(createdUser.toJSON());
 

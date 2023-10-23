@@ -1,5 +1,6 @@
 import { Model, RelationMappings, RelationMappingsThunk } from 'objection';
 import { CareerModel } from 'src/modules/career/entities/career.model';
+import { CourseSemesterProgressModel } from 'src/modules/user-courses-progress/entities/course-semester-progress.model';
 
 export class CourseModel extends Model {
   static tableName = 'courses';
@@ -21,6 +22,14 @@ export class CourseModel extends Model {
             to: 'career_courses.career_code',
           },
           to: 'careers.code',
+        },
+      },
+      courses_semester_progress: {
+        modelClass: CourseSemesterProgressModel,
+        relation: Model.BelongsToOneRelation,
+        join: {
+          from: 'courses.code',
+          to: 'courses_semester_progress.course_code',
         },
       },
     };

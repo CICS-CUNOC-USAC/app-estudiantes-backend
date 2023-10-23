@@ -8,6 +8,9 @@ import { CareerCourseModel } from 'src/modules/career_courses/entities/career_co
 import { UserModel } from 'src/modules/users/entities/user.model';
 import { ProfileModel } from 'src/modules/profiles/entities/profile.model';
 import { StaffModel } from 'src/modules/staffs/entities/staff.model';
+import { CareerProgressModel } from 'src/modules/user-courses-progress/entities/career-progress.model';
+import { SemesterProgressModel } from 'src/modules/user-courses-progress/entities/semester-progress.model';
+import { CourseSemesterProgressModel } from 'src/modules/user-courses-progress/entities/course-semester-progress.model';
 
 dotenv.config();
 
@@ -19,6 +22,9 @@ const models = [
   UserModel,
   ProfileModel,
   StaffModel,
+  CareerProgressModel,
+  SemesterProgressModel,
+  CourseSemesterProgressModel,
 ];
 
 const modelProviders = models.map((model) => {
