@@ -30,7 +30,6 @@ export class StaffAuthService extends BaseService {
    */
   async myProfile(staff: any) {
     const completeStaff = await this.staffsService.findAndReturnById(staff.id);
-    delete completeStaff.encrypted_password;
     return completeStaff;
   }
 

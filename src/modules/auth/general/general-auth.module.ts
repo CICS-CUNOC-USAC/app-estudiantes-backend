@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
-// import { StaffsModule } from 'src/staffs/staffs.module';
+import { JwtRequiredStrategy } from 'src/core/strategies/auth/general/jwt-required.strategy';
+import { StaffsModule } from 'src/modules/staffs/staffs.module';
 import { UsersModule } from 'src/modules/users/users.module';
 
 @Module({
-  // providers: [JwtStrategy],
+  providers: [JwtRequiredStrategy],
   imports: [
-    // StaffsModule,
+    StaffsModule,
     UsersModule,
     JwtModule.register({
       global: true,
