@@ -58,8 +58,12 @@ export class CareerCoursesService extends BaseService {
   async findCoursesByCareer(careerCode: number) {
     return await this.careerCourseModel
       .query()
+      .joinRaw(
+        'JOIN career_fields ON (career_courses.career_code = career_fields.career_code AND career_courses.field = career_fields.field_number)',
+      )
+      .select('career_courses.*', 'career_fields.name as field_name')
       .orderBy('semester')
-      .where('career_code', careerCode)
+      .where('career_courses.career_code', careerCode)
       .withGraphFetched('course')
       .modifyGraph('course', (builder) => {
         builder.select('name as course_name', 'credits');
