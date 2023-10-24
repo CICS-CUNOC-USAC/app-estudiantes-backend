@@ -27,7 +27,7 @@ export class CareerCoursesService extends BaseService {
       .sum('courses.credits as total_credits')
       .join('career_courses', 'careers.code', 'career_courses.career_code')
       .join('courses', 'career_courses.course_code', 'courses.code')
-      .where('careers.code', 58)
+      .where('careers.code', careerCode)
       .andWhere('career_courses.mandatory', true)
       .groupBy('careers.name')
       .first();
@@ -36,7 +36,7 @@ export class CareerCoursesService extends BaseService {
       .sum('courses.credits as total_credits')
       .join('career_courses', 'careers.code', 'career_courses.career_code')
       .join('courses', 'career_courses.course_code', 'courses.code')
-      .where('careers.code', 58)
+      .where('careers.code', careerCode)
       .groupBy('careers.name')
       .first();
     return {

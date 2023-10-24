@@ -36,8 +36,11 @@ export class CourseService extends BaseService {
       });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} course`;
+  async findOne(code: string) {
+    return await this.careerCourseModel
+      .query()
+      .findOne('course_code', code)
+      .withGraphFetched('course');
   }
 
   update(id: number, updateCourseDto: UpdateCourseDto) {

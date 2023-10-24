@@ -25,9 +25,9 @@ export class CourseController {
     return this.courseService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.courseService.findOne(+id);
+  @Get(':code')
+  findOne(@Param('code') code: string) {
+    return this.courseService.findOne(code);
   }
   /*
     TODO:
