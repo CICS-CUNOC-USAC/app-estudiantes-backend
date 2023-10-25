@@ -66,7 +66,7 @@ export class CareerCoursesService extends BaseService {
       .where('career_courses.career_code', careerCode)
       .withGraphFetched('course')
       .modifyGraph('course', (builder) => {
-        builder.select('name as course_name', 'credits');
+        builder.select('name', 'credits');
       });
   }
 

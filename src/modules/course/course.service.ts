@@ -39,6 +39,10 @@ export class CourseService extends BaseService {
   async findOne(code: string) {
     return await this.careerCourseModel
       .query()
+      .joinRaw(
+        'JOIN career_fields ON (career_courses.career_code = career_fields.career_code AND career_courses.field = career_fields.field_number)',
+      )
+      .select('career_courses.*', 'career_fields.name as field_name')
       .findOne('course_code', code)
       .withGraphFetched('course');
   }
