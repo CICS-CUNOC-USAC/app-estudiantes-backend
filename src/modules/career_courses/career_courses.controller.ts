@@ -1,15 +1,6 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { CareerCoursesService } from './career_courses.service';
 import { CreateCareerCourseDto } from './dto/create-career_course.dto';
-import { UpdateCareerCourseDto } from './dto/update-career_course.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { CourseService } from '../course/course.service';
 
@@ -39,7 +30,9 @@ export class CareerCoursesController {
 
   @Get(':careerCode')
   findCoursesByCareer(@Param('careerCode') careerCode: string) {
-    return this.careerCoursesService.findCoursesByCareer(+careerCode);
+    return this.careerCoursesService.findCoursesByCareerAndSemester(
+      +careerCode,
+    );
   }
 
   @Get()

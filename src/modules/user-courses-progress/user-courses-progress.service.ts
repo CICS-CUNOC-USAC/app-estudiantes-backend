@@ -1,9 +1,8 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { UpdateUserCoursesProgressDto } from './dto/update-user-courses-progress.dto';
 import { BaseService } from 'src/core/utils/base-service';
 import { ModelClass, Transaction } from 'objection';
 import { CareerCoursesService } from '../career_courses/career_courses.service';
-import { groupBy } from 'lodash';
 import { DatabaseTransactionService } from 'src/database/transaction/database-transaction.service';
 import { CareerProgressModel } from './entities/career-progress.model';
 import { SemesterProgressModel } from './entities/semester-progress.model';
@@ -26,14 +25,29 @@ export class UserCoursesProgressService extends BaseService {
   async findUserProgress(userId: number, careerCode: number) {
     const data = await this.careerProgressModel
       .query()
-      .select('*')
       .where('user_id', userId)
       .withGraphFetched(
         'semester_progress.courses_semester_progress.career_course.course',
       )
+      // .joinRaw(
+      //   'JOIN career_fields ON (career_courses.career_code = career_fields.career_code AND career_courses.field = career_fields.field_number)',
+      // )
       .modifyGraph('semester_progress.courses_semester_progress', (builder) => {
+        console.log('builder');
         builder.orderBy('id');
       })
+      .modifyGraph(
+        'semester_progress.courses_semester_progress.career_course',
+        (builder) => {
+          builder
+            // .where('career_code', careerCode)
+            .joinRaw(
+              'JOIN career_fields ON (career_fields.career_code = career_courses.career_code  AND career_courses.field = career_fields.field_number)',
+            )
+            .andWhere('career_courses.career_code', careerCode)
+            .select('career_fields.name as field_name', 'career_courses.*');
+        },
+      )
       .first();
 
     const credits =
