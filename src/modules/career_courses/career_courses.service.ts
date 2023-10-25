@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CreateCareerCourseDto } from './dto/create-career_course.dto';
 import { UpdateCareerCourseDto } from './dto/update-career_course.dto';
 import { ModelClass } from 'objection';
+import { groupBy } from 'lodash';
 import { CareerCourseModel } from './entities/career_course.entity';
 import { BaseService } from 'src/core/utils/base-service';
 import { CareerModel } from '../career/entities/career.model';
@@ -27,7 +28,7 @@ export class CareerCoursesService extends BaseService {
       .sum('courses.credits as total_credits')
       .join('career_courses', 'careers.code', 'career_courses.career_code')
       .join('courses', 'career_courses.course_code', 'courses.code')
-      .where('careers.code', 58)
+      .where('careers.code', careerCode)
       .andWhere('career_courses.mandatory', true)
       .groupBy('careers.name')
       .first();
@@ -36,7 +37,7 @@ export class CareerCoursesService extends BaseService {
       .sum('courses.credits as total_credits')
       .join('career_courses', 'careers.code', 'career_courses.career_code')
       .join('courses', 'career_courses.course_code', 'courses.code')
-      .where('careers.code', 58)
+      .where('careers.code', careerCode)
       .groupBy('careers.name')
       .first();
     return {
@@ -56,14 +57,46 @@ export class CareerCoursesService extends BaseService {
   }
 
   async findCoursesByCareer(careerCode: number) {
-    return await this.careerCourseModel
+    const courses = await this.careerCourseModel
       .query()
+      .joinRaw(
+        'JOIN career_fields ON (career_courses.career_code = career_fields.career_code AND career_courses.field = career_fields.field_number)',
+      )
+      .select('career_courses.*', 'career_fields.name as field_name')
       .orderBy('semester')
-      .where('career_code', careerCode)
+      .where('career_courses.career_code', careerCode)
       .withGraphFetched('course')
       .modifyGraph('course', (builder) => {
-        builder.select('name as course_name', 'credits');
+        builder.select('name', 'credits');
       });
+
+    return courses;
+  }
+
+  async findCoursesByCareerAndSemester(careerCode: number) {
+    const courses = await this.careerCourseModel
+      .query()
+      .joinRaw(
+        'JOIN career_fields ON (career_courses.career_code = career_fields.career_code AND career_courses.field = career_fields.field_number)',
+      )
+      .select('career_courses.*', 'career_fields.name as field_name')
+      .orderBy('semester')
+      .where('career_courses.career_code', careerCode)
+      .withGraphFetched('course')
+      .modifyGraph('course', (builder) => {
+        builder.select('name', 'credits');
+      });
+
+    const groupedCourses = groupBy(courses, 'semester');
+    const result = Object.keys(groupedCourses).map((key) => {
+      return {
+        semester: key,
+        courses: groupedCourses[key],
+      };
+    });
+    console.log(result);
+
+    return result;
   }
 
   async getCareerSemesters(careerCode: number) {
