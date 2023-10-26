@@ -8,6 +8,19 @@ import { BaseService } from 'src/core/utils/base-service';
 
 @Injectable()
 export class CourseService extends BaseService {
+  async findOneWithCareer(code: string, careerCode: number) {
+    return await this.careerCourseModel
+      .query()
+      .select('career_courses.*', 'career_fields.name as field_name')
+      .findOne({
+        'career_courses.course_code': code, // Specify the table for course_code
+        'career_courses.career_code': careerCode, // Specify the table for career_code
+      })
+      .joinRaw(
+        'JOIN career_fields ON (career_courses.career_code = career_fields.career_code AND career_courses.field = career_fields.field_number)',
+      )
+      .withGraphFetched('course');
+  }
   constructor(
     @Inject(CourseModel.name)
     private courseModel: ModelClass<CourseModel>,

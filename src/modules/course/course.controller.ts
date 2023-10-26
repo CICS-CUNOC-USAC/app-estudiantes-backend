@@ -29,11 +29,15 @@ export class CourseController {
   findOne(@Param('code') code: string) {
     return this.courseService.findOne(code);
   }
-  /*
-    TODO:
-    - Versioning doesn't work for our purposes, let's try nesting the routes manually inside
-    the Get decorator
-  */
+
+  @Get(':code/:careerCode')
+  findOneWithCareer(
+    @Param('code') code: string,
+    @Param('careerCode') careerCode: number,
+  ) {
+    return this.courseService.findOneWithCareer(code, careerCode);
+  }
+
   @Get(':semesterNumber')
   findAllByCareerAndSemester(
     @Param('semesterNumber') semesterNumber: string,
