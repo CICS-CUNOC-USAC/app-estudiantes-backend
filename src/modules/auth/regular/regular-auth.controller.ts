@@ -7,6 +7,7 @@ import {
   Request,
   Response,
   UseGuards,
+  ValidationPipe,
 } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { RegularAuthService } from './regular-auth.service';
@@ -22,7 +23,10 @@ export class RegularAuthController {
   constructor(private readonly regularAuthService: RegularAuthService) {}
 
   @Post('sign-up')
-  async create(@Body() signUpDto: SignUpDto, @Response() res) {
+  async create(
+    @Body(new ValidationPipe({ transform: true })) signUpDto: SignUpDto,
+    @Response() res,
+  ) {
     const response = await this.regularAuthService.signUp(signUpDto);
     const token = response['token'];
     const user = response['user'];
@@ -45,7 +49,11 @@ export class RegularAuthController {
 
   @UseGuards(RegularLoginJwtAuthGuard)
   @Put('me')
-  async updateProfile(@Request() req, @Body() body: UpdateRegularProfileDto) {
+  async updateProfile(
+    @Request() req,
+    @Body(new ValidationPipe({ transform: true }))
+    body: UpdateRegularProfileDto,
+  ) {
     return this.regularAuthService.update(
       req.user['id'],
       req.user['profile_id'],

@@ -1,4 +1,11 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  ValidationPipe,
+} from '@nestjs/common';
 import { CareerCoursesService } from './career_courses.service';
 import { CreateCareerCourseDto } from './dto/create-career_course.dto';
 import { ApiTags } from '@nestjs/swagger';
@@ -13,7 +20,10 @@ export class CareerCoursesController {
   ) {}
 
   @Post()
-  create(@Body() createCareerCourseDto: CreateCareerCourseDto) {
+  create(
+    @Body(new ValidationPipe({ transform: true }))
+    createCareerCourseDto: CreateCareerCourseDto,
+  ) {
     return this.careerCoursesService.create(createCareerCourseDto);
   }
 
@@ -48,7 +58,7 @@ export class CareerCoursesController {
   // @Patch(':id')
   // update(
   //   @Param('id') id: string,
-  //   @Body() updateCareerCourseDto: UpdateCareerCourseDto,
+  //   @Body(new ValidationPipe({ transform: true })) updateCareerCourseDto: UpdateCareerCourseDto,
   // ) {
   //   return this.careerCoursesService.update(+id, updateCareerCourseDto);
   // }

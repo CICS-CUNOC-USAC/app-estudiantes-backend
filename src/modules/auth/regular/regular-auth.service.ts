@@ -85,7 +85,6 @@ export class RegularAuthService extends BaseService {
       );
 
       // Also initialize the user's career progress (user_courses_progress)
-      console.log(createdUser.id);
       await this.userCoursesProgressService.create(
         createdUser.id,
         createdUser.career_code,

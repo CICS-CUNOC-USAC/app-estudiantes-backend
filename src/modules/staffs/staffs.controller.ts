@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  ValidationPipe,
 } from '@nestjs/common';
 import { StaffsService } from './staffs.service';
 import { CreateStaffDto } from './dto/create-staff.dto';
@@ -16,7 +17,10 @@ export class StaffsController {
   constructor(private readonly staffsService: StaffsService) {}
 
   @Post()
-  create(@Body() createStaffDto: CreateStaffDto) {
+  create(
+    @Body(new ValidationPipe({ transform: true }))
+    createStaffDto: CreateStaffDto,
+  ) {
     // return this.staffsService.create(createStaffDto);
   }
 
@@ -31,7 +35,11 @@ export class StaffsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateStaffDto: UpdateStaffDto) {
+  update(
+    @Param('id') id: string,
+    @Body(new ValidationPipe({ transform: true }))
+    updateStaffDto: UpdateStaffDto,
+  ) {
     // return this.staffsService.update(+id, updateStaffDto);
   }
 

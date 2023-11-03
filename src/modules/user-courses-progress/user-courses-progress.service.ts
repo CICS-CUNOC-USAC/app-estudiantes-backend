@@ -33,7 +33,6 @@ export class UserCoursesProgressService extends BaseService {
       //   'JOIN career_fields ON (career_courses.career_code = career_fields.career_code AND career_courses.field = career_fields.field_number)',
       // )
       .modifyGraph('semester_progress.courses_semester_progress', (builder) => {
-        console.log('builder');
         builder.orderBy('id');
       })
       .modifyGraph(
