@@ -46,12 +46,12 @@ export class GeneralAuthInterceptor<T>
     return next.handle().pipe();
   }
 
-  private throwUnauthenticatedException() {
-    const error: IGeneralError = {
+  private throwUnauthenticatedException(error?: IGeneralError) {
+    const defaultError: IGeneralError = {
       statusCode: 403,
       message: 'You are not authorized to perform this operation',
       error: 'Unauthorized',
     };
-    throw new UnauthorizedException(error);
+    throw new UnauthorizedException(error || defaultError);
   }
 }

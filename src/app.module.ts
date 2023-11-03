@@ -13,6 +13,7 @@ import { GeneralAuthModule } from './modules/auth/general/general-auth.module';
 import { StaffAuthModule } from './modules/auth/staff/staff-auth.module';
 import { AppLoggerMiddleware } from './core/middlewares/logger.middleware';
 import { UserCoursesProgressModule } from './modules/user-courses-progress/user-courses-progress.module';
+import { ManualsModule } from './modules/manuals/manuals.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { UserCoursesProgressModule } from './modules/user-courses-progress/user-
     ProfilesModule,
     StaffsModule,
     UserCoursesProgressModule,
+    ManualsModule,
   ],
 })
 export class AppModule {
