@@ -4,10 +4,18 @@ import { StaffModel } from 'src/modules/staffs/entities/staff.model';
 import { StaffsService } from 'src/modules/staffs/staffs.service';
 import * as bcrypt from 'bcrypt';
 import { BaseService } from 'src/core/utils/base-service';
+import { QueryBuilder, Model } from 'objection';
+import { BaseQueryDto } from 'src/core/utils/base-query.dto';
 
 // This class is responsible for the authentication of staffs users (admins)
 @Injectable()
 export class StaffAuthService extends BaseService {
+  queryFilters(
+    queryDto: BaseQueryDto,
+    builder: QueryBuilder<Model, Model[]>,
+  ): QueryBuilder<Model, Model[]> {
+    throw new Error('Method not implemented.');
+  }
   constructor(
     private readonly staffsService: StaffsService,
     private jwtService: JwtService,

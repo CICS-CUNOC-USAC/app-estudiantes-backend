@@ -1,15 +1,22 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { UpdateUserCoursesProgressDto } from './dto/update-user-courses-progress.dto';
 import { BaseService } from 'src/core/utils/base-service';
-import { ModelClass, Transaction } from 'objection';
+import { Model, ModelClass, QueryBuilder, Transaction } from 'objection';
 import { CareerCoursesService } from '../career_courses/career_courses.service';
 import { DatabaseTransactionService } from 'src/database/transaction/database-transaction.service';
 import { CareerProgressModel } from './entities/career-progress.model';
 import { SemesterProgressModel } from './entities/semester-progress.model';
 import { CourseSemesterProgressModel } from './entities/course-semester-progress.model';
+import { BaseQueryDto } from 'src/core/utils/base-query.dto';
 
 @Injectable()
 export class UserCoursesProgressService extends BaseService {
+  queryFilters(
+    queryDto: BaseQueryDto,
+    builder: QueryBuilder<Model, Model[]>,
+  ): QueryBuilder<Model, Model[]> {
+    throw new Error('Method not implemented.');
+  }
   constructor(
     @Inject(CareerProgressModel.name)
     private readonly careerProgressModel: ModelClass<CareerProgressModel>,

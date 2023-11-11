@@ -1,13 +1,20 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { UserModel } from './entities/user.model';
-import { ModelClass, Transaction } from 'objection';
+import { Model, ModelClass, QueryBuilder, Transaction } from 'objection';
 import { CreateUserDto } from './dto/create-user.dto';
 import * as bcrypt from 'bcrypt';
 import { BaseService } from 'src/core/utils/base-service';
 import { IGeneralError } from 'src/core/interfaces/response/error/general-error.interface';
+import { BaseQueryDto } from 'src/core/utils/base-query.dto';
 
 @Injectable()
 export class UsersService extends BaseService {
+  queryFilters(
+    queryDto: BaseQueryDto,
+    builder: QueryBuilder<Model, Model[]>,
+  ): QueryBuilder<Model, Model[]> {
+    throw new Error('Method not implemented.');
+  }
   constructor(
     @Inject(UserModel.name) private userModel: ModelClass<UserModel>,
   ) {

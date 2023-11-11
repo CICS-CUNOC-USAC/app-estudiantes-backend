@@ -1,4 +1,4 @@
-import { BadRequestException, Logger } from '@nestjs/common';
+import { Logger } from '@nestjs/common';
 import { BaseQueryDto } from './base-query.dto';
 import { Model, OrderByDirection, Page, QueryBuilder } from 'objection';
 import { type OrderBy, type PaginationConverted } from './types/pagination';
@@ -84,6 +84,15 @@ export abstract class BaseService {
   }
 
   /**
+   * Normalizes a string by removing diacritical marks.
+   * @param value - The string to be normalized.
+   * @returns The normalized string.
+   */
+  normalizeString(value: string): string {
+    return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+
+  /**
    * Converts a string of comma-separated order parameters into an array of formatted order objects that can be used by Objection.js.
    * @param orderString - The string of comma-separated order parameters as `column:order`.
    * @returns An array of formatted order objects.
@@ -110,4 +119,9 @@ export abstract class BaseService {
   private validTypeOfOrderBy(input: string): input is OrderByDirection {
     return ['ASC', 'DESC', 'asc', 'desc'].includes(input);
   }
+
+  abstract queryFilters(
+    queryDto: BaseQueryDto,
+    builder: QueryBuilder<Model, Model[]>,
+  ): QueryBuilder<Model, Model[]>;
 }

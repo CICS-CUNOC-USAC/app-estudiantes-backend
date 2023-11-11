@@ -2,12 +2,19 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 import { CourseModel } from './entities/course.model';
-import { ModelClass } from 'objection';
+import { Model, ModelClass, QueryBuilder } from 'objection';
 import { CareerCourseModel } from '../career_courses/entities/career_course.entity';
 import { BaseService } from 'src/core/utils/base-service';
+import { BaseQueryDto } from 'src/core/utils/base-query.dto';
 
 @Injectable()
 export class CourseService extends BaseService {
+  queryFilters(
+    queryDto: BaseQueryDto,
+    builder: QueryBuilder<Model, Model[]>,
+  ): QueryBuilder<Model, Model[]> {
+    throw new Error('Method not implemented.');
+  }
   async findOneWithCareer(code: string, careerCode: number) {
     return await this.careerCourseModel
       .query()

@@ -9,13 +9,20 @@ import { ProfilesService } from 'src/modules/profiles/profiles.service';
 import * as bcrypt from 'bcrypt';
 import { BaseService } from 'src/core/utils/base-service';
 import { UpdateRegularProfileDto } from '../dto/update-profile-regular.dto';
-import { ModelClass } from 'objection';
+import { Model, ModelClass, QueryBuilder } from 'objection';
 import { ProfileModel } from 'src/modules/profiles/entities/profile.model';
 import { UserCoursesProgressService } from 'src/modules/user-courses-progress/user-courses-progress.service';
+import { BaseQueryDto } from 'src/core/utils/base-query.dto';
 
 // This class is responsible for the authentication of regular users (students)
 @Injectable()
 export class RegularAuthService extends BaseService {
+  queryFilters(
+    queryDto: BaseQueryDto,
+    builder: QueryBuilder<Model, Model[]>,
+  ): QueryBuilder<Model, Model[]> {
+    throw new Error('Method not implemented.');
+  }
   constructor(
     @Inject(ProfileModel.name)
     private readonly profileModel: ModelClass<ProfileModel>,

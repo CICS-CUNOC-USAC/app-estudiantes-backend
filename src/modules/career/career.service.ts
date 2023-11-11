@@ -2,11 +2,18 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CreateCareerDto } from './dto/create-career.dto';
 import { UpdateCareerDto } from './dto/update-career.dto';
 import { CareerModel } from './entities/career.model';
-import { ModelClass } from 'objection';
+import { Model, ModelClass, QueryBuilder } from 'objection';
 import { BaseService } from 'src/core/utils/base-service';
+import { BaseQueryDto } from 'src/core/utils/base-query.dto';
 
 @Injectable()
 export class CareerService extends BaseService {
+  queryFilters(
+    queryDto: BaseQueryDto,
+    builder: QueryBuilder<Model, Model[]>,
+  ): QueryBuilder<Model, Model[]> {
+    throw new Error('Method not implemented.');
+  }
   constructor(
     @Inject(CareerModel.name)
     private careerModel: ModelClass<CareerModel>,
