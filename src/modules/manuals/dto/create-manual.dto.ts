@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CreateManualDto {
   @IsNotEmpty()
@@ -16,4 +16,12 @@ export class CreateManualDto {
     example: 'This is a manual',
   })
   readonly description: string;
+
+  @IsNotEmpty()
+  @IsNumber()
+  @ApiProperty({
+    description: 'The id of the media entity to attach to the manual',
+    example: 12,
+  })
+  readonly media_id: number;
 }

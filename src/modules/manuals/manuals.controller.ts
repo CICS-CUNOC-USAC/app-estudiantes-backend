@@ -39,26 +39,36 @@ export class ManualsController {
   }
 
   @Get('admin')
-  findAll(@Query() queryDto: ManualsQueryDto) {
+  findAllAdmin(@Query() queryDto: ManualsQueryDto) {
     return this.manualsAdminService.findAll(queryDto);
+  }
+
+  @Get('admin/:id')
+  findOneAdmin(@Param('id') id: string) {
+    return this.manualsAdminService.findOne(+id);
+  }
+
+  @Patch('admin/:id')
+  updateAdmin(
+    @Param('id') id: string,
+    @Body(new ValidationPipe({ transform: true }))
+    updateManualDto: UpdateManualDto,
+  ) {
+    return this.manualsAdminService.update(+id, updateManualDto);
+  }
+
+  @Delete('admin/:id')
+  remove(@Param('id') id: string) {
+    return this.manualsAdminService.remove(+id);
+  }
+
+  @Get('admin/:id')
+  findAll(@Query() queryDto: ManualsQueryDto) {
+    return this.manualsService.findAll();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.manualsService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body(new ValidationPipe({ transform: true }))
-    updateManualDto: UpdateManualDto,
-  ) {
-    return this.manualsService.update(+id, updateManualDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.manualsService.remove(+id);
   }
 }

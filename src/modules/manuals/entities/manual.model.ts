@@ -1,4 +1,5 @@
-import { Model } from 'objection';
+import { Model, RelationMappings, RelationMappingsThunk } from 'objection';
+import { MediaModel } from 'src/modules/media/entities/media.model';
 
 export class ManualModel extends Model {
   static tableName = 'manuals';
@@ -8,11 +9,21 @@ export class ManualModel extends Model {
   description: string;
   file: string;
   url: string;
-  createdAt: Date;
-  updatedAt: Date;
+  media_id: number;
+  created_at: Date;
+  updated_at: Date;
 
-  static get relationMappings() {
+  static get relationMappings(): RelationMappings | RelationMappingsThunk {
     // Insert relation mappings here
-    return {};
+    return {
+      media: {
+        relation: Model.HasOneRelation,
+        modelClass: MediaModel,
+        join: {
+          from: 'manuals.media_id',
+          to: 'media.id',
+        },
+      },
+    };
   }
 }
