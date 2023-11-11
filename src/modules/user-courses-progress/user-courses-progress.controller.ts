@@ -9,6 +9,7 @@ import {
   UseGuards,
   UseInterceptors,
   Request,
+  ValidationPipe,
 } from '@nestjs/common';
 import { UserCoursesProgressService } from './user-courses-progress.service';
 import { CreateUserCoursesProgressDto } from './dto/create-user-courses-progress.dto';
@@ -47,7 +48,8 @@ export class UserCoursesProgressController {
 
   @Patch(':careerProgressId')
   update(
-    @Body() updateUserCoursesProgressDto: UpdateUserCoursesProgressDto,
+    @Body(new ValidationPipe({ transform: true }))
+    updateUserCoursesProgressDto: UpdateUserCoursesProgressDto,
     @Request() req,
     @Param('careerProgressId') careerProgressId: number,
   ) {

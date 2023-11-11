@@ -11,6 +11,8 @@ import { StaffModel } from 'src/modules/staffs/entities/staff.model';
 import { CareerProgressModel } from 'src/modules/user-courses-progress/entities/career-progress.model';
 import { SemesterProgressModel } from 'src/modules/user-courses-progress/entities/semester-progress.model';
 import { CourseSemesterProgressModel } from 'src/modules/user-courses-progress/entities/course-semester-progress.model';
+import { ManualModel } from 'src/modules/manuals/entities/manual.model';
+import { MediaModel } from 'src/modules/media/entities/media.model';
 
 dotenv.config();
 
@@ -25,6 +27,8 @@ const models = [
   CareerProgressModel,
   SemesterProgressModel,
   CourseSemesterProgressModel,
+  ManualModel,
+  MediaModel,
 ];
 
 const modelProviders = models.map((model) => {

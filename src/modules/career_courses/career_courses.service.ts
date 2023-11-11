@@ -1,14 +1,21 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CreateCareerCourseDto } from './dto/create-career_course.dto';
 import { UpdateCareerCourseDto } from './dto/update-career_course.dto';
-import { ModelClass } from 'objection';
+import { Model, ModelClass, QueryBuilder } from 'objection';
 import { groupBy } from 'lodash';
 import { CareerCourseModel } from './entities/career_course.entity';
 import { BaseService } from 'src/core/utils/base-service';
 import { CareerModel } from '../career/entities/career.model';
+import { BaseQueryDto } from 'src/core/utils/base-query.dto';
 
 @Injectable()
 export class CareerCoursesService extends BaseService {
+  queryFilters(
+    queryDto: BaseQueryDto,
+    builder: QueryBuilder<Model, Model[]>,
+  ): QueryBuilder<Model, Model[]> {
+    throw new Error('Method not implemented.');
+  }
   constructor(
     @Inject(CareerCourseModel.name)
     private careerCourseModel: ModelClass<CareerCourseModel>,

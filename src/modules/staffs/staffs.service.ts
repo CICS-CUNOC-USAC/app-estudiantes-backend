@@ -1,10 +1,17 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { ModelClass, Transaction } from 'objection';
+import { Model, ModelClass, QueryBuilder, Transaction } from 'objection';
 import { StaffModel } from './entities/staff.model';
 import { BaseService } from 'src/core/utils/base-service';
+import { BaseQueryDto } from 'src/core/utils/base-query.dto';
 
 @Injectable()
 export class StaffsService extends BaseService {
+  queryFilters(
+    queryDto: BaseQueryDto,
+    builder: QueryBuilder<Model, Model[]>,
+  ): QueryBuilder<Model, Model[]> {
+    throw new Error('Method not implemented.');
+  }
   constructor(
     @Inject(StaffModel.name) private staffModel: ModelClass<StaffModel>,
   ) {

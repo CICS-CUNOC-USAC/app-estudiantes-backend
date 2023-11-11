@@ -12,7 +12,7 @@ async function bootstrap() {
   // for a GET / UPDATE / DELETE endpoint, and returns Not Found error
   app.useGlobalInterceptors(new NotFoundInterceptor());
   // Set up global validation pipe for checking DTOs
-  app.useGlobalPipes(new ValidationPipe({ transform: true }));
+  // app.useGlobalPipes(new ValidationPipe({ transform: true }));
 
   const docConfig = new DocumentBuilder()
     .setTitle('Backend - Aplicación para estudiantes del CUNOC')

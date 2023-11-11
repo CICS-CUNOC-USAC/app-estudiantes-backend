@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  ValidationPipe,
 } from '@nestjs/common';
 import { CareerService } from './career.service';
 import { CreateCareerDto } from './dto/create-career.dto';
@@ -17,7 +18,10 @@ export class CareerController {
   constructor(private readonly careerService: CareerService) {}
 
   @Post()
-  create(@Body() createCareerDto: CreateCareerDto) {
+  create(
+    @Body(new ValidationPipe({ transform: true }))
+    createCareerDto: CreateCareerDto,
+  ) {
     return this.careerService.create(createCareerDto);
   }
 
@@ -32,7 +36,11 @@ export class CareerController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCareerDto: UpdateCareerDto) {
+  update(
+    @Param('id') id: string,
+    @Body(new ValidationPipe({ transform: true }))
+    updateCareerDto: UpdateCareerDto,
+  ) {
     return this.careerService.update(+id, updateCareerDto);
   }
 

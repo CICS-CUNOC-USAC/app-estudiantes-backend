@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  ValidationPipe,
 } from '@nestjs/common';
 import { CourseService } from './course.service';
 import { CreateCourseDto } from './dto/create-course.dto';
@@ -16,7 +17,10 @@ export class CourseController {
   constructor(private readonly courseService: CourseService) {}
 
   @Post()
-  create(@Body() createCourseDto: CreateCourseDto) {
+  create(
+    @Body(new ValidationPipe({ transform: true }))
+    createCourseDto: CreateCourseDto,
+  ) {
     return this.courseService.create(createCourseDto);
   }
 
@@ -50,7 +54,11 @@ export class CourseController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCourseDto: UpdateCourseDto) {
+  update(
+    @Param('id') id: string,
+    @Body(new ValidationPipe({ transform: true }))
+    updateCourseDto: UpdateCourseDto,
+  ) {
     return this.courseService.update(+id, updateCourseDto);
   }
 
