@@ -14,6 +14,8 @@ import { StaffAuthModule } from './modules/auth/staff/staff-auth.module';
 import { AppLoggerMiddleware } from './core/middlewares/logger.middleware';
 import { UserCoursesProgressModule } from './modules/user-courses-progress/user-courses-progress.module';
 import { ManualsModule } from './modules/manuals/manuals.module';
+import { MediaModule } from './modules/media/media.module';
+import { S3Module } from './modules/s3/s3.module';
 
 @Module({
   imports: [
@@ -34,6 +36,8 @@ import { ManualsModule } from './modules/manuals/manuals.module';
     StaffsModule,
     UserCoursesProgressModule,
     ManualsModule,
+    MediaModule,
+    S3Module,
   ],
 })
 export class AppModule {
