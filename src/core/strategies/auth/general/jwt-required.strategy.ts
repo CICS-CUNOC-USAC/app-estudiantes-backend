@@ -22,13 +22,13 @@ export class JwtRequiredStrategy extends PassportStrategy(
 
   async validate(payload: object): Promise<any> {
     if (payload['profile_id']) {
-      const user = await this.userService.findAndReturnById(payload['id']);
+      const user = await this.userService.findAndReturnById(+payload['id']);
       return {
         ...user,
         type: 'profile',
       };
     } else {
-      const staff = await this.staffService.findAndReturnById(payload['id']);
+      const staff = await this.staffService.findAndReturnById(+payload['id']);
       return {
         ...staff,
         type: 'staff',
