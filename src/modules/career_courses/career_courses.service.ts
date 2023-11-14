@@ -101,7 +101,6 @@ export class CareerCoursesService extends BaseService {
         courses: groupedCourses[key],
       };
     });
-    console.log(result);
 
     return result;
   }

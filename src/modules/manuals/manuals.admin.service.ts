@@ -28,6 +28,11 @@ export class ManualsAdminService extends BaseService {
     }, this.logger);
   }
 
+  /**
+   * Finds all manuals based on the provided query parameters.
+   * @param queryDto The DTO containing the query parameters.
+   * @returns A paginated response containing the manuals.
+   */
   async findAll(queryDto: ManualsQueryDto) {
     const paginationOptions: PaginationConverted =
       this.createPaginationOptions(queryDto);
