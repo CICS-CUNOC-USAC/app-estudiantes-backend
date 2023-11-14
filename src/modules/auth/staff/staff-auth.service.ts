@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { StaffModel } from 'src/modules/staffs/entities/staff.model';
 import { StaffsService } from 'src/modules/staffs/staffs.service';
@@ -59,6 +59,14 @@ export class StaffAuthService extends BaseService {
         staff.encrypted_password,
       );
       delete staff.encrypted_password;
+      if (staff.roles.length <= 0) {
+        throw new UnauthorizedException({
+          statusCode: 403,
+          message:
+            "You don't have permission to authenticate as this user. No roles assigned.",
+          error: 'Forbidden',
+        });
+      }
       return match ? staff : undefined;
     }
   }
