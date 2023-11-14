@@ -16,6 +16,8 @@ import { UserCoursesProgressModule } from './modules/user-courses-progress/user-
 import { ManualsModule } from './modules/manuals/manuals.module';
 import { MediaModule } from './modules/media/media.module';
 import { S3Module } from './modules/s3/s3.module';
+import { RolesModule } from './modules/roles/roles.module';
+import { RoleDetailsModule } from './modules/role-details/role-details.module';
 
 @Module({
   imports: [
@@ -38,6 +40,8 @@ import { S3Module } from './modules/s3/s3.module';
     ManualsModule,
     MediaModule,
     S3Module,
+    RolesModule,
+    RoleDetailsModule,
   ],
 })
 export class AppModule {
