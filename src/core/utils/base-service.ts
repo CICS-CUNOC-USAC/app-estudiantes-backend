@@ -1,4 +1,4 @@
-import { Logger } from '@nestjs/common';
+import { BadRequestException, Logger } from '@nestjs/common';
 import { BaseQueryDto } from './base-query.dto';
 import { Model, OrderByDirection, Page, QueryBuilder } from 'objection';
 import { type OrderBy, type PaginationConverted } from './types/pagination';
@@ -55,7 +55,11 @@ export abstract class BaseService {
       limit = +queryDto.limit ? +queryDto.limit : 10;
     }
     // Subtract 1 from page because the api starts counting from 1 for query params
+    if (queryDto.page && +queryDto.page < 1) {
+      throw new BadRequestException('Page number should be greater than 0');
+    }
     const page = queryDto.page ? +queryDto.page - 1 : 0;
+    console.log('page', page);
     return {
       limit: limit,
       page: page,

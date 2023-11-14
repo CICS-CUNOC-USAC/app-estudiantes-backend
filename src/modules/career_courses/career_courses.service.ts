@@ -10,12 +10,6 @@ import { BaseQueryDto } from 'src/core/utils/base-query.dto';
 
 @Injectable()
 export class CareerCoursesService extends BaseService {
-  queryFilters(
-    queryDto: BaseQueryDto,
-    builder: QueryBuilder<Model, Model[]>,
-  ): QueryBuilder<Model, Model[]> {
-    throw new Error('Method not implemented.');
-  }
   constructor(
     @Inject(CareerCourseModel.name)
     private careerCourseModel: ModelClass<CareerCourseModel>,
@@ -81,6 +75,7 @@ export class CareerCoursesService extends BaseService {
   }
 
   async findCoursesByCareerAndSemester(careerCode: number) {
+    const career = await this.careerModel.query().findOne('code', careerCode);
     const courses = await this.careerCourseModel
       .query()
       .joinRaw(
@@ -102,7 +97,11 @@ export class CareerCoursesService extends BaseService {
       };
     });
 
-    return result;
+    return {
+      career_name: career.name,
+      career_code: career.code,
+      courses: result,
+    };
   }
 
   async getCareerSemesters(careerCode: number) {
@@ -123,5 +122,12 @@ export class CareerCoursesService extends BaseService {
 
   remove(id: number) {
     return `This action removes a #${id} careerCourse`;
+  }
+
+  queryFilters(
+    _queryDto: BaseQueryDto,
+    _builder: QueryBuilder<Model, Model[]>,
+  ): QueryBuilder<Model, Model[]> {
+    throw new Error('Method not implemented.');
   }
 }

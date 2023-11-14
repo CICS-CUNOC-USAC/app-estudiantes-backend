@@ -18,6 +18,7 @@ export class BaseQueryDto {
   @IsOptional()
   @IsNumber()
   @IsPositive()
+  @IsPositive()
   @ApiProperty({
     description: 'Page to return. Number should be positive.',
     example: 1,
