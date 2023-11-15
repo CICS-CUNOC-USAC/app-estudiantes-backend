@@ -18,6 +18,7 @@ import { MediaModule } from './modules/media/media.module';
 import { S3Module } from './modules/s3/s3.module';
 import { RolesModule } from './modules/roles/roles.module';
 import { RoleDetailsModule } from './modules/role-details/role-details.module';
+import { ArticlesModule } from './modules/articles/articles.module';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { RoleDetailsModule } from './modules/role-details/role-details.module';
     S3Module,
     RolesModule,
     RoleDetailsModule,
+    ArticlesModule,
   ],
 })
 export class AppModule {

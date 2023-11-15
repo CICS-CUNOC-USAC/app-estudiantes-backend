@@ -10,5 +10,5 @@ export async function up(knex: Knex.Knex) {
 }
 
 export async function down(knex: Knex.Knex) {
-  return knex.schema;
+  return knex.schema.dropTable('article_statuses');
 }
