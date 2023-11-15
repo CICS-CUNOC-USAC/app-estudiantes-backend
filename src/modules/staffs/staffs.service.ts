@@ -121,7 +121,14 @@ export class StaffsService extends BaseService {
     const paginationOptions = this.createPaginationOptions(queryDto);
     const resultsQueryBuilder = this.staffModel
       .query()
-      .select('*')
+      .select([
+        'id',
+        'first_name',
+        'last_name',
+        'email',
+        'created_at',
+        'updated_at',
+      ])
       .withGraphFetched('roles')
       .modifyGraph('roles', (builder) => {
         builder.select('roles.name', 'roles.alias');

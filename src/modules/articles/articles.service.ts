@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { CreateArticleDto } from './dto/create-article.dto';
 import { UpdateArticleDto } from './dto/update-article.dto';
+import { StaffModel } from '../staffs/entities/staff.model';
 
 @Injectable()
 export class ArticlesService {
-  create(createArticleDto: CreateArticleDto) {
+  create(createArticleDto: CreateArticleDto, staffUser: StaffModel) {
     return 'This action adds a new article';
   }
 
