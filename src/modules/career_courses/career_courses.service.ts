@@ -49,10 +49,6 @@ export class CareerCoursesService extends BaseService {
     };
   }
 
-  create(createCareerCourseDto: CreateCareerCourseDto) {
-    return 'This action adds a new careerCourse';
-  }
-
   findAll() {
     return `This action returns all careerCourses`;
   }
@@ -114,10 +110,6 @@ export class CareerCoursesService extends BaseService {
 
   findOne(id: number) {
     return `This action returns a #${id} careerCourse`;
-  }
-
-  update(id: number, updateCareerCourseDto: UpdateCareerCourseDto) {
-    return `This action updates a #${id} careerCourse`;
   }
 
   remove(id: number) {

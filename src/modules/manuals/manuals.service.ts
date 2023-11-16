@@ -16,9 +16,6 @@ export class ManualsService extends BaseService {
   ) {
     super(ManualsService.name);
   }
-  create(createManualDto: CreateManualDto) {
-    return 'This action adds a new manual';
-  }
 
   async findAll(queryDto: ManualsQueryDto) {
     const paginationOptions: PaginationConverted =
@@ -40,14 +37,6 @@ export class ManualsService extends BaseService {
       .findOne('id', id)
       .withGraphFetched('media');
     return manual;
-  }
-
-  update(id: number, updateManualDto: UpdateManualDto) {
-    return `This action updates a #${id} manual`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} manual`;
   }
 
   queryFilters(

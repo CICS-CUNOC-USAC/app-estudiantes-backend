@@ -19,14 +19,6 @@ export class CareerCoursesController {
     private readonly courseService: CourseService,
   ) {}
 
-  @Post()
-  create(
-    @Body(new ValidationPipe({ transform: true }))
-    createCareerCourseDto: CreateCareerCourseDto,
-  ) {
-    return this.careerCoursesService.create(createCareerCourseDto);
-  }
-
   @Get(':careerCode/semester/:semesterNumber')
   findCoursesByCareerAndSemester(
     @Param('careerCode') careerCode: string,
@@ -49,22 +41,4 @@ export class CareerCoursesController {
   findAll() {
     return this.careerCoursesService.findAll();
   }
-
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.careerCoursesService.findOne(+id);
-  // }
-
-  // @Patch(':id')
-  // update(
-  //   @Param('id') id: string,
-  //   @Body(new ValidationPipe({ transform: true })) updateCareerCourseDto: UpdateCareerCourseDto,
-  // ) {
-  //   return this.careerCoursesService.update(+id, updateCareerCourseDto);
-  // }
-
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.careerCoursesService.remove(+id);
-  // }
 }
