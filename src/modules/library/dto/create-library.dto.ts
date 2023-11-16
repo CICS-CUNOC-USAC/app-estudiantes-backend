@@ -20,8 +20,8 @@ export class CreateLibraryDto {
 
   @IsString()
   @ApiProperty({
-    description: 'The description of the manual',
-    example: 'This is a manual',
+    description: 'The description of the book resource',
+    example: 'Libro acerca de termodinamica',
   })
   readonly description: string;
 
