@@ -9,15 +9,16 @@ import {
 
 export class BaseQueryDto {
   @IsOptional()
+  @IsNumber()
+  @IsPositive()
   @ApiProperty({
     description: 'Limit of entries per page. Number should be positive.',
     example: 10,
   })
-  limit?: number | string;
+  limit?: number | string | null;
 
   @IsOptional()
   @IsNumber()
-  @IsPositive()
   @IsPositive()
   @ApiProperty({
     description: 'Page to return. Number should be positive.',
