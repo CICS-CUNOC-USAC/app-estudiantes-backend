@@ -3,10 +3,10 @@ import { BaseQueryDto } from 'src/core/utils/base-query.dto';
 
 export class StaffsQueryDto extends BaseQueryDto {
   @ApiProperty({
-    description: 'Name of the staff to search for',
+    description: 'Full name of the staff to search for',
     example: 'John Doe',
   })
-  name?: string;
+  full_name?: string;
 
   @ApiProperty({
     description: 'Email of the staff to search for',

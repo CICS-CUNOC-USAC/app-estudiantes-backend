@@ -17,6 +17,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { StaffLoginJwtAuthGuard } from 'src/core/guards/jwt-staff-auth.guard';
 import { StaffsQueryDto } from './dto/staff-query.dto';
 import { StaffSuperadminLoginJwtAuthGuard } from 'src/core/guards/jwt-staff-auth-superadmin.guard';
+import { UpdateStaffRolesDto } from './dto/update-roles-staff.dto';
 
 @ApiTags('staffs')
 @Controller('staffs')
@@ -46,13 +47,30 @@ export class StaffsController {
   }
 
   @UseGuards(StaffSuperadminLoginJwtAuthGuard)
+  @Get(':id/roles')
+  findOneRoles(@Param('id') id: string) {
+    return this.staffsService.findOneRoles(+id);
+  }
+
+  @UseGuards(StaffSuperadminLoginJwtAuthGuard)
   @Patch(':id')
   update(
     @Param('id') id: string,
     @Body(new ValidationPipe({ transform: true }))
     updateStaffDto: UpdateStaffDto,
   ) {
+    console.log('updateStaffDto', updateStaffDto);
     return this.staffsService.update(+id, updateStaffDto);
+  }
+
+  @UseGuards(StaffSuperadminLoginJwtAuthGuard)
+  @Patch(':id/roles')
+  updateRoles(
+    @Param('id') id: string,
+    @Body(new ValidationPipe({ transform: true }))
+    updateStaffRolesDto: UpdateStaffRolesDto,
+  ) {
+    return this.staffsService.updateRoles(+id, updateStaffRolesDto);
   }
 
   @Delete(':id')

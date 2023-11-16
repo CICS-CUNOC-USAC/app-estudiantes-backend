@@ -8,11 +8,17 @@ import { DatabaseTransactionService } from 'src/database/transaction/database-tr
 import { IGeneralError } from 'src/core/interfaces/response/error/general-error.interface';
 import { StaffsQueryDto } from './dto/staff-query.dto';
 import { UpdateStaffDto } from './dto/update-staff.dto';
+import { RoleDetailModel } from '../role-details/entities/role-detail.model';
+import { UpdateStaffRolesDto } from './dto/update-roles-staff.dto';
+import { RoleModel } from '../roles/entities/role.model';
 
 @Injectable()
 export class StaffsService extends BaseService {
   constructor(
     @Inject(StaffModel.name) private staffModel: ModelClass<StaffModel>,
+    @Inject(RoleDetailModel.name)
+    private roleDetailModel: ModelClass<RoleDetailModel>,
+    @Inject(RoleModel.name) private roleModel: ModelClass<RoleModel>,
     private readonly dbTrxService: DatabaseTransactionService,
   ) {
     super(StaffsService.name);
@@ -75,9 +81,43 @@ export class StaffsService extends BaseService {
         await this.updateEmail(staffId, updateStaffDto.email, trx);
 
       // Update the password if it is different
+      console.log('updateStaffDto.password', updateStaffDto.password);
       if (updateStaffDto.password)
         await this.updatePassword(staffId, updateStaffDto.password, trx);
 
+      return await this.findAndReturnById(staffId, trx);
+    }, this.logger);
+  }
+
+  async updateRoles(staffId: number, updateStaffRolesDto: UpdateStaffRolesDto) {
+    return await this.dbTrxService.databaseTransaction(async (trx) => {
+      // Update the staff
+      await this.roleDetailModel.query(trx).delete().where('staff_id', staffId);
+      // if the list of roles is empty, return the staff
+      if (!updateStaffRolesDto.rolesIds.length) {
+        return await this.findAndReturnById(staffId, trx);
+      }
+      // check if rolesids are not repeated
+      const rolesIdsSet = new Set(updateStaffRolesDto.rolesIds);
+      const roleDetails = Array.from(rolesIdsSet).map((roleId) => ({
+        staff_id: staffId,
+        role_id: roleId,
+      }));
+      // also check if the rolesIds are in the database
+      const rolesIds = roleDetails.map((roleDetail) => roleDetail.role_id);
+      const roles = await this.roleModel
+        .query(trx)
+        .select('id')
+        .whereIn('id', rolesIds);
+      if (roles.length !== rolesIds.length) {
+        const error: IGeneralError = {
+          statusCode: 404,
+          message: 'One or more of the specified roles were not found',
+          error: 'Not Found',
+        };
+        throw new BadRequestException(error);
+      }
+      await this.roleDetailModel.query(trx).insert(roleDetails);
       return await this.findAndReturnById(staffId, trx);
     }, this.logger);
   }
@@ -131,7 +171,7 @@ export class StaffsService extends BaseService {
       ])
       .withGraphFetched('roles')
       .modifyGraph('roles', (builder) => {
-        builder.select('roles.name', 'roles.alias');
+        builder.select('roles.id', 'roles.name', 'roles.alias');
       })
       .where((builder) => this.queryFilters(queryDto, builder))
       .orderBy(paginationOptions.orderBy);
@@ -173,6 +213,23 @@ export class StaffsService extends BaseService {
     return staff;
   }
 
+  async findOneRoles(id: number) {
+    const staff = await this.staffModel
+      .query()
+      .findById(id)
+      .withGraphFetched('roles')
+      .modifyGraph('roles', (builder) => {
+        builder.select(
+          'roles.id',
+          'roles.name',
+          'roles.alias',
+          'roles.description',
+        );
+      });
+    if (staff) delete staff.encrypted_password;
+    return staff.roles;
+  }
+
   /**
    * Hashes a given password using bcrypt.
    * @param password The password to hash.
@@ -186,11 +243,11 @@ export class StaffsService extends BaseService {
     queryDto: StaffsQueryDto,
     builder: QueryBuilder<Model, Model[]>,
   ): QueryBuilder<Model, Model[]> {
-    if (queryDto.name) {
+    if (queryDto.full_name) {
       builder.andWhere(
-        'name',
+        StaffModel.raw("CONCAT(first_name, ' ', last_name)"),
         'ilike',
-        `%${this.normalizeString(queryDto.name)}%`,
+        `%${this.normalizeString(queryDto.full_name)}%`,
       );
     }
     if (queryDto.email) {
