@@ -216,6 +216,7 @@ export class MediaService extends BaseService {
     const allowedFileTypes = {
       manual: 'application/pdf',
       article: 'application/pdf',
+      library: 'application/pdf',
     };
     if (fileType !== allowedFileTypes[attachType]) {
       const invalidFileError: IGeneralError = {

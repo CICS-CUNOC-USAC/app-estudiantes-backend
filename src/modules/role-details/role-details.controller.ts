@@ -1,8 +1,18 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { RoleDetailsService } from './role-details.service';
 import { CreateRoleDetailDto } from './dto/create-role-detail.dto';
 import { UpdateRoleDetailDto } from './dto/update-role-detail.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Role Details (not used/implemented)')
 @Controller('role-details')
 export class RoleDetailsController {
   constructor(private readonly roleDetailsService: RoleDetailsService) {}
@@ -23,7 +33,10 @@ export class RoleDetailsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRoleDetailDto: UpdateRoleDetailDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateRoleDetailDto: UpdateRoleDetailDto,
+  ) {
     return this.roleDetailsService.update(+id, updateRoleDetailDto);
   }
 

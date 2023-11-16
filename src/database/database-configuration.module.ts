@@ -19,6 +19,7 @@ import { ArticleModel } from 'src/modules/articles/entities/article.model';
 import { ArticleStatusModel } from 'src/modules/articles/entities/article-status.model';
 import { HistoryArticleStatusModel } from 'src/modules/articles/entities/history-article-status.model';
 import { CurrentStatusArticleModel } from 'src/modules/articles/entities/current-status-article.model';
+import { BookModel } from 'src/modules/library/entities/library.model';
 
 dotenv.config();
 
@@ -41,6 +42,7 @@ const models = [
   ArticleStatusModel,
   HistoryArticleStatusModel,
   CurrentStatusArticleModel,
+  BookModel,
 ];
 
 const modelProviders = models.map((model) => {

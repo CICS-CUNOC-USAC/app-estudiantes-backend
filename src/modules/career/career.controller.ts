@@ -11,8 +11,9 @@ import {
 import { CareerService } from './career.service';
 import { CreateCareerDto } from './dto/create-career.dto';
 import { UpdateCareerDto } from './dto/update-career.dto';
-import { CourseService } from '../course/course.service';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Careers')
 @Controller('careers')
 export class CareerController {
   constructor(private readonly careerService: CareerService) {}

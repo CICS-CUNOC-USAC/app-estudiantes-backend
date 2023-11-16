@@ -16,7 +16,9 @@ import { CreateUserCoursesProgressDto } from './dto/create-user-courses-progress
 import { UpdateUserCoursesProgressDto } from './dto/update-user-courses-progress.dto';
 import { JwtGeneralRequiredAuthGuard } from 'src/core/guards/jwt-general-required-auth.guard';
 import { GeneralAuthInterceptor } from 'src/core/interceptors/auth/regular-auth.interceptor';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('User Courses/Pensum Progress')
 @UseGuards(JwtGeneralRequiredAuthGuard)
 @UseInterceptors(GeneralAuthInterceptor)
 @Controller('user-courses-progress')

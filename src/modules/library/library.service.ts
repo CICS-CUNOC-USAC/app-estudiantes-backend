@@ -1,26 +1,21 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { CreateManualDto } from './dto/create-manual.dto';
-import { UpdateManualDto } from './dto/update-manual.dto';
+import { BooksQueryDto } from './dto/books-query.dto';
+import { BookModel } from './entities/library.model';
 import { Model, ModelClass, QueryBuilder, Transaction } from 'objection';
-import { ManualModel } from './entities/manual.model';
 import { BaseService } from 'src/core/utils/base-service';
-import { BaseQueryDto } from 'src/core/utils/base-query.dto';
-import { PaginationConverted } from 'src/core/utils/types/pagination';
-import { ManualsQueryDto } from './dto/manuals-query.dto';
 
 @Injectable()
-export class ManualsService extends BaseService {
+export class LibraryService extends BaseService {
   constructor(
-    @Inject(ManualModel.name)
-    private readonly manualModel: ModelClass<ManualModel>,
+    @Inject(BookModel.name)
+    private readonly bookModel: ModelClass<BookModel>,
   ) {
-    super(ManualsService.name);
+    super(LibraryService.name);
   }
 
-  async findAll(queryDto: ManualsQueryDto) {
-    const paginationOptions: PaginationConverted =
-      this.createPaginationOptions(queryDto);
-    const resultsQueryBuilder = this.manualModel
+  async findAll(queryDto: BooksQueryDto) {
+    const paginationOptions = this.createPaginationOptions(queryDto);
+    const resultsQueryBuilder = this.bookModel
       .query()
       .select('*')
       .where((builder) => this.queryFilters(queryDto, builder))
@@ -32,17 +27,17 @@ export class ManualsService extends BaseService {
   }
 
   async findOne(id: number, trx?: Transaction) {
-    const manual = await this.manualModel
+    const book = await this.bookModel
       .query(trx)
       .findOne('id', id)
       .withGraphFetched('media');
-    return manual;
+    return book;
   }
 
   queryFilters(
-    queryDto: ManualsQueryDto,
+    queryDto: BooksQueryDto,
     builder: QueryBuilder<Model, Model[]>,
-  ) {
+  ): QueryBuilder<Model, Model[]> {
     if (queryDto.name) {
       builder.andWhere(
         'name',
@@ -50,6 +45,14 @@ export class ManualsService extends BaseService {
         `%${this.normalizeString(queryDto.name)}%`,
       );
     }
+    if (queryDto.author) {
+      builder.andWhere(
+        'author',
+        'ilike',
+        `%${this.normalizeString(queryDto.author)}%`,
+      );
+    }
+
     return builder;
   }
 }
