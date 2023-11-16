@@ -16,7 +16,7 @@ export class JwtStaffStrategy extends PassportStrategy(Strategy, 'staff-jwt') {
   async validate(payload: object): Promise<any> {
     // return staff if present. If not, returns undefined
     if (!payload['profile_id']) {
-      const staff = await this.staffService.findAndReturnById(payload['id']);
+      const staff = await this.staffService.findAndReturnById(+payload['id']);
       if (!staff) {
         return null;
       }

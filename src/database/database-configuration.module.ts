@@ -13,6 +13,12 @@ import { SemesterProgressModel } from 'src/modules/user-courses-progress/entitie
 import { CourseSemesterProgressModel } from 'src/modules/user-courses-progress/entities/course-semester-progress.model';
 import { ManualModel } from 'src/modules/manuals/entities/manual.model';
 import { MediaModel } from 'src/modules/media/entities/media.model';
+import { RoleModel } from 'src/modules/roles/entities/role.model';
+import { RoleDetailModel } from 'src/modules/role-details/entities/role-detail.model';
+import { ArticleModel } from 'src/modules/articles/entities/article.model';
+import { ArticleStatusModel } from 'src/modules/articles/entities/article-status.model';
+import { HistoryArticleStatusModel } from 'src/modules/articles/entities/history-article-status.model';
+import { CurrentStatusArticleModel } from 'src/modules/articles/entities/current-status-article.model';
 
 dotenv.config();
 
@@ -29,6 +35,12 @@ const models = [
   CourseSemesterProgressModel,
   ManualModel,
   MediaModel,
+  RoleModel,
+  RoleDetailModel,
+  ArticleModel,
+  ArticleStatusModel,
+  HistoryArticleStatusModel,
+  CurrentStatusArticleModel,
 ];
 
 const modelProviders = models.map((model) => {

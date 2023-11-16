@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { StaffModel } from 'src/modules/staffs/entities/staff.model';
 import { StaffsService } from 'src/modules/staffs/staffs.service';
@@ -28,6 +28,14 @@ export class StaffAuthService extends BaseService {
    * @param staff Staff to generate the token for
    */
   async login(staff: StaffModel) {
+    if (staff.roles.length <= 0) {
+      throw new UnauthorizedException({
+        statusCode: 403,
+        message:
+          "You don't have permission to authenticate as this user. No roles assigned.",
+        error: 'Forbidden',
+      });
+    }
     const token = await this.jwtService.signAsync(staff.toJSON());
     return { staff, token };
   }
@@ -59,6 +67,7 @@ export class StaffAuthService extends BaseService {
         staff.encrypted_password,
       );
       delete staff.encrypted_password;
+
       return match ? staff : undefined;
     }
   }
