@@ -17,6 +17,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { StaffLoginJwtAuthGuard } from 'src/core/guards/jwt-staff-auth.guard';
 import { LibraryAdminService } from './library.admin.service';
 import { BooksQueryDto } from './dto/books-query.dto';
+import { JwtGeneralRequiredAuthGuard } from 'src/core/guards/jwt-general-required-auth.guard';
 
 @ApiTags('Library/Books')
 @Controller('library')
@@ -63,11 +64,13 @@ export class LibraryController {
     return this.libraryAdminService.remove(+id);
   }
 
+  @UseGuards(JwtGeneralRequiredAuthGuard)
   @Get()
   findAllPublic(@Query() queryDto: BooksQueryDto) {
     return this.libraryService.findAll(queryDto);
   }
 
+  @UseGuards(JwtGeneralRequiredAuthGuard)
   @Get(':id')
   findOnePublic(@Param('id') id: string) {
     return this.libraryService.findOne(+id);
