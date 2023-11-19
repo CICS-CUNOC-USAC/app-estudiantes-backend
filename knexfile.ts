@@ -26,7 +26,7 @@ module.exports = {
       port: process.env.DB_PORT,
       user: process.env.DB_USER,
       password: process.env.DB_PASS,
-      database: process.env.DB_NAME_DEV,
+      database: process.env.DB_NAME,
     },
     ...commonConfig,
   },
@@ -46,17 +46,7 @@ module.exports = {
       port: process.env.DB_PORT,
       user: process.env.DB_USER,
       password: process.env.DB_PASS,
-      database: process.env.DB_NAME_PROD,
+      database: process.env.DB_NAME,
     },
-  },
-  test: {
-    connection: {
-      host: process.env.DB_HOST,
-      port: process.env.DB_PORT,
-      user: process.env.DB_USER,
-      password: process.env.DB_PASS,
-      database: process.env.DB_NAME_TEST,
-    },
-    ...commonConfig,
   },
 } as Knex.Knex.Config;
