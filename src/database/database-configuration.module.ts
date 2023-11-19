@@ -52,25 +52,6 @@ const modelProviders = models.map((model) => {
   };
 });
 
-let databaseName = '';
-let isDevelop = false;
-switch (process.env.NODE_ENV) {
-  case 'development':
-    databaseName = process.env.DB_NAME_DEV;
-    isDevelop = true;
-    break;
-  case 'production':
-    databaseName = process.env.DB_NAME_PROD;
-    break;
-  case 'test':
-    databaseName = process.env.DB_NAME_TEST;
-    break;
-  default:
-    databaseName = process.env.DB_NAME_DEV;
-    isDevelop = true;
-    break;
-}
-
 const providers = [
   ...modelProviders,
   {
@@ -83,8 +64,8 @@ const providers = [
           port: parseInt(process.env.DB_PORT),
           user: process.env.DB_USER,
           password: process.env.DB_PASS,
-          database: databaseName,
-          debug: isDevelop,
+          database: process.env.DB_NAME,
+          debug: process.env.NODE_ENV === 'development',
         },
       });
       Model.knex(knex);

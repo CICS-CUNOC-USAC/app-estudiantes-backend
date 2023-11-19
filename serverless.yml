@@ -1,0 +1,27 @@
+service: app-cics-backend
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  stage: prod
+  profile: cics
+  environment:
+    NODE_ENV: production
+
+packages:
+  excludeDevDependencies: true
+
+functions:
+  main:
+    handler: ./dist/src/handler.handler
+    events:
+      - http:
+          method: ANY
+          path: /
+      - http:
+          method: ANY
+          path: '{proxy+}'
