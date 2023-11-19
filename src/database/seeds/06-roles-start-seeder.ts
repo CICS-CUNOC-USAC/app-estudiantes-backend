@@ -30,7 +30,7 @@ export async function seed(knex: Knex.Knex): Promise<any> {
     })
     .then(async () => {
       const staff = await knex('staffs')
-        .where('email', process.env.STAFF_EMAIL)
+        .where('email', 'cics.cunoc@gmail.com')
         .first();
       const superadminRole = await knex('roles')
         .where('alias', 'superadmin')
