@@ -7,10 +7,10 @@ export async function seed(knex: Knex.Knex): Promise<any> {
   const encryptedPassword = await bcrypt.hash(process.env.STAFF_PASSWORD, 10);
   return knex('staffs').insert([
     {
-      email: process.env.STAFF_EMAIL,
+      email: 'cics.cunoc@gmail.com',
       encrypted_password: encryptedPassword,
-      first_name: process.env.STAFF_FIRST_NAME,
-      last_name: process.env.STAFF_LAST_NAME,
+      first_name: 'Comite Ingenieria Sistemas',
+      last_name: 'CUNOC 2023',
     },
   ]);
 }
