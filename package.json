@@ -10,7 +10,7 @@
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "offline": "npm run build && sls offline",
-    "deploy": "npm run build && npm run migrate && npm run seed && serverless deploy",
+    "deploy": "NODE_ENV=production npm run build && npm run migrate && npm run seed && serverless deploy",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "NODE_ENV=production node dist/main",
