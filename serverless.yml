@@ -9,8 +9,16 @@ provider:
   region: us-east-1
   stage: prod
   profile: cics
+  apiGateway:
+    binaryMediaTypes:
+      - '*/*'
   environment:
     NODE_ENV: production
+  
+custom:
+  apigwBinary:
+    types:
+      - '*/*'
 
 packages:
   excludeDevDependencies: true
