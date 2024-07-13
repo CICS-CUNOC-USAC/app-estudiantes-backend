@@ -14,7 +14,7 @@ import { UpdateRoleDto } from './dto/update-role.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { StaffSuperadminLoginJwtAuthGuard } from 'src/core/guards/jwt-staff-auth-superadmin.guard';
 
-@ApiTags('roles')
+@ApiTags('Roles')
 @UseGuards(StaffSuperadminLoginJwtAuthGuard)
 @Controller('roles')
 export class RolesController {

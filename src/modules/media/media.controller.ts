@@ -23,7 +23,7 @@ import { GeneralAuthInterceptor } from 'src/core/interceptors/auth/regular-auth.
 import { StaffLoginJwtAuthGuard } from 'src/core/guards/jwt-staff-auth.guard';
 
 @UseGuards(JwtGeneralRequiredAuthGuard)
-@ApiTags('media')
+@ApiTags('Media')
 @Controller('media')
 export class MediaController {
   constructor(private readonly mediaService: MediaService) {}

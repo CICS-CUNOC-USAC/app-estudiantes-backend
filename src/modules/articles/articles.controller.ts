@@ -19,7 +19,7 @@ import { StaffModel } from '../staffs/entities/staff.model';
 import { Roles } from 'src/core/decorators/articles/roles.decorator';
 import { ArticleRolesGuard } from 'src/core/guards/articles/article-roles.guard';
 
-@ApiTags('articles')
+@ApiTags('Articles')
 @UseGuards(StaffLoginJwtAuthGuard, ArticleRolesGuard)
 @Controller('articles')
 export class ArticlesController {

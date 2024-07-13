@@ -17,7 +17,7 @@ import { RegularLoginJwtAuthGuard } from 'src/core/guards/jwt-regular-auth.guard
 import { SignUpDto } from '../dto/sign-up.dto';
 import { UpdateRegularProfileDto } from '../dto/update-profile-regular.dto';
 
-@ApiTags('regular login')
+@ApiTags('Regular Login')
 @Controller('auth')
 export class RegularAuthController {
   constructor(private readonly regularAuthService: RegularAuthService) {}
