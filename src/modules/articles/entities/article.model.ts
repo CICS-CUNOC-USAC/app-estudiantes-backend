@@ -3,6 +3,7 @@ import { MediaModel } from 'src/modules/media/entities/media.model';
 import { CurrentStatusArticleModel } from './current-status-article.model';
 import { StaffModel } from 'src/modules/staffs/entities/staff.model';
 import { HistoryArticleStatusModel } from './history-article-status.model';
+import { ArticleCategoryModel } from 'src/modules/article_categories/entities/article_category.entity';
 
 export class ArticleModel extends Model {
   static tableName = 'articles';
@@ -12,6 +13,7 @@ export class ArticleModel extends Model {
   description: string;
   staff_id: number;
   media_id: number;
+  category_id: number;
   created_at: Date;
   updated_at: Date;
 
@@ -47,6 +49,14 @@ export class ArticleModel extends Model {
         join: {
           from: 'articles.media_id',
           to: 'media.id',
+        },
+      },
+      category: {
+        relation: Model.HasOneRelation,
+        modelClass: ArticleCategoryModel,
+        join: {
+          from: 'articles.category_id',
+          to: 'article_categories.id',
         },
       },
     };

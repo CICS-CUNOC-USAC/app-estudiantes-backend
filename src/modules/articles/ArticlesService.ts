@@ -8,18 +8,19 @@ import { QueryBuilder, Model } from 'objection';
 import { BaseQueryDto } from 'src/core/utils/base-query.dto';
 import { DatabaseTransactionService } from 'src/database/transaction/database-transaction.service';
 
+
 @Injectable()
 export class ArticlesService extends BaseService {
   queryFilters(
     queryDto: BaseQueryDto,
-    builder: QueryBuilder<Model, Model[]>,
+    builder: QueryBuilder<Model, Model[]>
   ): QueryBuilder<Model, Model[]> {
     throw new Error('Method not implemented.');
   }
   constructor(
     private readonly mediaService: MediaService,
 
-    private readonly dbTrxService: DatabaseTransactionService,
+    private readonly dbTrxService: DatabaseTransactionService
   ) {
     super(ArticlesService.name);
   }
@@ -27,13 +28,13 @@ export class ArticlesService extends BaseService {
   async create(
     file: Express.Multer.File,
     createArticleDto: CreateArticleDto,
-    staffUser: StaffModel,
+    staffUser: StaffModel
   ) {
     // Deconstruct the DTO
     const { media: createMediaDto, ...articleDto } = createArticleDto;
 
     const createdMedia = await this.mediaService.create(file, createMediaDto);
-    return await this.dbTrxService.databaseTransaction(async (trx) => {});
+    return await this.dbTrxService.databaseTransaction(async (trx) => { });
   }
 
   findAll() {
