@@ -20,6 +20,7 @@ import { RolesModule } from './modules/roles/roles.module';
 import { RoleDetailsModule } from './modules/role-details/role-details.module';
 import { ArticlesModule } from './modules/articles/articles.module';
 import { LibraryModule } from './modules/library/library.module';
+import { ArticleCategoriesModule } from './modules/article_categories/article_categories.module';
 
 @Module({
   imports: [
@@ -46,6 +47,7 @@ import { LibraryModule } from './modules/library/library.module';
     RoleDetailsModule,
     ArticlesModule,
     LibraryModule,
+    ArticleCategoriesModule,
   ],
 })
 export class AppModule {
