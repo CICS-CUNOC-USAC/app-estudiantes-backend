@@ -35,14 +35,6 @@ export class CreateArticleDto {
   readonly category_id: number;
 
   @IsNotEmpty()
-  @IsNumber()
-  @ApiProperty({
-    description: 'Staff ID of the author of the article',
-    example: 1,
-  })
-  readonly staff_id: number;
-
-  @IsNotEmpty()
   @ValidateNested()
   @Type(() => CreateMediaDto)
   @ApiProperty({
