@@ -15,9 +15,5 @@ export async function up(knex: Knex.Knex) {
 }
 
 export async function down(knex: Knex.Knex) {
-  return knex.schema
-    .alterTable('career_courses', (t) => {
-      t.dropColumn('field_number');
-    })
-    .then(() => knex.schema.dropTableIfExists('career_fields'));
+  return knex.schema.dropTable('career_fields');
 }
