@@ -21,6 +21,10 @@ import { RoleDetailsModule } from './modules/role-details/role-details.module';
 import { ArticlesModule } from './modules/articles/articles.module';
 import { LibraryModule } from './modules/library/library.module';
 import { ArticleCategoriesModule } from './modules/article_categories/article_categories.module';
+import { SchedulesModule } from './modules/schedules/schedules.module';
+import { ClassroomsModule } from './modules/classrooms/classrooms.module';
+import { PeriodsModule } from './modules/periods/periods.module';
+import { SectionsModule } from './modules/sections/sections.module';
 
 @Module({
   imports: [
@@ -48,6 +52,10 @@ import { ArticleCategoriesModule } from './modules/article_categories/article_ca
     ArticlesModule,
     LibraryModule,
     ArticleCategoriesModule,
+    SchedulesModule,
+    ClassroomsModule,
+    PeriodsModule,
+    SectionsModule,
   ],
 })
 export class AppModule {

@@ -20,6 +20,10 @@ import { ArticleStatusModel } from 'src/modules/articles/entities/article-status
 import { HistoryArticleStatusModel } from 'src/modules/articles/entities/history-article-status.model';
 import { CurrentStatusArticleModel } from 'src/modules/articles/entities/current-status-article.model';
 import { BookModel } from 'src/modules/library/entities/library.model';
+import { SectionModel } from 'src/modules/sections/entities/section.entity';
+import { PeriodModel } from 'src/modules/periods/entities/period.entity';
+import { ClassroomModel } from 'src/modules/classrooms/entities/classroom.entity';
+import { ScheduleModel } from 'src/modules/schedules/entities/schedule.entity';
 
 dotenv.config();
 
@@ -43,6 +47,10 @@ const models = [
   HistoryArticleStatusModel,
   CurrentStatusArticleModel,
   BookModel,
+  ClassroomModel,
+  PeriodModel,
+  SectionModel,
+  ScheduleModel,
 ];
 
 const modelProviders = models.map((model) => {
