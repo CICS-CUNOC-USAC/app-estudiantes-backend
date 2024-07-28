@@ -64,6 +64,7 @@ export async function down(knex: Knex.Knex) {
           .inTable('courses')
           .onDelete('CASCADE');
         t.boolean('approved').notNullable().defaultTo(false);
+        t.integer('semester').notNullable().defaultTo(1);
         t.timestamps(true, true);
       }),
     );
