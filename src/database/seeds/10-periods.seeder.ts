@@ -2,10 +2,10 @@ import * as Knex from 'knex';
 
 export async function seed(knex: Knex.Knex): Promise<any> {
   await knex('periods').del();
-  let periods: any[] = [];
+  const periods: any[] = [];
   //Create the same periods for all weekdays
   [1, 2, 3, 4, 5].forEach((weekday) => {
-    let times = [
+    const times = [
       '12:10',
       '13:00',
       '13:40',

@@ -11,4 +11,3 @@ export async function seed(knex: Knex.Knex): Promise<any> {
     },
   ]);
 }
-
