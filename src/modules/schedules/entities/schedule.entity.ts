@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Model } from 'objection';
 import { CareerCourseModel } from 'src/modules/career_courses/entities/career_course.entity';
 import { ClassroomModel } from 'src/modules/classrooms/entities/classroom.entity';
@@ -7,10 +8,19 @@ import { SectionModel } from 'src/modules/sections/entities/section.entity';
 export class ScheduleModel extends Model {
   static tableName = 'schedules';
 
+  @ApiProperty({ example: 1, description: 'ID of the Schedule' })
   id: number;
+
+  @ApiProperty({ example: '58', description: 'Code of the career' })
   career_code: number;
+
+  @ApiProperty({ example: '2804', description: 'Code of the course' })
   course_code: string;
+
+  @ApiProperty({ example: 2, description: 'ID of the section of the course' })
   section_id: number;
+
+  @ApiProperty({ example: 4, description: 'ID of the classroom of the course' })
   classroom_id: number;
 
   static get relationMappings() {
