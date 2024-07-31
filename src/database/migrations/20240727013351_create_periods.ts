@@ -3,7 +3,8 @@ import * as Knex from 'knex';
 export async function up(knex: Knex.Knex) {
   return knex.schema.createTable('periods', (table) => {
     table.increments('id').primary();
-    table.integer('weekday_id')
+    table
+      .integer('weekday_id')
       .notNullable()
       .references('id')
       .inTable('weekdays');
