@@ -15,6 +15,10 @@ export class CareerCourseModel extends Model {
   career: CareerModel | null;
   course: CourseModel | null;
 
+  static get idColumn() {
+    return ['career_code', 'course_code'];
+  }
+
   static get relationMappings(): RelationMappings | RelationMappingsThunk {
     return {
       career: {

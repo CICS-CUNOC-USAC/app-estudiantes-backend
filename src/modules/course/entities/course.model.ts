@@ -10,6 +10,10 @@ export class CourseModel extends Model {
   description: string;
   credits: number;
 
+  static get idColumn() {
+    return 'code';
+  }
+
   static get relationMappings(): RelationMappings | RelationMappingsThunk {
     return {
       careers: {
