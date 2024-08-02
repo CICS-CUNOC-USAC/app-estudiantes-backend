@@ -34,16 +34,11 @@ export class SchedulesService extends BaseService {
     return await this.scheduleModel
       .query()
       .findById(id)
-      .withGraphFetched(
-        '[periods.weekday, career_course.course, section, classroom]',
-      )
+      .withGraphFetched('[periods.weekday, course, section, classroom]')
       .modifyGraph('periods', (builder) => {
         builder.select('weekday_id', 'start_time', 'end_time');
       })
-      .modifyGraph('career_course', (builder) => {
-        builder.select('semester', 'field');
-      })
-      .modifyGraph('career_course.course', (builder) => {
+      .modifyGraph('course', (builder) => {
         builder.select('name');
       })
       .modifyGraph('[periods.weekday, section, classroom]', (builder) => {
@@ -51,7 +46,7 @@ export class SchedulesService extends BaseService {
       });
   }
 
-  async findCourses() {
+  async findByDays(days) {
     return await this.scheduleModel
       .query()
       .withGraphJoined(
@@ -69,7 +64,7 @@ export class SchedulesService extends BaseService {
       .modifyGraph('[periods.weekday, section, classroom]', (builder) => {
         builder.select('name');
       })
-      .whereIn('periods:weekday.id', [1, 3, 5]);
+      .whereIn('periods:weekday.id', days);
   }
 
   update(id: number, updateScheduleDto: UpdateScheduleDto) {

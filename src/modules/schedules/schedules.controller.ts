@@ -36,7 +36,18 @@ export class SchedulesController {
     type: ScheduleModel,
   })
   findCourses() {
-    return this.schedulesService.findCourses();
+    return this.schedulesService.findByDays([1, 3, 5]);
+  }
+
+  @Get('laboratories')
+  @ApiResponse({
+    status: 200,
+    description:
+      'Find all Schedules of days of courses (Monday, Wednesday, Friday)',
+    type: ScheduleModel,
+  })
+  findLaboratories() {
+    return this.schedulesService.findByDays([2, 4]);
   }
 
   @Get(':id')
