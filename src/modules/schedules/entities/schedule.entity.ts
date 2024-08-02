@@ -23,6 +23,31 @@ export class ScheduleModel extends Model {
   @ApiProperty({ example: 4, description: 'ID of the classroom of the course' })
   classroom_id: number;
 
+  // Documentation of relations
+  @ApiProperty({
+    description: 'Career and course details',
+    type: () => CareerCourseModel,
+  })
+  career_course?: CareerCourseModel;
+
+  @ApiProperty({
+    type: () => [PeriodModel],
+    description: 'Periods associated with the schedule',
+  })
+  periods?: PeriodModel[];
+
+  @ApiProperty({
+    type: () => SectionModel,
+    description: 'Section details of the course',
+  })
+  section?: SectionModel;
+
+  @ApiProperty({
+    type: () => ClassroomModel,
+    description: 'Classroom details of the course',
+  })
+  classroom?: ClassroomModel;
+
   static get relationMappings() {
     return {
       career_course: {
