@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CreateScheduleDto } from './dto/create-schedule.dto';
 import { UpdateScheduleDto } from './dto/update-schedule.dto';
 import { BaseService } from 'src/core/utils/base-service';
-import { QueryBuilder, Model, ModelClass } from 'objection';
+import { QueryBuilder, Model, ModelClass, raw } from 'objection';
 import { BaseQueryDto } from 'src/core/utils/base-query.dto';
 import { ScheduleModel } from './entities/schedule.entity';
 
@@ -53,7 +53,11 @@ export class SchedulesService extends BaseService {
         '[periods.weekday, career_course.course, section, classroom]',
       )
       .modifyGraph('periods', (builder) => {
-        builder.select('weekday_id', 'start_time', 'end_time');
+        builder.select(
+          'weekday_id',
+          raw("TO_CHAR(start_time, 'HH24:MI')").as('start_time'),
+          raw("TO_CHAR(end_time, 'HH24:MI')").as('end_time'),
+        );
       })
       .modifyGraph('career_course', (builder) => {
         builder.select('semester', 'field');
