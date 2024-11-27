@@ -57,7 +57,7 @@ export async function seed(knex: Knex.Knex): Promise<any> {
       career_code: 35,
       course_code: '909',
       section_id: 2,
-      classroom_id: 8,
+      classroom_id: 7,
     },
   ]);
 }

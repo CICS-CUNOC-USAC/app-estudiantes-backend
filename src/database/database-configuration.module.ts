@@ -24,6 +24,7 @@ import { SectionModel } from 'src/modules/sections/entities/section.entity';
 import { PeriodModel } from 'src/modules/periods/entities/period.entity';
 import { ClassroomModel } from 'src/modules/classrooms/entities/classroom.entity';
 import { ScheduleModel } from 'src/modules/schedules/entities/schedule.entity';
+import { HourModel } from 'src/modules/hours/entities/hour.entity';
 
 dotenv.config();
 
@@ -51,6 +52,7 @@ const models = [
   PeriodModel,
   SectionModel,
   ScheduleModel,
+  HourModel,
 ];
 
 const modelProviders = models.map((model) => {

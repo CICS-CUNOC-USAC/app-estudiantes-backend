@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Model } from 'objection';
+import { HourModel } from 'src/modules/hours/entities/hour.entity';
 import { WeekdayModel } from 'src/modules/weekdays/entities/weekday.entity';
 
 export class PeriodModel extends Model {
@@ -11,11 +12,8 @@ export class PeriodModel extends Model {
   @ApiProperty({ example: 1, description: 'ID of the weekday of the period' })
   weekday_id: string;
 
-  @ApiProperty({ example: '14:30', description: 'Start Time of the period' })
-  start_time: string;
-
-  @ApiProperty({ example: '15:20', description: 'End Time of the period' })
-  end_time: string;
+  @ApiProperty({ example: 3, description: 'ID of the hour of the period' })
+  hour_id: string;
 
   @ApiProperty({
     description: 'Weekday details',
@@ -31,6 +29,14 @@ export class PeriodModel extends Model {
         join: {
           from: 'periods.weekday_id',
           to: 'weekdays.id',
+        },
+      },
+      hour: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: HourModel,
+        join: {
+          from: 'periods.hour_id',
+          to: 'hours.id',
         },
       },
     };

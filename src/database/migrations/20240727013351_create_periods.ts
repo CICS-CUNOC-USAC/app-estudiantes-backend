@@ -8,8 +8,7 @@ export async function up(knex: Knex.Knex) {
       .notNullable()
       .references('id')
       .inTable('weekdays');
-    table.time('start_time').notNullable();
-    table.time('end_time').notNullable();
+    table.integer('hour_id').notNullable().references('id').inTable('hours');
   });
 }
 
