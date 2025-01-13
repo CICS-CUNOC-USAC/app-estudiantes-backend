@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Inject, Injectable } from '@nestjs/common';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
@@ -14,11 +15,17 @@ export class RolesService {
   }
 
   async findAll() {
-    return await this.roleModel.query().select('*');
+    return await this.roleModel
+      .query()
+      .select('*')
+      .withGraphFetched('permissions');
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} role`;
+  async findOne(id: number) {
+    return await this.roleModel
+      .query()
+      .findById(id)
+      .withGraphFetched('permissions');
   }
 
   update(id: number, updateRoleDto: UpdateRoleDto) {
