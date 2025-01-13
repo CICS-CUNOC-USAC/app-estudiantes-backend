@@ -208,7 +208,8 @@ export class StaffsService extends BaseService {
       .withGraphFetched('roles')
       .modifyGraph('roles', (builder) => {
         builder.select('roles.id', 'roles.name', 'roles.alias');
-      });
+      })
+      .withGraphFetched('roles.permissions');
     if (staff) delete staff.encrypted_password;
     return staff;
   }

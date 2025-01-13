@@ -9,13 +9,13 @@ export class PermissionModel extends Model {
   description: string;
   action: string;
   subject: string;
-  conditions: string;
+  conditions?: string;
   created_at: Date;
   updated_at: Date;
 
   static get relationMappings() {
     return {
-      staffs: {
+      roles: {
         relation: Model.ManyToManyRelation,
         modelClass: RoleModel,
         join: {

@@ -13,9 +13,13 @@ import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { StaffSuperadminLoginJwtAuthGuard } from 'src/core/guards/jwt-staff-auth-superadmin.guard';
+import { PermissionsGuard } from 'src/core/guards/permissions/permissions.guard';
+import { CheckAbilities } from 'src/core/decorators/abilities/abilities.decorator';
 
 @ApiTags('Roles')
-@UseGuards(StaffSuperadminLoginJwtAuthGuard)
+//@UseGuards(StaffSuperadminLoginJwtAuthGuard)
+@CheckAbilities({ action: 'manage', subject: 'all' })
+@UseGuards(PermissionsGuard)
 @Controller('roles')
 export class RolesController {
   constructor(private readonly rolesService: RolesService) {}
