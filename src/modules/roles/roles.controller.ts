@@ -18,7 +18,7 @@ import { CheckAbilities } from 'src/core/decorators/abilities/abilities.decorato
 
 @ApiTags('Roles')
 //@UseGuards(StaffSuperadminLoginJwtAuthGuard)
-@CheckAbilities({ action: 'manage', subject: 'all' })
+@CheckAbilities({ action: 'manage', subject: 'Role' })
 @UseGuards(PermissionsGuard)
 @Controller('roles')
 export class RolesController {
