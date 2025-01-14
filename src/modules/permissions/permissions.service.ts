@@ -25,11 +25,11 @@ export class PermissionsService extends BaseService {
   }
 
   findAll() {
-    return `This action returns all permissions`;
+    return this.permissionModel.query().select();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} permission`;
+    return this.permissionModel.query().findById(id);
   }
 
   findAllByRoleId(roleId: number) {
