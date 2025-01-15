@@ -58,8 +58,10 @@ export class SchedulesService extends BaseService {
         '[periods.[weekday,hour], career_course.course, section, classroom]',
       )
       .modifyGraph('periods', (builder) => {
+        builder.select('weekday_id');
+      })
+      .modifyGraph('periods.hour', (builder) => {
         builder.select(
-          'weekday_id',
           raw("TO_CHAR(start_time, 'HH24:MI')").as('start_time'),
           raw("TO_CHAR(end_time, 'HH24:MI')").as('end_time'),
         );

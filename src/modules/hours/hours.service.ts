@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CreateHourDto } from './dto/create-hour.dto';
 import { UpdateHourDto } from './dto/update-hour.dto';
 import { BaseService } from 'src/core/utils/base-service';
-import { QueryBuilder, Model, ModelClass } from 'objection';
+import { QueryBuilder, Model, ModelClass, raw } from 'objection';
 import { BaseQueryDto } from 'src/core/utils/base-query.dto';
 import { HourModel } from './entities/hour.entity';
 
@@ -27,7 +27,13 @@ export class HoursService extends BaseService {
   }
 
   async findAll() {
-    return await this.hourModel.query();
+    return await this.hourModel
+      .query()
+      .select(
+        'id',
+        raw("TO_CHAR(start_time, 'HH24:MI')").as('start_time'),
+        raw("TO_CHAR(end_time, 'HH24:MI')").as('end_time'),
+      );
   }
 
   async findOne(id: number) {
