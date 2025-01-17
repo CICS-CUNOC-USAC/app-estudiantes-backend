@@ -55,7 +55,7 @@ export class SchedulesService extends BaseService {
     return await this.scheduleModel
       .query()
       .withGraphJoined(
-        '[periods.[weekday,hour], career_course.course, section, classroom]',
+        '[periods.[weekday,hour], career_course.[career, course], section, classroom]',
       )
       .modifyGraph('periods', (builder) => {
         builder.select('weekday_id');
