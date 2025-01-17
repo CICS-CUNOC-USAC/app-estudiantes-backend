@@ -11,11 +11,16 @@ export async function seed(knex: Knex.Knex): Promise<any> {
       period_id: 3 + 22 * i,
     });
 
-    //Matematica Basica 1 (mismos horarios que IPC 1)
+    //Matematica Basica 1 (doble periodo)
     periods_schedules.push({
       schedule_id: 2,
       //Lunes,Miercoles,Viernes 13:40-14:30
       period_id: 3 + 22 * i,
+    });
+    periods_schedules.push({
+      schedule_id: 2,
+      //Lunes,Miercoles,Viernes 14:30-15:20
+      period_id: 4 + 22 * i,
     });
 
     //Orientacion y Liderazgo
