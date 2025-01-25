@@ -9,6 +9,7 @@ export async function up(knex: Knex.Knex) {
       .onDelete('CASCADE');
     t.integer('field_number').notNullable();
     t.string('name', 320).notNullable();
+    t.boolean('common_field').notNullable().defaultTo(false);
     t.unique(['career_code', 'field_number']);
     t.primary(['career_code', 'field_number']);
   });

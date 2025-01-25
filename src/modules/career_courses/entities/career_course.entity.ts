@@ -69,8 +69,8 @@ export class CareerCourseModel extends Model {
         relation: Model.HasOneRelation,
         modelClass: CareerFieldModel,
         join: {
-          from: 'career_courses.field_number',
-          to: 'career_field.field_number',
+          from: ['career_courses.career_code', 'career_courses.field'], // Composite key from CareerCourseModel
+          to: ['career_fields.career_code', 'career_fields.field_number'], // Composite key in CareerFieldModel
         },
       },
     };

@@ -43,7 +43,7 @@ export class SchedulesController {
   @ApiResponse({
     status: 200,
     description:
-      'Find all Schedules of days of courses (Monday, Wednesday, Friday)',
+      'Find all Schedules of days of laboratories (Tuesday, Thursday)',
     type: ScheduleModel,
   })
   findLaboratories() {

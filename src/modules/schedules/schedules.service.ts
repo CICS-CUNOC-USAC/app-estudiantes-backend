@@ -52,10 +52,10 @@ export class SchedulesService extends BaseService {
   }
 
   async findByDays(days) {
-    return await this.scheduleModel
+    const schedules = await this.scheduleModel
       .query()
       .withGraphJoined(
-        '[periods.[weekday,hour], career_course.[career, course], section, classroom]',
+        '[periods.[weekday,hour], career_course.[career, course, career_field], section, classroom]',
       )
       .modifyGraph('periods', (builder) => {
         builder.select('weekday_id');
@@ -76,6 +76,25 @@ export class SchedulesService extends BaseService {
         builder.select('name');
       })
       .whereIn('periods:weekday.id', days);
+
+    schedules.forEach((schedule) => {
+      const groupedPeriods = schedule.periods.reduce((acc, period: any) => {
+        const existing = acc.find((p) => p.weekday_id === period.weekday_id);
+        if (existing) {
+          existing.hours.push(period.hour);
+        } else {
+          acc.push({
+            weekday_id: period.weekday_id,
+            weekday: period.weekday,
+            hours: [period.hour],
+          });
+        }
+        return acc;
+      }, []);
+      schedule.periods = groupedPeriods;
+    });
+
+    return schedules;
   }
 
   update(id: number, updateScheduleDto: UpdateScheduleDto) {
