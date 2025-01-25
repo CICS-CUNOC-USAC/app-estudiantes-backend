@@ -23,6 +23,12 @@ export class ScheduleModel extends Model {
   @ApiProperty({ example: 4, description: 'ID of the classroom of the course' })
   classroom_id: number;
 
+  @ApiProperty({
+    example: 'laboratory',
+    description: 'Nature of the schedule. Lecture, laboratory or other',
+  })
+  type: string;
+
   // Documentation of relations
   @ApiProperty({
     description: 'Career and course details',

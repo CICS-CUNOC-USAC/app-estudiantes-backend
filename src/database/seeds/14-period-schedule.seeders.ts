@@ -65,5 +65,38 @@ export async function seed(knex: Knex.Knex): Promise<any> {
       period_id: 2 + 22 * i,
     });
   });
+  //Laboratorio IPC 1
+  periods_schedules.push({
+    schedule_id: 9,
+    //Martes 13:40-14:30
+    period_id: 14,
+  });
+  periods_schedules.push({
+    schedule_id: 9,
+    //Martes 14:30-15:20
+    period_id: 15,
+  });
+  periods_schedules.push({
+    schedule_id: 9,
+    //Jueves 13:40-14:30
+    period_id: 36,
+  });
+
+  //Laboratorio Matematica Basica 1 (doble periodo)
+  periods_schedules.push({
+    schedule_id: 10,
+    //Martes 13:40-14:30
+    period_id: 14,
+  });
+  periods_schedules.push({
+    schedule_id: 10,
+    //Martes 14:30-15:20
+    period_id: 15,
+  });
+  periods_schedules.push({
+    schedule_id: 10,
+    //Martes 15:20-16:10
+    period_id: 16,
+  });
   return knex('period_schedule').insert(periods_schedules);
 }

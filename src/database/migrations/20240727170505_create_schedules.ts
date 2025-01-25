@@ -5,6 +5,7 @@ export async function up(knex: Knex.Knex) {
     table.increments('id').primary();
     table.integer('career_code').notNullable();
     table.string('course_code').notNullable();
+    table.string('type').notNullable().defaultTo('lecture');
     table
       .integer('section_id')
       .notNullable()

@@ -59,5 +59,21 @@ export async function seed(knex: Knex.Knex): Promise<any> {
       section_id: 2,
       classroom_id: 7,
     },
+    //Laboratorio IPC 1
+    {
+      career_code: 58,
+      course_code: '2796',
+      section_id: 1,
+      classroom_id: 3,
+      type: 'laboratory',
+    },
+    //Laboratorio Matematica Basica 1
+    {
+      career_code: 58,
+      course_code: '169',
+      section_id: 1,
+      classroom_id: 1,
+      type: 'laboratory',
+    },
   ]);
 }
