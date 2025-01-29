@@ -5,14 +5,21 @@ import { BaseService } from 'src/core/utils/base-service';
 import { QueryBuilder, Model, ModelClass, raw } from 'objection';
 import { BaseQueryDto } from 'src/core/utils/base-query.dto';
 import { ScheduleModel } from './entities/schedule.entity';
+import { ScheduleQueryDto } from './dto/schedule-query.dto';
 
 @Injectable()
 export class SchedulesService extends BaseService {
   queryFilters(
-    queryDto: BaseQueryDto,
+    queryDto: ScheduleQueryDto,
     builder: QueryBuilder<Model, Model[]>,
   ): QueryBuilder<Model, Model[]> {
-    throw new Error('Method not implemented.');
+    if (queryDto.selection) {
+      const selectionArray = JSON.parse(
+        queryDto.selection as unknown as string,
+      );
+      builder.andWhere('periods:hour.id', 'in', selectionArray);
+    }
+    return builder;
   }
 
   constructor(
@@ -51,7 +58,7 @@ export class SchedulesService extends BaseService {
       });
   }
 
-  async findByDays(days) {
+  async findByDays(days, queryDto: ScheduleQueryDto) {
     const schedules = await this.scheduleModel
       .query()
       .withGraphJoined(
@@ -62,6 +69,7 @@ export class SchedulesService extends BaseService {
       })
       .modifyGraph('periods.hour', (builder) => {
         builder.select(
+          'id',
           raw("TO_CHAR(start_time, 'HH24:MI')").as('start_time'),
           raw("TO_CHAR(end_time, 'HH24:MI')").as('end_time'),
         );
@@ -75,7 +83,8 @@ export class SchedulesService extends BaseService {
       .modifyGraph('[periods.weekday, section, classroom]', (builder) => {
         builder.select('name');
       })
-      .whereIn('periods:weekday.id', days);
+      .whereIn('periods:weekday.id', days)
+      .where((builder) => this.queryFilters(queryDto, builder));
 
     schedules.forEach((schedule) => {
       const groupedPeriods = schedule.periods.reduce((acc, period: any) => {

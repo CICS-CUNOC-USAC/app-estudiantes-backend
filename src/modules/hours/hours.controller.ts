@@ -1,7 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+} from '@nestjs/common';
 import { HoursService } from './hours.service';
 import { CreateHourDto } from './dto/create-hour.dto';
 import { UpdateHourDto } from './dto/update-hour.dto';
+import { HourQueryDto } from './dto/hour-query.dto';
 
 @Controller('hours')
 export class HoursController {
@@ -13,8 +23,8 @@ export class HoursController {
   }
 
   @Get()
-  findAll() {
-    return this.hoursService.findAll();
+  findAll(@Query() queryDto: HourQueryDto) {
+    return this.hoursService.findAll(queryDto);
   }
 
   @Get(':id')
