@@ -19,6 +19,16 @@ export class SchedulesService extends BaseService {
       );
       builder.andWhere('periods:hour.id', 'in', selectionArray);
     }
+    if (queryDto.career) {
+      const selectedCareer = Number.parseInt(queryDto.career as any);
+      if (selectedCareer === 0) {
+        builder.andWhere('career_course:career_field.common_field', true);
+      } else {
+        builder
+          .andWhere('schedules.career_code', selectedCareer)
+          .andWhere('career_course:career_field.common_field', false);
+      }
+    }
     return builder;
   }
 

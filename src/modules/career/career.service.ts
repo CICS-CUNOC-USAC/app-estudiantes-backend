@@ -25,7 +25,7 @@ export class CareerService extends BaseService {
   }
 
   findAll() {
-    return `This action returns all career`;
+    return this.careerModel.query();
   }
 
   async findOne(careerCode: number) {
