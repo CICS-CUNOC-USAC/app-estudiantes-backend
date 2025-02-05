@@ -2,30 +2,58 @@ import { Knex } from 'knex';
 
 export async function seed(knex: Knex): Promise<any> {
   const courses = [
+    //Edit kike
+
+     // { code: 33, name: 'Civil' },
+    // { code: 34, name: 'Mecánica' },
+    // { code: 35, name: 'Industrial' },
+    // { code: 36, name: 'Mecánica Industrial' },
+    // { code: 58, name: 'Ciencias y Sistemas' },
+
     //Primer Semestre
-    //Area Comun
-    { code: '028', name: 'Social Humanistica 1', description: '', credits: 4 },
-    { code: '169', name: 'Matematica Basica 1', description: '', credits: 7 },
+    //Area Comun para las 5 carreras
+    { code: '028', 
+      name: 'Social Humanistica 1', 
+      description: 'EL CURSO DE SOCIAL HUMANÍSTICA 1, TIENE COMO FINALIDAD; EL PROPORCIONAL AL ESTUDIANTE DEL AREA COMUN, DE LAS CARERRAS DE INGENIERIA, DE LA DIVISIÒN DE CIENCIAS DE LA INGENIERIA, DEL CENTRO UNIVERSITARIO DE OCCIDENTE (CUNOC), LOS CONOCIMIENTOS QUE LE PERMITAR TENER UN PANORAMA CIENTÌFICO SOBRE ASPECTOS DE LA SOCIEDAD EN FORMA GENERAL, CONOCIMIENTOS Y ELEMENTOS TEÓRICOS QUE SON INDISPENSABLES PARA INTERPRETAR CIENTÍFICAMENTE EL DESARROLLO DE LA SOCIEDAD.', 
+      credits: 4,  
+    }, //si esta correcto en todos los pensums
+    { code: '169',
+      name: 'Matematica Basica 1', 
+      description: 'En este curso el alumno analizara conceptos, teorías, procedimientos, gráficas, y principios de modelado sobre los temas de: conjuntos, números reales, funciones, límites, derivadas, integrales, ecuaciones diferenciales, geometría analítica, vectores, matrices, determinantes, sistemas de ecuaciones lineales, y aplicaciones de las matemáticas en la ingeniería.',
+      credits: 7, 
+    }, //sip esta bien en todos los pensums
     {
       code: '2666',
       name: 'Orientacion y Liderazgo',
-      description: '',
-      credits: 1,
-    },
+      description: 'El curso de Orientación y Liderazgo crea consciencia en el estudiante de su compromiso ante la sociedad guatemalteca que con el pago de sus impuestos financia su formación profesional; por lo que los egresados sancarlistas deben proponer soluciones a la problemática nacional que procuren el bien común. En el curso de Orientación y Liderazgo el estudiante conoce el perfil de egreso del ingeniero conforme a la carrera que estudia. Además, conoce el Código de Ética del Colegio de Ingenieros de Guatemala. El curso de Orientación y Liderazgo es un curso formativo en las competencias blandas: refuerza en el estudiante las cualidades de liderazgo que ya posee, y lo motiva para adquirir las cualidades de liderazgo que necesita para ser una persona exitosa que disfruta de relaciones interpersonales satisfactorias a nivel estudiantil, familiar, social, laboral y profesional.',
+      credits: 1 , 
+    },//credito correcto kajsd
     {
       code: '119',
       name: 'Tecnica Complementaria 1',
-      description: '',
-      credits: 3,
-    },
-    { code: '177', name: 'Deportes 1', description: '', credits: 1 },
-    { code: '216', name: 'Quimica 1', description: '', credits: 3 },
-    { code: '2792', name: 'Idioma Tecnico 1', description: '', credits: 2 },
+      description: 'La introducción al dibujo técnico se presenta en el curso Técnica Complementaria 1 a través de un recorrido desde conceptos generales hasta la elaboración de trabajos minuciosos y de carácter profesional. El curso principia con el conocimiento y uso de los instrumentos y materiales que requiere el dibujo técnico. Se presenta como un lenguaje al estudiante para comunicar ideas y convertirlas en el conocimiento de la realidad, abarcando metodologías para el uso de objetos, sistemas de medición, texturas de líneas, geometría básica e incluso técnicas de dibujo a mano alzada. Surge de la necesidad de tamaño, forma y relación de los objetos que nos rodean, espacios que se generan alrededor del cuerpo humano y la relación de este con todos los objetos que nos circundan.',
+      credits: 3, 
+    }, //creditos correctos entre todos los pensums
+    { code: '177', 
+      name: 'Deportes 1', 
+      description: 'tiene como finalidad contribuir al desarrollo integral del estudiante de primer ingreso, desarrollando en él las competencias fundamentales que le permitan encontrar en dicho curso una válvula de escape ante el incremento de estrés y la ansiedad, al encontrarse en un contexto diferente en el área académica; además le permite desarrollar conciencia de la importancia de dicha práctica ante el antagonismo de las enfermedades del siglo XXI, tales como la diabetes, hipertensión, obesidad, entre otras. El curso de Deportes se concibe como un área de enseñanza que sitúa al educando como sujeto de aprendizaje y objeto de estudio desde los dos ejes de básicos desde su acción educativa como lo son el cuerpo y el movimiento comprendiendo una relación integral y dialéctica.', 
+      credits: 1, 
+    }, //creditos correctos entre todos los pensums
+    { code: '216', 
+      name: 'Quimica 1', 
+      description: 'El curso de Química I, ésta vinculada a las actividades científicas y no científicas, con la finalidad de crear criterios para la comprensión y explicación de las otras ciencias que ayudan o afectan a la ingeniería. Ésta a la vez pretende que los estudiantes comprendan las diferentes teorías a través de los conceptos tanto a nivel atómico (partículas, teorías, modelos), como molecular (substancias compuestas, mezclas, soluciones, densidad). En todo caso la materia se analiza a través del análisis dimensional, formación de los enlaces químicos, nomenclatura química, reacciones químicas, cálculos estequiométricos y estado gaseoso. El estudiante justifica sus investigaciones socializándolas', 
+      credits: 3, 
+    },//creditos correctos entre todos los pensums
+    { code: '2792', 
+      name: 'Idioma Tecnico 1', 
+      description: 'Curso el cual no se habilitaba en la division de ciencias de la ingenieria, pero podia ganarse asignandose los cursos y niveles en CALUSAC, ganando los 12 niveles necesarios', 
+      credits: 2, 
+    }, //creditos correctos y solo esta en el pensum de industrial y sistemas
 
     //Segundo Semestre
     //Area Comun
-    { code: '029', name: 'Social Humanistica 2', description: '', credits: 4 },
-    { code: '170', name: 'Matematica Basica 2', description: '', credits: 7 },
+    { code: '029', name: 'Social Humanistica 2', description: '', credits: 4, },
+    { code: '170', name: 'Matematica Basica 2', description: '', credits: 7, },
     {
       code: '2667',
       name: 'Tecnicas de Investigacion y Estudio',
@@ -788,6 +816,12 @@ export async function seed(knex: Knex): Promise<any> {
       description: '',
       credits: 5,
     },
+    {
+      code: '2833-',
+      name: 'Bases de Datos Avanzadas',
+      description: '',
+      credits: 5,
+    } ///jajskja aca comienzo yooo kik3.h (Enrique Hernandez)    
   ];
 
   return knex('courses')
