@@ -164,7 +164,22 @@ export async function seed(knex: Knex): Promise<any> {
       field_number: 10,
       name: 'Diplomado en Administracion',
     },
-
+    //agregue 3 nuevas areas al pensum de industrial que hacian falta
+    { 
+      career_code: 35,
+      field_number: 11,
+      name: 'Area de Investigacion',
+    },
+    {
+      career_code: 35,
+      field_number: 12,
+      name: 'Area Ambiental',
+    },
+    {
+      career_code: 35,
+      field_number: 13,
+      name: 'Idioma',
+    },
     //Mecanica Industrial
     {
       career_code: 36,

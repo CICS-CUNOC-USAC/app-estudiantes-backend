@@ -15,44 +15,58 @@ export async function seed(knex: Knex): Promise<any> {
     mandatory: boolean}
     */
 
+    //TODOS ESTOS CURSOS SON DE LOS PENSUMS 2012 PARA CIVIL, MECANICA, INDUSTRIAL, MECANICA INDUSTRIAL, 2016 CIENCIAS Y SISTEMAS
+
     //PRIMER SEMESTRE
     //AREA COMUN
     //Social Humanistica 1
+    //Civil3
+
     {
-      career_code: 33,
+      career_code: 33, 
       course_code: '028',
       semester: 1,
       field: 6,
-      mandatory: true,
+      mandatory: true, 
     },
+    //sip correcto
+    //Mecanica
     {
-      career_code: 34,
+      career_code: 34, 
       course_code: '028',
       semester: 1,
       field: 5,
-      mandatory: true,
+      mandatory: true, 
     },
+    //Informacion correcta
+    //Industrial
     {
-      career_code: 35,
-      course_code: '028',
-      semester: 1,
-      field: 7,
-      mandatory: true,
-    },
-    {
-      career_code: 36,
-      course_code: '028',
-      semester: 1,
-      field: 8,
-      mandatory: true,
-    },
-    {
-      career_code: 58,
+      career_code: 35,  
       course_code: '028',
       semester: 1,
       field: 4,
-      mandatory: true,
+      mandatory: true, 
     },
+//se modifico el field de 7 a 4, segun malla
+
+    //Mecanica Industrial
+    {
+      career_code: 36, 
+      course_code: '028',
+      semester: 1,
+      field: 1,
+      mandatory: true, 
+    },
+    //se modifico el fiel de 8 a 1, ya que en ese pensum no tiene areas desglosadas, sino que es una unica area
+
+    //sistemas
+    {
+      career_code: 58, 
+      course_code: '028',
+      semester: 1,
+      field: 4,
+      mandatory: true, 
+    }, //Informacion correcta
 
     //Mate Basica 1
     {
@@ -238,13 +252,21 @@ export async function seed(knex: Knex): Promise<any> {
       field: 4,
       mandatory: true,
     },
-
-    //Idioma Tecnico 1 - PARECE EXISTIR UNICAMENTE PARA SISTEMAS
+    //Idioma Tecnico 1 - UNICAMENTE EXISTE EN SISTEMAS Y INDUSTRIAL
+    //Sistemas
     {
-      career_code: 58,
+      career_code: 58, 
       course_code: '2792',
       semester: 1,
       field: 4,
+      mandatory: false,
+    },
+    //Industrial
+    {
+      career_code: 35, 
+      course_code: '2792',
+      semester: 1,
+      field: 13,
       mandatory: false,
     },
 
