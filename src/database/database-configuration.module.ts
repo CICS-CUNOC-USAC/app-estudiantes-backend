@@ -20,6 +20,7 @@ import { ArticleStatusModel } from 'src/modules/articles/entities/article-status
 import { HistoryArticleStatusModel } from 'src/modules/articles/entities/history-article-status.model';
 import { CurrentStatusArticleModel } from 'src/modules/articles/entities/current-status-article.model';
 import { BookModel } from 'src/modules/library/entities/library.model';
+import { PermissionModel } from 'src/modules/permissions/entities/permission.model';
 
 dotenv.config();
 
@@ -43,6 +44,7 @@ const models = [
   HistoryArticleStatusModel,
   CurrentStatusArticleModel,
   BookModel,
+  PermissionModel,
 ];
 
 const modelProviders = models.map((model) => {

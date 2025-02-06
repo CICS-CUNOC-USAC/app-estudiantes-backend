@@ -20,6 +20,8 @@ import { RolesModule } from './modules/roles/roles.module';
 import { RoleDetailsModule } from './modules/role-details/role-details.module';
 import { ArticlesModule } from './modules/articles/articles.module';
 import { LibraryModule } from './modules/library/library.module';
+import { PermissionsModule } from './modules/permissions/permissions.module';
+import { CaslModule } from './modules/casl/casl.module';
 
 @Module({
   imports: [
@@ -46,6 +48,8 @@ import { LibraryModule } from './modules/library/library.module';
     RoleDetailsModule,
     ArticlesModule,
     LibraryModule,
+    PermissionsModule,
+    CaslModule,
   ],
 })
 export class AppModule {

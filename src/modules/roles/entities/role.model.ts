@@ -1,4 +1,5 @@
 import { Model } from 'objection';
+import { PermissionModel } from 'src/modules/permissions/entities/permission.model';
 import { StaffModel } from 'src/modules/staffs/entities/staff.model';
 
 export class RoleModel extends Model {
@@ -23,6 +24,18 @@ export class RoleModel extends Model {
             to: 'role_details.staff_id',
           },
           to: 'staffs.id',
+        },
+      },
+      permissions: {
+        relation: Model.ManyToManyRelation,
+        modelClass: PermissionModel,
+        join: {
+          from: 'roles.id',
+          through: {
+            from: 'role_permissions.role_id',
+            to: 'role_permissions.permission_id',
+          },
+          to: 'permissions.id',
         },
       },
     };

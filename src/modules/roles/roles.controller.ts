@@ -7,21 +7,26 @@ import {
   Param,
   Delete,
   UseGuards,
+  ValidationPipe,
 } from '@nestjs/common';
 import { RolesService } from './roles.service';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { StaffSuperadminLoginJwtAuthGuard } from 'src/core/guards/jwt-staff-auth-superadmin.guard';
+import { PermissionsGuard } from 'src/core/guards/permissions/permissions.guard';
+import { CheckAbilities } from 'src/core/decorators/abilities/abilities.decorator';
 
 @ApiTags('Roles')
-@UseGuards(StaffSuperadminLoginJwtAuthGuard)
+@UseGuards(PermissionsGuard)
+@CheckAbilities({ action: 'manage', subject: 'Role' })
 @Controller('roles')
 export class RolesController {
   constructor(private readonly rolesService: RolesService) {}
 
   @Post()
-  create(@Body() createRoleDto: CreateRoleDto) {
+  create(
+    @Body(new ValidationPipe({ transform: true })) createRoleDto: CreateRoleDto,
+  ) {
     return this.rolesService.create(createRoleDto);
   }
 
