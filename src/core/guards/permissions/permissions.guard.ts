@@ -55,14 +55,12 @@ export class PermissionsGuard extends AuthGuard('staff-jwt') {
       ]
     );
 
-    console.log('ENTRA A ESTE GUARD');
-    console.log(permissions);
+    //Si no requiere permisos
     if (!permissions) {
       return user;
     }
 
-    console.log('USUARIO')
-    console.log(user)
+    //Si no hay usuario
     if (!user) {
       const error: IGeneralError = {
         statusCode: 401,
@@ -72,6 +70,7 @@ export class PermissionsGuard extends AuthGuard('staff-jwt') {
       throw new UnauthorizedException(error);
     }
 
+    //Si el usuario no tiene roles
     if (!user.roles.length) {
       const error: IGeneralError = {
         statusCode: 401,
@@ -91,7 +90,7 @@ export class PermissionsGuard extends AuthGuard('staff-jwt') {
       if (hasPermission) return user;
     }
 
-    // Si ninguno de los roles tiene permiso, denegar acceso
+  // Si ninguno de los roles tiene permiso, denegar acceso
   const error: IGeneralError = {
     statusCode: 401,
     message: 'Not enough permissions',
