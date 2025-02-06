@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateCareerCourseDto } from './dto/create-career_course.dto';
 import { UpdateCareerCourseDto } from './dto/update-career_course.dto';
 import { Model, ModelClass, QueryBuilder } from 'objection';
@@ -72,6 +72,11 @@ export class CareerCoursesService extends BaseService {
 
   async findCoursesByCareerAndSemester(careerCode: number) {
     const career = await this.careerModel.query().findOne('code', careerCode);
+
+    if (!career) {
+      return undefined;
+    }
+
     const courses = await this.careerCourseModel
       .query()
       .joinRaw(
