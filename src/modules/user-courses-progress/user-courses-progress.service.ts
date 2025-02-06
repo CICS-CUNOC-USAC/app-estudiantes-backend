@@ -59,6 +59,7 @@ export class UserCoursesProgressService extends BaseService {
     const credits =
       await this.careerCoursesService.findTotalCreditsByCareer(careerCode);
     let currentMandatoryCredsAccum = 0;
+    let currentNotMandatoryCredsAccum = 0;
     let currentTotalCredsAccum = 0;
     data.semester_progress.forEach(({ courses_semester_progress }) => {
       courses_semester_progress.forEach(({ approved, career_course }) => {
@@ -66,6 +67,7 @@ export class UserCoursesProgressService extends BaseService {
           currentMandatoryCredsAccum += career_course.course.credits;
           currentTotalCredsAccum += career_course.course.credits;
         } else if (approved) {
+          currentNotMandatoryCredsAccum += career_course.course.credits;
           currentTotalCredsAccum += career_course.course.credits;
         }
       });
@@ -74,9 +76,11 @@ export class UserCoursesProgressService extends BaseService {
       progress: data,
       current_credits: {
         mandatory_credits: currentMandatoryCredsAccum,
+        not_mandatory_credits: currentNotMandatoryCredsAccum,
         total_credits: currentTotalCredsAccum,
       },
       mandatory_credits: credits.mandatory_credits,
+      not_mandatory_credits: credits.not_mandatory_credits,
       available_credits: credits.total_credits,
     };
     return response;
