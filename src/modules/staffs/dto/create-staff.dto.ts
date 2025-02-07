@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
+  IsArray,
   IsEmail,
   IsNotEmpty,
   IsString,
@@ -47,4 +48,12 @@ export class CreateStaffDto {
     required: true,
   })
   password: string;
+
+  @IsNotEmpty()
+  @IsArray()
+  @ApiProperty({
+    description: 'An array of ids of roles to assign to the staff',
+    example: '[ 1, 3, 6, 12 ]',
+  })
+  readonly roles_ids: number[];
 }
