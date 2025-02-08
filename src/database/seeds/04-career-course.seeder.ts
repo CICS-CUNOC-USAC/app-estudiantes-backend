@@ -124,15 +124,15 @@ export async function seed(knex: Knex): Promise<any> {
       career_code: 35,
       course_code: '2666',
       semester: 1,
-      field: 7,
+      field: 11,
       mandatory: true,
     },
     {
       career_code: 36,
       course_code: '2666',
       semester: 1,
-      field: 8,
-      mandatory: true,
+      field: 1,
+      mandatory: false,
     },
     {
       career_code: 58,
@@ -198,16 +198,16 @@ export async function seed(knex: Knex): Promise<any> {
       career_code: 35,
       course_code: '177',
       semester: 1,
-      field: 7,
+      field: 1,
       mandatory: false,
     },
     {
       career_code: 36,
       course_code: '177',
       semester: 1,
-      field: 8,
-      mandatory: false,
-    },
+      field: 1,
+      mandatory: true,
+    }, //para mecanica industrial si es obligatorio
     {
       career_code: 58,
       course_code: '177',
@@ -268,40 +268,40 @@ export async function seed(knex: Knex): Promise<any> {
       semester: 1,
       field: 13,
       mandatory: false,
-    },
+    }, //si la detecta la base de datos y agregada correctamente
 
     //SEGUNDO SEMESTRE
     //AREA COMUN
     //Social Humanistica 2
-    {
+    {//civil
       career_code: 33,
       course_code: '029',
       semester: 2,
       field: 6,
       mandatory: true,
     },
-    {
+    { //mecanica
       career_code: 34,
       course_code: '029',
       semester: 2,
       field: 5,
       mandatory: true,
     },
-    {
+    { //industrial
       career_code: 35,
       course_code: '029',
       semester: 2,
-      field: 7,
+      field: 4,
       mandatory: true,
     },
-    {
+    { //mecanica industrial
       career_code: 36,
       course_code: '029',
       semester: 2,
-      field: 8,
+      field: 1,
       mandatory: true,
     },
-    {
+    { //sistemas
       career_code: 58,
       course_code: '029',
       semester: 2,
@@ -309,7 +309,7 @@ export async function seed(knex: Knex): Promise<any> {
       mandatory: true,
     },
 
-    //Mate Basica 1
+    //Mate Basica 2
     {
       career_code: 33,
       course_code: '170',
@@ -328,56 +328,19 @@ export async function seed(knex: Knex): Promise<any> {
       career_code: 35,
       course_code: '170',
       semester: 2,
-      field: 7,
+      field: 2,
       mandatory: true,
     },
     {
       career_code: 36,
       course_code: '170',
       semester: 2,
-      field: 8,
+      field: 1,
       mandatory: true,
     },
     {
       career_code: 58,
       course_code: '170',
-      semester: 2,
-      field: 4,
-      mandatory: true,
-    },
-
-    //Tecnicas de Investigacion y Estudio
-    {
-      career_code: 33,
-      course_code: '2667',
-      semester: 2,
-      field: 6,
-      mandatory: true,
-    },
-    {
-      career_code: 34,
-      course_code: '2667',
-      semester: 2,
-      field: 5,
-      mandatory: true,
-    },
-    {
-      career_code: 35,
-      course_code: '2667',
-      semester: 2,
-      field: 7,
-      mandatory: true,
-    },
-    {
-      career_code: 36,
-      course_code: '2667',
-      semester: 2,
-      field: 8,
-      mandatory: true,
-    },
-    {
-      career_code: 58,
-      course_code: '2667',
       semester: 2,
       field: 4,
       mandatory: true,
@@ -386,6 +349,43 @@ export async function seed(knex: Knex): Promise<any> {
     //Tecnicas de Investigacion y Estudio
     {
       career_code: 33,
+      course_code: '2667',
+      semester: 2,
+      field: 6,
+      mandatory: true,
+    },
+    {
+      career_code: 34,
+      course_code: '2667',
+      semester: 2,
+      field: 5,
+      mandatory: true,
+    },
+    {
+      career_code: 35,
+      course_code: '2667',
+      semester: 2,
+      field: 11,
+      mandatory: true,
+    },
+    {
+      career_code: 36,
+      course_code: '2667',
+      semester: 2,
+      field: 1,
+      mandatory: false,
+    },
+    {
+      career_code: 58,
+      course_code: '2667',
+      semester: 2,
+      field: 4,
+      mandatory: true,
+    },
+
+    //Fisica Basica
+    {
+      career_code: 33,
       course_code: '072',
       semester: 2,
       field: 6,
@@ -402,14 +402,14 @@ export async function seed(knex: Knex): Promise<any> {
       career_code: 35,
       course_code: '072',
       semester: 2,
-      field: 7,
+      field: 3,
       mandatory: true,
     },
     {
       career_code: 36,
       course_code: '072',
       semester: 2,
-      field: 8,
+      field: 1,
       mandatory: true,
     },
     {
@@ -418,9 +418,9 @@ export async function seed(knex: Knex): Promise<any> {
       semester: 2,
       field: 4,
       mandatory: true,
-    },
+    }, //correctoooo
 
-    //Tecnicas de Investigacion y Estudio
+    //deportes 2
     {
       career_code: 33,
       course_code: '178',
@@ -439,14 +439,14 @@ export async function seed(knex: Knex): Promise<any> {
       career_code: 35,
       course_code: '178',
       semester: 2,
-      field: 7,
+      field: 1,
       mandatory: false,
     },
     {
       career_code: 36,
       course_code: '178',
       semester: 2,
-      field: 8,
+      field: 1,
       mandatory: false,
     },
     {
@@ -457,15 +457,30 @@ export async function seed(knex: Knex): Promise<any> {
       mandatory: false,
     },
 
-    //Idioma Tecnico 2 - PARECE EXISTIR UNICAMENTE PARA SISTEMAS
+    //Idioma Tecnico 2 - EXISTE UNICAMENTE PARA SISTEMAS Y INDUSTRIAL
     {
       career_code: 58,
       course_code: '2793',
-      semester: 1,
+      semester: 2,
       field: 4,
       mandatory: false,
     },
-
+    //idioma tecnico industrial
+    {
+      career_code: 35,
+      course_code: '2793',
+      semester: 2,
+      field: 13,
+      mandatory: false,
+    },
+    //tecnica complementaria 2 para civil
+    {
+      career_code: 33,
+      course_code: '121',
+      semester: 2,
+      field: 6,
+      mandatory: true,
+    },
     //TERCER SEMESTRE
     //AREA COMUN
     //Mate Intermedia 1

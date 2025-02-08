@@ -3,13 +3,11 @@ import { Knex } from 'knex';
 export async function seed(knex: Knex): Promise<any> {
   const courses = [
     //Edit kike
-
      // { code: 33, name: 'Civil' },
     // { code: 34, name: 'Mecánica' },
     // { code: 35, name: 'Industrial' },
     // { code: 36, name: 'Mecánica Industrial' },
     // { code: 58, name: 'Ciencias y Sistemas' },
-
     //Primer Semestre
     //Area Comun para las 5 carreras
     { code: '028', 
@@ -52,25 +50,44 @@ export async function seed(knex: Knex): Promise<any> {
 
     //Segundo Semestre
     //Area Comun
-    { code: '029', name: 'Social Humanistica 2', description: '', credits: 4, },
-    { code: '170', name: 'Matematica Basica 2', description: '', credits: 7, },
+    { code: '029', 
+      name: 'Social Humanistica 2',
+      description: 'tiene como finalidad; el proporcionar al estudiante del área común, de las carreras de ingeniería, de la División de Ciencias de la Ingeniería, del Centro Universitario de Occidente (CUNOC), los conocimientos que le permitan tener un panorama científico sobre aspectos de la sociedad en forma general, conocimientos y elementos teóricos que son indispensables para interpretar científicamente el desarrollo de la sociedad. Estableciendo los vínculos entre el pasado y el presente de las diferentes sociedades recurriendo al instrumental teórico metodológico que podrá ser utilizado y aplicado por el estudiantes para realizar ese análisis e interpretar científicamente el desarrollo de la sociedad, incluyendo para ello los contenidos temáticos siguientes: conceptos básicos para el estudio de la sociedad, desarrollo histórico de la sociedad y esbozo de la sociedad guatemalteca, sociedad precolonial guatemalteca, sociedad colonial guatemalteca, sociedad independiente guatemalteca, sociedad republicana guatemalteca También acorde a los cambios como parte de los contenidos se hace mención de temas relacionados con GIRD y ACC, porque no se tiene un contenido específico con esa temática', 
+      credits: 4, 
+    }, //creditos correctos
+    { code: '170', 
+      name: 'Matematica Basica 2', 
+      description: 'En este curso el alumno analizará conceptos, teorías, procedimientos, gráficas y principios de modelado sobre los temas de Límites, la derivada, leyes de derivación, aplicaciones de la derivada, la integral y aplicaciones de la integral. En la solución de problemas de mediana complejidad en el campo de las ciencias naturales y sociales, que le permitan desarrollar las competencias específicas de lenguaje oral y escrito, abstracción y modelado matemático; razonamiento y análisis matemático de problemas y aplicaciones a la ciencia de la ingeniería, lo que le permitirá comprender el cálculo diferencial e integral, base importante para su formación profesional y de su especialidad', 
+      credits: 7, 
+    }, //correcto en todos los pensums
     {
       code: '2667',
       name: 'Tecnicas de Investigacion y Estudio',
-      description: '',
+      description: 'Es un curso teórico - práctico que tiene la finalidad de proporcionar al estudiante de la Ingeniería, la capacidad a adquirir y practicar en su carrera profesional: Hábitos de Estudio, Técnicas de Estudio y Técnicas de Investigación para tener éxito en sus estudios y elaborar informes de Investigación Científica. Se realizará el Protocolo de Investigación sobre problemas de Ingeniería con la inserción de la temática de Gestión Integral de Riesgo de Desastre GIRD y la Adaptación al Cambio Climático ACC y según demandas sociales de investigación. Abarcando los otros 2 Pilares de la Universidad: Extensión é Investigación, para complementar al primero que es la Docencia. La evaluación será teórico – práctica; comprobaciones de lectura, prueba escrita, videoforum, dramatizaciones, ensayos, hojas de trabajo y perfil de investigación',
       credits: 3,
-    },
-    { code: '072', name: 'Fisica Basica', description: '', credits: 5 },
-    { code: '178', name: 'Deportes 2', description: '', credits: 1 },
-    { code: '2793', name: 'Idioma Tecnico 2', description: '', credits: 2 },
+    }, //creditos correctos, con la peculiaridad que solo en el pensum de sistemas tiene este codigo. en las demas carreras tiene codigo 0 
+    { code: '072', 
+      name: 'Fisica Basica', 
+      description: 'El curso de Física básica es un curso introductorio al estudio de la física para ingeniería, se presenta los inicios de la mecánica clásica, desarrollando clases expositivas en las que se discutirán con ayuda de los estudiantes las teorías existentes, se motivará y se hará participe al estudiante en algunas acciones para disminuir la contaminación y el consumo de papel como una participación en la mejora del ambiente. Se realizarán 3 evaluaciones parciales de 15 puntos cada una, se desarrollarán ejercicios en clase y en casa que tendrán una ponderación de 5 puntos, el laboratorio que se lleva de forma paralela tiene una ponderación de 20 puntos para hacer la zona requerida de 70 puntos. Las clases se desarrollarán los días lunes, miércoles y viernes en el horario y salón especificado en el horario de clases. Las unidades a trabajar son la cinemática, la dinámica, para luego ingresar a las teorías iniciales de energía y su conservación y finalmente llegar al estudio del "momentum" y su conservación.', 
+      credits: 5 
+    }, //correcto en todos los pensums
+    { code: '178', 
+      name: 'Deportes 2', 
+      description: 'El curso de Deporte II, es parte fundamental en la continuidad y consolidación para cultivar una buena condición física, base para una buena salud física y mental. Además, tiene como objetivo aprovechar los valores transmitidos por el deporte para el desarrollo del trabajo en equipo, la solidaridad, la tolerancia y el juego limpio. Sus ejes son la educación física, la recreación y deporte, buscando con ello que el aprendizaje sea significativo en cada uno de los educandos. Desarrolla habilidades en el conocimiento de primeros respondientes en casos de emergencia personal y colectiva, así como desastres naturales. Es de destacar que como parte de esta casa de estudios “Universidad de San Carlos, Centro Universitario de Occidente” estamos comprometidos con el cuidado del medio ambiente, por lo que se promoverán actividades que permitan fortalecer el cuidado del medio natural, concibiendo el deporte y el medio ambiente como parte unida, ya que el deportista necesita del medio natural para realizar dicha conciencia social y natural.', 
+      credits: 1 
+    }, //correcto en todos los pensums
+    { code: '2793', 
+      name: 'Idioma Tecnico 2', 
+      description: 'Curso el cual no se habilitaba en la division de ciencias de la ingenieria, pero podia ganarse asignandose los cursos y niveles en CALUSAC, ganando los 12 niveles necesarios', 
+      credits: 2 
+    }, //este curso solo sistemas y industrial lo tienen
     //Civil
     {
       code: '121',
       name: 'Tecnica Complementaria 2',
-      description: '',
+      description: 'Tiene como finalidad desarrollar habilidades manuales y espaciales, bidimensionales y tridimensionales en los estudiantes, las que a su vez coadyuvan en ampliar las destrezas de expresión, interpretación y definición a través del dibujo. El curso lleva al estudiante de Ingeniería al análisis de sistemas constructivos y espacios habitables para proyectarlos de forma gráfica a través del juego de planos. En este proceso el estudiante aprenderá a interpretar la nomenclatura y simbología de los planos de arquitectura, estructuras e instalaciones, lo que será de utilidad para su vida profesional. La forma de evaluación es a través del juego de planos que se elaborará en clase y en casa, los cuales sumarán el 70% del valor del curso (zona) y una evaluación final tendrá el 30% del valor del curso. Se incluirán actividades de motivación para que los estudiantes tomen conciencia sobre la importancia de la reducción de riesgos a desastres y la adaptación al cambio climático',
       credits: 3,
     },
-
     //Tercer Semestre
     //Area Comun
     {
