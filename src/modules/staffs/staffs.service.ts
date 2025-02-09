@@ -209,7 +209,7 @@ export class StaffsService extends BaseService {
     const staff = await this.staffModel
       .query(trx)
       .findOne({ email })
-      .withGraphFetched('roles');
+      .withGraphFetched('roles.permissions');
     return staff;
   }
 
