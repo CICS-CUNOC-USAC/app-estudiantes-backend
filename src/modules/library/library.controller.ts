@@ -15,37 +15,42 @@ import { CreateLibraryDto } from './dto/create-library.dto';
 import { UpdateLibraryDto } from './dto/update-library.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { StaffLoginJwtAuthGuard } from 'src/core/guards/jwt-staff-auth.guard';
-import { LibraryAdminService } from './library.admin.service';
 import { BooksQueryDto } from './dto/books-query.dto';
 import { JwtGeneralRequiredAuthGuard } from 'src/core/guards/jwt-general-required-auth.guard';
 
 @ApiTags('Library/Books')
 @Controller('library')
 export class LibraryController {
-  constructor(
-    private readonly libraryService: LibraryService,
-    private readonly libraryAdminService: LibraryAdminService,
-  ) {}
+  constructor(private readonly libraryService: LibraryService) {}
 
   @UseGuards(StaffLoginJwtAuthGuard)
-  @Post('admin')
-  createAdmin(
+  @Post('digital')
+  createDigital(
     @Body(new ValidationPipe({ transform: true }))
     createLibraryDto: CreateLibraryDto,
   ) {
-    return this.libraryAdminService.create(createLibraryDto);
+    return this.libraryService.create(createLibraryDto);
+  }
+
+  @UseGuards(StaffLoginJwtAuthGuard)
+  @Post('physical')
+  createPhysical(
+    @Body(new ValidationPipe({ transform: true }))
+    createLibraryDto: CreateLibraryDto,
+  ) {
+    return this.libraryService.create(createLibraryDto);
   }
 
   @UseGuards(StaffLoginJwtAuthGuard)
   @Get('admin')
   findAllAdmin(@Query() queryDto: BooksQueryDto) {
-    return this.libraryAdminService.findAll(queryDto);
+    return this.libraryService.findAll(queryDto);
   }
 
   @UseGuards(StaffLoginJwtAuthGuard)
   @Get('admin/:id')
   findOneAdmin(@Param('id') id: string) {
-    return this.libraryAdminService.findOne(+id);
+    return this.libraryService.findOne(+id);
   }
 
   @UseGuards(StaffLoginJwtAuthGuard)
@@ -55,13 +60,13 @@ export class LibraryController {
     @Body(new ValidationPipe())
     updateLibraryDto: UpdateLibraryDto,
   ) {
-    return this.libraryAdminService.update(+id, updateLibraryDto);
+    return this.libraryService.update(+id, updateLibraryDto);
   }
 
   @UseGuards(StaffLoginJwtAuthGuard)
   @Delete('admin/:id')
   remove(@Param('id') id: string) {
-    return this.libraryAdminService.remove(+id);
+    return this.libraryService.remove(+id);
   }
 
   @UseGuards(JwtGeneralRequiredAuthGuard)
