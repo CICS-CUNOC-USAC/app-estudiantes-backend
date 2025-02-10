@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
 import { LibraryService } from './library.service';
-import { LibraryController } from './library.controller';
+import { BooksController } from './books.controller';
 import { MediaModule } from '../media/media.module';
+import { LoansController } from './loans.controller';
 
 @Module({
-  controllers: [LibraryController],
+  controllers: [BooksController, LoansController],
   providers: [LibraryService],
   imports: [MediaModule],
 })

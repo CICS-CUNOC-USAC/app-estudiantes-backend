@@ -1,5 +1,6 @@
 import { Model } from 'objection';
 import { MediaModel } from 'src/modules/media/entities/media.model';
+import { LibraryReferenceModel } from './library_reference.model';
 
 export class BookModel extends Model {
   static tableName = 'books';
@@ -8,6 +9,7 @@ export class BookModel extends Model {
   name: string;
   author: string;
   description: string;
+  isbn: string;
   file: string;
   source_url: string;
   media_id: number;
@@ -22,6 +24,14 @@ export class BookModel extends Model {
         join: {
           from: 'books.media_id',
           to: 'media.id',
+        },
+      },
+      library_reference: {
+        relation: Model.HasOneRelation,
+        modelClass: LibraryReferenceModel,
+        join: {
+          from: 'books.id',
+          to: 'library_references.book_id',
         },
       },
     };

@@ -4,6 +4,7 @@ export async function up(knex: Knex.Knex) {
   return knex.schema.createTable('books', (table) => {
     table.increments('id').primary();
     table.string('name').notNullable();
+    table.string('isbn');
     table.text('description').notNullable().defaultTo('');
     table.string('file');
     table.string('source_url');

@@ -10,35 +10,36 @@ import {
   Query,
   ValidationPipe,
 } from '@nestjs/common';
-import { LibraryService } from './library.service';
-import { CreateLibraryDto } from './dto/create-library.dto';
+import { BookType, LibraryService } from './library.service';
 import { UpdateLibraryDto } from './dto/update-library.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { StaffLoginJwtAuthGuard } from 'src/core/guards/jwt-staff-auth.guard';
 import { BooksQueryDto } from './dto/books-query.dto';
 import { JwtGeneralRequiredAuthGuard } from 'src/core/guards/jwt-general-required-auth.guard';
+import { CreatePhysicalBookDto } from './dto/create-physical-book.dto';
+import { CreateDigitalBookDto } from './dto/create-digital-book.dto';
 
 @ApiTags('Library/Books')
-@Controller('library')
-export class LibraryController {
+@Controller('books')
+export class BooksController {
   constructor(private readonly libraryService: LibraryService) {}
 
   @UseGuards(StaffLoginJwtAuthGuard)
   @Post('digital')
   createDigital(
     @Body(new ValidationPipe({ transform: true }))
-    createLibraryDto: CreateLibraryDto,
+    createDigitalBookDto: CreateDigitalBookDto,
   ) {
-    return this.libraryService.create(createLibraryDto);
+    return this.libraryService.createDigital(createDigitalBookDto);
   }
 
   @UseGuards(StaffLoginJwtAuthGuard)
   @Post('physical')
   createPhysical(
     @Body(new ValidationPipe({ transform: true }))
-    createLibraryDto: CreateLibraryDto,
+    createPhysicalBookDto: CreatePhysicalBookDto,
   ) {
-    return this.libraryService.create(createLibraryDto);
+    return this.libraryService.createPhysical(createPhysicalBookDto);
   }
 
   @UseGuards(StaffLoginJwtAuthGuard)
@@ -48,9 +49,12 @@ export class LibraryController {
   }
 
   @UseGuards(StaffLoginJwtAuthGuard)
-  @Get('admin/:id')
-  findOneAdmin(@Param('id') id: string) {
-    return this.libraryService.findOne(+id);
+  @Get('admin/:id/:type')
+  findOneAdmin(
+    @Param('id') id: string,
+    @Param('type') type: 'digital' | 'physical',
+  ) {
+    return this.libraryService.findOne(+id, BookType[type.toUpperCase()]);
   }
 
   @UseGuards(StaffLoginJwtAuthGuard)
@@ -76,8 +80,11 @@ export class LibraryController {
   }
 
   @UseGuards(JwtGeneralRequiredAuthGuard)
-  @Get(':id')
-  findOnePublic(@Param('id') id: string) {
-    return this.libraryService.findOne(+id);
+  @Get(':id/:type')
+  findOnePublic(
+    @Param('id') id: string,
+    @Param('type') type: 'digital' | 'physical',
+  ) {
+    return this.libraryService.findOne(+id, BookType[type.toUpperCase()]);
   }
 }
