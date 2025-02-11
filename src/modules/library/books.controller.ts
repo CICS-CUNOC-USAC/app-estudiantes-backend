@@ -43,9 +43,15 @@ export class BooksController {
   }
 
   @UseGuards(StaffLoginJwtAuthGuard)
-  @Get('admin')
-  findAllAdmin(@Query() queryDto: BooksQueryDto) {
-    return this.libraryService.findAll(queryDto);
+  @Get('digital')
+  findAllDigital(@Query() queryDto: BooksQueryDto) {
+    return this.libraryService.findAll(queryDto, 'digital');
+  }
+
+  @UseGuards(StaffLoginJwtAuthGuard)
+  @Get('physical')
+  findAllPhysical(@Query() queryDto: BooksQueryDto) {
+    return this.libraryService.findAll(queryDto, 'physical');
   }
 
   @UseGuards(StaffLoginJwtAuthGuard)
@@ -71,12 +77,6 @@ export class BooksController {
   @Delete('admin/:id')
   remove(@Param('id') id: string) {
     return this.libraryService.remove(+id);
-  }
-
-  @UseGuards(JwtGeneralRequiredAuthGuard)
-  @Get()
-  findAllPublic(@Query() queryDto: BooksQueryDto) {
-    return this.libraryService.findAll(queryDto);
   }
 
   @UseGuards(JwtGeneralRequiredAuthGuard)

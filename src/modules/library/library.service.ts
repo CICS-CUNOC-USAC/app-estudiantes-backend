@@ -212,13 +212,24 @@ export class LibraryService extends BaseService {
     }, this.logger);
   }
 
-  async findAll(queryDto: BooksQueryDto) {
+  async findAll(queryDto: BooksQueryDto, type: 'digital' | 'physical') {
     const paginationOptions = this.createPaginationOptions(queryDto);
-    const resultsQueryBuilder = this.bookModel
-      .query()
-      .select('*')
-      .where((builder) => this.queryFilters(queryDto, builder))
-      .orderBy(paginationOptions.orderBy);
+    let resultsQueryBuilder: any = [];
+    if (type === 'digital') {
+      resultsQueryBuilder = this.bookModel
+        .query()
+        .select('*')
+        .whereNotNull('media_id')
+        .where((builder) => this.queryFilters(queryDto, builder))
+        .orderBy(paginationOptions.orderBy);
+    } else {
+      resultsQueryBuilder = this.bookModel
+        .query()
+        .select('*')
+        .whereNull('media_id')
+        .where((builder) => this.queryFilters(queryDto, builder))
+        .orderBy(paginationOptions.orderBy);
+    }
     return this.getCompletePaginatedResponse(
       await this.getPaginatedResults(resultsQueryBuilder, paginationOptions),
       paginationOptions,
