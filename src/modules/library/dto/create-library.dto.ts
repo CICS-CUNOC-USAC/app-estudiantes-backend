@@ -10,6 +10,13 @@ export class CreateLibraryDto {
   })
   readonly name: string;
 
+  @IsString()
+  @ApiProperty({
+    description: 'The ISBN code of the book',
+    example: '4594839543',
+  })
+  readonly isbn: string;
+
   @IsNotEmpty()
   @IsString()
   @ApiProperty({
@@ -18,27 +25,18 @@ export class CreateLibraryDto {
   })
   readonly author: string;
 
+  @IsNotEmpty()
+  @IsNumber()
+  @ApiProperty({
+    description: 'The ID of the catregory of the book',
+    example: 3,
+  })
+  readonly category_id: number;
+
   @IsString()
   @ApiProperty({
     description: 'The description of the book resource',
     example: 'Libro acerca de termodinamica',
   })
   readonly description: string;
-
-  @IsNotEmpty()
-  @IsString()
-  @ApiProperty({
-    description:
-      'External url to the book (used for reference to original source)',
-    example: 'https://www.googleacademico.com/termodinamica2-jamesstw.pdf',
-  })
-  readonly source_url: string;
-
-  @IsNotEmpty()
-  @IsNumber()
-  @ApiProperty({
-    description: 'The id of the media entity to attach to the book entity',
-    example: 12,
-  })
-  readonly media_id: number;
 }
