@@ -272,6 +272,7 @@ export async function seed(knex: Knex): Promise<any> {
 
     //SEGUNDO SEMESTRE
     //AREA COMUN
+    
     //Social Humanistica 2
     {//civil
       career_code: 33,
@@ -483,7 +484,8 @@ export async function seed(knex: Knex): Promise<any> {
     },
     //TERCER SEMESTRE
     //AREA COMUN
-    //Mate Intermedia 1
+
+    //Matematica Intermedia 1
     {
       career_code: 33,
       course_code: '290',
@@ -502,14 +504,14 @@ export async function seed(knex: Knex): Promise<any> {
       career_code: 35,
       course_code: '290',
       semester: 3,
-      field: 7,
+      field: 2,
       mandatory: true,
     },
     {
       career_code: 36,
       course_code: '290',
       semester: 3,
-      field: 8,
+      field: 1,
       mandatory: true,
     },
     {
@@ -539,14 +541,14 @@ export async function seed(knex: Knex): Promise<any> {
       career_code: 35,
       course_code: '146',
       semester: 3,
-      field: 7,
+      field: 3,
       mandatory: true,
     },
     {
       career_code: 36,
       course_code: '146',
       semester: 3,
-      field: 8,
+      field: 1,
       mandatory: true,
     },
     {
@@ -576,15 +578,15 @@ export async function seed(knex: Knex): Promise<any> {
       career_code: 35,
       course_code: '217',
       semester: 3,
-      field: 7,
+      field: 1,
       mandatory: false,
     },
     {
       career_code: 36,
       course_code: '217',
       semester: 3,
-      field: 8,
-      mandatory: true,
+      field: 1,
+      mandatory: false,
     },
 
     //Geografia
@@ -603,7 +605,7 @@ export async function seed(knex: Knex): Promise<any> {
       mandatory: false,
     },
 
-    //Practica Inicial
+    //Practica Inicial para civil, mecanica, industrial y mecanica industrial nada mas
     {
       career_code: 33,
       course_code: '2394',
@@ -622,18 +624,18 @@ export async function seed(knex: Knex): Promise<any> {
       career_code: 35,
       course_code: '2394',
       semester: 3,
-      field: 9,
+      field: 11,
       mandatory: true,
     },
     {
       career_code: 36,
       course_code: '2394',
       semester: 3,
-      field: 9,
+      field: 2,
       mandatory: true,
     },
 
-    //Idioma Tecnico 3 - PARECE EXISTIR UNICAMENTE PARA SISTEMAS
+    //Idioma Tecnico 3 - EXISTIR UNICAMENTE PARA SISTEMAS Y INDUSTRIAL
     {
       career_code: 58,
       course_code: '2794',
@@ -641,6 +643,14 @@ export async function seed(knex: Knex): Promise<any> {
       field: 4,
       mandatory: false,
     },
+    {
+      career_code: 35,
+      course_code: '2794',
+      semester: 3,
+      field: 13,
+      mandatory: false,
+    },
+
     //Sistemas
     //Logica de Sistemas
     {
@@ -666,14 +676,41 @@ export async function seed(knex: Knex): Promise<any> {
       field: 3,
       mandatory: true,
     },
-
-    //CUARTO SEMESTRE
-    //AREA COMUN
-    //Logica
+    //Filosofia de la Ciencia
     {
+      career_code: 34,
+      course_code: '077',
+      semester: 3,
+      field: 5,
+      mandatory: false,
+    },
+    {
+      career_code: 35,
+      course_code: '077',
+      semester: 3,
+      field: 4,
+      mandatory: false,
+    },
+    {
+      career_code: 36,
+      course_code: '077',
+      semester: 3,
+      field: 1,
+      mandatory: false,
+    },
+    {
+      career_code: 58,
+      course_code: '077',
+      semester: 5,
+      field: 4,
+      mandatory: false,
+    },
+
+     //Logica
+     {
       career_code: 33,
       course_code: '085',
-      semester: 4,
+      semester: 3,
       field: 6,
       mandatory: false,
     },
@@ -692,6 +729,9 @@ export async function seed(knex: Knex): Promise<any> {
       mandatory: false,
     },
 
+    //CUARTO SEMESTRE
+    //AREA COMUN
+    
     //Mate Intermedia 2
     {
       career_code: 33,
@@ -992,35 +1032,7 @@ export async function seed(knex: Knex): Promise<any> {
 
     //QUINTO SEMESTRE
     //AREA COMUN
-    //Filosofia de la Ciencia
-    {
-      career_code: 34,
-      course_code: '077',
-      semester: 3,
-      field: 5,
-      mandatory: true,
-    },
-    {
-      career_code: 35,
-      course_code: '077',
-      semester: 3,
-      field: 7,
-      mandatory: true,
-    },
-    {
-      career_code: 36,
-      course_code: '077',
-      semester: 3,
-      field: 8,
-      mandatory: true,
-    },
-    {
-      career_code: 58,
-      course_code: '077',
-      semester: 5,
-      field: 4,
-      mandatory: false,
-    },
+    
 
     //Matematica Aplicada 1
     {

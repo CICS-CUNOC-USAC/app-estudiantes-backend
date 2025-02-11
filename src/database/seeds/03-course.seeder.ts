@@ -93,32 +93,67 @@ export async function seed(knex: Knex): Promise<any> {
     {
       code: '290',
       name: 'Matematica Intermedia 1',
-      description: '',
+      description: 'El curso ofrece al estudiante, la oportunidad de formar las competencias en las áreas específicas de la matemática del cálculo integral, gráficas y ecuaciones paramétricas, gráficas y ecuaciones polares, aplicaciones específicas de la integral, algebra matricial álgebra vectorial, rectas, planos y superficies cuádricas en el espacio tridimensional, sucesiones y series infinitas. Es de suma importancia realizar las actividades propuestas con responsabilidad y trabajo autónomo. Conocer la simbología matemática, utilizada en la comunicación de los principios matemáticos, para que pueda utilizarlos en el planteamiento y análisis de problemas físicos, geométricos, económicos, de la realidad física actual, imprescindibles en las aplicaciones de la ingeniería contemporánea como en la gestión integrada de riesgos a desastres y la adaptación al cambio climático. La actividad requiere un compromiso ético al cumplir con el 90% de presencialidad, en donde se transfiere el conocimiento, en las tutorías y se solucionan múltiples ejercicios; para que pueda demostrar por medio de actividades de trabajo autónomo, ejercicios propuestos, desarrollo de proyectos propuestos y resolución de exámenes parciales, las competencias adquiridas.',
       credits: 10,
     },
-    { code: '146', name: 'Fisica 1', description: '', credits: 6 },
-    { code: '2794', name: 'Idioma Tecnico 3', description: '', credits: 2 },
-    { code: '217', name: 'Quimica 2', description: '', credits: 4 },
-    { code: '681', name: 'Geografia', description: '', credits: 3 },
-    { code: '2394', name: 'Practica Inicial', description: '', credits: 0 },
+    { code: '146',
+      name: 'Fisica 1', 
+      description: 'El curso de física 1 es continuidad del curso de física básica, extendiendo la idea de conjunto de partículas a cuerpos rígidos, en este se estudia el comportamiento de éstos a diversas situaciones de movimiento. En las clases expositivas se motivará la participación de los estudiantes para generar discusiones sobre las teorías y ejemplos para que los conceptos queden mejor aprendidos; así también se motivará la participación de los estudiantes en el reciclaje y la disminución de materiales de un solo uso, para participar en la disminución de la contaminación del ambiente debido a estos materiales. Los días de clases serán los días lunes, miércoles y viernes en los horarios y salones que se especifican en el horario de clases. Para evaluar el curso se desarrollarán 2 pruebas parciales. Se realizarán actividades como tareas asignadas en Moodle y un Proyecto de Investigación. De manera paralela se desarrollará el laboratorio que tiene una ponderación de 20 puntos para hacer la zona máxima de 70 puntos. Las unidades para trabajar son la Cinemática y dinámica de la rotación, equilibrio de cuerpos rígidos, momentum angular y su conservación, deformación de sólidos, introducción a la mecánica de fluidos, movimientos oscilatorios y ondas y las teorías de gravitación, aunque se hace una revisión de Momentum Lineal. Se incluirán actividades de motivación para que los estudiantes tomen conciencia sobre la importancia de la reducción de riesgos a desastres y la adaptación al cambio climático. ', 
+      credits: 6 
+    },
+    { code: '2794', 
+      name: 'Idioma Tecnico 3', 
+      description: 'Curso el cual no se habilitaba en la division de ciencias de la ingenieria, pero podia ganarse asignandose los cursos y niveles en CALUSAC, ganando los 12 niveles necesarios', 
+      credits: 2 
+    },
+    { code: '217', 
+      name: 'Quimica 2', 
+      description: 'el curso de Química 2, como continuación de Química 1, trata de incorporar el conocimiento generado en esta área, para estimular el conocimiento científico como pilar del aprendizaje de disciplinas que serán introducidas a lo largo de la carrera en Ingeniería. La química es probablemente la única rama de las ciencias experimentales cuyo objeto de estudio está en permanente expansión, dado que el número de nuevas moléculas, sintetizadas por el hombre crece día a día. El mundo actual y nuestra vida cotidiana están marcados por un sin número de productos de síntesis. Los entes objeto de estudio por parte de la Química, las moléculas, son átomos enlazados entre sí para formar un edificio más complejo y con propiedades completamente distintas de las de sus constituyentes. Parece lógico que una de las primeras inquietudes de los científicos fuera conocer características de esos constituyentes, en un primer intento para entender cómo se unen entre sí para formar nuevos sistemas que van desde la simplicidad de una molécula de hidrógeno a la complejidad de una proteína', 
+      credits: 4 
+    },
+    { code: '681', 
+      name: 'Geografia', 
+      description: 'El curso de Geografía introduce al estudiante a conceptualizar la posición de la Tierra en el Universo. Enseña al estudiante a comprender las propiedades de la Tierra. Enseña los sistemas de coordenadas geodésidas y UTM. Enseña el manejo de brújula y enseña a explotar y utilizar mapas cartográficos. Repasa la geografía descriptiva de Guatemala. Enseña al estudiante la conservación de ambiente a través de la identificación de rasgos hidrográficos para prospección de agua', 
+      credits: 3 
+    },
+    //practica inicial para civil, mecanica, industrial y mecanica industrial
+    { code: '2394', 
+      name: 'Practica Inicial', 
+      description: 'El curso de Prácticas Iniciales, busca dar respuesta a las necesidades académicas de los estudiantes de Ingeniería, en el marco específico de planificación, organización, liderazgo y control, así como la generación de estrategias de proyectos y prácticas, dadas como alternativas en el desarrollo del curso, que permitirán a los estudiantes, adquirir las competencias propuestas. Se motivará para que los estudiantes participen activamente en el desarrollo del curso y sus distintas actividades que estarán relacionadas con las competencias designadas a éste curso. Se generará capacidades entre las habilidades y destrezas del estudiante, de tal manera que pueda desarrollar proyectos en una etapa de perfil. El curso está fundamentado en el Normativo de Practicas de la División; buscando formar estudiantes de ingeniería con capacidad de aplicar conocimientos, habilidades, actitudes y criterios de su especialidad de acuerdo a su nivel académico. Se empezará dando a conocer a los estudiantes que son los anteproyectos, los proyectos y la finalidad de cada uno de ellos así también las partes que lo conforman para poderlos desarrollar. Conocerán los tipos de proyectos existentes y en donde se desarrollan cada uno de ellos. Aprenderán a realizar diferentes tipos de instrumentos para poder diagnosticar, así también se utilizará estudio de casos para aprender a manejar y resolver problemas. Además aprenderá a realizar los diferentes estudios que se dan para realizar un proyecto y conocerán estrategias para poder implementarlos cuando sea el caso. Todo esto a nivel de perfil de proyectos.', 
+      credits: 0 
+    },
     //Sistemas
-    { code: '2797', name: 'Logica de Sistemas', description: '', credits: 2 },
+    { code: '2797', 
+      name: 'Logica de Sistemas', 
+      description: 'Su intención es introducir al estudiante en la comprensión del “pensamiento” analizando este como “sub-sistema” básico del “sistema humano”. El estudio del ser humano desde esta perspectiva nos permitirá comprender cómo se forman los pensamientos en nuestra mente, como llegamos a los denominados “modelos mentales” y como estos influyen y determinan nuestro comportamiento. La lógica de sistemas va más allá de la lógica formal que se estudia en los cursos de matemática discreta y para la computación. Esta forma de abordar la lógica nos permitirá distinguir procesos de pensamiento que la lógica formal no aborda, es decir, se abordará no sólo el estudio de los “razonamientos”, sino que el de la memoria, la creatividad, las asociaciones y otros de interés especial a la hora de construir sistemas computacionales, entendidos éstos como modelos que simulan comportamientos humanos para la resolución de problemas', 
+      credits: 2 
+    },
     {
       code: '2795',
       name: 'Matematica de Computo 1',
-      description: '',
+      description: 'El curso es el acercamiento inicial al estudio de algunos temas de Matemática Discreta. Hoy en día, la Matemática Discreta juega un papel importante en las ciencias de la computación como lo son las áreas de estructura de datos, teoría de lenguajes de computación, análisis de algoritmos, entre otros. Por consiguiente se hace necesario estudiarla y comprender los temas básicos: lógica, conjuntos, algoritmos, relaciones, álgebra de Boole y conteo.',
       credits: 5,
     },
     {
       code: '2796',
       name: 'Introduccion a la Programacion y Computacion 1',
-      description: '',
+      description: 'El curso es el acercamiento inicial del estudiante de la carrera de sistemas, a la programación mediante el uso de disciplinas y metodologías especializadas. El curso se fundamenta en el concepto de algoritmo para la resolución de problemas de programación, enfatizando el uso del paradigma orientado a objetos. Se introducen conceptos básicos de UML como guía para el diseño de sistemas orientados a objetos. Se acerca al estudiante al conocimiento de los principales algoritmos de búsquedas y ordenamientos. Se cubre una parte importante de las estructuras de datos, los tipos de datos abstractos. Asimismo, el estudiante conocerá el lenguaje Java como el lenguaje oficial de programación del curso.',
       credits: 4,
     },
-
+    { //curso para mecanica, industrial y mecanica industrial en 3er semestre y en sistemas en 5to semestre, civil no lo lleva
+      code: '077',
+      name: 'Filosofia de la Ciencia',
+      description: 'La formación del profesional de las ciencias de la ingeniería requiere de una preparación integral por lo que se hace necesario proveer al estudiante de una serie de elementos teóricos y metodológicos que nos proporciona la Ciencia; éstos elementos son fundamentales y necesarios para que pueda aplicarlos al conocimiento de la realidad, contribuir al proceso de elaboración de la ciencia, ya que es una herramienta fundamental e ineludible para contribuir con el mejoramiento de las condiciones del hombre y de la sociedad.',
+      credits: 3,
+    },
+    { code: '085', 
+      name: 'Logica', 
+      description: 'La formación del profesional de las ciencias de la ingeniería requiere de una preparación integral por lo que se hace necesario proveer al estudiante de una serie de elementos teóricos y metodológicos que nos proporciona la Ciencia; éstos elementos son fundamentales y necesarios para que pueda aplicarlos al conocimiento de la realidad, contribuir al proceso de elaboración de la ciencia, ya que es una herramienta fundamental e ineludible para coadyuvar con el mejoramiento de las condiciones del hombre y de la sociedad. En el caso de los temas de GIRD y ACC, se realiza alusión a dichos temas en los contenidos generales, cuando se habla sobre la estructura las formas de expresión, por cuanto para transmitir los mensajes estos deben adaptarse a las diferentes formas de comunicar los mensajes', 
+      credits: 2 
+    },
     //Cuarto Semestre
     //Area Comun
-    { code: '085', name: 'Logica', description: '', credits: 2 },
+    
     {
       code: '291',
       name: 'Matematica Intermedia 2',
@@ -174,12 +209,7 @@ export async function seed(knex: Knex): Promise<any> {
 
     //Quinto Semestre
     //Area Comun
-    {
-      code: '077',
-      name: 'Filosofia de la Ciencia',
-      description: '',
-      credits: 3,
-    },
+    
     { code: '673', name: 'Matematica Aplicada 1', description: '', credits: 6 },
     { code: '674', name: 'Matematica Aplicada 3', description: '', credits: 5 },
     { code: '148', name: 'Fisica 3', description: '', credits: 6 },

@@ -179,7 +179,7 @@ export async function seed(knex: Knex): Promise<any> {
       career_code: 35,
       field_number: 13,
       name: 'Idioma',
-    },
+    }, //si aparece en la base de datos
     //Mecanica Industrial
     {
       career_code: 36,
