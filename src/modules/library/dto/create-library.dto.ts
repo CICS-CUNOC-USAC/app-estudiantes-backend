@@ -25,6 +25,14 @@ export class CreateLibraryDto {
   })
   readonly author: string;
 
+  @IsNotEmpty()
+  @IsNumber()
+  @ApiProperty({
+    description: 'The ID of the catregory of the book',
+    example: 3,
+  })
+  readonly category_id: number;
+
   @IsString()
   @ApiProperty({
     description: 'The description of the book resource',

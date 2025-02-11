@@ -23,6 +23,7 @@ import { BookModel } from 'src/modules/library/entities/book.model';
 import { LibraryReferenceModel } from 'src/modules/library/entities/library_reference.model';
 import { LibraryReceiptModel } from 'src/modules/library/entities/library_receipt.model';
 import { PermissionModel } from 'src/modules/permissions/entities/permission.model';
+import { BookCategoryModel } from 'src/modules/library/entities/book_category.model';
 
 dotenv.config();
 
@@ -46,6 +47,7 @@ const models = [
   HistoryArticleStatusModel,
   CurrentStatusArticleModel,
   BookModel,
+  BookCategoryModel,
   LibraryReferenceModel,
   LibraryReceiptModel,
   PermissionModel,

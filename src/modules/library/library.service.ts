@@ -13,6 +13,7 @@ import { LibraryReferenceModel } from './entities/library_reference.model';
 import { LibraryReceiptModel } from './entities/library_receipt.model';
 import { CreateExternalLoanDto } from './dto/create-external-loan.dto';
 import { CreateExternalReturnDto } from './dto/create-external-return.dto';
+import { BookCategoryModel } from './entities/book_category.model';
 
 export enum BookType {
   DIGITAL,
@@ -24,6 +25,8 @@ export class LibraryService extends BaseService {
   constructor(
     @Inject(BookModel.name)
     private readonly bookModel: ModelClass<BookModel>,
+    @Inject(BookCategoryModel.name)
+    private readonly bookCategoryModel: ModelClass<BookCategoryModel>,
     @Inject(LibraryReferenceModel.name)
     private readonly libraryReferenceModel: ModelClass<LibraryReferenceModel>,
     @Inject(LibraryReceiptModel.name)
@@ -237,6 +240,10 @@ export class LibraryService extends BaseService {
       .query()
       .where('library_reference_id', book_reference_id)
       .where('returned_at', null);
+  }
+
+  async findAllCategories() {
+    return await this.bookCategoryModel.query();
   }
 
   queryFilters(
