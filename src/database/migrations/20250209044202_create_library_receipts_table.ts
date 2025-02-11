@@ -2,7 +2,7 @@ import * as Knex from 'knex';
 
 export async function up(knex: Knex.Knex) {
   return knex.schema.createTable('library_receipts', (table) => {
-    table.string('id').primary();
+    table.increments('id').primary();
     table.string('ra', 20).references('ra').inTable('users');
     table.string('personal_id');
     table.string('place').notNullable();
@@ -11,6 +11,7 @@ export async function up(knex: Knex.Knex) {
       .notNullable()
       .references('id')
       .inTable('library_references');
+    table.timestamp('returned_at');
     table.timestamps(true, true);
   });
 }

@@ -20,14 +20,6 @@ export class PhysicalBookDto {
   @IsNotEmpty()
   @IsNumber()
   @ApiProperty({
-    description: 'The id of the book on the system',
-    example: 23,
-  })
-  readonly book_id: number;
-
-  @IsNotEmpty()
-  @IsNumber()
-  @ApiProperty({
     description: 'The number of existing units of the book',
     example: 6,
   })

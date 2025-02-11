@@ -12,6 +12,7 @@ export class LibraryReceiptModel extends Model {
   library_reference_id: string;
   created_at: Date;
   updated_at: Date;
+  returned_at: Date;
 
   static get relationMappings() {
     return {

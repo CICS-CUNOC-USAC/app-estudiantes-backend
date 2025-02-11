@@ -10,6 +10,9 @@ import { MediaService } from '../media/media.service';
 import { CreateDigitalBookDto } from './dto/create-digital-book.dto';
 import { CreatePhysicalBookDto } from './dto/create-physical-book.dto';
 import { LibraryReferenceModel } from './entities/library_reference.model';
+import { LibraryReceiptModel } from './entities/library_receipt.model';
+import { CreateExternalLoanDto } from './dto/create-external-loan.dto';
+import { CreateExternalReturnDto } from './dto/create-external-return.dto';
 
 export enum BookType {
   DIGITAL,
@@ -23,6 +26,8 @@ export class LibraryService extends BaseService {
     private readonly bookModel: ModelClass<BookModel>,
     @Inject(LibraryReferenceModel.name)
     private readonly libraryReferenceModel: ModelClass<LibraryReferenceModel>,
+    @Inject(LibraryReceiptModel.name)
+    private readonly libraryReceiptModel: ModelClass<LibraryReceiptModel>,
     private readonly mediaService: MediaService,
     private readonly dbTrxService: DatabaseTransactionService,
   ) {
@@ -66,15 +71,16 @@ export class LibraryService extends BaseService {
         .query(trx)
         .findById(book_reference_id);
       if (foundReference) {
-        if (
-          foundReference.current_availability + 1 >
-          foundReference.total_availability
-        ) {
+        if (foundReference.current_availability - 1 < 0) {
           throw new Error('No se pueden prestar más libros');
         }
-        await foundReference.$query(trx).increment('current_availability', 1);
+        return await foundReference
+          .$query(trx)
+          .decrement('current_availability', 1)
+          .returning('*');
+      } else {
+        throw new Error('Libro no encontrado');
       }
-      return foundReference;
     }, this.logger);
   }
 
@@ -84,12 +90,100 @@ export class LibraryService extends BaseService {
         .query(trx)
         .findById(book_reference_id);
       if (foundReference) {
-        if (foundReference.current_availability - 1 < 0) {
+        if (
+          foundReference.current_availability + 1 >
+          foundReference.total_availability
+        ) {
           throw new Error('No se pueden devolver más libros');
         }
-        await foundReference.$query(trx).decrement('current_availability', 1);
+
+        if (
+          foundReference.current_availability + 1 >
+          foundReference.total_availability -
+            (await this.getOutstangingExternalLoansById(book_reference_id))
+              .length
+        ) {
+          throw new Error('No se pueden devolver más libros');
+        }
+
+        await foundReference
+          .$query(trx)
+          .increment('current_availability', 1)
+          .returning('*');
+        return foundReference;
+      } else {
+        throw new Error('Libro no encontrado');
       }
-      return foundReference;
+    }, this.logger);
+  }
+
+  async createExternalLoan(
+    book_reference_id: string,
+    createExternalLoanDto: CreateExternalLoanDto,
+  ) {
+    return this.dbTrxService.databaseTransaction(async (trx) => {
+      const foundReference = await this.libraryReferenceModel
+        .query(trx)
+        .findById(book_reference_id);
+      if (foundReference) {
+        if (foundReference.current_availability - 1 < 0) {
+          throw new Error('No se pueden prestar más libros');
+        }
+        await foundReference.$query(trx).decrement('current_availability', 1);
+
+        console.log(`${createExternalLoanDto}, ${book_reference_id}`);
+        const createdReceipt = await this.libraryReceiptModel
+          .query(trx)
+          .insert({
+            ra: createExternalLoanDto.ra,
+            personal_id: createExternalLoanDto.personal_id,
+            place: createExternalLoanDto.place,
+            library_reference_id: book_reference_id,
+          });
+
+        return createdReceipt;
+      } else {
+        throw new Error('Libro no encontrado');
+      }
+    }, this.logger);
+  }
+
+  async createExternalReturn(
+    book_reference_id: string,
+    createExternalReturnDto: CreateExternalReturnDto,
+  ) {
+    return this.dbTrxService.databaseTransaction(async (trx) => {
+      const foundReference = await this.libraryReferenceModel
+        .query(trx)
+        .findById(book_reference_id);
+      if (foundReference) {
+        if (
+          foundReference.current_availability + 1 >
+          foundReference.total_availability
+        ) {
+          throw new Error('No se pueden devolver más libros');
+        }
+        await foundReference.$query(trx).increment('current_availability', 1);
+
+        const foundReceipt = await this.libraryReceiptModel
+          .query(trx)
+          .where('ra', createExternalReturnDto.ra)
+          .where('personal_id', createExternalReturnDto.personal_id)
+          .where('library_reference_id', book_reference_id)
+          .where('returned_at', null)
+          .first();
+
+        if (!foundReceipt) {
+          throw new Error('No se encontro un recibo del prestamo');
+        }
+
+        return await foundReceipt
+          .$query(trx)
+          .patch({ returned_at: new Date() })
+          .returning('*');
+      } else {
+        throw new Error('Libro no encontrado');
+      }
     }, this.logger);
   }
 
@@ -136,6 +230,13 @@ export class LibraryService extends BaseService {
       bookModel.withGraphFetched('library_reference');
     }
     return await bookModel;
+  }
+
+  async getOutstangingExternalLoansById(book_reference_id: string) {
+    return await this.libraryReceiptModel
+      .query()
+      .where('library_reference_id', book_reference_id)
+      .where('returned_at', null);
   }
 
   queryFilters(
