@@ -54,27 +54,31 @@ export class RegularAuthService extends BaseService {
       user: UserModel;
       token: string;
     }>(async (trx) => {
-      // Check first if the user already exists
-      const user: UserModel | undefined = await this.usersService.findByEmail(
-        createUserDto.email,
+      // Check if the RA is already in use
+      const user: UserModel | undefined = await this.usersService.findByRa(
+        createUserDto.ra,
         trx,
       );
+      const userByEmail: UserModel | undefined =
+        await this.usersService.findByEmail(createUserDto.email, trx);
 
-      // Return error if the user already exists
+      const error: IGeneralError = {
+        statusCode: 400,
+        message: [],
+        error: 'Bad Request',
+      };
+
       if (user !== undefined) {
-        const error: IGeneralError = {
-          statusCode: 400,
-          message: [
-            {
-              email: 'Email already exists',
-            },
-          ],
-          error: 'Bad Request',
-        };
-        if (user.ra === createUserDto.ra)
-          (error.message as object[]).push({
-            ra: 'RA already exists',
-          });
+        (error.message as object[]).push({
+          ra: 'Registro Académico ya en uso',
+        });
+      }
+      if (userByEmail !== undefined) {
+        (error.message as object[]).push({
+          email: 'Correo electrónico ya en uso',
+        });
+      }
+      if ((error.message as object[]).length > 0) {
         throw new BadRequestException(error);
       }
 

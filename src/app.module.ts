@@ -27,6 +27,8 @@ import { PeriodsModule } from './modules/periods/periods.module';
 import { SectionsModule } from './modules/sections/sections.module';
 import { WeekdaysModule } from './modules/weekdays/weekdays.module';
 import { HoursModule } from './modules/hours/hours.module';
+import { PermissionsModule } from './modules/permissions/permissions.module';
+import { CaslModule } from './modules/casl/casl.module';
 
 @Module({
   imports: [
@@ -60,6 +62,8 @@ import { HoursModule } from './modules/hours/hours.module';
     SectionsModule,
     WeekdaysModule,
     HoursModule,
+    PermissionsModule,
+    CaslModule,
   ],
 })
 export class AppModule {

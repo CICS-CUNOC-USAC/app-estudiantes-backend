@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
 import { LibraryService } from './library.service';
-import { LibraryController } from './library.controller';
-import { LibraryAdminService } from './library.admin.service';
+import { BooksController } from './books.controller';
 import { MediaModule } from '../media/media.module';
+import { LoansController } from './loans.controller';
+import { CategoriesController } from './categories.controller';
 
 @Module({
-  controllers: [LibraryController],
-  providers: [LibraryService, LibraryAdminService],
+  controllers: [BooksController, LoansController, CategoriesController],
+  providers: [LibraryService],
   imports: [MediaModule],
 })
 export class LibraryModule {}
