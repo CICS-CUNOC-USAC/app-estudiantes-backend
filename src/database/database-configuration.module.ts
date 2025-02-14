@@ -19,6 +19,11 @@ import { ArticleModel } from 'src/modules/articles/entities/article.model';
 import { ArticleStatusModel } from 'src/modules/articles/entities/article-status.model';
 import { HistoryArticleStatusModel } from 'src/modules/articles/entities/history-article-status.model';
 import { CurrentStatusArticleModel } from 'src/modules/articles/entities/current-status-article.model';
+import { SectionModel } from 'src/modules/sections/entities/section.entity';
+import { PeriodModel } from 'src/modules/periods/entities/period.entity';
+import { ClassroomModel } from 'src/modules/classrooms/entities/classroom.entity';
+import { ScheduleModel } from 'src/modules/schedules/entities/schedule.entity';
+import { HourModel } from 'src/modules/hours/entities/hour.entity';
 import { BookModel } from 'src/modules/library/entities/book.model';
 import { LibraryReferenceModel } from 'src/modules/library/entities/library_reference.model';
 import { LibraryReceiptModel } from 'src/modules/library/entities/library_receipt.model';
@@ -47,6 +52,11 @@ const models = [
   HistoryArticleStatusModel,
   CurrentStatusArticleModel,
   BookModel,
+  ClassroomModel,
+  PeriodModel,
+  SectionModel,
+  ScheduleModel,
+  HourModel,
   BookCategoryModel,
   LibraryReferenceModel,
   LibraryReceiptModel,
