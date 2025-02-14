@@ -45,7 +45,6 @@ export class StaffsService extends BaseService {
       }
 
       // Create the new staff
-      // Note: This only creates the staff with no roles
       // Functionality to add roles to the staff will be handled in another endpoint
       const encryptedPassword = await this.hashPassword(
         createStaffDto.password,
@@ -56,6 +55,25 @@ export class StaffsService extends BaseService {
         email: createStaffDto.email,
         encrypted_password: encryptedPassword,
       });
+
+      if (createStaffDto.roles_ids.length > 0) {
+        const validPermissions = await Promise.all(
+          createStaffDto.roles_ids.map(async (roleId) => {
+            const roleExists = await this.roleModel.query(trx).findById(roleId);
+
+            if (!roleExists) {
+              throw new Error(`El rol ${roleId} no existe`);
+            }
+            return {
+              staff_id: createdStaff.id,
+              role_id: roleId,
+            };
+          }),
+        );
+
+        await trx('role_details').insert(validPermissions);
+      }
+
       return this.findAndReturnById(createdStaff.$id(), trx);
     }, this.logger);
   }
@@ -191,7 +209,7 @@ export class StaffsService extends BaseService {
     const staff = await this.staffModel
       .query(trx)
       .findOne({ email })
-      .withGraphFetched('roles');
+      .withGraphFetched('roles.permissions');
     return staff;
   }
 
