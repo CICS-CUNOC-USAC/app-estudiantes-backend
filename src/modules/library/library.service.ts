@@ -53,6 +53,7 @@ export class LibraryService extends BaseService {
         isbn: createPhysicalBookDto.isbn,
         description: createPhysicalBookDto.description,
         author: createPhysicalBookDto.author,
+        category_id: createPhysicalBookDto.category_id,
       });
 
       await this.libraryReferenceModel.query(trx).insert({

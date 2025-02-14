@@ -1,6 +1,7 @@
 import { Model } from 'objection';
 import { MediaModel } from 'src/modules/media/entities/media.model';
 import { LibraryReferenceModel } from './library_reference.model';
+import { BookCategoryModel } from './book_category.model';
 
 export class BookModel extends Model {
   static tableName = 'books';
@@ -13,6 +14,7 @@ export class BookModel extends Model {
   file: string;
   source_url: string;
   media_id: number;
+  category_id: number;
   created_at: Date;
   updated_at: Date;
 
@@ -32,6 +34,14 @@ export class BookModel extends Model {
         join: {
           from: 'books.id',
           to: 'library_references.book_id',
+        },
+      },
+      category: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: BookCategoryModel,
+        join: {
+          from: 'books.category_id',
+          to: 'book_categories.id',
         },
       },
     };
