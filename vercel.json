@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npx knex --knexfile ./dist/knexfile.js migrate:latest && npx knex --knexfile ./dist/knexfile.js seed:run",
+  "buildCommand": "nest build",
   "builds": [
     {
       "src": "dist/src/main.js",
