@@ -87,4 +87,16 @@ export class BooksController {
   ) {
     return this.libraryService.findOne(+id, BookType[type.toUpperCase()]);
   }
+
+  @UseGuards(JwtGeneralRequiredAuthGuard)
+  @Get('/public/digital')
+  findAllDigitalPublic(@Query() queryDto: BooksQueryDto) {
+    return this.libraryService.findAll(queryDto, 'digital');
+  }
+
+  @UseGuards(JwtGeneralRequiredAuthGuard)
+  @Get('/public/physical')
+  findAllPhysicalPublic(@Query() queryDto: BooksQueryDto) {
+    return this.libraryService.findAll(queryDto, 'physical');
+  }
 }
