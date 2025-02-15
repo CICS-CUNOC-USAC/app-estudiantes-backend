@@ -54,6 +54,18 @@ export class BooksController {
     return this.libraryService.findAll(queryDto, 'physical');
   }
 
+  @UseGuards(JwtGeneralRequiredAuthGuard)
+  @Get('public/digital')
+  findAllDigitalPublic(@Query() queryDto: BooksQueryDto) {
+    return this.libraryService.findAll(queryDto, 'digital');
+  }
+
+  @UseGuards(JwtGeneralRequiredAuthGuard)
+  @Get('public/physical')
+  findAllPhysicalPublic(@Query() queryDto: BooksQueryDto) {
+    return this.libraryService.findAll(queryDto, 'physical');
+  }
+
   @UseGuards(StaffLoginJwtAuthGuard)
   @Get('admin/:id/:type')
   findOneAdmin(
@@ -86,17 +98,5 @@ export class BooksController {
     @Param('type') type: 'digital' | 'physical',
   ) {
     return this.libraryService.findOne(+id, BookType[type.toUpperCase()]);
-  }
-
-  @UseGuards(JwtGeneralRequiredAuthGuard)
-  @Get('/public/digital')
-  findAllDigitalPublic(@Query() queryDto: BooksQueryDto) {
-    return this.libraryService.findAll(queryDto, 'digital');
-  }
-
-  @UseGuards(JwtGeneralRequiredAuthGuard)
-  @Get('/public/physical')
-  findAllPhysicalPublic(@Query() queryDto: BooksQueryDto) {
-    return this.libraryService.findAll(queryDto, 'physical');
   }
 }
