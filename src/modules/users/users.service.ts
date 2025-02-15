@@ -111,6 +111,15 @@ export class UsersService extends BaseService {
     return user;
   }
 
+  async findByRa(ra: string, trx?: Transaction): Promise<UserModel> {
+    const user = await this.userModel
+      .query(trx)
+      .withGraphFetched('profile')
+      .withGraphFetched('career')
+      .findOne({ ra });
+    return user;
+  }
+
   /**
    * Finds and returns an user by id, or undefined if no user is found
    * @param {string} id Id to find a user by

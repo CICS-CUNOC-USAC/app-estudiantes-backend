@@ -20,6 +20,15 @@ import { RolesModule } from './modules/roles/roles.module';
 import { RoleDetailsModule } from './modules/role-details/role-details.module';
 import { ArticlesModule } from './modules/articles/articles.module';
 import { LibraryModule } from './modules/library/library.module';
+import { ArticleCategoriesModule } from './modules/article_categories/article_categories.module';
+import { SchedulesModule } from './modules/schedules/schedules.module';
+import { ClassroomsModule } from './modules/classrooms/classrooms.module';
+import { PeriodsModule } from './modules/periods/periods.module';
+import { SectionsModule } from './modules/sections/sections.module';
+import { WeekdaysModule } from './modules/weekdays/weekdays.module';
+import { HoursModule } from './modules/hours/hours.module';
+import { PermissionsModule } from './modules/permissions/permissions.module';
+import { CaslModule } from './modules/casl/casl.module';
 
 @Module({
   imports: [
@@ -46,6 +55,15 @@ import { LibraryModule } from './modules/library/library.module';
     RoleDetailsModule,
     ArticlesModule,
     LibraryModule,
+    ArticleCategoriesModule,
+    SchedulesModule,
+    ClassroomsModule,
+    PeriodsModule,
+    SectionsModule,
+    WeekdaysModule,
+    HoursModule,
+    PermissionsModule,
+    CaslModule,
   ],
 })
 export class AppModule {

@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
   Req,
+  UploadedFile,
 } from '@nestjs/common';
 import { ArticlesService } from './articles.service';
 import { CreateArticleDto } from './dto/create-article.dto';
@@ -19,7 +20,7 @@ import { StaffModel } from '../staffs/entities/staff.model';
 import { Roles } from 'src/core/decorators/articles/roles.decorator';
 import { ArticleRolesGuard } from 'src/core/guards/articles/article-roles.guard';
 
-@ApiTags('articles')
+@ApiTags('Articles')
 @UseGuards(StaffLoginJwtAuthGuard, ArticleRolesGuard)
 @Controller('articles')
 export class ArticlesController {
@@ -27,8 +28,13 @@ export class ArticlesController {
 
   @Post('/admin')
   @Roles(['superadmin', 'writer'])
-  create(@Body() createArticleDto: CreateArticleDto, @Req() req: Request) {
+  create(
+    @Body() createArticleDto: CreateArticleDto,
+    @Req() req: Request,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
     return this.articlesService.create(
+      file,
       createArticleDto,
       req.user as StaffModel,
     );

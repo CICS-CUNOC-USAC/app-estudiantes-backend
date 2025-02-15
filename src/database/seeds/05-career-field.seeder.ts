@@ -22,6 +22,7 @@ export async function seed(knex: Knex): Promise<any> {
       career_code: 58,
       field_number: 4,
       name: 'Area de Ciencias Basicas y Complementarias',
+      common_field: true,
     },
     { career_code: 58, field_number: 5, name: 'EPS' },
 
@@ -55,6 +56,7 @@ export async function seed(knex: Knex): Promise<any> {
       career_code: 33,
       field_number: 6,
       name: 'Area de Ciencias Basicas y Complementarias',
+      common_field: true,
     },
     {
       career_code: 33,
@@ -87,6 +89,7 @@ export async function seed(knex: Knex): Promise<any> {
       career_code: 34,
       field_number: 3,
       name: 'Area de Ciencias Basicas y Complementarias',
+      common_field: true,
     },
     {
       career_code: 34,
@@ -129,6 +132,7 @@ export async function seed(knex: Knex): Promise<any> {
       career_code: 35,
       field_number: 4,
       name: 'Area Complementaria',
+      common_field: true,
     },
     {
       career_code: 35,
@@ -201,6 +205,7 @@ export async function seed(knex: Knex): Promise<any> {
       career_code: 36,
       field_number: 8,
       name: 'Area de Ciencias Basicas',
+      common_field: true,
     },
     {
       career_code: 36,

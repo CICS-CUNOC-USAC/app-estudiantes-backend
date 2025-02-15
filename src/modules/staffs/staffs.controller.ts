@@ -19,7 +19,7 @@ import { StaffsQueryDto } from './dto/staff-query.dto';
 import { StaffSuperadminLoginJwtAuthGuard } from 'src/core/guards/jwt-staff-auth-superadmin.guard';
 import { UpdateStaffRolesDto } from './dto/update-roles-staff.dto';
 
-@ApiTags('staffs')
+@ApiTags('Staffs')
 @Controller('staffs')
 @UseGuards(StaffLoginJwtAuthGuard)
 export class StaffsController {

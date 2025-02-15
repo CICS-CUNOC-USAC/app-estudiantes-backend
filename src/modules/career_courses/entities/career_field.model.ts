@@ -3,7 +3,7 @@ import { CareerCourseModel } from './career_course.entity';
 import { CareerModel } from 'src/modules/career/entities/career.model';
 
 export class CareerFieldModel extends Model {
-  static tableName = 'career_field';
+  static tableName = 'career_fields';
 
   career_code: number;
   field_number: number;
@@ -15,7 +15,7 @@ export class CareerFieldModel extends Model {
         relation: Model.BelongsToOneRelation,
         modelClass: CareerModel,
         join: {
-          from: 'career_field.career_code',
+          from: 'career_fields.career_code',
           to: 'careers.code',
         },
       },
@@ -23,8 +23,8 @@ export class CareerFieldModel extends Model {
         relation: Model.BelongsToOneRelation,
         modelClass: CareerCourseModel,
         join: {
-          from: 'career_field.field_number',
-          to: 'career_courses.field_number',
+          from: 'career_fields.field_number',
+          to: 'career_courses.field',
         },
       },
     };

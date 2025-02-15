@@ -12,7 +12,7 @@ import { LoginDto } from '../dto/login.dto';
 import { StaffLoginLocalAuthGuard } from 'src/core/guards/local-staff-auth.guard';
 import { StaffLoginJwtAuthGuard } from 'src/core/guards/jwt-staff-auth.guard';
 
-@ApiTags('staff login')
+@ApiTags('Staff Login')
 @Controller('staff-auth')
 export class StaffAuthController {
   constructor(private readonly staffAuthService: StaffAuthService) {}
