@@ -5,6 +5,11 @@
         "use": "@vercel/node"
     }
   ],
+  "functions": {
+    "src/main.js": {
+        "runtime": "@vercel/node"
+    }
+  },
   "routes": [
     {
       "src": "/(.*)",
