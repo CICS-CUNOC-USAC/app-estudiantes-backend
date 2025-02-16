@@ -2,7 +2,7 @@
   "buildCommand": "npm run build",
   "functions": {
     "src/main.js": {
-        "runtime": "@vercel/node"
+        "runtime": "@vercel/node@22"
     }
   },
   "routes": [
