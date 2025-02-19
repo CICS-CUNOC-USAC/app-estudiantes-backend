@@ -1054,6 +1054,13 @@ export async function seed(knex: Knex): Promise<any> {
       field: 7,
       mandatory: false,
     },
+    {
+      career_code: 36,
+      course_code: '925',
+      semester: 5,
+      field: 1,
+      mandatory: true,
+    },
     //DIBUJO TECNICO MECANICO (CORRECTAMENTE INGRESADO)
     {
       career_code: 34,
@@ -1102,12 +1109,130 @@ export async function seed(knex: Knex): Promise<any> {
       field: 3,
       mandatory: true,
     },
-
     //QUINTO SEMESTRE
     //AREA COMUN
-    
 
-    //Matematica Aplicada 1
+    //Topografia 2 (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 33,
+      course_code: '747',
+      semester: 5,
+      field: 1,
+      mandatory: true,
+    }, 
+    //Resistencia de materiales 1 (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 33,
+      course_code: '672',
+      semester: 5,
+      field: 2,
+      mandatory: true,
+    },
+    {
+      career_code: 34,
+      course_code: '672',
+      semester: 6,
+      field: 4,
+      mandatory: true,
+    }, 
+    {
+      career_code: 35,
+      course_code: '672',
+      semester: 5,
+      field: 5,
+      mandatory: true,
+    },
+    {
+      career_code: 36,
+      course_code: '672',
+      semester: 5,
+      field: 1,
+      mandatory: true,
+    },
+    //CIENCIAS DE LOS MATERIALES (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 33,
+      course_code: '678',
+      semester: 5,
+      field: 3,
+      mandatory: false,
+    },
+    {
+      career_code: 34,
+      course_code: '678',
+      semester: 6,
+      field: 4,
+      mandatory: true,
+    },
+    {
+      career_code: 35,
+      course_code: '678',
+      semester: 6,
+      field: 5,
+      mandatory: true,
+    },
+    {
+      career_code: 36,
+      course_code: '678',
+      semester: 5,
+      field: 1,
+      mandatory: true,
+    },
+    //MECANICA DE FLUIDOS (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 33,
+      course_code: '671',
+      semester: 5,
+      field: 4,
+      mandatory: true,
+    },
+    {
+      career_code: 34,
+      course_code: '671',
+      semester: 5,
+      field: 3,
+      mandatory: true,
+    },
+    {
+      career_code: 35,
+      course_code: '671',
+      semester: 5,
+      field: 5,
+      mandatory: true,
+    },
+    {
+      career_code: 36,
+      course_code: '671',
+      semester: 5,
+      field: 1,
+      mandatory: true,
+    }, 
+    //Geologia Estructural (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 33,
+      course_code: '1060',
+      semester: 5,
+      field: 7,
+      mandatory: false,
+    },
+    //Geofisica (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 33,
+      course_code: '920',
+      semester: 5,
+      field: 7,
+      mandatory: false,
+    },
+    //Petrologia (CORRECTAMENTE INGRESADO)0
+    {
+      career_code: 33,
+      course_code: '1068',
+      semester: 5,
+      field: 7,
+      mandatory: false,
+    },
+        
+    //Matematica Aplicada 1 (CORRECTAMENTE INGRESADO)
     {
       career_code: 33,
       course_code: '673',
@@ -1126,14 +1251,14 @@ export async function seed(knex: Knex): Promise<any> {
       career_code: 35,
       course_code: '673',
       semester: 5,
-      field: 7,
+      field: 2,
       mandatory: false,
     },
     {
       career_code: 36,
       course_code: '673',
       semester: 5,
-      field: 8,
+      field: 1,
       mandatory: false,
     },
     {
@@ -1144,7 +1269,7 @@ export async function seed(knex: Knex): Promise<any> {
       mandatory: true,
     },
 
-    //Matematica Aplicada 3
+    //Matematica Aplicada 3 (CORRECTAMENTE INGRESADO)
     {
       career_code: 33,
       course_code: '674',
@@ -1163,14 +1288,14 @@ export async function seed(knex: Knex): Promise<any> {
       career_code: 35,
       course_code: '674',
       semester: 5,
-      field: 7,
+      field: 2,
       mandatory: true,
     },
     {
       career_code: 36,
       course_code: '674',
       semester: 5,
-      field: 8,
+      field: 1,
       mandatory: true,
     },
     {
@@ -1180,8 +1305,7 @@ export async function seed(knex: Knex): Promise<any> {
       field: 4,
       mandatory: true,
     },
-
-    //Fisica 3
+    //Fisica 3 (CORRECTAMENTE INGRESADO)
     {
       career_code: 34,
       course_code: '148',
@@ -1193,7 +1317,22 @@ export async function seed(knex: Knex): Promise<any> {
       career_code: 36,
       course_code: '148',
       semester: 5,
-      field: 8,
+      field: 1,
+      mandatory: false,
+    },
+    //circuitos electricos 1 (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 36,
+      course_code: '923',
+      semester: 5,
+      field: 1,
+      mandatory: false,
+    },
+    {
+      career_code: 34,
+      course_code: '923',
+      semester: 8,
+      field: 1,
       mandatory: false,
     },
 
@@ -1234,35 +1373,36 @@ export async function seed(knex: Knex): Promise<any> {
       mandatory: false,
     },
 
-    //Principios de Metrologia
+    //Principios de Metrologia (CORRECTAMENTE INGRESADO)
     {
       career_code: 33,
-      course_code: '2806',
+      course_code: '2669',
       semester: 5,
       field: 2,
       mandatory: false,
     },
     {
       career_code: 34,
-      course_code: '2806',
+      course_code: '2669',
       semester: 5,
       field: 5,
       mandatory: false,
     },
     {
       career_code: 35,
-      course_code: '2806',
+      course_code: '2669',
       semester: 5,
-      field: 4,
+      field: 5,
       mandatory: false,
     },
     {
       career_code: 36,
-      course_code: '2806',
+      course_code: '2669',
       semester: 5,
-      field: 7,
+      field: 1,
       mandatory: false,
     },
+    //principios de metrologia pa sistemas (CORRECTAMENTE INGRESADO)
     {
       career_code: 58,
       course_code: '2806',
@@ -1308,7 +1448,7 @@ export async function seed(knex: Knex): Promise<any> {
       mandatory: false,
     },
 
-    //Programacion de Computadoras 1
+    //Programacion de Computadoras 1 (CORRECTAMENTE INGRESADO)
     {
       career_code: 33,
       course_code: '087',
@@ -1317,21 +1457,28 @@ export async function seed(knex: Knex): Promise<any> {
       mandatory: true,
     },
     {
+      career_code: 34,
+      course_code: '087',
+      semester: 6,
+      field: 5,
+      mandatory: true,
+    },
+    {
       career_code: 35,
       course_code: '087',
-      semester: 5,
-      field: 4,
+      semester: 6,
+      field: 10,
       mandatory: true,
     },
     {
       career_code: 36,
       course_code: '087',
       semester: 5,
-      field: 7,
+      field: 1,
       mandatory: true,
     },
 
-    //Legislacion 2
+    //Legislacion 2 (CORRECTAMENTE INGRESADO)
     {
       career_code: 33,
       course_code: '764',
@@ -1350,7 +1497,7 @@ export async function seed(knex: Knex): Promise<any> {
       career_code: 35,
       course_code: '764',
       semester: 6,
-      field: 1,
+      field: 9,
       mandatory: true,
     },
     {
@@ -1360,8 +1507,23 @@ export async function seed(knex: Knex): Promise<any> {
       field: 1,
       mandatory: true,
     },
+    //perforacion de pozos 1 (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 33,
+      course_code: '792',
+      semester: 5,
+      field: 7,
+      mandatory: false,
+    },
+    {
+      career_code: 34,
+      course_code: '792',
+      semester: 6,
+      field: 5,
+      mandatory: false,
+    },
 
-    //Administracion de Personal
+    //Administracion de Personal (CORRECTAMENTE INGRESADO)
     {
       career_code: 33,
       course_code: '928',
@@ -1377,21 +1539,14 @@ export async function seed(knex: Knex): Promise<any> {
       mandatory: false,
     },
     {
-      career_code: 35,
+      career_code: 36,
       course_code: '928',
       semester: 6,
       field: 1,
       mandatory: true,
     },
-    {
-      career_code: 36,
-      course_code: '928',
-      semester: 5,
-      field: 1,
-      mandatory: true,
-    },
 
-    //Geologia del Petroleo
+    //Geologia del Petroleo (CORRECTAMENTE INGRESADO)
     {
       career_code: 33,
       course_code: '926',
@@ -1406,7 +1561,36 @@ export async function seed(knex: Knex): Promise<any> {
       field: 5,
       mandatory: false,
     },
-
+    //Electricidad y electronica basica (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 34,
+      course_code: '2571',
+      semester: 5,
+      field: 2,
+      mandatory: false,
+    },
+    //Mecanica analitica 2 (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 34,
+      course_code: '118',
+      semester: 5,
+      field: 4,
+      mandatory: true,
+    },
+    {
+      career_code: 35,
+      course_code: '118',
+      semester: 5,
+      field: 5,
+      mandatory: false,
+    },
+    {
+      career_code: 36,
+      course_code: '118',
+      semester: 5,
+      field: 1,
+      mandatory: true,
+    },
     //Sistemas
     //Analisis Probabilistico
     {
@@ -1522,7 +1706,7 @@ export async function seed(knex: Knex): Promise<any> {
       mandatory: false,
     },
 
-    //Ingenieria Electrica 1
+    //Ingenieria Electrica 1 (CORRECTAMENTE INGRESADO)
     {
       career_code: 33,
       course_code: '670',
@@ -1541,14 +1725,14 @@ export async function seed(knex: Knex): Promise<any> {
       career_code: 35,
       course_code: '670',
       semester: 5,
-      field: 8,
+      field: 5,
       mandatory: true,
     },
     {
       career_code: 36,
       course_code: '670',
       semester: 5,
-      field: 8,
+      field: 1,
       mandatory: true,
     },
     {
@@ -1556,7 +1740,7 @@ export async function seed(knex: Knex): Promise<any> {
       course_code: '670',
       semester: 6,
       field: 4,
-      mandatory: true,
+      mandatory: false,
     },
 
     //Ingenieria Electrica 2
@@ -1598,7 +1782,7 @@ export async function seed(knex: Knex): Promise<any> {
       mandatory: false,
     },
 
-    //Contabilidad 2
+    //Contabilidad 2 (CORRECTAMENTE INGRESADO)
     {
       career_code: 33,
       course_code: '779',
@@ -1610,7 +1794,7 @@ export async function seed(knex: Knex): Promise<any> {
       career_code: 35,
       course_code: '779',
       semester: 6,
-      field: 1,
+      field: 8,
       mandatory: true,
     },
     {
@@ -1628,7 +1812,7 @@ export async function seed(knex: Knex): Promise<any> {
       mandatory: false,
     },
 
-    //Gestion de Desastres
+    //Gestion de Desastres (CORRECTAMENTE INGRESADO)
     {
       career_code: 33,
       course_code: '2670',
@@ -1637,17 +1821,24 @@ export async function seed(knex: Knex): Promise<any> {
       mandatory: false,
     },
     {
+      career_code: 34,
+      course_code: '2670',
+      semester: 9,
+      field: 3,
+      mandatory: false,
+    },
+    {
       career_code: 35,
       course_code: '2670',
-      semester: 7,
-      field: 4,
+      semester: 9,
+      field: 12,
       mandatory: false,
     },
     {
       career_code: 36,
       course_code: '2670',
       semester: 7,
-      field: 6,
+      field: 1,
       mandatory: false,
     },
     {
@@ -1942,13 +2133,41 @@ export async function seed(knex: Knex): Promise<any> {
       mandatory: true,
     },
 
-    //Estadistica 2
+    //Estadistica 2 (CORRECTAMENTE INGRESADO)
     {
       career_code: 58,
       course_code: '950',
       semester: 7,
       field: 1,
       mandatory: false,
+    },
+    {
+      career_code: 33,
+      course_code: '950',
+      semester: 5,
+      field: 8,
+      mandatory: false,
+    },
+    {
+      career_code: 34,
+      course_code: '950',
+      semester: 5,
+      field: 5,
+      mandatory: false,
+    },
+    {
+      career_code: 35,
+      course_code: '950',
+      semester: 5,
+      field: 7,
+      mandatory: true
+    },
+    {
+      career_code: 36,
+      course_code: '950',
+      semester: 5,
+      field: 1,
+      mandatory: true,
     },
 
     //Sistemas Operativos 1
@@ -1998,7 +2217,7 @@ export async function seed(knex: Knex): Promise<any> {
 
     //Octavo Semestre
     //Area Comun
-    //Ingenieria Economica 1
+    //Ingenieria Economica 1 (CORRECTAMENTE INGRESADO)
     {
       career_code: 33,
       course_code: '690',
@@ -2016,7 +2235,7 @@ export async function seed(knex: Knex): Promise<any> {
     {
       career_code: 35,
       course_code: '690',
-      semester: 5,
+      semester: 6,
       field: 8,
       mandatory: true,
     },

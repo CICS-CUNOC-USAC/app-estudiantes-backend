@@ -13,129 +13,98 @@ export async function seed(knex: Knex): Promise<any> {
     { code: '028', 
       name: 'Social Humanistica 1', 
       description: 'EL CURSO DE SOCIAL HUMANÍSTICA 1, TIENE COMO FINALIDAD; EL PROPORCIONAL AL ESTUDIANTE DEL AREA COMUN, DE LAS CARERRAS DE INGENIERIA, DE LA DIVISIÒN DE CIENCIAS DE LA INGENIERIA, DEL CENTRO UNIVERSITARIO DE OCCIDENTE (CUNOC), LOS CONOCIMIENTOS QUE LE PERMITAR TENER UN PANORAMA CIENTÌFICO SOBRE ASPECTOS DE LA SOCIEDAD EN FORMA GENERAL, CONOCIMIENTOS Y ELEMENTOS TEÓRICOS QUE SON INDISPENSABLES PARA INTERPRETAR CIENTÍFICAMENTE EL DESARROLLO DE LA SOCIEDAD.', 
-      credits: 4,  
-    }, //si esta correcto en todos los pensums
+      credits: 4, }, //si esta correcto en todos los pensums
     { code: '169',
       name: 'Matematica Basica 1', 
       description: 'En este curso el alumno analizara conceptos, teorías, procedimientos, gráficas, y principios de modelado sobre los temas de: conjuntos, números reales, funciones, límites, derivadas, integrales, ecuaciones diferenciales, geometría analítica, vectores, matrices, determinantes, sistemas de ecuaciones lineales, y aplicaciones de las matemáticas en la ingeniería.',
-      credits: 7, 
-    }, //sip esta bien en todos los pensums
-    {
-      code: '2666',
+      credits: 7, }, //sip esta bien en todos los pensums
+    { code: '2666',
       name: 'Orientacion y Liderazgo',
       description: 'El curso de Orientación y Liderazgo crea consciencia en el estudiante de su compromiso ante la sociedad guatemalteca que con el pago de sus impuestos financia su formación profesional; por lo que los egresados sancarlistas deben proponer soluciones a la problemática nacional que procuren el bien común. En el curso de Orientación y Liderazgo el estudiante conoce el perfil de egreso del ingeniero conforme a la carrera que estudia. Además, conoce el Código de Ética del Colegio de Ingenieros de Guatemala. El curso de Orientación y Liderazgo es un curso formativo en las competencias blandas: refuerza en el estudiante las cualidades de liderazgo que ya posee, y lo motiva para adquirir las cualidades de liderazgo que necesita para ser una persona exitosa que disfruta de relaciones interpersonales satisfactorias a nivel estudiantil, familiar, social, laboral y profesional.',
-      credits: 1 , 
-    },//credito correcto kajsd
-    {
-      code: '119',
+      credits: 1 , },//credito correcto kajsd
+    { code: '119',
       name: 'Tecnica Complementaria 1',
       description: 'La introducción al dibujo técnico se presenta en el curso Técnica Complementaria 1 a través de un recorrido desde conceptos generales hasta la elaboración de trabajos minuciosos y de carácter profesional. El curso principia con el conocimiento y uso de los instrumentos y materiales que requiere el dibujo técnico. Se presenta como un lenguaje al estudiante para comunicar ideas y convertirlas en el conocimiento de la realidad, abarcando metodologías para el uso de objetos, sistemas de medición, texturas de líneas, geometría básica e incluso técnicas de dibujo a mano alzada. Surge de la necesidad de tamaño, forma y relación de los objetos que nos rodean, espacios que se generan alrededor del cuerpo humano y la relación de este con todos los objetos que nos circundan.',
-      credits: 3, 
-    }, //creditos correctos entre todos los pensums
+      credits: 3, }, //creditos correctos entre todos los pensums
     { code: '177', 
       name: 'Deportes 1', 
       description: 'tiene como finalidad contribuir al desarrollo integral del estudiante de primer ingreso, desarrollando en él las competencias fundamentales que le permitan encontrar en dicho curso una válvula de escape ante el incremento de estrés y la ansiedad, al encontrarse en un contexto diferente en el área académica; además le permite desarrollar conciencia de la importancia de dicha práctica ante el antagonismo de las enfermedades del siglo XXI, tales como la diabetes, hipertensión, obesidad, entre otras. El curso de Deportes se concibe como un área de enseñanza que sitúa al educando como sujeto de aprendizaje y objeto de estudio desde los dos ejes de básicos desde su acción educativa como lo son el cuerpo y el movimiento comprendiendo una relación integral y dialéctica.', 
-      credits: 1, 
-    }, //creditos correctos entre todos los pensums
+      credits: 1, }, //creditos correctos entre todos los pensums
     { code: '216', 
       name: 'Quimica 1', 
       description: 'El curso de Química I, ésta vinculada a las actividades científicas y no científicas, con la finalidad de crear criterios para la comprensión y explicación de las otras ciencias que ayudan o afectan a la ingeniería. Ésta a la vez pretende que los estudiantes comprendan las diferentes teorías a través de los conceptos tanto a nivel atómico (partículas, teorías, modelos), como molecular (substancias compuestas, mezclas, soluciones, densidad). En todo caso la materia se analiza a través del análisis dimensional, formación de los enlaces químicos, nomenclatura química, reacciones químicas, cálculos estequiométricos y estado gaseoso. El estudiante justifica sus investigaciones socializándolas', 
-      credits: 3, 
-    },//creditos correctos entre todos los pensums
+      credits: 3, },//creditos correctos entre todos los pensums
     { code: '2792', 
       name: 'Idioma Tecnico 1', 
       description: 'Curso el cual no se habilitaba en la division de ciencias de la ingenieria, pero podia ganarse asignandose los cursos y niveles en CALUSAC, ganando los 12 niveles necesarios', 
-      credits: 2, 
-    }, //creditos correctos y solo esta en el pensum de industrial y sistemas
-
+      credits: 2, }, //creditos correctos y solo esta en el pensum de industrial y sistemas
     //Segundo Semestre
     //Area Comun
     { code: '029', 
       name: 'Social Humanistica 2',
       description: 'tiene como finalidad; el proporcionar al estudiante del área común, de las carreras de ingeniería, de la División de Ciencias de la Ingeniería, del Centro Universitario de Occidente (CUNOC), los conocimientos que le permitan tener un panorama científico sobre aspectos de la sociedad en forma general, conocimientos y elementos teóricos que son indispensables para interpretar científicamente el desarrollo de la sociedad. Estableciendo los vínculos entre el pasado y el presente de las diferentes sociedades recurriendo al instrumental teórico metodológico que podrá ser utilizado y aplicado por el estudiantes para realizar ese análisis e interpretar científicamente el desarrollo de la sociedad, incluyendo para ello los contenidos temáticos siguientes: conceptos básicos para el estudio de la sociedad, desarrollo histórico de la sociedad y esbozo de la sociedad guatemalteca, sociedad precolonial guatemalteca, sociedad colonial guatemalteca, sociedad independiente guatemalteca, sociedad republicana guatemalteca También acorde a los cambios como parte de los contenidos se hace mención de temas relacionados con GIRD y ACC, porque no se tiene un contenido específico con esa temática', 
-      credits: 4, 
-    }, //creditos correctos
+      credits: 4, }, //creditos correctos
     { code: '170', 
       name: 'Matematica Basica 2', 
       description: 'En este curso el alumno analizará conceptos, teorías, procedimientos, gráficas y principios de modelado sobre los temas de Límites, la derivada, leyes de derivación, aplicaciones de la derivada, la integral y aplicaciones de la integral. En la solución de problemas de mediana complejidad en el campo de las ciencias naturales y sociales, que le permitan desarrollar las competencias específicas de lenguaje oral y escrito, abstracción y modelado matemático; razonamiento y análisis matemático de problemas y aplicaciones a la ciencia de la ingeniería, lo que le permitirá comprender el cálculo diferencial e integral, base importante para su formación profesional y de su especialidad', 
-      credits: 7, 
-    }, //correcto en todos los pensums
-    {
-      code: '2667',
+      credits: 7, }, //correcto en todos los pensums
+    { code: '2667',
       name: 'Tecnicas de Investigacion y Estudio',
       description: 'Es un curso teórico - práctico que tiene la finalidad de proporcionar al estudiante de la Ingeniería, la capacidad a adquirir y practicar en su carrera profesional: Hábitos de Estudio, Técnicas de Estudio y Técnicas de Investigación para tener éxito en sus estudios y elaborar informes de Investigación Científica. Se realizará el Protocolo de Investigación sobre problemas de Ingeniería con la inserción de la temática de Gestión Integral de Riesgo de Desastre GIRD y la Adaptación al Cambio Climático ACC y según demandas sociales de investigación. Abarcando los otros 2 Pilares de la Universidad: Extensión é Investigación, para complementar al primero que es la Docencia. La evaluación será teórico – práctica; comprobaciones de lectura, prueba escrita, videoforum, dramatizaciones, ensayos, hojas de trabajo y perfil de investigación',
-      credits: 3,
-    }, //creditos correctos, con la peculiaridad que solo en el pensum de sistemas tiene este codigo. en las demas carreras tiene codigo 0 
+      credits: 3, }, //creditos correctos, con la peculiaridad que solo en el pensum de sistemas tiene este codigo. en las demas carreras tiene codigo 0 
     { code: '072', 
       name: 'Fisica Basica', 
       description: 'El curso de Física básica es un curso introductorio al estudio de la física para ingeniería, se presenta los inicios de la mecánica clásica, desarrollando clases expositivas en las que se discutirán con ayuda de los estudiantes las teorías existentes, se motivará y se hará participe al estudiante en algunas acciones para disminuir la contaminación y el consumo de papel como una participación en la mejora del ambiente. Se realizarán 3 evaluaciones parciales de 15 puntos cada una, se desarrollarán ejercicios en clase y en casa que tendrán una ponderación de 5 puntos, el laboratorio que se lleva de forma paralela tiene una ponderación de 20 puntos para hacer la zona requerida de 70 puntos. Las clases se desarrollarán los días lunes, miércoles y viernes en el horario y salón especificado en el horario de clases. Las unidades a trabajar son la cinemática, la dinámica, para luego ingresar a las teorías iniciales de energía y su conservación y finalmente llegar al estudio del "momentum" y su conservación.', 
-      credits: 5 
-    }, //correcto en todos los pensums
+      credits: 5 }, //correcto en todos los pensums
     { code: '178', 
       name: 'Deportes 2', 
       description: 'El curso de Deporte II, es parte fundamental en la continuidad y consolidación para cultivar una buena condición física, base para una buena salud física y mental. Además, tiene como objetivo aprovechar los valores transmitidos por el deporte para el desarrollo del trabajo en equipo, la solidaridad, la tolerancia y el juego limpio. Sus ejes son la educación física, la recreación y deporte, buscando con ello que el aprendizaje sea significativo en cada uno de los educandos. Desarrolla habilidades en el conocimiento de primeros respondientes en casos de emergencia personal y colectiva, así como desastres naturales. Es de destacar que como parte de esta casa de estudios “Universidad de San Carlos, Centro Universitario de Occidente” estamos comprometidos con el cuidado del medio ambiente, por lo que se promoverán actividades que permitan fortalecer el cuidado del medio natural, concibiendo el deporte y el medio ambiente como parte unida, ya que el deportista necesita del medio natural para realizar dicha conciencia social y natural.', 
-      credits: 1 
-    }, //correcto en todos los pensums
+      credits: 1 }, //correcto en todos los pensums
     { code: '2793', 
       name: 'Idioma Tecnico 2', 
       description: 'Curso el cual no se habilitaba en la division de ciencias de la ingenieria, pero podia ganarse asignandose los cursos y niveles en CALUSAC, ganando los 12 niveles necesarios', 
-      credits: 2 
-    }, //este curso solo sistemas y industrial lo tienen
+      credits: 2 }, //este curso solo sistemas y industrial lo tienen
     //Civil
-    {
-      code: '121',
+    { code: '121',
       name: 'Tecnica Complementaria 2',
       description: 'Tiene como finalidad desarrollar habilidades manuales y espaciales, bidimensionales y tridimensionales en los estudiantes, las que a su vez coadyuvan en ampliar las destrezas de expresión, interpretación y definición a través del dibujo. El curso lleva al estudiante de Ingeniería al análisis de sistemas constructivos y espacios habitables para proyectarlos de forma gráfica a través del juego de planos. En este proceso el estudiante aprenderá a interpretar la nomenclatura y simbología de los planos de arquitectura, estructuras e instalaciones, lo que será de utilidad para su vida profesional. La forma de evaluación es a través del juego de planos que se elaborará en clase y en casa, los cuales sumarán el 70% del valor del curso (zona) y una evaluación final tendrá el 30% del valor del curso. Se incluirán actividades de motivación para que los estudiantes tomen conciencia sobre la importancia de la reducción de riesgos a desastres y la adaptación al cambio climático',
-      credits: 3,
-    },
+      credits: 3, },
     //Tercer Semestre
     //Area Comun
-    {
-      code: '290',
+    { code: '290',
       name: 'Matematica Intermedia 1',
       description: 'El curso ofrece al estudiante, la oportunidad de formar las competencias en las áreas específicas de la matemática del cálculo integral, gráficas y ecuaciones paramétricas, gráficas y ecuaciones polares, aplicaciones específicas de la integral, algebra matricial álgebra vectorial, rectas, planos y superficies cuádricas en el espacio tridimensional, sucesiones y series infinitas. Es de suma importancia realizar las actividades propuestas con responsabilidad y trabajo autónomo. Conocer la simbología matemática, utilizada en la comunicación de los principios matemáticos, para que pueda utilizarlos en el planteamiento y análisis de problemas físicos, geométricos, económicos, de la realidad física actual, imprescindibles en las aplicaciones de la ingeniería contemporánea como en la gestión integrada de riesgos a desastres y la adaptación al cambio climático. La actividad requiere un compromiso ético al cumplir con el 90% de presencialidad, en donde se transfiere el conocimiento, en las tutorías y se solucionan múltiples ejercicios; para que pueda demostrar por medio de actividades de trabajo autónomo, ejercicios propuestos, desarrollo de proyectos propuestos y resolución de exámenes parciales, las competencias adquiridas.',
-      credits: 10,
-    },
+      credits: 10,},
     { code: '146',
       name: 'Fisica 1', 
       description: 'El curso de física 1 es continuidad del curso de física básica, extendiendo la idea de conjunto de partículas a cuerpos rígidos, en este se estudia el comportamiento de éstos a diversas situaciones de movimiento. En las clases expositivas se motivará la participación de los estudiantes para generar discusiones sobre las teorías y ejemplos para que los conceptos queden mejor aprendidos; así también se motivará la participación de los estudiantes en el reciclaje y la disminución de materiales de un solo uso, para participar en la disminución de la contaminación del ambiente debido a estos materiales. Los días de clases serán los días lunes, miércoles y viernes en los horarios y salones que se especifican en el horario de clases. Para evaluar el curso se desarrollarán 2 pruebas parciales. Se realizarán actividades como tareas asignadas en Moodle y un Proyecto de Investigación. De manera paralela se desarrollará el laboratorio que tiene una ponderación de 20 puntos para hacer la zona máxima de 70 puntos. Las unidades para trabajar son la Cinemática y dinámica de la rotación, equilibrio de cuerpos rígidos, momentum angular y su conservación, deformación de sólidos, introducción a la mecánica de fluidos, movimientos oscilatorios y ondas y las teorías de gravitación, aunque se hace una revisión de Momentum Lineal. Se incluirán actividades de motivación para que los estudiantes tomen conciencia sobre la importancia de la reducción de riesgos a desastres y la adaptación al cambio climático. ', 
-      credits: 6 
-    },
+      credits: 6 },
     { code: '2794', 
       name: 'Idioma Tecnico 3', 
       description: 'Curso el cual no se habilitaba en la division de ciencias de la ingenieria, pero podia ganarse asignandose los cursos y niveles en CALUSAC, ganando los 12 niveles necesarios', 
-      credits: 2 
-    },
+      credits: 2 },
     { code: '217', 
       name: 'Quimica 2', 
       description: 'el curso de Química 2, como continuación de Química 1, trata de incorporar el conocimiento generado en esta área, para estimular el conocimiento científico como pilar del aprendizaje de disciplinas que serán introducidas a lo largo de la carrera en Ingeniería. La química es probablemente la única rama de las ciencias experimentales cuyo objeto de estudio está en permanente expansión, dado que el número de nuevas moléculas, sintetizadas por el hombre crece día a día. El mundo actual y nuestra vida cotidiana están marcados por un sin número de productos de síntesis. Los entes objeto de estudio por parte de la Química, las moléculas, son átomos enlazados entre sí para formar un edificio más complejo y con propiedades completamente distintas de las de sus constituyentes. Parece lógico que una de las primeras inquietudes de los científicos fuera conocer características de esos constituyentes, en un primer intento para entender cómo se unen entre sí para formar nuevos sistemas que van desde la simplicidad de una molécula de hidrógeno a la complejidad de una proteína', 
-      credits: 4 
-    },
+      credits: 4 },
     { code: '681', 
       name: 'Geografia', 
       description: 'El curso de Geografía introduce al estudiante a conceptualizar la posición de la Tierra en el Universo. Enseña al estudiante a comprender las propiedades de la Tierra. Enseña los sistemas de coordenadas geodésidas y UTM. Enseña el manejo de brújula y enseña a explotar y utilizar mapas cartográficos. Repasa la geografía descriptiva de Guatemala. Enseña al estudiante la conservación de ambiente a través de la identificación de rasgos hidrográficos para prospección de agua', 
-      credits: 3 
-    },
+      credits: 3 },
     //practica inicial para civil, mecanica, industrial y mecanica industrial
     { code: '2394', 
       name: 'Practica Inicial', 
       description: 'El curso de Prácticas Iniciales, busca dar respuesta a las necesidades académicas de los estudiantes de Ingeniería, en el marco específico de planificación, organización, liderazgo y control, así como la generación de estrategias de proyectos y prácticas, dadas como alternativas en el desarrollo del curso, que permitirán a los estudiantes, adquirir las competencias propuestas. Se motivará para que los estudiantes participen activamente en el desarrollo del curso y sus distintas actividades que estarán relacionadas con las competencias designadas a éste curso. Se generará capacidades entre las habilidades y destrezas del estudiante, de tal manera que pueda desarrollar proyectos en una etapa de perfil. El curso está fundamentado en el Normativo de Practicas de la División; buscando formar estudiantes de ingeniería con capacidad de aplicar conocimientos, habilidades, actitudes y criterios de su especialidad de acuerdo a su nivel académico. Se empezará dando a conocer a los estudiantes que son los anteproyectos, los proyectos y la finalidad de cada uno de ellos así también las partes que lo conforman para poderlos desarrollar. Conocerán los tipos de proyectos existentes y en donde se desarrollan cada uno de ellos. Aprenderán a realizar diferentes tipos de instrumentos para poder diagnosticar, así también se utilizará estudio de casos para aprender a manejar y resolver problemas. Además aprenderá a realizar los diferentes estudios que se dan para realizar un proyecto y conocerán estrategias para poder implementarlos cuando sea el caso. Todo esto a nivel de perfil de proyectos.', 
-      credits: 0 
-    },
-    //Sistemas
+      credits: 0 }, //Sistemas
     { code: '2797', 
       name: 'Logica de Sistemas', 
       description: 'Su intención es introducir al estudiante en la comprensión del “pensamiento” analizando este como “sub-sistema” básico del “sistema humano”. El estudio del ser humano desde esta perspectiva nos permitirá comprender cómo se forman los pensamientos en nuestra mente, como llegamos a los denominados “modelos mentales” y como estos influyen y determinan nuestro comportamiento. La lógica de sistemas va más allá de la lógica formal que se estudia en los cursos de matemática discreta y para la computación. Esta forma de abordar la lógica nos permitirá distinguir procesos de pensamiento que la lógica formal no aborda, es decir, se abordará no sólo el estudio de los “razonamientos”, sino que el de la memoria, la creatividad, las asociaciones y otros de interés especial a la hora de construir sistemas computacionales, entendidos éstos como modelos que simulan comportamientos humanos para la resolución de problemas', 
-      credits: 2 
-    },
-    {
-      code: '2795',
+      credits: 2 },
+    { code: '2795',
       name: 'Matematica de Computo 1',
       description: 'El curso es el acercamiento inicial al estudio de algunos temas de Matemática Discreta. Hoy en día, la Matemática Discreta juega un papel importante en las ciencias de la computación como lo son las áreas de estructura de datos, teoría de lenguajes de computación, análisis de algoritmos, entre otros. Por consiguiente se hace necesario estudiarla y comprender los temas básicos: lógica, conjuntos, algoritmos, relaciones, álgebra de Boole y conteo.',
-      credits: 5,
-    },
-    {
-      code: '2796',
+      credits: 5, },
+    { code: '2796',
       name: 'Introduccion a la Programacion y Computacion 1',
       description: 'El curso es el acercamiento inicial del estudiante de la carrera de sistemas, a la programación mediante el uso de disciplinas y metodologías especializadas. El curso se fundamenta en el concepto de algoritmo para la resolución de problemas de programación, enfatizando el uso del paradigma orientado a objetos. Se introducen conceptos básicos de UML como guía para el diseño de sistemas orientados a objetos. Se acerca al estudiante al conocimiento de los principales algoritmos de búsquedas y ordenamientos. Se cubre una parte importante de las estructuras de datos, los tipos de datos abstractos. Asimismo, el estudiante conocerá el lenguaje Java como el lenguaje oficial de programación del curso.',
       credits: 4, },
@@ -148,12 +117,10 @@ export async function seed(knex: Knex): Promise<any> {
       credits: 2 },
     //Cuarto Semestre
     //Area Comun
-    {
-      code: '291', name: 'Matematica Intermedia 2',
+    { code: '291', name: 'Matematica Intermedia 2',
       description: 'Curso dedicado al estudio de los conceptos fundamentales del cálculo diferencial è integral de funciones de varias variables, estudiándolas desde el punto de vista verbal, numérico, visual y algebraico. Es importante mencionar que este curso se orientara haciendo referencia al contexto regional, nacional, è internacional. Durante el desarrollo del curso, los participantes construirán conjuntamente con el docente, los principales conceptos del cálculo de varias variables. La orientación de los cursos se hará de tal forma que los estudiantes leerán previamente los contenidos y harán anotaciones para poder discutirlos en clase, se tratara por todos los medios que la participación de los mismos sean la más alta posible, para poder inculcar en cada uno un pensamiento más crítico. Bajo esta metodología el objetivo principal es que el estudiante trate que por sí mismos descubran los conceptos y sus interrelaciones para poder tener una visión más clara del curso y sus posibles aplicaciones.',
       credits: 5, },
-    {
-      code: '292',name: 'Matematica Intermedia 3',
+    { code: '292',name: 'Matematica Intermedia 3',
       description: 'Curso dedicado al estudio de los conceptos fundamentales de las ecuaciones diferenciales, estudiándolas desde el punto de vista verbal, numérico, visual y algebraico. Es importante mencionar que este curso se orientara haciendo referencia al contexto regional, nacional, è internacional. El curso inicia con una descripción del vocabulario básico empleado en ecuaciones diferenciales y en la solución de ecuaciones diferenciales, luego se trata el tema de modelado, empleando como ejemplo una investigación sencilla de un modelo. El estudio de las ecuaciones diferenciales de orden superior, así como su aplicación a diversos problemas de la vida real, principalmente en la parte de resortes y deformación de vigas, temas importantes para la formación de los ingenieros mecánicos y civiles.',
       credits: 5, },
     { code: '147', name: 'Fisica 2', 
@@ -182,82 +149,88 @@ export async function seed(knex: Knex): Promise<any> {
       credits: 2 },
     //Civil
     { //TODO: REVISAR, NO TIENE CODIGO PERO SE USO EL A PROVISIONALMENTE
-      code: 'A',
-      name: 'Introduccion a Proyectos Gerenciales',
-      description: 'Curso introductorio a la gestion de proyectos en la carrera',
-      credits: 6,
-    }, 
+      code: 'A', name: 'Introduccion a Proyectos Gerenciales', description: 'Curso introductorio a la gestion de proyectos en la carrera',
+      credits: 6,}, 
     { code: '925', name: 'Psicologia Industrial', 
       description: 'La actividad laboral presenta una serie de interacciones, donde se pone de manifiesto el comportamiento humano, tanto individual como grupal, generando ciertas y determinadas dinámicas individuales y colectivas que es necesario investigar y aplicar elementos teóricos para su análisis y comprensión lo que establece la necesidad de desarrollar temas relacionados a la Psicología. Esta disciplina tiene como objetivo fundamental, proporcionar al estudiante, los elementos teóricos, metodológicos y técnicos indispensables sobre la Psicología Industrial, a la vez que se propone efectuar una práctica al interior del mismo, para poder aplicar los conocimientos al que hacer del futuro profesional de la ingeniería', 
       credits: 3 },
     //Sistemas
-    {
-      code: '2798', name: 'Lenguajes Formales y de Programacion',
+    { code: '2798', name: 'Lenguajes Formales y de Programacion',
       description: 'Este curso busca introducir al estudiante con los fundamentos teóricos matemáticos y conceptos que fundamentan los lenguajes de programación. El estudiante debe adquirir la base teórica necesaria y requerida para que pueda llevar un curso avanzado de lenguajes y compiladores. Se busca, además, definir los modelos matemáticos asociados a la representación de los diferentes tipos de lenguajes para luego implementar estos conceptos en lenguajes de programación. Es de primordial importancia que pueda reconocer cualquier tipo de gramática, pero, sobre todo, pueda manejar y diseñar gramáticas para lenguajes regulares y para lenguajes libres de contexto, además de los modelos matemáticos que las resuelven.',
-      credits: 3, },
-    {
-      code: '2799', name: 'Matematica de Computo 2',
+      credits: 3,},
+    { code: '2799', name: 'Matematica de Computo 2',
       description: 'Desarrolle, reconozca, formule y aplique conceptos relaciones de recurrencia, grafos, árboles y redes que sirvan de base para los cursos profesionales de la Escuela de Ciencias y Sistemas relacionados con las estructuras dinámicas utilizadas en el manejo eficiente de memoria primaria y secundaria',
       credits: 5,},
-    {
-      code: '2800', name: 'Introduccion a la Programacion y Computacion 2',
+    { code: '2800', name: 'Introduccion a la Programacion y Computacion 2',
       description: 'Los sistemas de software existen para automatizar y acelerar tareas, y la mayoría de veces también se necesita manipular, modificar y almacenar datos para extraer información. Eso quiere decir que un software puede ser igual de complejo como las tareas que se desean realizar. El modelado de sistemas de software utilizando conceptos de la programación orientada a objetos y el uso de diagramas que representan el diseño de las diferentes piezas de software que forman un sistema mas grande es la mejor manera de ordenar las ideas antes de iniciar un proceso de desarrollo de software complejo. Además, el disponer de una variedad de metodologías de desarrollo de software dan a los equipos de desarrollo de software los pasos necesarios para desarrollar software dependiendo del contexto en el que el software será desarrollado',
-      credits: 5, },
-
+      credits: 5,},
     //Quinto Semestre
     //Area Comun
-    
-    { code: '673', name: 'Matematica Aplicada 1', description: '', credits: 6 },
-    { code: '674', name: 'Matematica Aplicada 3', description: '', credits: 5 },
-    { code: '148', name: 'Fisica 3', description: '', credits: 6 },
+    { code: '673', name: 'Matematica Aplicada 1', 
+      description: 'Tiene pre-requisito matemática intermedia 2 y matemática intermedia 3, por lo que es fundamental que el estudian cuente con conocimientos previos de derivadas e integrales, ecuaciones diferenciales entre otros. El curso de Matemática aplicada 1, ésta vinculada a la resolución de ecuaciones diferenciales, con la finalidad de crear criterios para la comprensión y explicación de las otras ciencias que ayudan o afectan a la ingeniería. Ésta a la vez pretende que los estudiantes comprendan los diferentes métodos para poder desarrollar ecuaciones diferenciales usando serie de potencia como también usando la transformada de Laplace. Asimismo, el estudiante justifica sus investigaciones socializándolas, las explicara para exponer posibles soluciones que aqueja al planeta en los últimos años. Entre otras actividades se resolverán hojas de trabajo individual y grupal, comprobaciones de lectura, preguntas indagatorias con metodología acorde a los temas bibliográficos, que incluye exposiciones de análisis, y explicaciones de las diferentes teorías debidamente contextualizadas. En relación a la evaluación el curso de Matemática aplicada 1 se tendrá una zona de 70 puntos que se distribuirán dos parciales de 15 y 20 puntos, hojas de trabajo, exposición y una actividad extra-aula para contribuir al medio ambiente y aminorar la contaminación, y la evaluación de 30 puntos escrita consta de ejercicios contextualizados para su mayor compresión y análisis.', 
+      credits: 6 },
+    { code: '674', name: 'Matematica Aplicada 3', 
+      description: 'El curso de matemática aplicada 3, sección A, tiene pre-requisito matemática intermedia 2 y matemática intermedia 3, el estudiante debe de tener conocimiento básico de despeje de fórmulas ya que en la Matemática aplicada 3 se usan fórmulas para poder resolver las diferentes ecuaciones no lineales y los problemas o casos de ingeniería. El curso de Matemática aplicada 3, ésta vinculada a la resolución de ecuaciones no lineales, con la finalidad de crear criterios para la comprensión y explicación de las otras ciencias que ayudan o afectan a la ingeniería. Ésta a la vez pretende que los estudiantes comprendan los diferentes métodos para poder desarrollar ecuaciones no lineales usando métodos numéricos como primer punto poder clasificar si son métodos abiertos o cerrados si son de una o más variables y así poder resolver casos o problemas de la ingeniería en todas sus ramas. Así mismo, el estudiante justifica sus investigaciones socializándolas, las explicara para exponer posibles soluciones que aqueja al planeta en los últimos años. Entre otras actividades se resolverán hojas de trabajo individual y grupal, comprobaciones de lectura, preguntas indagatorias con metodología acorde a los temas bibliográficos, que incluye exposiciones de análisis, y explicaciones de las diferentes teorías debidamente contextualizadas. En relación a la evaluación el curso de Matemática aplicada 3 se tendrá una zona de 70 puntos que se distribuirán dos parciales de 20 puntos cada uno, hojas de trabajo, trabajos de investigación y exposición de los trabajaos de investigación en forma grupal y una evaluación final de 30 puntos en forma escrita.', 
+      credits: 5 },
+    { code: '148', name: 'Fisica 3', 
+      description: 'Abarca temas avanzados de física clásica y electromagnetismo. El curso incluye el estudio de la carga eléctrica, el campo eléctrico, el potencial eléctrico y los condensadores. También se exploran los circuitos de corriente continua, el campo magnético, la fuerza magnética sobre una carga y un conductor con corriente, y las leyes de Ampere y de Biot-Savart. Además, se complementan conceptos de ondas sonoras, ondas electromagnéticas, óptica geométrica, óptica física y termodinámica. Este curso proporciona a los estudiantes una comprensión profunda de los principios físicos que son fundamentales para el análisis y diseño de sistemas en ingeniería', 
+      credits: 6 
+    },
     { code: '694', name: 'Contabilidad 1',
       description: 'Curso que estudia los principios de la contabilidad general aplicable a todo tipo de empresa comercial, industrial o de servicio. servicio. Sirve de base para estudiar posteriormente Contabilidad 2 (Contabilidad de costos) y posteriormente Contabilidad 3 (Análisis financieros). Así también podrá quien haya estudiado éste curso, leer y comprender los estados de resultados de cualquier empresa.', 
       credits: 3 },
     { code: '094', name: 'Ecologia', 
       description: 'Se proporcionará un concepto básico de ecología que describe a los seres vivos y no vivos y la relación que existe entre ellos. Introducción de los cuatro conceptos principales empleados: energía, ciclos, poblaciones y ecosistemas. Conceptos sobre los sistemas y poblaciones ecológicas. La relación del hombre con el medio ambiente, principalmente su intervención en los ecosistemas para formar o desarrollar poblaciones y comunidades humanas, concientizando en la forma adecuada para no intervenir drásticamente en las sucesiones ecológicas', 
-      credits: 3 }, //
-    {
-      code: '087',
-      name: 'Programacion de Computadoras 1',
-      description: '',
-      credits: 3,
-    },
-    { code: '764', name: 'Legislacion 2', description: '', credits: 3 },
+      credits: 3 },
+    { code: '087', name: 'Programacion de Computadoras 1',
+      description: 'El curso es el acercamiento inicial del estudiante de la carrera de Ingeniería Industrial, a la programación mediante el uso de disciplinas y metodologías especializadas. El curso se fundamenta en el concepto de algoritmo para la resolución de problemas de programación, enfatizando el uso del paradigma programación estructurada. Se introducen conceptos básicos del Lenguaje de Programación C++ como guía para el diseño de sistemas estructurados. Se acerca al estudiante al conocimiento de los principales algoritmos de estructuras secuenciales, condicionales y repetitivas. Se cubre una parte importante de las estructuras de datos, los tipos de datos básicos. Asimismo, el estudiante conocerá el lenguaje C++ como el lenguaje oficial de programación del curso',
+      credits: 3, },
+    { code: '764', name: 'Legislacion 2', 
+      description: 'El propósito del curso Legislación II es promover un proceso de enseñanza-aprendizaje crítico, por el cual los estudiantes mejoren su conocimiento en las normas jurídicas y doctrinas que se aplican dentro del campo del derecho comercial y mercantil, así como la existencia y el uso de los documentos que el derecho guatemalteco designa como Títulos de Crédito, que le permitirán al futuro ingeniero como gerente en la administración técnica y en el desarrollo de su vida profesional involucrarse en la globalización del tráfico mercantil y bursátil. En el curso se aplicará la investigación, el análisis, la exposición y discusión de los diferentes temas del mismo', 
+      credits: 3 },
     {
       code: '928',
       name: 'Administracion de Personal',
-      description: '',
+      description: 'La actividad laboral presenta una serie de interacciones, donde se pone de manifiesto el comportamiento humano individual y grupal, generando ciertas y determinadas dinámicas individuales y colectivas que es necesario investigar aplicando elementos teóricos para su análisis y su comprensión, lo que establece la necesidad de desarrollar temas relacionados a la Administración de Personal. Esta disciplina tiene como objetivo fundamental, proporcionar al estudiante, los elementos teóricos, metodológicos y técnicos indispensables sobre la Administración de Recursos Humanos en las organizaciones, a la vez que se propone efectuar una práctica al interior del curso, para poder aplicar los conocimientos al que hacer del futuro profesional de la ingeniería ',
       credits: 3,
     },
-    { code: '926', name: 'Geologia del Petroleo', description: '', credits: 3 },
+    { code: '926', name: 'Geologia del Petroleo', 
+      description: 'Un curso de Geología del Petróleo en la carrera de ingeniería civil se centra en el estudio de los procesos geológicos que llevan a la formación y acumulación de hidrocarburos. El curso comienza con una introducción a los fundamentos geológicos de los depósitos de hidrocarburos, seguido por la caracterización geológica de estos depósitos. Se exploran los métodos de prospección geofísica y geoquímica utilizados para identificar y evaluar yacimientos petroleros. Además, se estudian los sistemas petroleros, incluyendo la generación, migración y atrapamiento de hidrocarburos. El curso también aborda las técnicas de exploración y perforación, así como la evaluación de reservas y la gestión de yacimientos. A lo largo del curso, se utilizan casos prácticos y estudios de campo para proporcionar una comprensión aplicada de los conceptos teóricos. Este curso proporciona a los estudiantes las habilidades necesarias para trabajar en la exploración y producción de petróleo, contribuyendo al desarrollo eficiente y sostenible del sector energético', 
+      credits: 3 },
     //Civil
-    { code: '747', name: 'Topografia 2', description: '', credits: 6 },
+    { code: '747', name: 'Topografia 2', 
+      description: 'El Curso de Topografía 2 da seguimiento a los conocimientos adquiridos en topografía 1, permite terminar de conocer todas las características de una faja de tierra, para lo cual toma las tres variables de espacio, las cueles son: Distancia, altura y dirección. Este curso se divide en 3 partes fundamentales: En la primera parte se estudian los instrumentos necesarios para poder llevar a cabo un levantamiento de altimetría y luego se ven los diferentes métodos de levantamiento. En la segunda, se trata la parte de movimientos de tierra. La tercera parte, cubre el tema de agrimensura y la medición y partición de terrenos, así como aspectos legales relativos a la topografía. Algunos contenidos del curso tienen una relación directa con la Gestión Integral de Riesgos GIRD, dado a que la topografía es el primer trabajo que que realiza en una obra de Ingeniería, y esto permite identificar zonas de riesgo, (habitabilidad, zonas de inundación, deslaves, asentamientos humanos, etc.).', 
+      credits: 6 },
     {
-      code: '672',
-      name: 'Resistencia de Materiales 1',
-      description: '',
-      credits: 5,
-    },
+      code: '672', name: 'Resistencia de Materiales 1',
+      description: 'La mecánica de materiales se enfoca principalmente en determinar y describir el comportamiento de cuerpos a las cargas, que pueden ser elementos estructurales o partes de mecanismos. Es importante identificar los diferentes esfuerzos que pueden existir, la deformación relacionada a estos esfuerzos y las aplicaciones para el diseño correcto para los esfuerzos permisibles, esto sentara las bases para el análisis y diseño de elementos estructurales y para el diseño mecánico de partes y sistemas. Además, que adquiera las competencias para conocer los materiales no solo desde el punto de vista de la mecánica de los materiales, sino que también pueda conocer los componentes de los mismos y cómo estos puedan afectar el entorno desde el punto de vista ambiental, estos conocimientos brindan al estudiante la capacidad de poder identificar los riesgos que se pueden presentar en estructuras o maquinarias derivado del mal manejo y uso de los materiales, de tal manera que al diseñar tome la consciencia de la utilización de estos y poder lograr un equilibrio entre la utilización de los materiales, el medio ambiente y la seguridad de los usuarios',
+      credits: 5,  },
+    { code: '2669',  name: 'Principios de Metrologia',
+      description: 'La metrología estudia los sistemas de pesos y medidas. La metrología es la disciplina científica dedicada al análisis de los sistemas de medidas y pesos. Su objeto de estudio son las mediciones de magnitudes, impulsando la trazabilidad para favorecer la normalización.',
+      credits: 3,  }, //TODO: REVISAR, NO TIENE CODIGO
+    { code: '2806',  name: 'Principios De Metrologia',
+      description: 'La metrología estudia los sistemas de pesos y medidas. La metrología es la disciplina científica dedicada al análisis de los sistemas de medidas y pesos. Su objeto de estudio son las mediciones de magnitudes, impulsando la trazabilidad para favorecer la normalización.',
+      credits: 3,  }, //ESTE ES PA SISTEMAS
     {
-      code: '2806',
-      name: 'Principios de Metrologia',
-      description: '',
-      credits: 3,
-    }, //TODO: REVISAR, NO TIENE CODIGO
-    {
-      code: '678',
-      name: 'Ciencias de los Materiales',
-      description: '',
-      credits: 5,
-    },
-    { code: '671', name: 'Mecanica de Fluidos', description: '', credits: 6 },
-    { code: '1060', name: 'Geologia Estructural', description: '', credits: 5 },
-    { code: '920', name: 'Geofisica', description: '', credits: 4 },
-    { code: '1068', name: 'Petrologia', description: '', credits: 4 },
+      code: '678', name: 'Ciencias de los Materiales',
+      description: 'La ciencia de materiales es la disciplina científica encargada de investigar la relación entre la estructura y las propiedades de los materiales.',
+      credits: 5, },
+    { code: '671', name: 'Mecanica de Fluidos', 
+      description: 'El curso proporciona al estudiante una visión general sobre las propiedades de los fluidos, su comportamiento, las leyes que los gobiernan y los métodos y procedimientos empleados en el estudio y análisis. Se trata tanto la estática de fluidos o hidrostática como la dinámica de fluido, además de introducir a los estudiantes a aplicación de los temas a futuros cursos en cada una de las áreas de la ingeniería en la que se desempeñara, así como al modelado y estudio de amenazas naturales para la aplicación en Gestión Integral de Riesgo de Desastres (GIRD) y la adaptación resiliente al cambio climático (ACC).', 
+      credits: 6 },
+    { code: '1060', name: 'Geologia Estructural', 
+      description: 'La geología estructural es una rama de la geología que se dedica al estudio de las estructuras de las rocas y los procesos geológicos que las forman. Se centra en la interpretación de plegamientos, fallas y otras deformaciones para comprender la historia tectónica de un área y su relación con los recursos naturales', 
+      credits: 5 },
+    { code: '920', name: 'Geofisica', 
+      description: 'La geofísica es una rama de la geología que se centra en el estudio de las propiedades físicas de la Tierra y los procesos que ocurren en su interior y superficie.', 
+      credits: 4 },
+    { code: '1068', name: 'Petrologia', 
+      description: 'Un curso de petrología en la carrera de ingeniería civil abarca el estudio de las rocas y minerales, su formación, clasificación y propiedades. Se inicia con una introducción a la petrología y su importancia en la ingeniería civil, seguido por la mineralogía, donde se analizan las propiedades físicas y químicas de los minerales. Se estudian las rocas ígneas, sedimentarias y metamórficas, incluyendo sus procesos de formación y aplicaciones en la construcción. Además, se enseñan técnicas de análisis de rocas y minerales, utilizando herramientas como microscopios. El curso también aborda el uso de diferentes tipos de rocas en infraestructuras civiles, evaluando su idoneidad para proyectos específicos. Finalmente, se presentan estudios de caso de proyectos reales donde la petrología ha sido crucial en la toma de decisiones de ingeniería. Este curso proporciona una base sólida para entender cómo las propiedades de las rocas y minerales afectan la durabilidad y estabilidad de las estructuras civiles.', 
+      credits: 4 },
     {
       code: '792',
       name: 'Perforacion de Pozos 1',
-      description: '',
+      description: 'Un curso de Perforación de Pozos 1 en la carrera de ingeniería civil abarca el estudio de los métodos y tecnologías utilizados en la perforación de pozos profundos, esenciales para el abastecimiento de agua y otros recursos. El curso comienza con una introducción a las generalidades geohidrológicas y la clasificación de las aguas subterráneas, seguido por la identificación y localización de acuíferos. Se exploran las técnicas de perforación, incluyendo perforaciones exploratorias y muestreo, así como el diseño y desarrollo de pozos. También se abordan los perfiles de un pozo, el diseño y selección de equipamiento de bombeo, y la legislación aplicable. A lo largo del curso, se utilizan métodos de enseñanza como exposiciones orales y audiovisuales, lecturas obligatorias, trabajos de investigación, ejercicios prácticos y visitas guiadas de campo. Este curso proporciona a los estudiantes las habilidades necesarias para diseñar y calcular proyectos de perforación de pozos, asegurando su correcta administración, operación y mantenimiento',
       credits: 5,
     },
     //Mecanica
@@ -270,31 +243,37 @@ export async function seed(knex: Knex): Promise<any> {
     {
       code: '2571',
       name: 'Electricidad y Electronica Basica',
-      description: '',
+      description: 'abarca los principios fundamentales de la electricidad y la electrónica, esenciales para el diseño y análisis de sistemas eléctricos y electrónicos. El curso comienza con una introducción a los conceptos básicos de electricidad, incluyendo voltaje, corriente y resistencia, y cómo se relacionan a través de la Ley de Ohm. Se estudian los componentes eléctricos y electrónicos, como resistencias, capacitores, inductores, diodos y transistores, así como su funcionamiento y aplicaciones. Además, se exploran los circuitos eléctricos y electrónicos, tanto en corriente continua (DC) como en corriente alterna (AC), y se enseñan técnicas de análisis de circuitos. El curso también incluye prácticas de laboratorio donde los estudiantes aprenden a construir y probar circuitos, utilizando herramientas como multímetros y osciloscopios. Este curso proporciona una base sólida para entender y aplicar los principios de la electricidad y la electrónica en el diseño y mantenimiento de sistemas mecánicos y electromecánicos',
       credits: 5,
     },
-    { code: '118', name: 'Mecanica Analitica 2', description: '', credits: 5 },
+    { code: '118', name: 'Mecanica Analitica 2', 
+      description: 'Es un curso del área de ciencias básicas y complementarias, el cual trata del análisis de las condiciones de la estática de partículas y cuerpos rígidos, el análisis de su cinética de movimiento, y, finalmente, la introducción a la teoría de las vibraciones. A lo largo del desarrollo del mismo, se auxilia de otras ciencias y cursos preliminares, entre ellas destacan: matemáticas básicas y aplicadas, física, mecánica y análisis estructural. El punto de partida del curso, es el estudio de la geometría del movimiento de partículas, relacionando el desplazamiento, velocidad, aceleración y tiempo (cinemática de partículas), se estudian los temas de las causas del movimiento (la cinética de partículas); el estudio del movimiento luego se traslada al análisis y formas del comportamiento de los cuerpos rígidos, tanto en su geometría como en sus causas (cinemática y cinética de cuerpos rígidos); finalmente se tratan temas introductorios de estudio de movimiento vibratorio y a la dinámica estructural.', 
+      credits: 5 },
     //Sistemas
     {
       code: '2802',
       name: 'Analisis Probabilistico',
-      description: '',
+      description: 'En los años recientes el análisis estadístico, los procesos estocásticos y la aplicación de la teoría de probabilidades a la confiabilidad y a la toma de decisiones han adquirido trascendencia en los campos de la Ingeniería y las ciencias sociales, por lo que su conocimiento es indispensable para el personal de dichas disciplinas. Este curso tiene como propósitos fundamentales: ofrecer una introducción a los conceptos de Inferencia Estadística, Modelos Lineales, Procesos Estocásticos y Confiabilidad, mostrando las aplicaciones en el campo de la ingeniería. Su finalidad es preparar al estudiante para que con confianza resuelva problemas que requieren el empleo de las leyes de probabilidad y los procesos estocásticos, así como para que efectúen análisis estadístico y modelen matemáticamente situaciones de incertidumbre.',
       credits: 4,
     },
     {
       code: '2803',
       name: 'Organizacion de Lenguajes y Compiladores 1',
-      description: '',
+      description: 'Este curso estudia los principios básicos de un compilador y / o intérprete, partiendo de la estructura interna del proceso de compilación, y describiendo las fases de este proceso. Se tratan en detalle las primeras fases del proceso: análisis lexicográfico, análisis sintáctico y traducción dirigida por la sintaxis. Para poner en práctica los conceptos aprendidos se realizan varias tareas y proyectos prácticos.',
       credits: 4,
     },
     {
       code: '2804',
       name: 'Organizacion Computacional',
-      description: '',
+      description: 'Llevar a la práctica los conocimientos aprendidos en clase en lo que respecta a la lógica combinacional y secuencial de la electrónica digital, para que puedan lograr comprender la estructura interna de las computadoras, desde el punto de vista más básico, que permiten realizar tareas sencillas que sumándolas una a una realizan procesos complejos como los que actualmente conocemos. ',
       credits: 3,
     },
-    { code: '2805', name: 'Estructura de Datos', description: '', credits: 5 },
-    { code: '2807', name: 'Practica Inicial TI', description: '', credits: 0 },
+    { code: '2805', name: 'Estructura de Datos', 
+      description: 'Estudia sobre varias técnicas de representación de los datos en la memoria de una computadora y los algoritmos que los manipulan. Se enfatiza en las características de una buena programación: modularidad, ocultamiento de información, reutilización de código y estilo de programación', 
+      credits: 5 },
+    { code: '2807', name: 'Practica Inicial TI', 
+      description: 'Los talleres correspondientes a la carrera de Ingeniería en Ciencias y Sistemas, se enfocan básicamente en elconocimiento práctico que adquiere el estudiante acerca de los diferentes elementos de hardware y software necesarios para coadyuvar al desarrollo de su futura vida profesional, facilitando la comprensión y el aprendizaje de los cursos en la etapa intermedia y avanzada de su carrera', 
+      credits: 0 },
 
     //Sexto Semestre
     //Area Comun
@@ -303,7 +282,7 @@ export async function seed(knex: Knex): Promise<any> {
     {
       code: '670',
       name: 'Ingenieria Electrica 1',
-      description: '',
+      description: 'Es un curso de introducción a la ingeniería eléctrica, se fundamenta en el estudio de los circuitos eléctricos en corriente continua y corriente alterna, generadores, transformadores y motores eléctricos que son utilizados en las equipos e instalaciones domiciliares y con mayor aplicación en la industria.',
       credits: 5,
     },
     {
@@ -313,8 +292,12 @@ export async function seed(knex: Knex): Promise<any> {
       credits: 5,
     },
     { code: '150', name: 'Fisica 4', description: '', credits: 6 },
-    { code: '779', name: 'Contabilidad 2', description: '', credits: 3 },
-    { code: '2670', name: 'Gestion de Desastres', description: '', credits: 3 },
+    { code: '779', name: 'Contabilidad 2', 
+      description: 'La necesidad de ser más competitivos en un mundo globalizado, lleva a las empresas a implementar sistemas de control de su sistema operativo. En el caso de las empresas manufactureras o de transformación llamadas industriales, el control de los recursos es de vital importancia, ya que la fábrica utiliza la mayor parte de dichos recursos, por lo tanto, el director de la planta, el Ingeniero Industrial, debe hacer uso de herramientas de control que le ayuden a reconocer la realidad de las operaciones y generar sistemas de información que le ayuden a tomar mejores decisiones en el uso adecuado de los recursos. El curso de Contabilidad 2 dará al estudiante de Ingeniería Industrial, las herramientas de control de costo de producción, tomando como base los conceptos de la Contabilidad General, los conocimientos de Administración de Personal, Legislación laboral y sobre sistemas de producción', 
+      credits: 3 },
+    { code: '2670', name: 'Gestion de Desastres', 
+      description: 'El curso explica la relación que existe entre los Desastres tanto naturales como tecnológicos y socio-políticos, con el Medio Ambiente y el Desarrollo Económico-Social. Los Desastres deben considerarse como un problema de “Desarrollo Económico”, tienen una relación directa con la explosión demográfica, la concentración de población en centros urbanos, ocupación de áreas inadecuadas para vivienda, pero principalmente por consecuencia de falta de una planificación adecuada para el desarrollo. La gestión de riesgo consiste en un conjunto de acciones integradas y sistemáticas para lograr identificar, localizar, eliminar o atenuar las condiciones causantes de los desastres antes de que estos ocurran y la consecuente recuperación si estos se producen.', 
+      credits: 3 },
     {
       code: '794',
       name: 'Programacion de Computadoras 2',
@@ -425,7 +408,10 @@ export async function seed(knex: Knex): Promise<any> {
     { code: '796', name: 'Microeconomia', description: '', credits: 3 },
     //Sistemas
     { code: '2813', name: 'Teoria de Sistemas 2', description: '', credits: 5 },
-    { code: '950', name: 'Estadistica 2', description: '', credits: 5 },
+
+    { code: '950', name: 'Estadistica 2', 
+      description: 'El análisis de datos comprende el uso de métodos de estadística inferencial para estimar parámetros desconocidos de los modelos y comprobar hipótesis sobre la estructura de los datos y de procedimientos para la toma de decisiones y formular ciertas conclusiones que pueden aplicarse a la solución de distintos problemas. En este curso, se presentan los métodos corrientes de construcción de estimadores y los criterios para examinar las estadísticas; se aborda también el método de variable pivote para construir intervalos con?denciales y se hace énfasis en los intervalos bajo normalidad. En la primera unidad se plantean los conceptos de muestra aleatoria y distribución de muestreo. En la segunda unidad se presentan los métodos de estimación tanto puntual como de intervalo. En la tercera unidad se exploran las bases de la inferencia estadística y se presentan las pruebas de hipótesis para medias, varianza y proporciones. En la unidad cuatro se detalla el uso de la distribución chi-cuadrada, tanto para determinar la bondad de ajuste como para tablas de contingencia y en la unidad cinco se ve el tema de regresión lineal y correlación.', 
+      credits: 5 },
     {
       code: '2814',
       name: 'Sistemas Operativos 1',
@@ -462,7 +448,7 @@ export async function seed(knex: Knex): Promise<any> {
     {
       code: '690',
       name: 'Ingenieria Economica 1',
-      description: '',
+      description: 'A diario se toman decisiones que afectan el futuro económico y físico del medio en el que se desenvuelven las personas. Las opciones que se tomen cambian sus vidas en poco y algunas veces considerablemente; en el caso de decisiones que involucren el manejo de dinero, estas pueden determinar el éxito o fracaso de una empresa, planteándose el término empresa no solo como el ente encargado de producir ganancias, sino también como cualquier actividad emprendedora. En este sentido la ingeniería económica definida como la colección de técnicas matemáticas que simplifican las comparaciones económicas, es una herramienta eficaz para la mayordomía adecuada de los recursos económicos, en todo sentido, y más aún en el ejercicio de la ingeniería como origen de desarrollo y crecimiento económico en el medio físico ligadas entre sí por los procesos de producción y de construcción. El objetivo de la ingeniería económica es preparar a los ingenieros para hacerle frente efectivamente a la naturaleza bio ambiental y la asignación óptima de los recursos agotables y de esta manera entender los problemas económico-ambientales.',
       credits: 5,
     },
     {
@@ -520,7 +506,7 @@ export async function seed(knex: Knex): Promise<any> {
     {
       code: '923',
       name: 'Circuitos Electricos 1',
-      description: '',
+      description: 'abarca los principios y técnicas fundamentales para el análisis y diseño de circuitos eléctricos. El curso comienza con una introducción a los conceptos básicos de electricidad, como voltaje, corriente y resistencia, y la Ley de Ohm. Se estudian los componentes eléctricos esenciales, incluyendo resistencias, capacitores, inductores y fuentes de energía. Además, se exploran los métodos de análisis de circuitos en corriente continua (DC) y corriente alterna (AC), como las leyes de Kirchhoff y los teoremas de Thevenin y Norton. El curso también incluye prácticas de laboratorio donde los estudiantes construyen y prueban circuitos, utilizando herramientas como multímetros y osciloscopios. Este curso proporciona una base sólida para entender y aplicar los principios de los circuitos eléctricos en el diseño y mantenimiento de sistemas mecánicos y electromecánicos',
       credits: 6,
     },
     {
