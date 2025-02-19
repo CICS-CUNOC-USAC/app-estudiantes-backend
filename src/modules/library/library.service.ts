@@ -42,7 +42,7 @@ export class LibraryService extends BaseService {
       const createdBook = await this.bookModel
         .query(trx)
         .insert(createDigitalBookDto);
-      return await this.findOne(createdBook.$id(), BookType.DIGITAL, trx);
+      return await this.findOne(createdBook.$id(), trx);
     }, this.logger);
   }
 
@@ -65,7 +65,7 @@ export class LibraryService extends BaseService {
         location: createPhysicalBookDto.location,
       });
 
-      return await this.findOne(createdBook.$id(), BookType.PHYSICAL, trx);
+      return await this.findOne(createdBook.$id(), trx);
     }, this.logger);
   }
 
@@ -237,14 +237,13 @@ export class LibraryService extends BaseService {
     );
   }
 
-  async findOne(id: number, bookType: BookType, trx?: Transaction) {
-    const bookModel = this.bookModel.query(trx).findById(id);
-    if (bookType === BookType.DIGITAL) {
-      bookModel.withGraphFetched('media');
-    } else if (bookType === BookType.PHYSICAL) {
-      bookModel.withGraphFetched('library_reference');
+  async findOne(id: number, trx?: Transaction) {
+    const bookModel = await this.bookModel.query(trx).findById(id);
+    if (bookModel.media_id) {
+      return await bookModel.$query(trx).withGraphFetched('media');
+    } else {
+      return await bookModel.$query(trx).withGraphFetched('library_reference');
     }
-    return await bookModel;
   }
 
   async getOutstangingExternalLoansById(book_reference_id: string) {
