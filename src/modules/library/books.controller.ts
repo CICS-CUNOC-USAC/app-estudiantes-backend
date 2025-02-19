@@ -92,11 +92,8 @@ export class BooksController {
   }
 
   @UseGuards(JwtGeneralRequiredAuthGuard)
-  @Get(':id/:type')
-  findOnePublic(
-    @Param('id') id: string,
-    @Param('type') type: 'digital' | 'physical',
-  ) {
-    return this.libraryService.findOne(+id, BookType[type.toUpperCase()]);
+  @Get(':id')
+  findOnePublic(@Param('id') id: string) {
+    return this.libraryService.findOne(+id);
   }
 }
