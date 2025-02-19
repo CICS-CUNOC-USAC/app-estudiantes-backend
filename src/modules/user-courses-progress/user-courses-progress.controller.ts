@@ -35,6 +35,14 @@ export class UserCoursesProgressController {
     );
   }
 
+  @Get('stats')
+  findUserProgressStats(@Request() req) {
+    return this.userCoursesProgressService.findUserProgressStats(
+      req.user['id'],
+      req.user['career_code'],
+    );
+  }
+
   @Get()
   findUserProgress(@Request() req) {
     return this.userCoursesProgressService.findUserProgress(

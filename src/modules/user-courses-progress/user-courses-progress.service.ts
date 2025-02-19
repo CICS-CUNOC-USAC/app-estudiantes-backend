@@ -11,6 +11,9 @@ import { BaseQueryDto } from 'src/core/utils/base-query.dto';
 
 @Injectable()
 export class UserCoursesProgressService extends BaseService {
+  findUserProgressStats(userId: number, careerCode: number) {
+    return this.findUserProgress(userId, careerCode, true);
+  }
   queryFilters(
     queryDto: BaseQueryDto,
     builder: QueryBuilder<Model, Model[]>,
@@ -29,7 +32,11 @@ export class UserCoursesProgressService extends BaseService {
   ) {
     super(UserCoursesProgressService.name);
   }
-  async findUserProgress(userId: number, careerCode: number) {
+  async findUserProgress(
+    userId: number,
+    careerCode: number,
+    onlyCredits = false,
+  ) {
     const data = await this.careerProgressModel
       .query()
       .where('user_id', userId)
@@ -83,6 +90,9 @@ export class UserCoursesProgressService extends BaseService {
       not_mandatory_credits: credits.not_mandatory_credits,
       available_credits: credits.total_credits,
     };
+    if (onlyCredits) {
+      delete response.progress;
+    }
     return response;
   }
 
