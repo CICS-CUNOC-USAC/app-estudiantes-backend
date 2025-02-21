@@ -277,8 +277,12 @@ export async function seed(knex: Knex): Promise<any> {
 
     //Sexto Semestre
     //Area Comun
-    { code: '904', name: 'Matematica Aplicada 2', description: '', credits: 6 },
-    { code: '905', name: 'Matematica Aplicada 4', description: '', credits: 4 },
+    { code: '904', name: 'Matematica Aplicada 2', 
+      description: 'Durante el curso, los estudiantes profundizarán en temas como el cálculo integral, las series y sucesiones, la geometría analítica, y las ecuaciones diferenciales ordinarias. El énfasis estará en la comprensión y aplicación de estos conceptos en situaciones prácticas, permitiendo a los estudiantes adquirir habilidades críticas en el análisis y modelación de problemas reales. El curso incorporará el uso de software especializado y métodos computacionales para la resolución de problemas matemáticos complejos, preparando a los estudiantes para los desafíos técnicos en sus futuras carreras profesionales. A través de ejercicios prácticos y proyectos, los estudiantes aprenderán a aplicar las matemáticas en el diseño y análisis de sistemas de ingeniería, mejorando su capacidad para tomar decisiones informadas basadas en datos cuantitativos.', 
+      credits: 6 },
+    { code: '905', name: 'Matematica Aplicada 4', 
+      description: 'El curso de Matemática Aplicada 4 es una parte integral del plan de estudios para las carreras de Ciencias de la Ingeniería. Este curso tiene como objetivo proporcionar a los estudiantes una comprensión profunda y práctica de técnicas matemáticas avanzadas que son esenciales para la resolución de problemas en diversas disciplinas de la ingeniería. A lo largo del curso, los estudiantes explorarán temas avanzados de cálculo, ecuaciones diferenciales, álgebra lineal, y análisis numérico. Se hará hincapié en la aplicación de estos conceptos matemáticos en la modelación y solución de problemas de ingeniería, permitiendo a los estudiantes desarrollar habilidades analíticas y críticas necesarias en su futura carrera profesional.', 
+      credits: 4 },
     {
       code: '670',
       name: 'Ingenieria Electrica 1',
@@ -288,10 +292,16 @@ export async function seed(knex: Knex): Promise<any> {
     {
       code: '676',
       name: 'Ingenieria Electrica 2',
-      description: '',
+      description: 'El curso Ingeniería Eléctrica 2 está dirigido a los estudiantes de todas las carreras de Ingeniería que se imparten en la Universidad de San Carlos de Guatemala, excepto para los estudiantes de Ingeniería Eléctrica, Ingeniería Electrónica e Ingeniería Mecánica Eléctrica. Durante el curso se desarrollaran estudios de temas relacionados con instalaciones eléctricas residenciales e industriales. Al finalizar el curso el estudiante estará en la posibilidad de realizar cálculos de conductores eléctricos y selección de ductos eléctricos, así mismo de desarrollar un diseño de iluminación. Los temas que se desarrollan a lo largo del curso le brindan al estudiante una valiosa herramienta en su vida profesional como Ingeniero ya que con ello podrá realizar trabajos de calidad y confiabilidad. ',
       credits: 5,
     },
-    { code: '150', name: 'Fisica 4', description: '', credits: 6 },
+    { code: '150', name: 'Fisica 4', 
+      description: 'dedicado a profundizar en los principios y aplicaciones de la física en el ámbito de la ingeniería. Este curso abarca temas complejos y avanzados que son esenciales para entender y solucionar problemas en diversas disciplinas de la ingeniería. A lo largo del curso, los estudiantes explorarán temas como la termodinámica, la óptica, la teoría electromagnética, y la física moderna. Se hará hincapié en la aplicación práctica de estos conceptos a través de experimentos de laboratorio y proyectos, permitiendo a los estudiantes desarrollar habilidades analíticas y experimentales necesarias en su futura carrera profesional. El curso incluirá el estudio de la transferencia de calor, los principios de la mecánica cuántica, la teoría de circuitos eléctricos, y las ondas electromagnéticas. Los estudiantes aprenderán a utilizar herramientas y técnicas avanzadas para analizar y resolver problemas físicos complejos, y a aplicar estos conocimientos en el diseño y mejora de sistemas y dispositivos tecnológicos.', 
+      credits: 6 },
+      //codigo inventado pq no tiene
+    { code: '1234', name: 'Estadistica 3', 
+      description: 'Durante el curso, los estudiantes explorarán temas como la inferencia estadística, el análisis de regresión, las pruebas de hipótesis, y el diseño de experimentos. Se hará hincapié en la aplicación de estas técnicas en la solución de problemas ingenieriles y en la interpretación de resultados estadísticos en un contexto práctico. El curso también abordará el uso de software estadístico y herramientas computacionales para la manipulación y análisis de grandes conjuntos de datos, permitiendo a los estudiantes desarrollar habilidades técnicas en el manejo de datos y en la generación de informes estadísticos detallados. A lo largo del curso, los estudiantes participarán en proyectos prácticos y estudios de casos que les permitirán aplicar los conceptos teóricos en situaciones reales, mejorando su capacidad para diseñar y ejecutar experimentos, así como para analizar e interpretar datos relevantes para sus campos de especialización.',
+      credits: 5 },
     { code: '779', name: 'Contabilidad 2', 
       description: 'La necesidad de ser más competitivos en un mundo globalizado, lleva a las empresas a implementar sistemas de control de su sistema operativo. En el caso de las empresas manufactureras o de transformación llamadas industriales, el control de los recursos es de vital importancia, ya que la fábrica utiliza la mayor parte de dichos recursos, por lo tanto, el director de la planta, el Ingeniero Industrial, debe hacer uso de herramientas de control que le ayuden a reconocer la realidad de las operaciones y generar sistemas de información que le ayuden a tomar mejores decisiones en el uso adecuado de los recursos. El curso de Contabilidad 2 dará al estudiante de Ingeniería Industrial, las herramientas de control de costo de producción, tomando como base los conceptos de la Contabilidad General, los conocimientos de Administración de Personal, Legislación laboral y sobre sistemas de producción', 
       credits: 3 },
@@ -301,64 +311,79 @@ export async function seed(knex: Knex): Promise<any> {
     {
       code: '794',
       name: 'Programacion de Computadoras 2',
-      description: '',
+      description: 'Este curso se enfoca en el desarrollo de habilidades avanzadas de programación y en la aplicación práctica de estas habilidades en la solución de problemas complejos. Durante el curso, los estudiantes profundizarán en lenguajes de programación como C, C++ o Java, y explorarán temas avanzados como la programación orientada a objetos, estructuras de datos, algoritmos de búsqueda y ordenación, y manejo de archivos. El curso también incluye el uso de herramientas y entornos de desarrollo integrados (IDEs) que facilitan la escritura, depuración y mantenimiento del código. Los estudiantes participarán en proyectos prácticos que les permitirán aplicar los conceptos aprendidos en la implementación de aplicaciones y sistemas más complejos. Se fomentará el trabajo en equipo y el uso de metodologías ágiles para el desarrollo de software, simulando el entorno profesional de la industria de la ingeniería y la tecnología.',
       credits: 4,
     },
     {
       code: '685',
       name: 'Investigacion de Operaciones 1',
-      description: '',
+      description: 'Las técnicas de Investigación de Operaciones se encuentran entre las herramientas más importantes de ingenieros y científicos porque proporcionan los medios más eficientes para la administración de recursos (hombres, máquinas, dinero, materiales, tiempo). Utiliza para ello modelos matemáticos que optimizan en algún criterio particular, permitiendo tomar decisiones acertadas. El propósito de este curso es iniciar la formación básica en métodos cuantitativos (área a la que pertenece este curso) para la administración; presenta una introducción a la investigación de operaciones y sus aplicaciones, para ello analizan conceptos y describe técnicas que son sumamente importantes en la solución de problemas de todo tipo. Asimismo, se pretende fomentar la utilización de métodos analíticos desarrollando en el estudiante, el razonamiento deductivo y el espíritu de investigación. En la presentación del curso se aprovecha el conocimiento de la teoría matemática y de probabilidades que ya posee el estudiante para lograr profunda comprensión de los conceptos expuestos. Este curso tiene el enlace para los cursos de Control de la Producción e Investigación de operaciones 2. El curso consta de cinco unidades, distribuidas de la siguiente forma: En la primera unidad se ve la introducción de forma teórica; en la unidad dos se estudia la Programación lineal en la formulación y solución gráfica de problemas de asignación de recursos; en la unidad tres se estudia la Programación Lineal por medio del Método Simplex; en la unidad cuatro se estudia la Programación Lineal por medio del Método de Transporte y en la unidad cinco se estudia los Modelos de Redes',
       credits: 5,
     },
     {
       code: '677',
       name: 'Resistencia de Materiales 2',
-      description: '',
+      description: 'La resistencia de materiales trata del cálculo de los esfuerzos y deformaciones que se producirán en los distintos elementos sometidos a diversos tipos de carga, y el ingeniero debe garantizar que las deformaciones estén dentro de los límites permisibles y además que no se produzcan fallas. El realizar el análisis de dichas deformaciones y fallas se pretende que el estudiante tenga los conocimientos básicos de criterios de análisis de identificación de riesgos y la reducción de desastres, ya que podrá identificar desde un inicio de análisis las deformaciones excesivas en los elementos que pueden llevar a una falla tanto en el elemento de forma individual y como esto puede incidir en una estructura completa. Para alcanzar este objetivo primero debe determinarse a qué tipo de fuerza está sometido el elemento bajo estudio, que pueden ser axiales, transversales (flexión), momentos torsionales (torsión) o una combinación de estas. En la práctica el análisis se realiza construyendo un esquema ideal del cálculo formado por elementos unidimensionales o bidimensionales y se aplican fórmulas preestablecidas para calcular esfuerzos internos, realizar un análisis resistente y un análisis de rigidez. En el curso de resistencia de materiales 2 se dará énfasis al estudio de: deformaciones en vigas, resolución de vigas estáticamente indeterminadas, columnas y esfuerzos combinados. Los conocimientos adquiridos en el curso serán la base para cursos de análisis estructural y análisis mecánico',
       credits: 5,
     },
     //Civil
-    { code: '1073', name: 'Topografia 3', description: '', credits: 6 },
+    { code: '1073', name: 'Topografia 3', 
+      description: 'El curso de Topografía 3 se centra en el estudio avanzado de técnicas y herramientas utilizadas en la medición y representación del terreno. Los estudiantes aprenderán a manejar instrumentos topográficos de precisión, como el teodolito y la estación total, así como a utilizar tecnologías modernas como el Sistema de Posicionamiento Global (GPS) y los sistemas de Información Geográfica (SIG). A lo largo del curso, los estudiantes desarrollarán habilidades prácticas en la realización de levantamientos topográficos complejos y en la interpretación de datos obtenidos. Se abordarán temas como la nivelación geométrica y trigonométrica, el cálculo de áreas y volúmenes, y la generación de planos topográficos detallados.', 
+      credits: 6 
+    },
     {
       code: '679',
       name: 'Materiales de Construccion',
-      description: '',
+      description: 'El curso de Materiales de Construcción proporciona las herramientas para la correcta selección de los materiales a emplear en el diseño y construcción de obra civil, tomando como base los requerimientos de desempeño, normativa y sostenibilidad además de analizar a detalle las propiedades, normas y elementos del diseño de mezclas de concreto, estructuras de madera, metal, y diversos materiales de construcción que se utilizarán según los requerimientos del entorno. Se aborda la selección y uso de los materiales de construcción a manera de minimizar los impactos negativos al medio ambiente, y asegurar la calidad de la construcción reduciendo así la vulnerabilidad ante las amenazas naturales',
       credits: 6,
     },
-    { code: '748', name: 'Mecanica de Suelos', description: '', credits: 5 },
-    { code: '686', name: 'Hidraulica', description: '', credits: 6 },
+    { code: '748', name: 'Mecanica de Suelos', 
+      description: 'dedicado al estudio de las propiedades físicas y mecánicas de los suelos. Este curso aborda los principios fundamentales que determinan el comportamiento de los suelos bajo diversas condiciones de carga y estrés, esenciales para el diseño y construcción de estructuras seguras y duraderas. Los estudiantes aprenderán a clasificar diferentes tipos de suelo y a evaluar sus características mediante ensayos de laboratorio y campo. Se cubrirán temas como la consolidación, la capacidad de carga, el asentamiento, la estabilidad de taludes, y la permeabilidad de los suelos. Además, se estudiarán los métodos de mejoramiento y estabilización de suelos para asegurar la viabilidad de proyectos de infraestructura. Un enfoque significativo del curso es la aplicación de la Mecánica de Suelos en el diseño de cimentaciones, muros de contención, y otras estructuras geotécnicas. Los estudiantes desarrollarán habilidades analíticas y prácticas para solucionar problemas relacionados con la interacción entre el suelo y las estructuras, contribuyendo así al éxito y seguridad de proyectos de ingeniería', 
+      credits: 5 },
+    { code: '686', name: 'Hidraulica', 
+      description: 'El agua juega un papel preponderante e importante en cualquier cultura por buenas razones, es un medio de trasnporte y recurso básico de sobrevivencia. El hombre necesita agua para beber, preparar alimentos, aseo personal, pero también es una fuente de energía como medio de transporte. Por ello, el agua posee una simbología preponderante en las representaciones de cualquier cultura. Una vez discutidas las ideas de mecanica de fluidos, se exponen a los temas de la hidraulica que versan sobre el transporte y distribucion de agua, asi como de otros tipos de fluidos. En esta asignatura una idea fundamental es el teorema de Bernoulli, como una particularidad del principio de conservacion de la energia. Al anterior se suman el concepto de viscosidad, previa discusión en la asignatura de Mecanica de Fluidos. Viene posteriormente la aplicacion del teorema de Bernoulli a los sistemas confinados y no confinados del agua, con el estudio de tuberías a sección llena con presión manométrica mayor que cero y la tubería como tahujías y canales que trabajan a seccion parcial y presion atmosférica unicamente. Finalmente se cae al estudio de los vertederos.', 
+      credits: 6 },
     //Mecanica
-    { code: '684', name: 'Termodinamica 1', description: '', credits: 5 },
-    { code: 'C', name: 'Geofisica del Petroleo', description: '', credits: 4 }, //TODO: REVISAR, NO TIENE CODIGO
+    { code: '684', name: 'Termodinamica 1', 
+      description: 'Los profesionales de la ingeniería debe ser capaz de dominar los conceptos de transformación de energía, las propiedades relacionadas con la materia, su eficiencia y ahorro por el bien del medio ambiente, en la búsqueda de energías alternas y renovables. El estudiane aprendera sobre el uso de las dimensionales y su transformacion entre los distintos sistemas de unidades, se vera el concepto de temperatura y la ley cero de la termodinamica, asi como como los conceptos de calor y trabajo. y la transformacion por medio de la primera ley de la termodinamica, ademas se analiza la razon por la que la transformacion de energia no es total sino parcial, por la segunda ley de la termodinamica o entropia', 
+      credits: 5 },
+
+    
     {
       code: '687',
       name: 'Procesos de Manufactura 1',
-      description: '',
+      description: 'El Curso proporciona a los estudiantes de las carreras de Ingeniería Mecánica e Industrial, el conocimiento teórico-práctico de procesos de fabricación y mantenimiento, utilizando máquinas herramientas tales como sierra mecánica, torno, cepillo, taladro, fresa, etc. Se expondrá al estudiante mediante presentaciones multimedia, el conocimiento de procesos de fabricación mediante manufactura y su función en nuestra sociedad, haciendo énfasis en los procesos con arranque de viruta o maquinado, así como el conocimiento de las máquinas - herramientas que se utilizan para tal efecto. Además se conocerán los distintos tipos de procesos y sub procesos de torneado, fresado, taladrado, cepillado, etc Este curso tiene laboratorio donde se llevan a cabo aplicaciones prácticas de los conceptos y principios de los procesos de fabricación indicados.',
       credits: 3,
     },
     //Sistemas
-    { code: '2808', name: 'Teoria de Sistemas 1', description: '', credits: 5 },
-    { code: '2809', name: 'Economia', description: '', credits: 4 },
+    { code: '2808', name: 'Teoria de Sistemas 1', 
+      description: 'Este curso busca abordar con profundidad el concepto de paradigma o modelo mental, distinguiendo así los sistemas de creencias que constituyen al ser humano y su rol en el comportamiento y desempeño personal y profesional que estas herramientas abstractas nos proporcionan, de tal manera de conocer sus beneficios y sus limitaciones. El curso enfatiza particularmente en el estudio del “paradigma de sistemas”, denominado también “pensamiento sistémico”, “visión sistémica” o “enfoque sistémico”; todos términos asociados al uso y aplicación de un sistema de creencias particular que busca ser consciente de los beneficios y limitaciones de los paradigmas y ampliar el uso de estas herramientas abstractas para el beneficio de nuestra práctica profesional influyendo también el que hacer personal. El “paradigma de sistemas” se fundamenta en la “Teoría General de Sistemas” (T.G.S.), por lo que el estudio de esta teoría durante el semestre proporcionará conceptos, definiciones y expresiones del lenguaje que nos permitirá hablar con mayor precisión de los “fenómenos de sistemas” que podemos identificar y comprender a nuestro alrededor. Ser un“pensador sistémico” implica ser más consciente de nuestro desempeño personal y profesional, así como ser conscientes del entorno que nos rodea para comprenderlo de formas más precisas y tomar decisiones más acertadas que nos permitan intervenir de forma eficiente y efectiva en los sistemas con los que interactuamos', 
+      credits: 5 },
+    { code: '2809', name: 'Economia', 
+      description: 'El curso introducirá al estudiante en el estudio de la economía, se abordarán los principios, variables e interacciones basados en la teoría y práctica para comprender el funcionamiento del sistema económico del país a un nivel microeconómico y macroeconómico para que los futuros profesionales puedan comprender como la economía genera cambios dentro de la sociedad', 
+      credits: 4 },
     {
       code: '2810',
       name: 'Organizacion de Lenguajes y Compiladores 2',
-      description: '',
+      description: 'Este curso estudia los principios avanzados de un compilador y / o intérprete, partiendo de la estructura semántica del proceso de compilación, y describiendo las fases de este proceso. Se tratan en detalle las traducciones dirigidas por la sintaxis y el análisis semántico Para poner en práctica los conceptos aprendidos se realizan varias tareas y proyectos prácticos. La construcción de compiladores es una tarea que implica muchos conocimientos relacionados a las ciencias de la computación, algoritmos y procesos automatizados que permiten la lectura y comprensión de un código fuente y generar un programa funcional. A lo largo del desarrollo de la formación del estudiante, se usa constantemente diferentes compiladores y es importante conocer las capacidades y limitaciones para generar código optimizado dependiendo del compilador usado.',
       credits: 5,
     },
     {
       code: '2811',
       name: 'Arquitectura de Computadores y Ensambladores 1',
-      description: '',
+      description: 'Desarrolle, estudie y aplique conceptos sobre la arquitectura de los microprocesadores de la línea tecnológica INTEL/CISC. Aprenda la utilidad del lenguaje ensamblador como herramienta eficaz para acceso de los procesadores antes mencionados, como base elemental de un computador comercial, ejemplo: DMA, Buses, Interfaces básicas, Interrupciones y fundamentos de los procesadores RISC',
       credits: 5,
     },
     {
       code: '2812',
       name: 'Manejo e Implementacion de Archivos',
-      description: '',
+      description: 'En el curso se estudian los conceptos básicos para comprender la forma en que los archivos soportan un sistema de gestión de base de datos, la forma en que los datos deben ser almacenados para que su manejo y mantenimiento sean eficientes y óptimos. Se da una introducción a los conceptos necesarios para entender la arquitectura de las bases de datos y la forma en que se administran y funcionan',
       credits: 4,
     },
 
     //Septimo Semestre
     //Area Comun
+    { code: 'C', name: 'Geofisica del Petroleo', description: '', credits: 4 }, //TODO: REVISAR, NO TIENE CODIGO
     { code: '919', name: 'Contabilidad 3', description: '', credits: 3 },
     {
       code: '945',
@@ -517,11 +542,13 @@ export async function seed(knex: Knex): Promise<any> {
     },
     { code: '683', name: 'Diseño de Maquinas 1', description: '', credits: 6 },
     { code: '695', name: 'Plantas de Vapor', description: '', credits: 5 },
-    { code: '952', name: 'Ingenieria de Plantas', description: '', credits: 6 },
+    { code: '952', name: 'Ingenieria de Plantas', 
+      description: 'La competitividad de una empresa no es solamente la calidad y tipo de producto que ofrece, sino el costo de producción, lo que implica una relación integral de todos los componentes involucrados en el proceso de producción. Un componente muy importante es el conjunto de instalaciones de la empresa. Este conjunto no es solamente el edificio, sino las comunicaciones, la distribución, los materiales y su manejo. Al final todo lo que mueve a la producción, por lo tanto se hace necesario controlar cada componente, para hacer una planta industrial eficiente.', 
+      credits: 6 },
     {
       code: '682',
       name: 'Metalurgia y Metalografia',
-      description: '',
+      description: 'Es un curso introductorio de conceptualización sobre el arte, la ciencia y la tecnología para obtener metales, desde sus minerales, estudiando sus propiedades físicas y mecánicas, hasta su transformación en un objeto útil para satisfacer las necesidades humanas en bien del desarrollo industrial. Así mismo, existe un énfasis en enfocar en forma teórica los distintos procesos de manufactura que se realizan a partir de la deformación de metales, así como los procesos más importantes y conocidos en Guatemala, y su relación con otros procesos productivos de la tecnología moderna aplicada, sin olvidar la consideración en los temas relacionados con el cuidado del medio ambiente y la ecología',
       credits: 6,
     },
     {
@@ -531,7 +558,9 @@ export async function seed(knex: Knex): Promise<any> {
       credits: 3,
     },
     //Industrial
-    { code: '793', name: 'Mercadotecnia 1', description: '', credits: 3 },
+    { code: '793', name: 'Mercadotecnia 1', 
+      description: 'En la actualidad una herramienta para la competitividad es crear valor para el cliente y construir relaciones que beneficien a la empresa y al mercado, en ambientes de constante cambio y de alta tecnología. Para ello el curso de Mercadotecnia 1 capacitará al estudiante de Ingeniería Industrial, en las técnicas que le servirán para comprender el significado de satisfacer al consumidor y de las técnicas mercadológicas del proceso de la mercadotecnia, que le ayuden a desarrollar estrategias de competitividad.', 
+      credits: 3 },
     {
       code: '778',
       name: 'Programacion Comercial',
@@ -581,7 +610,7 @@ export async function seed(knex: Knex): Promise<any> {
     {
       code: '922',
       name: 'Ingenieria Economica 2',
-      description: '',
+      description: 'Este curso se ha diseñado para que el estudiante conozca, a nivel introductorio, los principales temas del área macroeconómica, como el enfoque más amplio del funcionamiento de un sistema económico. Se enfatizará en cuáles han sido las necesidades de la problemática económica internacional que permitieron la evolución de este nuevo campo de especialización, que dieron origen al estudio diferenciado de los grandes agregados, hasta la estructuración, de los principales temas que en la actualidad comprende. Asimismo, cuáles son las tendencias en su orientación, tanto desde sus inicios como hasta la actualidad. Previo a que aborden directamente los temas de la macroeconomía, es necesario enfatizar cuál es la naturaleza de la ciencia económica, su importancia y principales ramas. De igual manera, diferenciar con claridad cuál es el campo de estudio de la microeconomía y el de la macroeconomía, así como los aspectos complementarios entre ambas disciplinas. Puesto que todo individuo en el ámbito social cumple también variadas funciones como agente económico, el curso se propone dar una visión general y amplia al estudiante, sobre cuáles son las características del entorno económico en el que se desenvuelve actualmente, y que ya en su vida profesional deberá conocer para la realización de un efectivo ejercicio.',
       credits: 4,
     },
     { code: '2570', name: 'Etica Profesional', description: '', credits: 4 },
@@ -647,7 +676,9 @@ export async function seed(knex: Knex): Promise<any> {
       description: '',
       credits: 5,
     },
-    { code: '693', name: 'Mecanismos', description: '', credits: 3 },
+    { code: '693', name: 'Mecanismos', 
+      description: 'Curso dirigido a los estudiantes de Ingeniería Mecánica, que abarca la cinemática de algunos mecanismos básicos que forman parte de las máquinas. Se expondrá al estudiante mediante presentaciones multimedia, el conocimiento de mecanismos básicos de eslabones articulados, levas y engranajes, se analizará cuáles son los elementos que conforman los mecanismos y el movimiento que generan. Además se conocerán los distintos tipos de movimientos que se pueden generar con la combinación de dos o más mecanismos. Se desarrollará un proyecto de una aplicación de tres mecanismos combinados con el propósito de poner en práctica los conocimientos teóricos aprendidos y conocer las consideraciones de diseño y construcción que requiere dicho proyecto.', 
+      credits: 3 },
     { code: '699', name: 'Diseño de Maquinas 2', description: '', credits: 6 },
     {
       code: '697',
