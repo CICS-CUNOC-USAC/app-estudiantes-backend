@@ -1,7 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, IsNumber } from 'class-validator';
+import { IsNotEmpty, IsString, IsNumber, IsOptional } from 'class-validator';
 
 export class CreateExternalLoanDto {
+  @IsOptional()
   @IsString()
   @ApiProperty({
     description: 'RA of the student loaning the book',
