@@ -109,7 +109,7 @@ export class LibraryService extends BaseService {
         if (
           foundReference.current_availability + 1 >
           foundReference.total_availability -
-            (await this.getOutstangingExternalLoansById(book_reference_id))
+            (await this.getOutstandingExternalLoansById(book_reference_id))
               .length
         ) {
           throw new BadRequestException('No se pueden devolver más libros');
@@ -252,11 +252,15 @@ export class LibraryService extends BaseService {
     }
   }
 
-  async getOutstangingExternalLoansById(book_reference_id: string) {
+  async getOutstandingExternalLoansById(book_reference_id: string) {
     return await this.libraryReceiptModel
       .query()
       .where('library_reference_id', book_reference_id)
       .where('returned_at', null);
+  }
+
+  async getOutstandingExternalLoans() {
+    return await this.libraryReceiptModel.query().where('returned_at', null);
   }
 
   async findAllCategories() {

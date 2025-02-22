@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   Param,
   Post,
   UseGuards,
@@ -16,6 +17,12 @@ import { CreateExternalReturnDto } from './dto/create-external-return.dto';
 @Controller('loans')
 export class LoansController {
   constructor(private readonly libraryService: LibraryService) {}
+
+  @UseGuards(StaffLoginJwtAuthGuard)
+  @Get('outstanding-loans')
+  getOutstandingExternalLoans() {
+    return this.libraryService.getOutstandingExternalLoans();
+  }
 
   @UseGuards(StaffLoginJwtAuthGuard)
   @Post('simple-loan/:book_reference_id')
