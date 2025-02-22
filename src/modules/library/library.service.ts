@@ -1,4 +1,9 @@
-import { Inject, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateLibraryDto } from './dto/create-library.dto';
 import { UpdateLibraryDto } from './dto/update-library.dto';
 import { BooksQueryDto } from './dto/books-query.dto';
@@ -76,14 +81,14 @@ export class LibraryService extends BaseService {
         .findById(book_reference_id);
       if (foundReference) {
         if (foundReference.current_availability - 1 < 0) {
-          throw new Error('No se pueden prestar más libros');
+          throw new BadRequestException('No se pueden prestar más libros');
         }
         return await foundReference
           .$query(trx)
           .decrement('current_availability', 1)
           .returning('*');
       } else {
-        throw new Error('Libro no encontrado');
+        throw new NotFoundException('Libro no encontrado');
       }
     }, this.logger);
   }
@@ -98,7 +103,7 @@ export class LibraryService extends BaseService {
           foundReference.current_availability + 1 >
           foundReference.total_availability
         ) {
-          throw new Error('No se pueden devolver más libros');
+          throw new BadRequestException('No se pueden devolver más libros');
         }
 
         if (
@@ -107,7 +112,7 @@ export class LibraryService extends BaseService {
             (await this.getOutstangingExternalLoansById(book_reference_id))
               .length
         ) {
-          throw new Error('No se pueden devolver más libros');
+          throw new BadRequestException('No se pueden devolver más libros');
         }
 
         await foundReference
@@ -116,7 +121,7 @@ export class LibraryService extends BaseService {
           .returning('*');
         return foundReference;
       } else {
-        throw new Error('Libro no encontrado');
+        throw new NotFoundException('Libro no encontrado');
       }
     }, this.logger);
   }
@@ -227,6 +232,7 @@ export class LibraryService extends BaseService {
       resultsQueryBuilder = this.bookModel
         .query()
         .select('*')
+        .withGraphFetched('library_reference')
         .whereNull('media_id')
         .where((builder) => this.queryFilters(queryDto, builder))
         .orderBy(paginationOptions.orderBy);
