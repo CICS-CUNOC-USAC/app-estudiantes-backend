@@ -136,7 +136,7 @@ export class LibraryService extends BaseService {
         .findById(book_reference_id);
       if (foundReference) {
         if (foundReference.current_availability - 1 < 0) {
-          throw new Error('No se pueden prestar más libros');
+          throw new BadRequestException('No se pueden prestar más libros');
         }
         await foundReference.$query(trx).decrement('current_availability', 1);
 
@@ -152,7 +152,7 @@ export class LibraryService extends BaseService {
 
         return createdReceipt;
       } else {
-        throw new Error('Libro no encontrado');
+        throw new NotFoundException('Libro no encontrado');
       }
     }, this.logger);
   }
@@ -170,7 +170,7 @@ export class LibraryService extends BaseService {
           foundReference.current_availability + 1 >
           foundReference.total_availability
         ) {
-          throw new Error('No se pueden devolver más libros');
+          throw new BadRequestException('No se pueden devolver más libros');
         }
         await foundReference.$query(trx).increment('current_availability', 1);
 
@@ -183,7 +183,7 @@ export class LibraryService extends BaseService {
           .first();
 
         if (!foundReceipt) {
-          throw new Error('No se encontro un recibo del prestamo');
+          throw new NotFoundException('No se encontro un recibo del prestamo');
         }
 
         return await foundReceipt
