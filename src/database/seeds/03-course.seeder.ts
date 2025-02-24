@@ -382,89 +382,108 @@ export async function seed(knex: Knex): Promise<any> {
     },
 
     //Septimo Semestre
+    { code: 'C', name: 'Geofisica del Petroleo', 
+      description: 'El curso de Geofísica del Petróleo está diseñado para proporcionar a los estudiantes una comprensión profunda de los principios y técnicas geofísicas aplicadas a la exploración y producción de hidrocarburos. Este curso es fundamental para aquellos interesados en la industria del petróleo y gas, ya que aborda los métodos avanzados utilizados para localizar y evaluar reservas de petróleo y gas. Durante el curso, los estudiantes explorarán temas como la sismología de reflexión y refracción, la gravimetría, la magnetometría y la geoelectricidad. Se enfocará en la interpretación de datos geofísicos y en la integración de estos datos con información geológica para identificar y caracterizar yacimientos de hidrocarburos. El curso incluirá el uso de software especializado y técnicas computacionales para el procesamiento y análisis de datos geofísicos. Los estudiantes aprenderán a diseñar y ejecutar programas de adquisición de datos geofísicos, así como a interpretar los resultados para la toma de decisiones en la exploración y desarrollo de campos petroleros.', 
+      credits: 4 }, //TODO: REVISAR, NO TIENE CODIGO
+
     //Area Comun
-    { code: 'C', name: 'Geofisica del Petroleo', description: '', credits: 4 }, //TODO: REVISAR, NO TIENE CODIGO
-    { code: '919', name: 'Contabilidad 3', description: '', credits: 3 },
+    { code: '919', name: 'Contabilidad 3', 
+      description: 'La formación del profesional de Ingeniería Industrial abarca áreas diversas, una de éstas es el área contable que con el curso Contabilidad 3 dota a los estudiantes con conocimientos como presupuestos, flujo de caja, análisis financieros, entre otros, que constituyen la base de la toma de decisiones', 
+      credits: 3 },
     {
       code: '945',
       name: 'Ingenieria de la Produccion',
-      description: '',
+      description: 'Es un curso orientado al área administrativa - productiva - financiera, que comprende las herramientas que aplicará el estudiante en la investigación y ejecución de proyectos de Ingeniería Civil, con el objetivo de minimizar costos y maximizar utilidades, apegados a la ética - legal- ecológico, para la producción de bienes y/o servicios con la mejor Calidad q en lo que se logra implementar la Filosofía Calidad Total o Cero Defectos Q, más un Valor Agregado para la satisfacción del Cliente. Y con la inserción de la temática de Gestión Integral de Riesgo de Desastre GIRD y la Adaptación al Cambio Climático, especialmente en la Unidad 1 de Riesgos Industriales. La técnica de evaluación es de proyectos, por equipos de estudiantes.',
       credits: 5,
     },
     {
       code: '943',
       name: 'Administracion de Empresas 1',
-      description: '',
+      description: 'El éxito de una empresa se mide en base a la filosofía administrativa que utiliza para controlar el uso de los recursos financieros, humanos y materiales, que deben ser utilizados para el sostenimiento y desarrollo de la empresa, mejorando la productividad de las actividades de operación de la empresa. En un mundo convulsionado y de cambios extremos, las empresas deben aportar el balance adecuado entre la falta de recursos y la generación de riqueza, a través de estrategias a corto, mediano y largo plazo, para ir avanzando en el tiempo con la flexibilidad de cambio necesario, según lo establezca el mercado. El curso de Administración de Empresas 1, es un curso introductorio, que lleva al estudiante a comprender de que se trata la administración, la dinámica de sus funciones y cómo estas interactuan para alcanzar las metas trazadas.',
       credits: 5,
     },
     {
       code: '795',
       name: 'Investigacion de Operaciones 2',
-      description: '',
+      description: 'La investigación de operaciones surge de la necesidad de optimizar recursos en las organizaciones. porque proporcionan medios eficaces para la administración de recursos: Hombres máquinas, costos, materiales y tiempo. Utiliza para ello modelos matemáticos que optimizan algún criterio particular y facilitan la toma de decisiones. El propósito de este curso es continuar con la información básica necesaria en modelos cuantitativos para la administración y la planificación analizando conceptos y describiendo técnicas probabilísticas que son sumamente importantes en la solución de problemas profesionales, ya que los modelos matemáticos apropiados para la mayoría de ellos son probabilísticos. Asimismo se pretende fomentar en el estudiante la utilización de métodos analíticos desarrollando en él, el razonamiento deductivo y el espíritu de investigación.',
       credits: 5,
     },
-    { code: '2585', name: 'Practica Intermedia', description: '', credits: 0 },
+    { code: '2585', name: 'Practica Intermedia', 
+      description: 'El curso de Práctica Intermedia es una parte fundamental del plan de estudios de Ciencias de la Ingeniería, diseñado para proporcionar a los estudiantes una experiencia práctica en un entorno profesional real. Este curso permite a los estudiantes aplicar los conocimientos teóricos adquiridos en el aula a situaciones prácticas, mejorando sus habilidades técnicas y profesionales. Durante el curso, los estudiantes participan en proyectos de ingeniería supervisados por profesionales de la industria. Estos proyectos pueden incluir el diseño y desarrollo de soluciones ingenieriles, la realización de estudios de campo, el análisis de datos, y la implementación de tecnologías innovadoras. La práctica intermedia ofrece la oportunidad de trabajar en equipo, resolver problemas reales y desarrollar una comprensión profunda de los desafíos y responsabilidades de la profesión.', 
+      credits: 0 },
     //Civil
-    { code: '940', name: 'Vias Terrestres 1', description: '', credits: 6 },
+    { code: '940', name: 'Vias Terrestres 1', 
+      description: 'Es un curso de la rama de la Ingeniería vial, el cual trata sobre el diseño geométrico de carreteras, que toma como base los levantamientos topográficos, con en base a las especificaciones de la AASHTO. Así mismo, este curso se auxilia de otras ciencias, siendo las más importantes: Matemáticas, Física, Mecánica de suelos, Hidrología, Materiales de construcción, Meteorología, entre otras. Además, se pretende crear vínculos con los contenidos de GIRD y ACC para realizar diseños resilientes. Durante el proceso del curso se determina la planimetría y la altimetría de un proyecto de carreteras, en el cual se analiza los efectos físicos que puede experimentar un cuerpo al moverse en un alineamiento en curva a una velocidad determinada y bajo ciertas condiciones topográficas; además se define el proyecto bajo tres conceptos fundamentales, los cuales son: seguridad, comodidad y economía.', 
+      credits: 6 },
     {
       code: '924',
       name: 'Resistencia de Materiales 3',
-      description: '',
+      description: 'El curso de Resistencia de los Materiales 3 se centra en el estudio avanzado del comportamiento mecánico de materiales utilizados en la ingeniería. Este curso aborda los principios fundamentales y las aplicaciones prácticas necesarias para analizar y diseñar estructuras seguras y eficientes. Durante el curso, los estudiantes profundizarán en temas como la teoría de elasticidad, el análisis de esfuerzos y deformaciones en materiales, y los métodos de diseño basados en la resistencia. Se explorarán diferentes tipos de materiales, incluyendo metales, polímeros, cerámicas y compuestos, y se evaluará su desempeño bajo diversas condiciones de carga.',
       credits: 4,
     },
     {
       code: '745',
       name: 'Analisis Estructural 1',
-      description: '',
-      credits: 4,
+      description: 'Este curso permite estudiar de una manera sistematizada, el comportamiento mecánico de diferentes tipos de estructuras, sometidas a la acción de cargas de diversa índole (gravitacionales y/o laterales), por medio del análisis estructural y los diversos métodos aproximados y exactos que pueden ser empleados para determinar los diferentes esfuerzos internos a los que se somete una estructura. Así también se estudia los diferentes procesos que se requieren para ejecutar y efectuar un diseño estructural correcto tomando como la base la gestión integral para la reducción de riesgo (GIRD) ante un evento sísmico y también la optimización de materiales para una mejor adaptación resiliente al Cambio Climático (ACC).',
+      credits: 6,
     },
-    { code: '935', name: 'Concreto Armado 1', description: '', credits: 5 },
-    { code: '749', name: 'Hidrologia', description: '', credits: 6 },
+    { code: '935', name: 'Concreto Armado 1', 
+      description: 'El concreto estan viejo como el hombre mismo y desde una perpectiva no conservadora se puede considerar como un arma de guerra efectiva en el pasado. Grandes civilizaciones de antaño, de quienes se hereda el derecho, la filosofía y otros; no pudieron ser sin el concreto. Los Mayas, como los Aztecas, Incas y otros, no pudieron construir sus grandes teocracias teatrales sin sus ciudades con templos, patios de pelota y más. Dichas infraestructuras hoy monumentos, que necesitaron de los rudimentos de las tecnologías del concreto. Se agregan a los anteriores la construccion de vías de trasnporte y acueductos, que permitieron la subsistencia de las ciudades estado guatemaltecas, tales como: Tikal, Zaculeu, El Mirador y muchas más. De esa cuenta el concreto tiene una dimensión política, cultural y económica, que no se puede desligar de la Guatemala de hoy. ', 
+      credits: 5 },
+    { code: '749', name: 'Hidrologia', 
+      description: 'La Hidrología tiene un papel muy importante en el planeamiento del uso de los recursos hidráulicos y ha llegado a convertirse en parte fundamental de los proyectos de ingeniería que tienen que ver con suministro de agua, drenaje, protección contra la acción de ríos entre otros.', 
+      credits: 6 },
     {
       code: '1061',
       name: 'Hidraulica de Canales',
-      description: '',
+      description: 'La asignatura permitirá al alumno recibir los conocimientos generales y su aplicación en la solución de problemas relacionados con el flujo en canales. El contenido abarca flujo superficial libre, régimen uniforme, variado tanto gradual como rápido. Se estudia la aplicación a casos prácticos y el impacto de los cambios en los patrones climáticos en los criterios de diseño. ',
       credits: 5,
     },
-    { code: '769', name: 'Maquinas Hidraulicas', description: '', credits: 4 },
+    { code: '769', name: 'Maquinas Hidraulicas', 
+      description: 'Este curso introduce al estudiante al mundo de las máquinas hidráulicas de manera que reconoce los distintos tipos y es capaz de calcular la energía y potencia que intercambian con los liquidos. Todo esto a través de clase magistral, de analisis de modelos reales de bombas y turbinas. El estudiante resuelve problemas de casos reales y ejecuta la construcción de bombas. Construye una bomba que no consume más energía que la energía hidráulica renovable ', 
+      credits: 4 },
     //Mecanica
-    { code: '688', name: 'Termodinamica 2', description: '', credits: 5 },
+    { code: '688', name: 'Termodinamica 2', 
+      description: 'Durante el curso se estudian las aplicaciones de la termodinámica, los modelos y ciclos que relacionan los cambios de energía tanto en la práctica como en la teoría. Se analiza la aplicación de estas leyes al estudio de los fluidos puros y algunas idealizaciones, los diversos equipos para la transformación de energía térmica en trabajo y la utilización de los ciclos ideales de potencia. Además, estudia las relaciones matemáticas que se aplican para evaluar las funciones de estado de los fluidos. Se analiza la aplicación de los fundamentos de termodinámica en la generación de potencia, mediante sistemas que operan en ciclos, como los ciclos Rankine, Stirling, Erickson, Otto, Diésel y Brayton. Además, se analiza el ciclo de refrigeración y como a pesar de que tiene distintos propósitos, los principios teóricos se mantienen', 
+      credits: 5 },
     //Mecanica-Industrial
-    { code: '796', name: 'Microeconomia', description: '', credits: 3 },
+    { code: '796', name: 'Microeconomia', 
+      description: 'Toda sociedad tiene necesidades que requieren ser satisfechas y esto supone el uso de medios o recursos escasos. Los recursos de que se dispone para producir bienes o servicios son la tierra, el trabajo, el capital y la tecnología. Este curso trata de resolver las preguntas básicas de la economía: ¿qué y cuánto producir?, ¿cómo producirlo? y ¿para quién producir? En él se establecen las relaciones entre los elementos que integran el mercado, los productores de bienes y servicios y los consumidores que tienen necesidades que deben ser satisfechas. Mediante el análisis de las relaciones entre oferta y demanda, variaciones en el precio de los productos o el ingreso del consumidor en una economía de libre mercado, el estudiante es capaz de tomar decisiones ante los diferentes escenarios económicos que se presentan. Adicionalmente identifica los factores que intervienen en el crecimiento económico de Guatemala con respecto a los demás países de la región centroamericana y analiza temas de actualidad tales como emprendimiento, innovación, incidencia del cambio climático y la economía circular como un modelo de producción más amigable y responsable con el ambiente.', 
+      credits: 3 },
     //Sistemas
-    { code: '2813', name: 'Teoria de Sistemas 2', description: '', credits: 5 },
-
+    { code: '2813', name: 'Teoria de Sistemas 2', 
+      description: 'Este curso busca desarrollar en el estudiante una visión sistémica del desarrollo de proyectos, sean estos basados en Tecnologías de la Información o no. Se busca aplicar el pensamiento sistémico para comprender y aprender a dirigir, coordinar y gestionar el ciclo de vida de los proyectos que en sí mismos constituyen sistemas complejos. Se espera que al final del curso el estudiante pueda integrar una amplia gama de conocimientos, técnicas y herramientas dentro del contexto de la ejecución de proyectos de su carrera.', 
+      credits: 5 },
     { code: '950', name: 'Estadistica 2', 
       description: 'El análisis de datos comprende el uso de métodos de estadística inferencial para estimar parámetros desconocidos de los modelos y comprobar hipótesis sobre la estructura de los datos y de procedimientos para la toma de decisiones y formular ciertas conclusiones que pueden aplicarse a la solución de distintos problemas. En este curso, se presentan los métodos corrientes de construcción de estimadores y los criterios para examinar las estadísticas; se aborda también el método de variable pivote para construir intervalos con?denciales y se hace énfasis en los intervalos bajo normalidad. En la primera unidad se plantean los conceptos de muestra aleatoria y distribución de muestreo. En la segunda unidad se presentan los métodos de estimación tanto puntual como de intervalo. En la tercera unidad se exploran las bases de la inferencia estadística y se presentan las pruebas de hipótesis para medias, varianza y proporciones. En la unidad cuatro se detalla el uso de la distribución chi-cuadrada, tanto para determinar la bondad de ajuste como para tablas de contingencia y en la unidad cinco se ve el tema de regresión lineal y correlación.', 
       credits: 5 },
-    {
-      code: '2814',
+    { code: '2814',
       name: 'Sistemas Operativos 1',
-      description: '',
+      description: 'Comprende y aplica el concepto de Exclusión mutua entre procesos. Considera los criterios adecuados para implementar las diferentes soluciones que existen en la administración de Sistemas Operativos.',
       credits: 5,
     },
     {
       code: '2815',
       name: 'Arquitectura de Computadores y Ensambladores 2',
-      description: '',
+      description: 'Proporcionar al estudiante los conocimientos, conceptos y procesos tecnológicos comúnmente utilizados en la automatización de la industria y sus procesos para luego aplicarlos de forma técnica para resolver un problema de la vida real.',
       credits: 4,
     },
     {
       code: '2816',
       name: 'Redes de Computadoras 1',
-      description: '',
+      description: 'En este curso el estudiante estudiara las capas 1 a 3 de los modelos de referencia OSI (Open System Interconection) y TCP/IP para conocer como las telecomunicaciones se llevan a cabo en el mundo moderno, estudiando las distintas formas de transmisión así como los medios, algoritmos y técnicas para transmitirlos.',
       credits: 4,
     },
     {
       code: '2817',
       name: 'Sistemas de Bases de Datos 1',
-      description: '',
+      description: 'Este curso tiene como finalidad introducir a los estudiantes a los conceptos fundamentales de bases de datos, sistemas administradores de bases de datos y la teoría relacional, así como su aplicación en las distintas áreas empresariales y la utilización de sistemas de bases de datos relacionales en el desarrollo de aplicaciones. Teniendo como base la teoría relacional para el desarrollo de modelos de datos permitiendo representar la información y el nivel de abstracción de los datos como un mecanismo de representación de la realidad de cualquier empresa. Además, entender el concepto de mapeo del modelo de datos a la teoría relacional.',
       credits: 5,
     },
     {
       code: '2818',
       name: 'Practica Intemedia TI',
-      description: '',
+      description: 'El curso de Prácticas Intermedias de la carrera de Ingeniería en Ciencias y Sistemas, tiene como finalidad introducir al estudiante en las prácticas, actividades y procesos que se desarrollan en el entorno laboral del Ingeniero en Ciencias y Sistemas orientado al Desarrollo y Entrega de Software, así mismo busca proporcionar un apoyo técnico a las diferentes unidades académicas dentro de la universidad San Carlos si estas así la requirieren y además una complementación académica hacia el estudiantado; la cual se realiza a través de la organización de un programa que cubre identificación de áreas clave de la carrera, identificación de empresas dedicadas a cada área, búsqueda de expertos en cada área y realización de prácticas respectivas',
       credits: 0,
     },
 
@@ -540,7 +559,9 @@ export async function seed(knex: Knex): Promise<any> {
       description: '',
       credits: 5,
     },
-    { code: '683', name: 'Diseño de Maquinas 1', description: '', credits: 6 },
+    { code: '683', name: 'Diseño de Maquinas 1', 
+      description: 'Diseño de Maquinas 1 es un curso orientado al estudio de los métodos de proyecto de los diversos elementos de máquinas fundamentados en la Mecánica, Resistencia y Ciencia de los Materiales', 
+      credits: 6 },
     { code: '695', name: 'Plantas de Vapor', description: '', credits: 5 },
     { code: '952', name: 'Ingenieria de Plantas', 
       description: 'La competitividad de una empresa no es solamente la calidad y tipo de producto que ofrece, sino el costo de producción, lo que implica una relación integral de todos los componentes involucrados en el proceso de producción. Un componente muy importante es el conjunto de instalaciones de la empresa. Este conjunto no es solamente el edificio, sino las comunicaciones, la distribución, los materiales y su manejo. Al final todo lo que mueve a la producción, por lo tanto se hace necesario controlar cada componente, para hacer una planta industrial eficiente.', 
@@ -554,7 +575,7 @@ export async function seed(knex: Knex): Promise<any> {
     {
       code: '698',
       name: 'Procesos de Manufactura 2',
-      description: '',
+      description: 'Este Curso ofrece a los Estudiantes de las carreras de Ingeniería Mecánica e Industrial, el conocimiento teórico-práctico de procesos de fabricación a partir de la deformación de los metales, así como los procesos más importantes conocidos en el medio nacional y su relación con otros procesos productivos de la tecnología moderna aplicada. Se expondrá al estudiante mediante presentaciones multimedia, el conocimiento de procesos de formado en frio y en caliente, las condiciones para que puedan desarrollarse cada uno de estos procesos, así como las máquinas y herramientas que facilitan los mismos. Además se conocerán las distintas etapas de los procesos industriales de mayor importancia en el país, se indicará por qué representan una potencial fuente de trabajo para los futuros profesionales, así como el impacto que tienen en la economía nacional. ',
       credits: 3,
     },
     //Industrial
@@ -564,7 +585,7 @@ export async function seed(knex: Knex): Promise<any> {
     {
       code: '778',
       name: 'Programacion Comercial',
-      description: '',
+      description: 'introduce conceptos básicos de SQL y profundiza en el uso de Power BI para el análisis de datos comerciales. A través de proyectos prácticos, los estudiantes aprenderán a manejar consultas SQL y crear visualizaciones de datos en Power BI, aplicando DAX para análisis avanzados y presentación de reportes.',
       credits: 3,
     },
     //Sistemas
@@ -663,7 +684,9 @@ export async function seed(knex: Knex): Promise<any> {
     { code: '934', name: 'Cimentaciones 2', description: '', credits: 4 },
     { code: '788', name: 'Obras Hidraulicas', description: '', credits: 4 },
     //Mecanica
-    { code: '954', name: 'Ingenieria de Metodos', description: '', credits: 6 },
+    { code: '954', name: 'Ingenieria de Metodos', 
+      description: 'La necesidad de ser más competitivos en un mundo globalizado, lleva a las empresas comerciales, industriales y de servicios a ser selectivos en la contratación del personal, pero además de la selección, se hace necesario que el puesto de trabajo esté bien diseñado para que el trabajador sea mucho más eficiente y que contribuya a mejorar la productividad. Por tal razón el curso de Ingeniería de Métodos debe capacitar al Ingeniero Industrial en el análisis y diseño de los puestos de trabajo, en este curso se tratará sobre las técnicas de estudio de trabajo, como análisis de movimientos, toma de tiempos, diagramas de proceso y sistemas de pago de salarios.', 
+      credits: 6 },
     {
       code: '947',
       name: 'Mantenimiento de Hospitales 2',
@@ -673,7 +696,7 @@ export async function seed(knex: Knex): Promise<any> {
     {
       code: '744',
       name: 'Montaje y Mantenimiento de Equipo',
-      description: '',
+      description: 'Este Curso ofrece a los Estudiantes de las carreras de Ingeniería Mecánica e Industrial, el conocimiento de los conceptos y técnicas de mantenimiento utilizados en la industria moderna, así mismo ofrece los principios básicos de cimentación de maquinaria y equipo. Se expondrá al estudiante mediante presentaciones multimedia las bases conceptuales y las técnicas desarrolladas a lo largo del tiempo; sobre el análisis de la información documental, partes, montaje y operación de los equipos de su entorno, con el propósito de que pueda seleccionar los insumos más convenientes para realizar el mantenimiento de los mismos. Se requerirá la participación de los estudiantes con la obtención de manuales de equipos cuyo costo en el mercado sea mayor a dos cientos mil quetzales Q 200,000.00 para analizarlos y desarrollar un programa anual de mantenimiento. Así mismo, se realizarán acciones que permitan la solución de problemas tipo para que los estudiantes conozcan la ventaja de utilizar recursos tecnológicos en dichas soluciones.',
       credits: 5,
     },
     { code: '693', name: 'Mecanismos', 
@@ -694,7 +717,9 @@ export async function seed(knex: Knex): Promise<any> {
       description: '',
       credits: 5,
     },
-    { code: '797', name: 'Mercadotecnia 2', description: '', credits: 3 },
+    { code: '797', name: 'Mercadotecnia 2', 
+      description: 'En la actualidad los vendedores enfrentan un mercado que simultáneamente se hace competitivo, especializado, global y conectado al Internet con miras a la exportación. Se hace necesario apostar hoy más que nunca, por un equilibrio entre creatividad y conocimiento para planificar, crear intercambios que satisfagan las metas del consumidor final, objetivos del empresario en aras del beneficio social y eco planetario ', 
+      credits: 3 },
     {
       code: '931',
       name: 'Controles Industriales',
@@ -814,11 +839,13 @@ export async function seed(knex: Knex): Promise<any> {
     {
       code: '916',
       name: 'Seguridad e Higiene Industrial',
-      description: '',
+      description: 'El ambiente laboral involucra diferentes riesgos, tales como los físicos, químicos, biológicos, eléctricos, mecánicos, psicosociales, radiológicos, ergonómicos, entre otros; que pueden afectar la salud del trabajador y de la comunidad donde se ubica cualquier tipo de organización lucrativa o no lucrativa. Por esta razón es indispensable que el Ingeniero Industrial y Mecánico conozca el marco legal guatemalteco, que obliga a todo patrono a adoptar las medidas de mitigación de riesgos y a aplicar las técnicas necesarias para proteger la salud de los colaboradores, para mantener un ambiente de trabajo seguro y confiable; apoyados de normativas y protocolos internacionales, los cuales resultan importantes para crear una cultura de prevención de riesgos laborales. La Seguridad y Salud Ocupacional hace que se minimice el riesgo de accidentes y de contraer enfermedades profesionales, con el fin de mejorar las condiciones en los centros de trabajo.',
       credits: 3,
     },
     { code: 'F', name: 'Electronica 1', description: '', credits: 6 }, //TODO: REVISAR, NO TIENE CODIGO
-    { code: '915', name: 'Vibraciones', description: '', credits: 5 },
+    { code: '915', name: 'Vibraciones', 
+      description: 'Estudio de la teoría de las vibraciones y su aplicación a problemas de Ingeniería. Técnicas analíticas, numéricas y experimentales aplicadas con uno o más grados de libertad.', 
+      credits: 5 },
     { code: '790', name: 'Diseño de Maquinas 3', description: '', credits: 6 },
     {
       code: '696',

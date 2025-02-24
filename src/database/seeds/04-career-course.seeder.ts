@@ -2188,14 +2188,106 @@ export async function seed(knex: Knex): Promise<any> {
     },
 
     //SEPTIMO SEMESTRE
-    //AREA COMUN
+    //AREA COMUN y/o Area Profesional
 
-    //Contabilidad 3
+    //Vias Terrestres 1  (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 33,
+      course_code: '940',
+      semester: 7,
+      field: 1,
+      mandatory: true,
+    },
+    //Resistencia De Materiales 3 (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 33,
+      course_code: '924',
+      semester: 7,
+      field: 2,
+      mandatory: false,
+    },
+    {
+      career_code: 34,
+      course_code: '924',
+      semester: 8,
+      field: 4,
+      mandatory: false,
+    },
+    {
+      career_code: 36,
+      course_code: '924',
+      semester: 7,
+      field: 1,
+      mandatory: false,
+    },
+    //Analisis Estructural 1 (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 33,
+      course_code: '745',
+      semester: 7,
+      field: 2,
+      mandatory: true,
+    },
+    {
+      career_code: 34,
+      course_code: '745',
+      semester: 9,
+      field: 2,
+      mandatory: true,
+    },
+    // Concreto Armado 1 (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 33,
+      course_code: '935',
+      semester: 7,
+      field: 2,
+      mandatory: true,
+    },
+    // Hidrologia (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 33,
+      course_code: '749',
+      semester: 7,
+      field: 4,
+      mandatory: true,
+    },
+    //Hidraulica de canales (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 33,
+      course_code: '1061',
+      semester: 7,
+      field: 4,
+      mandatory: false,
+    },
+    // Maquinas Hidraulicas (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 33,
+      course_code: '769',
+      semester: 7,
+      field: 4,
+      mandatory: false,
+    },
+    {
+      career_code: 34,
+      course_code: '769',
+      semester: 9,
+      field: 1,
+      mandatory: true,
+    },
+    {
+      career_code: 36,
+      course_code: '769',
+      semester: 7,
+      field: 1,
+      mandatory: false,
+    },
+    
+    //Contabilidad 3 (CORRECTAMENTE INGRESADO)
     {
       career_code: 35,
       course_code: '919',
       semester: 7,
-      field: 1,
+      field: 8,
       mandatory: true,
     },
     {
@@ -2213,7 +2305,7 @@ export async function seed(knex: Knex): Promise<any> {
       mandatory: false,
     },
 
-    //Ingenieria de la Produccion
+    //Ingenieria de la Produccion (CORRECTAMENTE INGRESADO)
     {
       career_code: 33,
       course_code: '945',
@@ -2229,7 +2321,7 @@ export async function seed(knex: Knex): Promise<any> {
       mandatory: false,
     },
 
-    //Administracion de Empresas 1
+    //Administracion de Empresas 1 (CORRECTAMENTE INGRESADO)
     {
       career_code: 33,
       course_code: '943',
@@ -2247,8 +2339,8 @@ export async function seed(knex: Knex): Promise<any> {
     {
       career_code: 35,
       course_code: '943',
-      semester: 7,
-      field: 1,
+      semester: 9,
+      field: 9,
       mandatory: true,
     },
     {
@@ -2266,7 +2358,14 @@ export async function seed(knex: Knex): Promise<any> {
       mandatory: false,
     },
 
-    //Investigacion de Operaciones 2
+    //Investigacion de Operaciones 2 (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 33,
+      course_code: '795',
+      semester: 7,
+      field: 8,
+      mandatory: false,
+    },
     {
       career_code: 34,
       course_code: '795',
@@ -2277,15 +2376,15 @@ export async function seed(knex: Knex): Promise<any> {
     {
       career_code: 35,
       course_code: '795',
-      semester: 7,
-      field: 3,
+      semester: 8,
+      field: 7,
       mandatory: true,
     },
     {
       career_code: 36,
       course_code: '795',
       semester: 7,
-      field: 2,
+      field: 1,
       mandatory: true,
     },
     {
@@ -2296,7 +2395,7 @@ export async function seed(knex: Knex): Promise<any> {
       mandatory: true,
     },
 
-    //Practica Intermedia
+    //Practica Intermedia (CORRECTAMENTE INGRESADO)
     {
       career_code: 33,
       course_code: '2585',
@@ -2315,19 +2414,211 @@ export async function seed(knex: Knex): Promise<any> {
       career_code: 35,
       course_code: '2585',
       semester: 7,
-      field: 9,
+      field: 11,
       mandatory: true,
     },
     {
       career_code: 36,
       course_code: '2585',
       semester: 7,
+      field: 2,
+      mandatory: true,
+    },
+    //Termodinamica 2 (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 34,
+      course_code: '688',
+      semester: 7,
+      field: 3,
+      mandatory: true,
+    },
+    {
+      career_code: 35,
+      course_code: '688',
+      semester: 7,
+      field: 5,
+      mandatory: false,
+    },
+    {
+      career_code: 36,
+      course_code: '688',
+      semester: 7,
+      field: 1,
+      mandatory: true,
+    },
+    //Geofisica del Petroleo (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 34,
+      course_code: 'C',
+      semester: 7,
+      field: 3,
+      mandatory: false,
+    },
+    //Microeconomia (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 36,
+      course_code: '796',
+      semester: 7,
+      field: 1,
+      mandatory: true,
+    },
+    {
+      career_code: 35,
+      course_code: '796',
+      semester: 8,
+      field: 8,
+      mandatory: true,
+    },
+    //Mercadotecnia 2 (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 36,
+      course_code: '797',
+      semester: 7,
+      field: 1,
+      mandatory: true,
+    },
+    {
+      career_code: 35,
+      course_code: '797',
+      semester: 10,
+      field: 9,
+      mandatory: false,
+    },
+    // Ingenieria de Metodos (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 36,
+      course_code: '954',
+      semester: 7,
+      field: 1,
+      mandatory: true,
+    },
+    {
+      career_code: 34,
+      course_code: '954',
+      semester: 9,
+      field: 1,
+      mandatory: false,
+    },
+    {
+      career_code: 35,
+      course_code: '954',
+      semester: 8,
+      field: 6,
+      mandatory: true,
+    },
+    //Seguridad e Higiene Industrial (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 36,
+      course_code: '916',
+      semester: 7,
+      field: 1,
+      mandatory: true,
+    },
+    {
+      career_code: 35,
+      course_code: '916',
+      semester: 10,
       field: 9,
       mandatory: true,
     },
-
+    //Diseño de Maquinas 1 (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 36,
+      course_code: '683',
+      semester: 7,
+      field: 1,
+      mandatory: true,
+    },
+    {
+      career_code: 34,
+      course_code: '683',
+      semester: 8,
+      field: 2,
+      mandatory: true,
+    },
+    {
+      career_code: 35,
+      course_code: '683',
+      semester: 8,
+      field: 5,
+      mandatory: false,
+    },
+    //Montaje y mantenimiento de equipo (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 36,
+      course_code: '744',
+      semester: 7,
+      field: 1,
+      mandatory: true,
+    },
+    {
+      career_code: 34,
+      course_code: '744',
+      semester: 9,
+      field: 1,
+      mandatory: true,
+    },
+    {
+      career_code: 35,
+      course_code: '744',
+      semester: 10,
+      field: 5,
+      mandatory: false,
+    },
+    //Procesos de Manufactura 2 (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 36,
+      course_code: '698',
+      semester: 7,
+      field: 1,
+      mandatory: true,
+    },
+    {
+      career_code: 34,
+      course_code: '698',
+      semester: 8,
+      field: 4,
+      mandatory: true,
+    },
+    {
+      career_code: 35,
+      course_code: '698',
+      semester: 8,
+      field: 5,
+      mandatory: true,
+    },
+    //Vibraciones (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 36,
+      course_code: '915',
+      semester: 7,
+      field: 1,
+      mandatory: false,
+    },
+    {
+      career_code: 34,
+      course_code: '915',
+      semester: 10,
+      field: 2,
+      mandatory: true,
+    },
+    //Programacion Comercial (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 36,
+      course_code: '778',
+      semester: 7,
+      field: 1,
+      mandatory: true,
+    },
+    {
+      career_code: 35,
+      course_code: '778',
+      semester: 8,
+      field: 10,
+      mandatory: true,
+    },
     //Sistemas
-    //Teoria de Sistemas 2
+    //Teoria de Sistemas 2 (CORRECTAMENTE INGRESADO)
     {
       career_code: 58,
       course_code: '2813',
@@ -2373,7 +2664,7 @@ export async function seed(knex: Knex): Promise<any> {
       mandatory: true,
     },
 
-    //Sistemas Operativos 1
+    //Sistemas Operativos 1 (CORRECTAMENTE INGRESADO)
     {
       career_code: 58,
       course_code: '2814',
@@ -2382,7 +2673,7 @@ export async function seed(knex: Knex): Promise<any> {
       mandatory: true,
     },
 
-    //Arquitectura de Computadores y Ensambladores 2
+    //Arquitectura de Computadores y Ensambladores 2 (CORRECTAMENTE INGRESADO)
     {
       career_code: 58,
       course_code: '2815',
@@ -2391,7 +2682,7 @@ export async function seed(knex: Knex): Promise<any> {
       mandatory: true,
     },
 
-    //Redes de Computadores 1
+    //Redes de Computadores 1 (CORRECTAMENTE INGRESADO)
     {
       career_code: 58,
       course_code: '2816',
@@ -2400,7 +2691,7 @@ export async function seed(knex: Knex): Promise<any> {
       mandatory: true,
     },
 
-    //Sistemas de Bases de Datos 1
+    //Sistemas de Bases de Datos 1 (CORRECTAMENTE INGRESADO)
     {
       career_code: 58,
       course_code: '2817',
@@ -2409,7 +2700,7 @@ export async function seed(knex: Knex): Promise<any> {
       mandatory: true,
     },
 
-    //Practica Intermedia TI
+    //Practica Intermedia TI (CORRECTAMENTE INGRESADO)
     {
       career_code: 58,
       course_code: '2818',
