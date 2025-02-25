@@ -10,6 +10,7 @@ const commonConfig = {
     directory: './src/database/migrations',
     stub: './src/database/migration.stub.ts',
     extension: 'ts',
+    schemaName: process.env.DB_SCHEMA,
   },
   seeds: {
     directory: './src/database/seeds',
