@@ -1,4 +1,9 @@
-import { Inject, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateLibraryDto } from './dto/create-library.dto';
 import { UpdateLibraryDto } from './dto/update-library.dto';
 import { BooksQueryDto } from './dto/books-query.dto';
@@ -42,7 +47,7 @@ export class LibraryService extends BaseService {
       const createdBook = await this.bookModel
         .query(trx)
         .insert(createDigitalBookDto);
-      return await this.findOne(createdBook.$id(), BookType.DIGITAL, trx);
+      return await this.findOne(createdBook.$id(), trx);
     }, this.logger);
   }
 
@@ -65,7 +70,7 @@ export class LibraryService extends BaseService {
         location: createPhysicalBookDto.location,
       });
 
-      return await this.findOne(createdBook.$id(), BookType.PHYSICAL, trx);
+      return await this.findOne(createdBook.$id(), trx);
     }, this.logger);
   }
 
@@ -76,14 +81,14 @@ export class LibraryService extends BaseService {
         .findById(book_reference_id);
       if (foundReference) {
         if (foundReference.current_availability - 1 < 0) {
-          throw new Error('No se pueden prestar más libros');
+          throw new BadRequestException('No se pueden prestar más libros');
         }
         return await foundReference
           .$query(trx)
           .decrement('current_availability', 1)
           .returning('*');
       } else {
-        throw new Error('Libro no encontrado');
+        throw new NotFoundException('Libro no encontrado');
       }
     }, this.logger);
   }
@@ -98,16 +103,16 @@ export class LibraryService extends BaseService {
           foundReference.current_availability + 1 >
           foundReference.total_availability
         ) {
-          throw new Error('No se pueden devolver más libros');
+          throw new BadRequestException('No se pueden devolver más libros');
         }
 
         if (
           foundReference.current_availability + 1 >
           foundReference.total_availability -
-            (await this.getOutstangingExternalLoansById(book_reference_id))
+            (await this.getOutstandingExternalLoansById(book_reference_id))
               .length
         ) {
-          throw new Error('No se pueden devolver más libros');
+          throw new BadRequestException('No se pueden devolver más libros');
         }
 
         await foundReference
@@ -116,7 +121,7 @@ export class LibraryService extends BaseService {
           .returning('*');
         return foundReference;
       } else {
-        throw new Error('Libro no encontrado');
+        throw new NotFoundException('Libro no encontrado');
       }
     }, this.logger);
   }
@@ -131,7 +136,7 @@ export class LibraryService extends BaseService {
         .findById(book_reference_id);
       if (foundReference) {
         if (foundReference.current_availability - 1 < 0) {
-          throw new Error('No se pueden prestar más libros');
+          throw new BadRequestException('No se pueden prestar más libros');
         }
         await foundReference.$query(trx).decrement('current_availability', 1);
 
@@ -147,7 +152,7 @@ export class LibraryService extends BaseService {
 
         return createdReceipt;
       } else {
-        throw new Error('Libro no encontrado');
+        throw new NotFoundException('Libro no encontrado');
       }
     }, this.logger);
   }
@@ -165,7 +170,7 @@ export class LibraryService extends BaseService {
           foundReference.current_availability + 1 >
           foundReference.total_availability
         ) {
-          throw new Error('No se pueden devolver más libros');
+          throw new BadRequestException('No se pueden devolver más libros');
         }
         await foundReference.$query(trx).increment('current_availability', 1);
 
@@ -178,7 +183,7 @@ export class LibraryService extends BaseService {
           .first();
 
         if (!foundReceipt) {
-          throw new Error('No se encontro un recibo del prestamo');
+          throw new NotFoundException('No se encontro un recibo del prestamo');
         }
 
         return await foundReceipt
@@ -227,6 +232,7 @@ export class LibraryService extends BaseService {
       resultsQueryBuilder = this.bookModel
         .query()
         .select('*')
+        .withGraphFetched('library_reference')
         .whereNull('media_id')
         .where((builder) => this.queryFilters(queryDto, builder))
         .orderBy(paginationOptions.orderBy);
@@ -237,21 +243,24 @@ export class LibraryService extends BaseService {
     );
   }
 
-  async findOne(id: number, bookType: BookType, trx?: Transaction) {
-    const bookModel = this.bookModel.query(trx).findById(id);
-    if (bookType === BookType.DIGITAL) {
-      bookModel.withGraphFetched('media');
-    } else if (bookType === BookType.PHYSICAL) {
-      bookModel.withGraphFetched('library_reference');
+  async findOne(id: number, trx?: Transaction) {
+    const bookModel = await this.bookModel.query(trx).findById(id);
+    if (bookModel.media_id) {
+      return await bookModel.$query(trx).withGraphFetched('media');
+    } else {
+      return await bookModel.$query(trx).withGraphFetched('library_reference');
     }
-    return await bookModel;
   }
 
-  async getOutstangingExternalLoansById(book_reference_id: string) {
+  async getOutstandingExternalLoansById(book_reference_id: string) {
     return await this.libraryReceiptModel
       .query()
       .where('library_reference_id', book_reference_id)
       .where('returned_at', null);
+  }
+
+  async getOutstandingExternalLoans() {
+    return await this.libraryReceiptModel.query().where('returned_at', null);
   }
 
   async findAllCategories() {
