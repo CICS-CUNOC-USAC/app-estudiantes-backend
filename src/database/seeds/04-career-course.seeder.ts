@@ -2710,6 +2710,120 @@ export async function seed(knex: Knex): Promise<any> {
     },
 
     //Octavo Semestre
+    //Civil
+    //Transportes (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 33,
+      course_code: '1074',
+      semester: 8,
+      field: 1,
+      mandatory: false,
+    },
+    //VIAS TERRESTRES (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 33,
+      course_code: '1075',
+      semester: 8,
+      field: 1,
+      mandatory: false,
+    },
+    //Ingenieria de Transito (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 33,
+      course_code: '1063',
+      semester: 8,
+      field: 1,
+      mandatory: false,
+    },
+    //Analisis estructural 2 (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 33,
+      course_code: '1053',
+      semester: 8,
+      field: 2,
+      mandatory: false,
+    },
+    //Tipologia Estructural (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 33,
+      course_code: '1072',
+      semester: 8,
+      field: 2,
+      mandatory: false,
+    },
+    // Concreto armado 2 (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 33,
+      course_code: '936',
+      semester: 8,
+      field: 2,
+      mandatory: true,
+    },
+    // Diseño Estructural (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 33,
+      course_code: '932',
+      semester: 8,
+      field: 2,
+      mandatory: true,
+    },
+    // Cimentaciones 1 (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 33,
+      course_code: '799',
+      semester: 8,
+      field: 3,
+      mandatory: true,
+    },
+    //Pavimentos (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 33,
+      course_code: '1067',
+      semester: 8,
+      field: 3,
+      mandatory: false,
+    },
+    //Aguas Subterraneas (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 33,
+      course_code: '1052',
+      semester: 8,
+      field: 4,
+      mandatory: true,
+    },
+    //Saneamiento Ambiental (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 33,
+      course_code: '920A', //ojo con el codigo del curso
+      semester: 8,
+      field: 4,
+      mandatory: true,
+    },
+    // Ingenieria Sanitaria 1 (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 33,
+      course_code: '791',
+      semester: 8,
+      field: 4,
+      mandatory: true,
+    },
+    // Ingenieria Sanitaria 2 (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 33,
+      course_code: '798',
+      semester: 8,
+      field: 4,
+      mandatory: true,
+    },
+    //Analisis mecanico (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 33,
+      course_code: '906',
+      semester: 8,
+      field: 6,
+      mandatory: true,
+    },
+
     //Area Comun
     //Ingenieria Economica 1 (CORRECTAMENTE INGRESADO)
     {
@@ -2748,7 +2862,7 @@ export async function seed(knex: Knex): Promise<any> {
       mandatory: false,
     },
 
-    //Administracion de Empresas 2
+    //Administracion de Empresas 2 (CORRECTAMENTE INGRESADO)
     {
       career_code: 33,
       course_code: '944',
@@ -2766,8 +2880,8 @@ export async function seed(knex: Knex): Promise<any> {
     {
       career_code: 35,
       course_code: '944',
-      semester: 8,
-      field: 1,
+      semester: 10,
+      field: 9,
       mandatory: false,
     },
     {
@@ -2777,8 +2891,185 @@ export async function seed(knex: Knex): Promise<any> {
       field: 1,
       mandatory: false,
     },
+
+    //Mecanica 
+    //Mantenimiento de Hospitales 1 (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 34,
+      course_code: '946',
+      semester: 8,
+      field: 1,
+      mandatory: false,
+    },
+    //Plantas de vapor (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 34,
+      course_code: '695',
+      semester: 8,
+      field: 3,
+      mandatory: true,
+    },
+    {
+      career_code: 35,
+      course_code: '695',
+      semester: 9,
+      field: 5,
+      mandatory: false,
+    },
+    {
+      career_code: 36,
+      course_code: '695',
+      semester: 8,
+      field: 1,
+      mandatory: true,
+    },
+    // Industrial
+    //Motores de Combustion Interna (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 35,
+      course_code: '696',
+      semester: 8,
+      field: 5,
+      mandatory: false,
+    },
+    {
+      career_code: 36,
+      course_code: '696',
+      semester: 8,
+      field: 1,
+      mandatory: false,
+    },
+    {
+      career_code: 34,
+      course_code: '696',
+      semester: 10,
+      field: 3,
+      mandatory: true,
+    },
+    //Legislacion Ambiental (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 35,
+      course_code: 'E',
+      semester: 8,
+      field: 12,
+      mandatory: false,
+    },
+    //MECANICA INDUSTRIAL 
+    // Economia Industrial (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 36,
+      course_code: '939',
+      semester: 8,
+      field: 1,
+      mandatory: false,
+    },
+    {
+      career_code: 35,
+      course_code: '939',
+      semester: 9,
+      field: 8,
+      mandatory: false,
+    },
+    //Econometria (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 36,
+      course_code: '921',
+      semester: 8,
+      field: 1,
+      mandatory: false,
+    },
+    {
+      career_code: 35,
+      course_code: '921',
+      semester: 9,
+      field: 7,
+      mandatory: false,
+    },
+    //Diseño de la Produccion (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 36,
+      course_code: '907',
+      semester: 8,
+      field: 1,
+      mandatory: true,
+    },
+    {
+      career_code: 34,
+      course_code: '907',
+      semester: 10,
+      field: 5,
+      mandatory: false,
+    },
+    {
+      career_code: 35,
+      course_code: '907',
+      semester: 9,
+      field: 6,
+      mandatory: true,
+    },
+    //Controles industriales (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 36,
+      course_code: '931',
+      semester: 8,
+      field: 1,
+      mandatory: true,
+    },
+    {
+      career_code: 35,
+      course_code: '931',
+      semester: 9,
+      field: 6,
+      mandatory: true,
+    },
+    //Ingenieria Textil 1 (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 36,
+      course_code: '937',
+      semester: 8,
+      field: 1,
+      mandatory: false,
+    },
+    {
+      career_code: 35,
+      course_code: '937',
+      semester: 10,
+      field: 6,
+      mandatory: false,
+    },
+    // Diseño de maquinas 2 (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 36,
+      course_code: '699',
+      semester: 8,
+      field: 1,
+      mandatory: true,
+    },
+    {
+      career_code: 34,
+      course_code: '699',
+      semester: 9,
+      field: 2,
+      mandatory: true,
+    },
+    // Refrigeracion y aire acondicionado (CORRECTAMENTE INGRESADO)
+    {
+      career_code: 36,
+      course_code: '697',
+      semester: 8,
+      field: 1,
+      mandatory: false,
+    },
+    {
+      career_code: 34,
+      course_code: '697',
+      semester: 9,
+      field: 3,
+      mandatory: true,
+    },
+
     //Sistemas
-    //Sistemas Operativos 2
+    //Sistemas Operativos 2 (CORRECTAMENTE INGRESADO)
     {
       career_code: 58,
       course_code: '2819',
@@ -2787,7 +3078,7 @@ export async function seed(knex: Knex): Promise<any> {
       mandatory: true,
     },
 
-    //Redes de Computadores 2
+    //Redes de Computadores 2 (CORRECTAMENTE INGRESADO)
     {
       career_code: 58,
       course_code: '2820',
@@ -2796,7 +3087,7 @@ export async function seed(knex: Knex): Promise<any> {
       mandatory: true,
     },
 
-    //Sistemas de Bases de Datos 2
+    //Sistemas de Bases de Datos 2 (CORRECTAMENTE INGRESADO)
     {
       career_code: 58,
       course_code: '2821',
@@ -2805,7 +3096,7 @@ export async function seed(knex: Knex): Promise<any> {
       mandatory: true,
     },
 
-    //Analisis y Diseño de Sistemas 1
+    //Analisis y Diseño de Sistemas 1 (CORRECTAMENTE INGRESADO)
     {
       career_code: 58,
       course_code: '2822',
@@ -2814,7 +3105,7 @@ export async function seed(knex: Knex): Promise<any> {
       mandatory: true,
     },
 
-    //Seminario de Sistemas 1
+    //Seminario de Sistemas 1 (CORRECTAMENTE INGRESADO)
     {
       career_code: 58,
       course_code: '2823',
