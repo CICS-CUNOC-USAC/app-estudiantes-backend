@@ -10,7 +10,6 @@ const commonConfig = {
     directory: './src/database/migrations',
     stub: './src/database/migration.stub.ts',
     extension: 'ts',
-    schemaName: process.env.DB_SCHEMA,
   },
   seeds: {
     directory: './src/database/seeds',
@@ -28,7 +27,6 @@ module.exports = {
       user: process.env.DB_USER,
       password: process.env.DB_PASS,
       database: process.env.DB_NAME,
-      searchPath: [process.env.DB_SCHEMA],
     },
     ...commonConfig,
   },
