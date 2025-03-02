@@ -176,14 +176,12 @@ export class LibraryService extends BaseService {
 
         const foundReceipt = await this.libraryReceiptModel
           .query(trx)
-          .where('ra', createExternalReturnDto.ra)
-          .where('personal_id', createExternalReturnDto.personal_id)
-          .where('library_reference_id', book_reference_id)
+          .where('id', createExternalReturnDto.loan_id)
           .where('returned_at', null)
           .first();
 
         if (!foundReceipt) {
-          throw new NotFoundException('No se encontro un recibo del prestamo');
+          throw new NotFoundException('No se encontro un recibo del prestamo valido');
         }
 
         return await foundReceipt
