@@ -30,10 +30,11 @@ import { HoursModule } from './modules/hours/hours.module';
 import { PermissionsModule } from './modules/permissions/permissions.module';
 import { CaslModule } from './modules/casl/casl.module';
 import { RedisModule } from './modules/redis/redis.module';
+import appConfig from './app.config';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot({ isGlobal: true, load: [appConfig] }),
     // Auth
     GeneralAuthModule,
     RegularAuthModule,
