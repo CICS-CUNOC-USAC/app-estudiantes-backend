@@ -29,6 +29,7 @@ import { WeekdaysModule } from './modules/weekdays/weekdays.module';
 import { HoursModule } from './modules/hours/hours.module';
 import { PermissionsModule } from './modules/permissions/permissions.module';
 import { CaslModule } from './modules/casl/casl.module';
+import { RedisModule } from './modules/redis/redis.module';
 
 @Module({
   imports: [
@@ -64,6 +65,7 @@ import { CaslModule } from './modules/casl/casl.module';
     HoursModule,
     PermissionsModule,
     CaslModule,
+    RedisModule
   ],
 })
 export class AppModule {
