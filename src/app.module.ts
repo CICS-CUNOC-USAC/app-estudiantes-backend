@@ -29,10 +29,14 @@ import { WeekdaysModule } from './modules/weekdays/weekdays.module';
 import { HoursModule } from './modules/hours/hours.module';
 import { PermissionsModule } from './modules/permissions/permissions.module';
 import { CaslModule } from './modules/casl/casl.module';
+import { MailerModule } from '@nestjs-modules/mailer';
+import { Transport } from './modules/emails/dto/Transport';
+import { EmailModule } from './modules/emails/email.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
+    MailerModule.forRoot({ transport: new Transport().configuration }),
     // Auth
     GeneralAuthModule,
     RegularAuthModule,
@@ -64,6 +68,7 @@ import { CaslModule } from './modules/casl/casl.module';
     HoursModule,
     PermissionsModule,
     CaslModule,
+    EmailModule
   ],
 })
 export class AppModule {
