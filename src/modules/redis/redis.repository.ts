@@ -1,5 +1,8 @@
 import { Inject, Injectable, NotFoundException, OnModuleDestroy } from "@nestjs/common";
 import Redis from "ioredis";
+import { SaveDatasetDto } from "./dto/save-dataset.dto";
+import { GetDatasetDto } from "./dto/get-dataset.dto";
+import { DeleteDatasetDto } from "./dto/delete-dataset.dto";
 
 @Injectable()
 export class RedisRepository implements OnModuleDestroy {
@@ -12,18 +15,20 @@ export class RedisRepository implements OnModuleDestroy {
         await this.redisClient.quit();
     }
 
-    async get(prefix: string, key: string): Promise<string> { 
-        const value = await this.redisClient.get(`${prefix}:${key}`);
-        if(!value) throw new NotFoundException(`Llave de redis ${key} no encontrada o ha expirado`);
+    async get(fullKey: string): Promise<string> { 
+        const value = await this.redisClient.get(fullKey);
+        if(!value) throw new NotFoundException(`Llave de redis ${fullKey} no encontrada o ha expirado`);
         return value;
     }
 
-    async set(prefix: string, key: string, value: string, expiration: number): Promise<void> {
-        await this.redisClient.set(`${prefix}:${key}`, value, 'EX', expiration);
+    async set(saveDatasetDto: SaveDatasetDto): Promise<SaveDatasetDto> {
+        await this.redisClient.set(`${saveDatasetDto.fullKey}`, saveDatasetDto.value, 'EX', saveDatasetDto.ttl);
+        return saveDatasetDto;
     }
 
-    async delete(prefix: string, key: string): Promise<void> {
-        await this.redisClient.del(`${prefix}:${key}`);
+    async delete(deleteDatasetDto: DeleteDatasetDto): Promise<boolean> {
+        const result = await this.redisClient.del(deleteDatasetDto.fullKey)
+        return result === 1;
     }
     
 }
