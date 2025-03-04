@@ -274,7 +274,7 @@ export async function seed(knex: Knex): Promise<any> {
       credits: 5 }, //Creditos correctos
     { code: '2807', name: 'Practica Inicial TI', 
       description: 'Los talleres correspondientes a la carrera de Ingeniería en Ciencias y Sistemas, se enfocan básicamente en elconocimiento práctico que adquiere el estudiante acerca de los diferentes elementos de hardware y software necesarios para coadyuvar al desarrollo de su futura vida profesional, facilitando la comprensión y el aprendizaje de los cursos en la etapa intermedia y avanzada de su carrera', 
-      credits: 3 }, //creditos correctos
+      credits:0  }, //creditos correctos, no contiene creditos.
 
     //Sexto Semestre
     //Area Comun
@@ -622,7 +622,7 @@ export async function seed(knex: Knex): Promise<any> {
       code: '2821',
       name: 'Sistemas de Bases de Datos 2',
       description: 'El curso comprende el estudio profundo de los sistemas de bases de datos, buscando que el estudiante comprenda los modelos y componentes de bases de datos, así como la estructura interna de las mismas, las nuevas tecnologías y los aspectos teóricos que las fundamenta. El curso se divide en dos partes fundamentales: a. El funcionamiento de un sistema administrador de bases de datos: Manejo de transacciones, concurrencia, procesamiento de consultas, respaldo y recuperación. b. Los modelos de bases de datos y las tendencias de los sistemas de bases de datos. La base teórica para el desarrollo de aplicaciones en los diferentes modelos de bases de datos',
-      credits: 5, //se modifico su valor de creditos de 3 a 5 segun programa de curso, creditos correctos
+      credits: 4, //se modifico su valor de creditos de 5 a 4 segun informacion de erikkson hernandez, creditos correctos
     },
     {
       code: '2822',
@@ -642,8 +642,8 @@ export async function seed(knex: Knex): Promise<any> {
     {
       code: '2672',
       name: 'Introduccion a la Evaluacion de Impacto Ambiental',
-      description: '',
-      credits: 4,
+      description: 'Esta asignatura facilita los conocimientos, criterios e instrumentos utilizados para las evaluaciones ambientales en general. Proporcionando para ello los elementos esenciales y básicos para que los estudiantes de las carreras de ingeniería manejen con propiedad el componente ambiental en los proyectos, obras o actividades en el ejercicio de su profesión. El contenido del curso parte de una introducción a sistemas ambientales y derecho ambiental, posteriormente un análisis de la situación ambiental, de la legislación y normativas que rigen los estudios de impacto ambiental en el país. Posteriormente se profundiza en el uso de metodologías y técnicas establecidas para las evaluaciones ambientales y se culmina con la elaboración de un estudio de impacto ambiental completo, partiendo de una experiencia real de una obra existente o a nivel de proyecto. Complementariamente la Gestión Integral de Riesgo y Reducción a Desastres y Adaptación al Cambio Climático, es adquirida por el estudiante por la naturaleza de prevenir los impactos y proponer sistemas de gestión y monitoreo ambiental',
+      credits: 4, //Creditos correctos
     },
     {
       code: '922',
@@ -651,55 +651,73 @@ export async function seed(knex: Knex): Promise<any> {
       description: 'Este curso se ha diseñado para que el estudiante conozca, a nivel introductorio, los principales temas del área macroeconómica, como el enfoque más amplio del funcionamiento de un sistema económico. Se enfatizará en cuáles han sido las necesidades de la problemática económica internacional que permitieron la evolución de este nuevo campo de especialización, que dieron origen al estudio diferenciado de los grandes agregados, hasta la estructuración, de los principales temas que en la actualidad comprende. Asimismo, cuáles son las tendencias en su orientación, tanto desde sus inicios como hasta la actualidad. Previo a que aborden directamente los temas de la macroeconomía, es necesario enfatizar cuál es la naturaleza de la ciencia económica, su importancia y principales ramas. De igual manera, diferenciar con claridad cuál es el campo de estudio de la microeconomía y el de la macroeconomía, así como los aspectos complementarios entre ambas disciplinas. Puesto que todo individuo en el ámbito social cumple también variadas funciones como agente económico, el curso se propone dar una visión general y amplia al estudiante, sobre cuáles son las características del entorno económico en el que se desenvuelve actualmente, y que ya en su vida profesional deberá conocer para la realización de un efectivo ejercicio.',
       credits: 4, //Creditos correctos
     },
-    { code: '2570', name: 'Etica Profesional', description: '', credits: 4 },
+    { code: '2570', name: 'Etica Profesional', 
+      description: 'El estudio de la ética profesional, necesita del conocimiento de los valores, las virtudes humanas, los principios para la evaluación de las decisiones éticas, la ética social, la responsabilidad social del profesional y la empresa con la sociedad, la correlación de las decisiones éticas con la población, ecología, seguridad y recursos necesarios. Es un curso que busca formar al estudiante con los principales temas de la ética y de la ética profesional, siendo esta el principal compromiso que el hombre adquiere individual, social y profesionalmente. La acción profesional procura el sustento propio y el de la familia, así como también busca conservar los elementos fundamentales de la comunidad y el desarrollo social; por medio del qué hacer ético y moral del ingeniero, ejerciendo su profesión sin poner en riesgo la vida del ser humano y garantizando el cuidado del medio ambiente que lo rodea. Existe una obligatoriedad moral en el comportamiento profesional de los ciudadanos, que implica respeto a la sociedad y a las personas con que se relacionan, la cual deriva de un compromiso de comportamiento de la propia acción del trabajo, de sus consecuencias, junto a los directamente interesados y a la sociedad en general.', 
+      credits: 4 }, //creditos correctos
     {
-      code: '2837',
+      code: '2671', //Para civil, mecanica, industrial y mecanica industrial
       name: 'Seminario de Investigacion',
-      description: '',
-      credits: 4,
-    }, //TODO: REVISAR, EN SISTEMAS VALE 3 CREDITOS, NO 4
+      description: 'En el Curso de Seminario de Investigación, el estudiante adquiere las herramientas de investigación para resolver problemas y proyectarse a la sociedad por la Extensión Universitaria (además de los otros 2 Pilares de la Universidad: Docencia é Investigación, que se realizará en este curso) con la inserción de la temática de Gestión Integral de Riesgo de Desastres GIRD y la Adaptación al Cambio Climático ACC para que pueda realizar el Anteproyecto é Informe Final de su proyecto de fin de carrera o trabajo de graduación a través del EPS. El curso se desarrolla con la participación activa de los estudiantes, para definir la problemática. La metodología consiste en contextualizar los temas para darle sentido a la investigación. En la formulación de los temas se podrá realizar de manera individual, por carrera o grupal, según el consenso y número de estudiantes. Las aplicabilidades de las investigaciones en su mayoría se realizarán a manera de llevar a los estudiantes a experimentar la oportunidad solución de problemas en su medio. La evaluación de curso es proporcional según avances y cumplimiento de tiempos de los avances de los diferentes proyectos.',
+      credits: 4, //Creditos correctos
+    },
+    {
+      code: '2837', //para sistemas
+      name: 'Seminario de Investigacion',
+      description: 'Este seminario es un guía para que el alumno sepa cómo preparar un proyecto de fin de carrera o Trabajo de Graduación TESIS. Se asume que los estudiantes que ingresan a este seminario tiene el objetivo personal de completar los cursos de Ingeniería en Ciencias y Sistemas en el presente semestre por lo que han de estar interesados en desarrollar un proceso de investigación completo para experimentar todas las fases de un Trabajo de Graduación. Con el trabajo a desarrollar a lo largo de las próximas semanas se orientará al estudiante desde la concepción del tema central de una investigación hasta su desarrollo y presentación escrita',
+      credits: 3, //Creditos correctos
+    }, 
     //Civil
     {
       code: '911',
       name: 'Costos Presupuestos y Avaluos',
-      description: '',
-      credits: 6,
+      description: 'El curso proporciona al estudiante las habilidades y herramientas para alcanzar las competencias necesarias para Planificar, Organizar, Ejecutar, Supervisar y Monitorear proyectos de infraestructura',
+      credits: 6, //Creditos correctos
     },
-    { code: '1062', name: 'Ingenieria Sismica', description: '', credits: 5 },
+    { code: '1062', name: 'Ingenieria Sismica', 
+      description: ' La ingeniería sismo-resistente tiene como primer objetivo entender cómo se comportan las estructuras cuando están sometidas a un evento sísmico. Basado en un claro entendimiento de los parámetros y condiciones que afectan una estructura, es que se puede alcanzar el segundo objetivo de la ingeniería sismo-resistente el cual va dirigido a mitigar el riesgo al cual están expuestas las obras civiles ante la ocurrencia de terremotos destructivos. El primer bloque de este curso presenta los conceptos importantes en sismología. El segundo bloque de este curso es un repaso de cómo se calcula la respuesta sísmica de sistemas de un grado de libertad así como de múltiples grados de libertad. El tercer bloque de este curso se compone por la construcción de espectros de diseño para las edificaciones basados en la normativa guatemalteca y estadounidense. Por último, se estudian las consideraciones de tipología estructural para poder evitar el colapso de la estructura o bien para controlar el daño bajo la acción sísmica.', 
+      credits: 5 }, //creditos correctos
     {
-      code: '1054',
-      name: 'Analisis Estructural 3',
-      description: '',
-      credits: 5,
-    },
+        code: '1054',
+        name: 'Elementos Finitos',
+        description: 'El curso de Elementos Finitos está diseñado para proporcionar a los estudiantes una comprensión profunda del método de los elementos finitos (MEF) y sus aplicaciones en el análisis y solución de problemas ingenieriles complejos. Este curso es fundamental para aquellos interesados en el modelado y simulación de sistemas físicos en diversas disciplinas de la ingeniería. Durante el curso, los estudiantes explorarán los principios básicos del MEF, incluyendo la formulación de problemas de valor de contorno, la discretización del dominio, y la construcción de matrices de rigidez. Se abordarán temas como la solución de ecuaciones diferenciales parciales, la interpolación y aproximación de funciones, y la evaluación de errores y convergencia. El curso incluirá el uso de software especializado para la implementación y análisis de modelos de elementos finitos. Los estudiantes aprenderán a desarrollar y validar modelos numéricos para simular el comportamiento de estructuras, sólidos, fluidos y otros sistemas físicos, aplicando el MEF en áreas como la mecánica de sólidos, la transferencia de calor, y la dinámica de fluidos.',
+        credits: 5, //Creditos correctos
+    },  
     {
       code: '1057',
       name: 'Diseño de Estructuras de Mamposteria',
-      description: '',
-      credits: 5,
+      description: ' El curso de Diseño Estructural en Mampostería forma parte del área de estructuras de la carrera de ingeniería civil y ayuda al estudiante a analizar, interpretar y comprender el comportamiento de las diferentes estructuras tipo cajón (Sistema E2, NSE 3-2018) al ser sometidas a diferentes estados de carga. Dentro del curso se estudian las propiedades mecánicas y físicas de los materiales a utilizar en este tipo de estructuras. Además se estudia la clasificación del sistema estructural y el comportamiento de los muros mampuestos al ser sometidos a cargas gravitacionales y laterales, siendo éstas últimas (sismo y viento), las que se consideran para un análisis estructural sismo-resistente del sistema. Además se verán los diferentes chequeos a considerar para el sistema estructural de forma que cumpla con un diseño sismo-resistente adecuado, considerando los factores de seguridad expuestos en la normativa vigente de la región. ASPECTO IMPORTANTE: Debido a que nuestra región y país en general tiene sectores altamente vulnerables a riesgo por efectos naturales como derrumbes, deslaves, inundaciones, etc. Todo esto debido a los efectos del calentamiento global y a la topografía propia de sitio, especialmente en la cercanía de los ríos, montañas, barrancos, etc. Entonces se considerará el diseño de muros aniso-trópicos (Muros con diferente rigidez dentro de los ejes estructurales). Para evaluar todos los aspectos críticos dentro de esta posibilidad de falla o colapso debido a estas circunstancias.',
+      credits: 5, //Creditos correctos
     },
-    { code: '1071', name: 'Puentes', description: '', credits: 5 },
+    { code: '1071', name: 'Puentes', 
+      description: ' El curso de puentes forma parte del área de Topografía y Transportes de la carrera de ingeniería civil y para ello debe tener conocimientos sobre el diseño geométrico de una carretera para poder enlazar la carretera y el puente que debe de encajaren el diseño establecido, además de los conceptos técnicos debe tener identificado el riesgo que este tipo de estructuras podría tener a lo largo de su vida útil, que sería uno de los puntos mas importantes a considerar ya que el diseño de loselementos se han aprendido en otras clases del área estructura', 
+      credits: 5 }, //creditos correctos
     {
       code: '1055',
       name: 'Concreto Preesforzado',
-      description: '',
-      credits: 5,
+      description: 'Pre esforzar es una acción deliberada de crear esfuerzos internos permanentes en una estructura o sistema con el fin de mejorar su desempeño. Dichos esfuerzos están diseñados a contraponerse a aquellos esfuerzos inducidos por fuerzas externas. La aplicación del pre-esfrozado en el concreto es conveniente para un gran rango de aplicación, la razón es que el concreto es un material con mucha capacidad de resistir esfuerzos a compresión, pero su capacidad de soportar esfuerzos a tracción es muy baja. El pre-esforzado en el concreto produce esfuerzos de compresión, uniformes o no uniformes, que están contrarrestando los efectos de tracción inducidos por fuerzas externas. La aplicación del concreto pre-esforzado abarca desde puentes, losas macizas, columnas, reforzamiento de estructuras existentes y muchos otros. Un aspecto muy importante es que en un inicio la aplicación del pre-esforzado ha sido para rehabilitar estructuras existentes. ',
+      credits: 5, //Creditos correctos
     },
     {
       code: '1058',
       name: 'Diseño de Estructuras Metalicas 1',
-      description: '',
-      credits: 5,
+      description: 'La asignatura de Estructuras Metálicas I es un curso del área de estructuras, el cual trata sobre la concepción y el pre  dimensionamiento con énfasis en las normativas internacionales correspondientes al acero estructural. El acero se utiliza en una amplia variedad de formas para muchas funciones en la construcciones de edificios, las estructuras de madera, concreto y mampostería, requieren mucho producto de acero, sin embargo se estudia el acero como un material estructural para la producción de componentes y sistemas de acero. El acero es un material muy versátil y en la actualidad se producen en cientos de grados o tipos, para uso estructural, si bien es cierto que es la AISC por sus siglas en inglés (American Institute of Steel Construction), es la principal organización de servicio en el área de la construcción de acero, existen muchas organizaciones que aportan mucha información adicional para el proyectista como lo es la ASTM, que también aportan especificaciones estándar ampliamente utilizadas en tipos de acero. El curso de Estructuras Metálicas I, utilizara el método del esfuerzo de trabajo, el cual se basa principalmente en la construcción de las condiciones de carga a nivel de servicio y el análisis de deformación. Los grados estructurales del acero son únicos entre la mayoría de los materiales para construcción porque poseen propiedades casi ideales en cuanto a esfuerzos y deformación en la mayoría de las condiciones de carga de servicio.',
+      credits: 5, //Creditos correctos
     },
-    { code: '1070', name: 'Placas y Cascaras', description: '', credits: 5 },
+    { code: '1070', name: 'Placas y Cascaras', 
+      description: 'El curso de Placas y Cáscaras está diseñado para proporcionar a los estudiantes una comprensión profunda de las teorías y métodos de análisis aplicados al estudio de estructuras de placas y cáscaras. Este curso es fundamental para aquellos interesados en el diseño y análisis de estructuras delgadas y curvas que se encuentran en diversas aplicaciones de la ingeniería civil, mecánica y aeroespacial. Durante el curso, los estudiantes explorarán los principios básicos y avanzados del comportamiento estructural de placas y cáscaras bajo diferentes condiciones de carga. Se abordarán temas como la teoría de placas delgadas, las ecuaciones de equilibrio y compatibilidad, y los métodos de solución analítica y numérica. El curso incluirá el uso de software especializado para el modelado y análisis de estructuras de placas y cáscaras, permitiendo a los estudiantes desarrollar habilidades técnicas en la simulación y evaluación del desempeño estructural. Se analizarán casos prácticos y aplicaciones reales, como puentes, edificios, tanques, y componentes aeroespaciales, para ilustrar los conceptos teóricos.', 
+      credits: 5 }, //creditos correctos
     {
       code: '1066',
       name: 'Metodos de Construccion',
-      description: '',
-      credits: 3,
+      description: ' El curso está enfocado para que el estudiante pueda conocer los diferentes materiales, métodos, procesos y supervisión de obras de construcción de diversa índole. Dentro del mismo se verán las diversas fases del proceso de construcción de edificaciones, puentes, carreteras e instalaciones hidráulicas, sanitarias, eléctricas y especiales. Dentro del mismo se presentarán casos y paso a paso se explicará todo lo que conlleva la construcción obras desde el punto de vista de ejecución de obra (contratista o constructor) y supervisión de obra pública y privada. Dentro del contenido se analizará la etapa previa a la ejecución como lo es la planificación y gestión de obra, revisión de planos y cuantificación de cantidades de acuerdo con el presupuesto, para luego ir al proceso y método constructivo, análisis de la gestión de los riesgos en obra de distinta índole y la adaptabilidad al cambio climático que sufren las mismas, para luego ir a la etapa de finalización de proyecto planos As-Built y administración del cierre de obra.',
+      credits: 3, //Creditos correctos
     },
-    { code: '934', name: 'Cimentaciones 2', description: '', credits: 4 },
-    { code: '788', name: 'Obras Hidraulicas', description: '', credits: 4 },
+    { code: '934', name: 'Cimentaciones 2', 
+      description: ' Es un curso del área de construcciones civiles y materiales de construcción, el cual trata del análisis y diseño de cimentaciones superficiales combinadas, para sistemas de soporte de dos o más columnas, estudio de cimentaciones profundas tipo pilote, obras de retención que se diseñan ante solicitaciones de carga de suelo y sismo. A lo largo del desarrollo del mismo, se auxilia de otras ciencias y cursos preliminares, entre ellas destacan: matemáticas básicas y aplicadas, mecánica y análisis estructural, materiales de construcción, entre otras. A nivel aplicativo, se hace la vinculación de los temas vistos a GIRD y ACC para la elaboración de proyectos. El punto de partida del curso, es el estudio de las propiedades del suelo, la capacidad de carga última y el estudio de la filosofía de diseño de cimientos, se estudian los temas de cimentaciones combinadas por medio de zapatas combinadas, zapatas con viga conectora, y losa de cimentación, el estudio de los muros de contención; finalmente se tratan temas introductorios de estudio de cimentaciones profundas, cimentación con pilotes y el estudio de la estabilidad de taludes.', 
+      credits: 4 }, //creditos correctos
+    { code: '788', name: 'Obras Hidraulicas', 
+      description: ' La asignatura permitirá al alumno recibir los conocimientos generales esenciales de las técnicas de regulación de ríos, los principales tipos de presas y embalses, el análisis funcional y cálculo de estabilidad de las presas de gravedad, el cálculo hidráulico, diseño, construcción y equipamiento de las obras hidráulicas varias y las asociadas', 
+      credits: 5 }, //creditos correctos
     //Mecanica
     { code: '954', name: 'Ingenieria de Metodos', 
       description: 'La necesidad de ser más competitivos en un mundo globalizado, lleva a las empresas comerciales, industriales y de servicios a ser selectivos en la contratación del personal, pero además de la selección, se hace necesario que el puesto de trabajo esté bien diseñado para que el trabajador sea mucho más eficiente y que contribuya a mejorar la productividad. Por tal razón el curso de Ingeniería de Métodos debe capacitar al Ingeniero Industrial en el análisis y diseño de los puestos de trabajo, en este curso se tratará sobre las técnicas de estudio de trabajo, como análisis de movimientos, toma de tiempos, diagramas de proceso y sistemas de pago de salarios.', 
@@ -707,8 +725,8 @@ export async function seed(knex: Knex): Promise<any> {
     {
       code: '947',
       name: 'Mantenimiento de Hospitales 2',
-      description: '',
-      credits: 5,
+      description: 'El curso de Mantenimiento de Hospitales 2 está diseñado para proporcionar a los estudiantes una comprensión avanzada de los principios y prácticas relacionados con el mantenimiento y gestión de instalaciones hospitalarias. Este curso es fundamental para aquellos interesados en asegurar el funcionamiento eficiente y seguro de los sistemas y equipos en entornos de atención médica. Durante el curso, los estudiantes explorarán temas como el mantenimiento preventivo y correctivo de equipos médicos, la gestión de infraestructuras hospitalarias, y la implementación de sistemas de gestión de mantenimiento asistido por computadora (GMAO). Se hará hincapié en la aplicación de técnicas y procedimientos que garanticen la operatividad continua y la seguridad de los pacientes y el personal. El curso incluirá el estudio de sistemas críticos en hospitales, como climatización, ventilación, electricidad, y suministro de agua. Los estudiantes aprenderán a desarrollar planes de mantenimiento, a gestionar recursos y a coordinar actividades de mantenimiento para minimizar interrupciones en los servicios hospitalarios.',
+      credits: 5, //Creditos correctos segun pensum
     },
     {
       code: '744',
@@ -735,8 +753,8 @@ export async function seed(knex: Knex): Promise<any> {
     {
       code: '941',
       name: 'Analisis de Sistemas Industriales',
-      description: '',
-      credits: 5,
+      description: 'Dada la globalización, tratados de libre comercio y el acceso a la información es necesario tener un enfoque sistemático que integre las áreas sociales y productivas permitiendo a los estudiantes tener otra visión del mundo que le rodea y actuar de forma adecuada a los distintos casos que se pueden presentar en la práctica profesional',
+      credits: 5, //Creditos correctos
     },
     { code: '797', name: 'Mercadotecnia 2', 
       description: 'En la actualidad los vendedores enfrentan un mercado que simultáneamente se hace competitivo, especializado, global y conectado al Internet con miras a la exportación. Se hace necesario apostar hoy más que nunca, por un equilibrio entre creatividad y conocimiento para planificar, crear intercambios que satisfagan las metas del consumidor final, objetivos del empresario en aras del beneficio social y eco planetario ', 
@@ -757,53 +775,74 @@ export async function seed(knex: Knex): Promise<any> {
     {
       code: '2824',
       name: 'Modelacion y Simulacion 1',
-      description: '',
-      credits: 5,
+      description: 'El objetivo de este curso es dar un tratamiento integral de todos los aspectos importantes de un estudio de simulación, incluyendo el modelado, software de simulación, verificación de modelo y validación, el modelado de datos de entrada, generadores de números aleatorios, generación de variables aleatorias y procesos aleatorios, el diseño estadístico y análisis de experimentos de simulación, y para resaltar las principales áreas de aplicación como la manufactura. Así mismo se hace una introducción a la econometría que trata de la aplicación de la teoría económica, la matemática y técnicas estadísticas con el fin de probar hipótesis y estimar, así como pronosticar, los fenómenos económicos.',
+      credits: 5, //Creditos correctos
     },
     {
       code: '2825',
       name: 'Sistemas Organizacionales y Gerenciales 1',
-      description: '',
-      credits: 4,
+      description: ' Dentro de las empresas, se observa que año con año los avances en la tecnología logran ofrecer nuevas y mejores maneras de hacer las cosas. La tecnología se va renovando cada vez más rápido y es importante mantenerse al tanto de las últimas técnicas gerenciales y de TI en las empresas, y de la misma forma de todas las posibles soluciones que se pueden plantear a distintos problemas que enfrentan las organizaciones. Durante la primera parte del curso se identifican componentes, interacciones y reacciones que presentan los sistemas mediante conceptos básicos de administración, presupuestos y contabilidad.',
+      credits: 4, //Creditos correctos
     },
     {
       code: '2830',
       name: 'Emprendedores de Negocios Informaticos',
-      description: '',
-      credits: 4,
+      description: 'El curso de Emprendedores de Negocios Informáticos está diseñado para proporcionar a los estudiantes las habilidades y conocimientos necesarios para iniciar y gestionar negocios en el ámbito de la tecnología de la información. Este curso es fundamental para aquellos interesados en emprender y desarrollar soluciones innovadoras en el sector informático. Durante el curso, los estudiantes explorarán temas como la identificación de oportunidades de negocio, la creación de planes de negocio, la gestión de recursos financieros, y las estrategias de marketing y ventas. Se hará hincapié en la aplicación de estos conceptos en el contexto de startups y empresas tecnológicas, permitiendo a los estudiantes desarrollar competencias clave para el éxito empresarial. El curso incluirá estudios de casos de emprendedores exitosos en el ámbito informático, así como el uso de herramientas y metodologías ágiles para el desarrollo de productos y servicios tecnológicos. Los estudiantes aprenderán a utilizar tecnologías emergentes y a implementar modelos de negocio innovadores que respondan a las demandas del mercado.',
+      credits: 4, //Creditos correctos segun pensum
     },
     {
       code: '2826',
       name: 'Inteligencia Artificial 1',
-      description: '',
-      credits: 4,
+      description: ' Presentar un panorama de los problemas que trata la inteligencia artificial. Conceptos básicos y aplicaciones de la IA. Se tratarán las dos áreas básicas de la Inteligencia Artificial: la resolución de problemas (incluyendo el espacio de estados, la búsqueda heurística y la satisfacción de restricciones) y la representación de conocimiento. Para completar la visión del área se presentaran dos de los temas que tienen actualmente un mayor grado presencia en el ámbito de las aplicaciones y la investigación: El tratamiento de lenguaje Natural y los Sistemas Basados en el Conocimiento siendo el enfoque de la asignatura práctico.',
+      credits: 4, //Creditos correctos
     },
     {
       code: '2831',
       name: 'Seguridad y Auditorias de Redes',
-      description: '',
-      credits: 4,
+      description: 'Se busca desarrollar en el estudiante una visión general sobre Auditoria de Sistemas Computacionales, tipos y reportes, con un enfoque mas detallado en Redes Informáticas, así como los pilares de la seguridad informática, vulnerabilidades, estándares, leyes, metodologías y tipos de amenaza, con una introducción a herramientas para análisis de vulnerabilidades de redes.',
+      credits: 4, //Creditos correctos
     },
     {
       code: '2827',
       name: 'Analisis y Diseño de Sistemas 2',
-      description: '',
-      credits: 3,
+      description: ' En un mundo donde se busca obtener resultados mas rápido, manteniendo la calidad de un producto, los conceptos de patrones de diseño y arquitectura de software son herramientas de gran utilidad para alcanzar esos objetivos. El curso es acerca de patrones aplicables para el diseño de componentes de una aplicación, es decir patrones de diseño. El uso de dichos patrones, de patrones de arquitectura, técnicas para definir una arquitectura que satisfaga los requerimientos funcionales y no funcionales, comprenden el resto del curso. Se aplicarán los elementos anteriores en un proyecto de curso para poder contar con una experiencia real en el uso de los patrones y técnicas presentados.',
+      credits: 5, //Creditos modificados
     },
-    { code: '2832', name: 'Sistemas Aplicados 1', description: '', credits: 5 },
+    { code: '2832', name: 'Sistemas Aplicados 1', 
+      description: 'El curso de Sistemas Aplicados 1 está diseñado para proporcionar a los estudiantes una comprensión práctica y aplicada de los sistemas informáticos y su integración en diversos entornos. Este curso es fundamental para aquellos interesados en el desarrollo, implementación y gestión de soluciones tecnológicas en la ingeniería en ciencias y sistemas. Durante el curso, los estudiantes explorarán temas como la arquitectura de sistemas, la administración de redes, la gestión de bases de datos y la seguridad informática. Se hará hincapié en la aplicación de estos conceptos en proyectos reales, permitiendo a los estudiantes desarrollar habilidades técnicas y prácticas necesarias para enfrentar desafíos en el ámbito de los sistemas informáticos. El curso incluirá el uso de herramientas y tecnologías modernas utilizadas en la industria, como sistemas operativos, servidores, y software de gestión de redes. Los estudiantes aprenderán a configurar, administrar y mantener sistemas informáticos, asegurando su funcionamiento eficiente y seguro.', 
+      credits: 5 }, //creditos correctos segun pensum
     {
       code: '2833',
       name: 'Bases de Datos Avanzadas',
-      description: '',
-      credits: 5,
+      description: 'El curso de Bases de Datos Avanzadas está diseñado para proporcionar a los estudiantes una comprensión profunda y práctica de las técnicas avanzadas en el diseño, implementación y gestión de bases de datos. Este curso es fundamental para aquellos interesados en el manejo eficiente de grandes volúmenes de datos y en la optimización del rendimiento de los sistemas de bases de datos. Durante el curso, los estudiantes explorarán temas como la arquitectura de bases de datos distribuidas, el diseño y administración de bases de datos NoSQL, y las técnicas de replicación y fragmentación de datos. Se hará hincapié en la aplicación de estos conceptos en el desarrollo de sistemas de información robustos y escalables. El curso incluirá el uso de herramientas y tecnologías modernas utilizadas en la industria, como sistemas de gestión de bases de datos (DBMS) avanzados, lenguajes de consulta (SQL y NoSQL), y plataformas de big data. Los estudiantes aprenderán a diseñar esquemas de bases de datos eficientes, a implementar procedimientos almacenados y a optimizar consultas para mejorar el rendimiento.',
+      credits: 5, //Creditos correctos segun pensum
     },
     {
       code: '2828',
       name: 'Seminario de Sistemas 2',
-      description: '',
-      credits: 3,
+      description: 'En las últimas décadas se ha presenciado como empresas han construido su posición competitiva a partir del buen análisis de sus datos. Para poder hacer de esto una estrategia sustentable y diferenciadora, muchas empresas han extendido el concepto analítico desde sus bases de datos corporativas, a bases de datos nuevas, más grandes y de más rápido crecimiento, que han surgido producto de las redes sociales, smartphones y nuevos sensores, que en combinación con las bases de datos corporativas han demostrado tener altísimo valor en el descubrimiento de nuevo conocimiento. En su conjunto, el fenómeno de Big Data engloba una serie de conceptos del Business Intelligence tradicional, pero re-escritos desde la perspectiva de las nuevas posibilidades que abren tecnologías como las bases de datos no relacionales, procesamiento paralelo, visualización, inteligencia artificial y procesamiento en tiempo real',
+      credits: 3, //Creditos correctos
     },
-    { code: '2829', name: 'Practica Final', description: '', credits: 0 },
+    { code: '2829', name: 'Practica Final',  //Para sistemas
+      description: 'Son 400 horas de trabajo en un Proyecto aplicado, docencia e investigación. El objetivo es poner en contacto al estudiante con aplicaciones de la carrera que ha estudiado Las prácticas son actividades que el estudiante realiza para consolidar los conocimientos adquiridos durante la carrera, las cuales tienen como propósito poner en contacto al estudiante con la realidad que presenta el ámbito de la carrera de Ingeniería en Ciencias y Sistemas. Teniendo la posibilidad de elegir el área en que desea realizar su práctica. Estas áreas son; investigación, docencia y trabajo aplicado. El estudiante que opte por la práctica aplicada contará con el apoyo de un encargado, el cual será un profesional de su misma expertís, y quien deberá laborar dentro de la empresa o entidad gubernamental. Así mismo, cuando el estudiante opte por la práctica en Investigación, el encargado será el docente responsable del proyecto de investigación, quien asignará las tareas de la investigación acorde a sus capacidades. Por el contrario, sí el estudiante opta por realizar su práctica en Docencia, él deberá haber aprobado el curso donde desea realizar su práctica con una nota mínima y su responsable será el docente del curso, quien asignará las tareas que considere convenientes. Todas las regulaciones de prácticas serán de acuerdo con el normativo vigente de prácticas y otros normativos que regulen la actividad de auxiliatura. Además, este curso es el espacio idóneo, para que independientemente de la elección del estudiante, se evidencie el conocimiento teórico-práctico, se promuevan acciones pertinentes en los diferentes campos de acción y proyecten alternativas de solución a problemáticas sociales, ambientales, educativas, entre otras. El estudiante al finalizar la práctica deberá presentar un informe, a través del cual detalle las actividades que desarrollo. Este debe evidenciar la implementación de la temática de Gestión Integral de Reducción de Desastres y Adaptación al Cambio Climático, así como la conservación del medio ambiente', 
+      credits: 0 }, //creditos correctos
+    //Para industrial -35 segun programa de cursos
+    { code: '2740', name: 'Practicas Finales', 
+      description: 'Las prácticas son actividades que el estudiante realiza para consolidar los conocimientos adquiridos durante la carrera, las cuales tienen como propósito poner en contacto al estudiante con la realidad que presenta el ámbito de la carrera de Ingeniería Industrial. Teniendo la posibilidad de elegir el área en que desea realizar su práctica. Estas áreas son; investigación, docencia y trabajo aplicado. El estudiante que opte por la práctica aplicada contará con el apoyo de un encargado, el cual será un profesional de su misma expertís, y quien deberá laborar dentro de la empresa o entidad gubernamental. Así mismo, cuando el estudiante opte por la práctica en Investigación, el encargado será el docente responsable del proyecto de investigación, quien asignará las tareas de la investigación acorde a sus capacidades. Por el contrario, sí el estudiante opta por realizar su práctica en Docencia, él deberá haber aprobado el curso donde desea realizar su práctica con una nota mínima y su responsable será el docente del curso, quien asignará las tareas que considere convenientes. Todas las regulaciones de prácticas serán de acuerdo con el normativo vigente de prácticas y otros normativos que regulen la actividad de auxiliatura. Además, este curso es el espacio idóneo, para que independientemente de la elección del estudiante, se evidencie el conocimiento teórico-práctico, se promuevan acciones pertinentes en los diferentes campos de acción y proyecten alternativas de solución a problemáticas sociales, ambientales, educativas, entre otras. El estudiante al finalizar la práctica deberá presentar un informe, a través del cual detalle las actividades que desarrollo. Este debe evidenciar la implementación de la temática de Gestión Integral de Reducción de Desastres y Adaptación al Cambio Climático, así como la conservación del medio ambiente', 
+      credits: 0 }, //creditos correctos
+
+    {
+      code: '2741', //Para mecanica segun programa de cursos
+      name: 'Practicas Finales', 
+      description: 'Las prácticas son actividades que el estudiante realiza para consolidar los conocimientos adquiridos durante la carrera, las cuales tienen como propósito poner en contacto al estudiante con la realidad que presenta el ámbito de la carrera de Ingeniería Mecanica. Él tendrá la posibilidad de elegir el área en que desea realizar su práctica. Estas áreas son; investigación, docencia y trabajo aplicado. El estudiante que opte por la práctica aplicada, contará con el apoyo de un encargado, el cual será un profesional de su misma expertís, y quien deberá laborar dentro de la empresa o entidad gubernamental. Así mismo, cuando el estudiante opte por la práctica en Investigación, el encargado será el docente responsable del proyecto de investigación, quien asignará las tareas de la investigación acorde a sus capacidades. Por el contrario, sí el estudiante opta por realizar su práctica en Docencia, él deberá haber aprobado el curso donde desea realizar su práctica con una nota mínima y su responsable será el docente del curso, quien asignará las tareas que considere convenientes. Todas las regulaciones de prácticas serán de acuerdo al normativo vigente de prácticas y otros normativos que regulen la actividad de auxiliatura. Además, este curso es el espacio idóneo, para que independientemente de la elección del estudiante, se evidencie el conocimiento teórico-práctico, se promuevan acciones pertinentes en los diferentes campos de acción y proyecten alternativas de solución a problemáticas sociales, ambientales, educativas, entre otras. El estudiante al finalizar la práctica deberá presentar un informe, a través del cual detalle las actividades que desarrollo. Este debe evidenciar la implementación de la temática de Gestión Integral de Reducción de Desastres y Adaptación al Cambio Climático, así como la conservación del medio ambiente',
+      credits: 0,
+    },
+    {
+      code: '2742', //Para mecanica industrial segun programa de cursos
+      name: 'Practicas Finales', 
+      description: ' Son 400 horas de trabajo en un Proyecto de tipo: Aplicado, Docencia o Investigación. El objetivo es poner en contacto al estudiante con aplicaciones de la carrera que ha estudiado.',
+      credits: 0,
+    },
 
     //Decimo Semestre
     //Area Comun
@@ -813,12 +852,14 @@ export async function seed(knex: Knex): Promise<any> {
       description: '',
       credits: 4,
     },
-    { code: '912', name: 'Planeamiento', description: '', credits: 6 },
+    { code: '912', name: 'Planeamiento', 
+      description: 'El curso de planeamiento esta enfocado a los aspectos importantes que el estudiante manejará a lo largo del curso, iniciandose con los antecedentes (sistesis histórica) de la planificación; conceptos, importancia, naturaleza, características de la misma; así como la diferencia entre planificación táctica y estrategica, técnica de planificación participativa (tecnica FODA) Identificación y priorización de proyectos de beneficio social y de aplicación a la administración y desarrollo gerencial de proyectos de desarrollo y empresas privadas. El propósito es que el estudiante de ingeniería civil, este en condiciones de poner en práctica la serie de conocimientos adquiridos y que los plasme en sus actividades profesionales, que esté prepardo para administrar eficientemente los recursos escasos, control de calidad, control de avance y seguimiento a las diferentes abras de ingeniería civil. en sistesis que sus esfuerzos se concreticen en obras personales que solucionen problemas sociales y que mejores la calidad de vida de las comunidades, que los conocimientos y destrezas adquiridas, sean una herramienta para desenvolverse en el campo laboral, desarrollando obras de infraestructura o una acción organizacional.', 
+      credits: 6 }, //creditos correctos
     {
       code: '909',
       name: 'Preparacion y Evaluacion de Proyectos 1',
-      description: '',
-      credits: 4,
+      description: 'El curso de Preparación y Evaluación de Proyectos 1, corresponde al noveno ciclo de la carrera de ingeniería industrial, este curso se dedica a la formulación, el análisis y la evaluación de proyectos industriales, cubre el análisis de mercado, el análisis técnico, el análisis financiero y el análisis económico y social de proyectos. ',
+      credits: 4, //Creditos correctos
     },
     {
       code: '918',
@@ -826,7 +867,10 @@ export async function seed(knex: Knex): Promise<any> {
       description: '',
       credits: 4,
     },
-    { code: '2586', name: 'Practica Final', description: '', credits: 0 },
+    //Curso para Civil
+    { code: '2586', name: 'Practicas Finales', 
+      description: ' Las prácticas son actividades que el estudiante realiza para consolidar los conocimientos adquiridos durante la carrera, las cuales tienen como propósito poner en contacto al estudiante con la realidad que presenta el ámbito de la carrera de Ingeniería Civil. Él tendrá la posibilidad de elegir el área en que desea realizar su práctica. Estas áreas son; investigación, docencia y trabajo aplicado. El estudiante que opte por la práctica aplicada, contará con el apoyo de un encargado, el cual será un profesional de su misma expertís, y quien deberá laborar dentro de la empresa o entidad gubernamental. Así mismo, cuando el estudiante opte por la práctica en Investigación, el encargado será el docente responsable del proyecto de investigación, quien asignará las tareas de la investigación acorde a sus capacidades. Por el contrario, sí el estudiante opta por realizar su práctica en Docencia, él deberá haber aprobado el curso donde desea realizar su práctica con una nota mínima y su responsable será el docente del curso, quien asignará las tareas que considere convenientes. Todas las regulaciones de prácticas serán de acuerdo al normativo vigente de prácticas y otros normativos que regulen la actividad de auxiliatura. Además, este curso es el espacio idóneo, para que independientemente de la elección del estudiante, se evidencie el conocimiento teórico-práctico, se promuevan acciones pertinentes en los diferentes campos de acción y proyecten alternativas de solución a problemáticas sociales, ambientales, educativas, entre otras.', 
+      credits: 0 },
     //Civil
     { code: '1056', name: 'Dinamica Estructural', description: '', credits: 3 },
     {
@@ -846,14 +890,14 @@ export async function seed(knex: Knex): Promise<any> {
     {
       code: '914',
       name: 'Instrumentacion Mecanica',
-      description: '',
+      description: 'El curso de Instrumentación Mecánica está dirigido a los estudiantes de Ingeniería Mecánica con el propósito de familiarizarlos con los principios fundamentales de operación de los instrumentos más utilizados en la industria, como los medidores de flujo de fluidos, presión, temperatura, y niveles en líquidos y sólidos. Así mismo presenta una introducción a los transmisores neumáticos y eléctricos.',
       credits: 3,
     },
     {
       code: '913',
       name: 'Instalaciones Mecanicas',
-      description: '',
-      credits: 3,
+      description: ' El curso de instalaciones mecánicas capacita al estudiante en el uso del aire el cual es importante como medio de trabajo con sistemas de aire comprimido en herramientas, en motores neumáticos y toberas y también utilizado en sistemas de ventilación para el confort y seguridad industrial y como medio para el control y automatización en procesos industriales productivos',
+      credits: 5, //creditos correctos segun programa de curso
     },
     {
       code: '948',
@@ -871,7 +915,9 @@ export async function seed(knex: Knex): Promise<any> {
     { code: '915', name: 'Vibraciones', 
       description: 'Estudio de la teoría de las vibraciones y su aplicación a problemas de Ingeniería. Técnicas analíticas, numéricas y experimentales aplicadas con uno o más grados de libertad.', 
       credits: 5 }, //creditos correctos
-    { code: '790', name: 'Diseño de Maquinas 3', description: '', credits: 6 },
+    { code: '790', name: 'Diseño de Maquinas 3', 
+      description: 'Diseño de máquinas 3 es un curso complementario a los dos diseños anteriores, en donde se finaliza el análisis de los componentes de una maquina en términos generales. Los engranajes y la lubricación son los componentes que más énfasis reciben.', 
+      credits: 6 },
     {
       code: '696',
       name: 'Motores de Combustion Interna',
@@ -895,11 +941,13 @@ export async function seed(knex: Knex): Promise<any> {
     { code: '921', name: 'Econometria', 
       description: ' El curso de econometría proporciona una introducción elemental pero completa al arte y ciencia de la econometría, campo que se ha venido convirtiendo en parte integral de la formación del ingeniero industrial. El curso no exige conocimientos de Álgebra Matricial, Cálculo Diferencial e Integral o Estadística que estén por encima del nivel elemental y está dirigido fundamentalmente a estudiantes de Ingeniería Industrial que en el momento actual necesitan un conocimiento informal pero sistemático de los Métodos Econométricos. La filosofía básica del curso parte del hecho de que la Econometría, aunque fundamentada en principios de matemática superior y estadística matemática, puede enseñarse al principiante haciéndolo sentir intuitivamente la materia', 
       credits: 5 }, //creditos correctos
-    { code: '938', name: 'Ingenieria Textil 2', description: '', credits: 4 },
+    { code: '938', name: 'Ingenieria Textil 2', 
+      description: 'El curso de Ingeniería Textil 2 está diseñado para proporcionar a los estudiantes una comprensión avanzada de los principios y técnicas aplicadas en la industria textil. Este curso es fundamental para aquellos interesados en el diseño, producción y gestión de productos textiles, abarcando desde la selección de materias primas hasta el acabado final de los productos. Durante el curso, los estudiantes explorarán temas como las propiedades físicas y químicas de las fibras textiles, los procesos de hilatura y tejido, y las técnicas de teñido y acabado. Se hará hincapié en la aplicación de estos conceptos en la producción de textiles de alta calidad y en la mejora de la eficiencia de los procesos productivos. El curso incluirá el uso de equipos y tecnologías modernas utilizadas en la industria textil, permitiendo a los estudiantes desarrollar habilidades técnicas en la operación y control de maquinaria textil. Además, se abordarán temas como la innovación en materiales textiles, el desarrollo de productos sostenibles, y la gestión de la calidad en la producción textil.', 
+      credits: 4 },
     {
       code: '910',
       name: 'Control de la Produccion',
-      description: '',
+      description: ' Las relaciones comerciales en un mundo globalizado son cada vez más complejas y las empresas necesitan ser competitivas en esos ambientes, por lo que se hace necesario administrar de otra manera. El Ingeniero@ Industrial es un@ profesional que comprende esa otra manera de administrar las empresas, dando énfasis a las operaciones, no solo, de manufactura sino de operaciones de servicio, ya que su pensamiento está basado en el control de los sistemas, sean estos complejos o sencillos, y evalúan los elementos de cualquier sistema para integrarlos a la administración y aprovechar al máximo los recursos. El curso de Control de la Producción analiza e integra todas las operaciones del sistema, para desarrollar estrategias que ayuden a la empresa a utilizar de mejor manera los recursos, agregando valor al producto que ofrece.',
       credits: 6,
     },
     //Sistemas
