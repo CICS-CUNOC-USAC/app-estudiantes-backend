@@ -4,12 +4,12 @@ export class SaveDatasetDto {
 
     @IsOptional()
     @IsString()
-    prefix: string;
+    prefix?: string;
 
     @IsOptional()
     @IsString()
     @Length(5,8)
-    key: string;
+    key?: string;
 
     @IsNotEmpty()
     @IsString()
@@ -17,7 +17,7 @@ export class SaveDatasetDto {
 
     @IsOptional()
     @IsNumber()
-    ttl: number;
+    ttl?: number;
 
     get fullKey(): string{
         return `${this.prefix}:${this.key}`;

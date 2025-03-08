@@ -7,12 +7,16 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtRegularStrategy } from 'src/core/strategies/auth/regular/jwt-regular.strategy';
 import { ProfilesModule } from 'src/modules/profiles/profiles.module';
 import { UserCoursesProgressModule } from 'src/modules/user-courses-progress/user-courses-progress.module';
+import { RedisModule } from 'src/modules/redis/redis.module';
+import { EmailModule } from 'src/modules/emails/email.module';
 
 @Module({
   controllers: [RegularAuthController],
   providers: [RegularAuthService, LocalRegularStrategy, JwtRegularStrategy],
   imports: [
     UsersModule,
+    RedisModule,
+    EmailModule,
     ProfilesModule,
     PassportModule,
     UserCoursesProgressModule,
