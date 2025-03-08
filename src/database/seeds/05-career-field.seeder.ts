@@ -74,7 +74,7 @@ export async function seed(knex: Knex): Promise<any> {
       name: 'EPS',
     },
 
-    //Mecanica
+    //Mecanica 34
     {
       career_code: 34,
       field_number: 1,
@@ -112,63 +112,63 @@ export async function seed(knex: Knex): Promise<any> {
       name: 'EPS',
     },
 
-    //Industrial
+    //Industrial 35
     {
       career_code: 35,
       field_number: 1,
-      name: 'Area de Administracion',
+      name: 'Area Basica',
     },
     {
       career_code: 35,
       field_number: 2,
-      name: 'Area de Produccion',
+      name: 'Area Matematicas',
     },
     {
       career_code: 35,
       field_number: 3,
-      name: 'Area de Metodos Cuantitativos',
+      name: 'Area de Fisica',
     },
     {
       career_code: 35,
       field_number: 4,
-      name: 'Area Complementaria',
+      name: 'Area Humanistica',
       common_field: true,
     },
     {
       career_code: 35,
       field_number: 5,
-      name: 'Area Termica',
+      name: 'Area de Mecanica'
     },
     {
       career_code: 35,
       field_number: 6,
-      name: 'Area de Materiales de Ingenieria',
+      name: 'Area Produccion',
     },
     {
       career_code: 35,
       field_number: 7,
-      name: 'Area de Ciencias Basicas',
+      name: 'Area Metodos Cuantitativos',
     },
     {
       career_code: 35,
       field_number: 8,
-      name: 'Area de Diseño',
+      name: 'Area Financiera',
     },
     {
       career_code: 35,
       field_number: 9,
-      name: 'EPS',
+      name: 'Area Administrativa',
     },
     {
       career_code: 35,
       field_number: 10,
-      name: 'Diplomado en Administracion',
+      name: 'Area Informatica',
     },
     //agregue 3 nuevas areas al pensum de industrial que hacian falta
     { 
       career_code: 35,
       field_number: 11,
-      name: 'Area de Investigacion',
+      name: 'Area Investigacion',
     },
     {
       career_code: 35,
@@ -180,7 +180,8 @@ export async function seed(knex: Knex): Promise<any> {
       field_number: 13,
       name: 'Idioma',
     }, //si aparece en la base de datos
-    //Mecanica Industrial
+
+    //Mecanica Industrial 36
     {
       career_code: 36,
       field_number: 1,

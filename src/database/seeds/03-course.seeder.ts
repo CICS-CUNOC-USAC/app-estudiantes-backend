@@ -3,7 +3,7 @@ import { Knex } from 'knex';
 export async function seed(knex: Knex): Promise<any> {
   const courses = [
     //Edit kike
-     // { code: 33, name: 'Civil' },
+    // { code: 33, name: 'Civil' },
     // { code: 34, name: 'Mecánica' },
     // { code: 35, name: 'Industrial' },
     // { code: 36, name: 'Mecánica Industrial' },
@@ -849,8 +849,8 @@ export async function seed(knex: Knex): Promise<any> {
     {
       code: '2842',
       name: 'Seminario de Investigacion EPS',
-      description: '',
-      credits: 4,
+      description: ' El curso Seminario de Investigación de EPS pretende que los estudiantes tengan las comptetencias necesarias para entender el proceso de investigación. El curso le permite al estudiante definir su tema de investigación y completar el protocolo de EPS para poder prepararse para completar los requisitos de graduación. Este curso aplica la metodología científica basada en investigación, enfocado a la búsqueda de soluciones a problemas sociales.',
+      credits: 4, //creditos correctos segun pensum
     },
     { code: '912', name: 'Planeamiento', 
       description: 'El curso de planeamiento esta enfocado a los aspectos importantes que el estudiante manejará a lo largo del curso, iniciandose con los antecedentes (sistesis histórica) de la planificación; conceptos, importancia, naturaleza, características de la misma; así como la diferencia entre planificación táctica y estrategica, técnica de planificación participativa (tecnica FODA) Identificación y priorización de proyectos de beneficio social y de aplicación a la administración y desarrollo gerencial de proyectos de desarrollo y empresas privadas. El propósito es que el estudiante de ingeniería civil, este en condiciones de poner en práctica la serie de conocimientos adquiridos y que los plasme en sus actividades profesionales, que esté prepardo para administrar eficientemente los recursos escasos, control de calidad, control de avance y seguimiento a las diferentes abras de ingeniería civil. en sistesis que sus esfuerzos se concreticen en obras personales que solucionen problemas sociales y que mejores la calidad de vida de las comunidades, que los conocimientos y destrezas adquiridas, sean una herramienta para desenvolverse en el campo laboral, desarrollando obras de infraestructura o una acción organizacional.', 
@@ -864,34 +864,56 @@ export async function seed(knex: Knex): Promise<any> {
     {
       code: '918',
       name: 'Preparacion y Evaluacion de Proyectos 2',
-      description: '',
-      credits: 4,
+      description: ' El curso de Preparación y Evaluación de Proyectos 2, toma como base Fundamentalmente el curso de Preparación y Evaluación de Proyectos 1, en el sentido de seguir el mismo procedimiento de formulación del proyecto con las variantes correspondientes tomando en cuenta que en el presente curso se trabajan sobre todo los proyectos sociales. Además por ser uno de los últimos cursos del estudiante de Ingeniería, se convierte en un curso resumen de los cursos de toda la carrera, especialmente del área profesional, por lo que deberá tenerse un dominio aceptable de su contenido. Por las características propias del curso es necesario formular un proyecto de connotación social, pero especialmente si es productivo, por lo que es necesario tener algún conocimiento o experiencia sobre el proyecto a formular o bien tener la posibilidad de obtener información real para formularlo',
+      credits: 4, //creditos correctos segun pensum
     },
     //Curso para Civil
     { code: '2586', name: 'Practicas Finales', 
       description: ' Las prácticas son actividades que el estudiante realiza para consolidar los conocimientos adquiridos durante la carrera, las cuales tienen como propósito poner en contacto al estudiante con la realidad que presenta el ámbito de la carrera de Ingeniería Civil. Él tendrá la posibilidad de elegir el área en que desea realizar su práctica. Estas áreas son; investigación, docencia y trabajo aplicado. El estudiante que opte por la práctica aplicada, contará con el apoyo de un encargado, el cual será un profesional de su misma expertís, y quien deberá laborar dentro de la empresa o entidad gubernamental. Así mismo, cuando el estudiante opte por la práctica en Investigación, el encargado será el docente responsable del proyecto de investigación, quien asignará las tareas de la investigación acorde a sus capacidades. Por el contrario, sí el estudiante opta por realizar su práctica en Docencia, él deberá haber aprobado el curso donde desea realizar su práctica con una nota mínima y su responsable será el docente del curso, quien asignará las tareas que considere convenientes. Todas las regulaciones de prácticas serán de acuerdo al normativo vigente de prácticas y otros normativos que regulen la actividad de auxiliatura. Además, este curso es el espacio idóneo, para que independientemente de la elección del estudiante, se evidencie el conocimiento teórico-práctico, se promuevan acciones pertinentes en los diferentes campos de acción y proyecten alternativas de solución a problemáticas sociales, ambientales, educativas, entre otras.', 
       credits: 0 },
     //Civil
-    { code: '1056', name: 'Dinamica Estructural', description: '', credits: 3 },
+    { code: '1056', name: 'Dinamica Estructural', 
+      description: 'El curso de Dinámica Estructural está diseñado para proporcionar a los estudiantes una comprensión avanzada de los principios y métodos utilizados para analizar el comportamiento dinámico de las estructuras. Este curso es fundamental para aquellos interesados en el diseño y evaluación de estructuras sujetas a cargas dinámicas, como sismos, viento y vibraciones. Durante el curso, los estudiantes explorarán temas como la teoría de vibraciones, el análisis modal, la respuesta dinámica de estructuras y la propagación de ondas. Se abordarán diferentes tipos de estructuras, incluyendo edificaciones, puentes y maquinaria, y se evaluará su comportamiento bajo diversas condiciones de carga dinámica. El curso incluirá el uso de software especializado para el análisis y simulación de la respuesta dinámica de las estructuras, permitiendo a los estudiantes desarrollar habilidades técnicas en la modelación y evaluación del desempeño estructural. Además, se abordarán temas avanzados como el análisis sísmico, el diseño de estructuras resistentes a sismos y la mitigación de vibraciones.', 
+      credits: 3 }, //creditos correctos segun pensum
     {
       code: '1059',
       name: 'Diseño de Estructuras Metalicas 2',
-      description: '',
-      credits: 5,
+      description: 'El curso de Diseño de Estructuras Metálicas 2 está diseñado para proporcionar a los estudiantes una comprensión avanzada de los principios y técnicas utilizados en el diseño y análisis de estructuras metálicas. Este curso es fundamental para aquellos interesados en la construcción y mantenimiento de estructuras seguras y eficientes hechas de acero y otros metales. Durante el curso, los estudiantes explorarán temas como el diseño de conexiones soldadas y atornilladas, el análisis de comportamiento de estructuras metálicas bajo diversas cargas, y los métodos de diseño según los códigos y normas internacionales. Se hará hincapié en la aplicación de conceptos de resistencia de materiales y análisis estructural en el diseño de vigas, columnas, marcos y otros componentes estructurales metálicos. El curso incluirá el uso de software especializado para la modelación y simulación de estructuras metálicas, permitiendo a los estudiantes desarrollar habilidades técnicas en la evaluación y optimización del diseño estructural. Además, se abordarán temas avanzados como el diseño de estructuras resistentes a sismos, el análisis de fatiga y fractura, y la evaluación de la durabilidad y mantenimiento de estructuras metálicas.',
+      credits: 5, //creditos correctos segun pensum 
+    },
+    {
+      code: 'I',
+      name: 'Diseños Estructurales APC',
+      description: 'El curso de Diseño de Estructuras de Concreto 2 está diseñado para proporcionar a los estudiantes una comprensión avanzada de los principios y técnicas utilizados',
+      credits: 0, //No contiene creditos en el pensum
     },
     {
       code: '1069',
       name: 'Planeamiento y Uso de los Recursos Hidraulicos',
-      description: '',
-      credits: 5,
+      description: 'El curso de Planeamiento y Uso de los Recursos Hidráulicos está diseñado para proporcionar a los estudiantes una comprensión integral de los principios y prácticas relacionados con la gestión y planificación sostenible de los recursos hídricos. Este curso es fundamental para aquellos interesados en la conservación, el desarrollo y la gestión eficiente de los recursos hidráulicos en proyectos de ingeniería civil y ambiental. Durante el curso, los estudiantes explorarán temas como la hidrología, la gestión de cuencas hidrográficas, el diseño de sistemas de abastecimiento de agua potable, y la planificación y gestión de sistemas de riego. Se hará hincapié en la aplicación de estos conceptos para asegurar el uso sostenible y equitativo del agua en diferentes contextos. El curso incluirá el uso de herramientas y tecnologías modernas para el análisis y modelación de recursos hídricos, permitiendo a los estudiantes desarrollar habilidades técnicas en la evaluación de la disponibilidad y demanda de agua. Además, se abordarán temas como la calidad del agua, el tratamiento de aguas residuales, y la gestión de inundaciones y sequías. Los estudiantes participarán en proyectos prácticos y estudios de casos que les permitirán aplicar los conocimientos adquiridos en situaciones reales, promoviendo el trabajo en equipo y la colaboración interdisciplinaria. Se fomentará el análisis crítico y la resolución de problemas relacionados con la gestión de recursos hídricos, considerando aspectos técnicos, económicos, sociales y ambientales.',
+      credits: 5, //creditos correctos
     },
-    { code: '933', name: 'Urbanismo', description: '', credits: 5 },
+    { code: '933', name: 'Urbanismo', 
+      description: 'El curso de Urbanismo está diseñado para proporcionar a los estudiantes una comprensión integral de los principios y prácticas relacionados con la planificación y el desarrollo urbano sostenible. Este curso es fundamental para aquellos interesados en el diseño, la gestión y la transformación de los espacios urbanos para mejorar la calidad de vida de sus habitantes. Durante el curso, los estudiantes explorarán temas como la historia y teoría del urbanismo, la planificación y diseño urbano, la gestión del suelo, y la política urbana. Se hará hincapié en la aplicación de estos conceptos en el contexto de ciudades contemporáneas, permitiendo a los estudiantes desarrollar competencias clave para abordar los desafíos urbanos del siglo XXI. El curso incluirá el uso de herramientas y tecnologías modernas para el análisis y modelado urbano, así como la evaluación de impactos ambientales y sociales. Los estudiantes aprenderán a diseñar planes urbanos integrales que promuevan la sostenibilidad, la equidad y la resiliencia, considerando aspectos económicos, sociales y ambientales.', 
+      credits: 5 }, //creditos correctos segun pensum
+    {
+      code: 'J',
+      name: 'Programacion de Proyectos APC',
+      description: 'El curso de Programación de Proyectos APC está diseñado para proporcionar a los estudiantes una comprensión integral de los principios y prácticas relacionadas con la planificación, programación y control de proyectos de construcción. Este curso es esencial para aquellos interesados en la gestión efectiva de proyectos en el ámbito de la construcción y la ingeniería civil. Durante el curso, los estudiantes explorarán temas como la planificación de proyectos, la elaboración de cronogramas, la gestión de recursos, y el control de costos y calidad. Se hará hincapié en la aplicación de técnicas y herramientas avanzadas de programación de proyectos, como el método del camino crítico (CPM), el diagrama de Gantt, y el análisis de riesgos. El curso incluirá el uso de software especializado para la programación y control de proyectos de construcción, permitiendo a los estudiantes desarrollar habilidades técnicas en la planificación y seguimiento de proyectos complejos. Además, se abordarán temas de gestión de contratos, liderazgo y comunicación, y la implementación de metodologías ágiles en la administración de proyectos.',
+      credits: 0, //no tiene creditos
+    },
+    {
+      code: 'K',
+      name: 'Diseño de Proyectos de Agua Potable APC',
+      description: 'El curso de Diseño de Proyectos de Agua Potable APC está diseñado para proporcionar a los estudiantes una comprensión integral de los principios y prácticas relacionados con la planificación, diseño y gestión de proyectos de suministro de agua potable. Este curso es esencial para aquellos interesados en la implementación de sistemas de abastecimiento de agua que cumplan con los estándares de calidad y sostenibilidad. Durante el curso, los estudiantes explorarán temas como la captación y tratamiento de agua, el diseño de redes de distribución, y la selección de tecnologías adecuadas para el suministro de agua potable. Se hará hincapié en la aplicación de técnicas avanzadas de diseño y planificación que aseguren la eficiencia y confiabilidad del sistema. El curso incluirá el uso de software especializado para el diseño y simulación de proyectos de agua potable, permitiendo a los estudiantes desarrollar habilidades técnicas en la modelación hidráulica y el análisis de sistemas de distribución. Además, se abordarán temas de normativas y estándares de calidad del agua, gestión de recursos hídricos, y sostenibilidad en el suministro de agua.',
+      credits: 0, //no tiene creditos
+    },
     //Mecanica
     {
       code: '914',
       name: 'Instrumentacion Mecanica',
       description: 'El curso de Instrumentación Mecánica está dirigido a los estudiantes de Ingeniería Mecánica con el propósito de familiarizarlos con los principios fundamentales de operación de los instrumentos más utilizados en la industria, como los medidores de flujo de fluidos, presión, temperatura, y niveles en líquidos y sólidos. Así mismo presenta una introducción a los transmisores neumáticos y eléctricos.',
-      credits: 3,
+      credits: 3, //Creditos correctos
     },
     {
       code: '913',
@@ -902,8 +924,8 @@ export async function seed(knex: Knex): Promise<any> {
     {
       code: '948',
       name: 'Mantenimiento de Hospitales 3',
-      description: '',
-      credits: 5,
+      description: 'El curso de Mantenimiento de Hospitales 3 está diseñado para proporcionar a los estudiantes una comprensión avanzada y especializada de los principios y prácticas relacionadas con el mantenimiento integral y la gestión de instalaciones hospitalarias. Este curso es esencial para aquellos interesados en asegurar la operación eficiente y segura de los sistemas y equipos en entornos de atención médica de alta complejidad. Durante el curso, los estudiantes explorarán temas como la gestión avanzada de sistemas críticos en hospitales, incluyendo sistemas de calefacción, ventilación y aire acondicionado (HVAC), sistemas eléctricos, y sistemas de agua y saneamiento. Se hará hincapié en la aplicación de técnicas y procedimientos especializados que garanticen la continuidad operativa y la seguridad del paciente. El curso incluirá el estudio de metodologías avanzadas de mantenimiento preventivo y predictivo, así como la gestión de activos y el uso de sistemas de gestión de mantenimiento asistido por computadora (GMAO). Los estudiantes aprenderán a diseñar e implementar programas de mantenimiento que optimicen la eficiencia y reduzcan el riesgo de fallos en equipos críticos.',
+      credits: 5, //Creditos correctos segun pensum
     },
     {
       code: '916',
@@ -911,13 +933,15 @@ export async function seed(knex: Knex): Promise<any> {
       description: 'El ambiente laboral involucra diferentes riesgos, tales como los físicos, químicos, biológicos, eléctricos, mecánicos, psicosociales, radiológicos, ergonómicos, entre otros; que pueden afectar la salud del trabajador y de la comunidad donde se ubica cualquier tipo de organización lucrativa o no lucrativa. Por esta razón es indispensable que el Ingeniero Industrial y Mecánico conozca el marco legal guatemalteco, que obliga a todo patrono a adoptar las medidas de mitigación de riesgos y a aplicar las técnicas necesarias para proteger la salud de los colaboradores, para mantener un ambiente de trabajo seguro y confiable; apoyados de normativas y protocolos internacionales, los cuales resultan importantes para crear una cultura de prevención de riesgos laborales. La Seguridad y Salud Ocupacional hace que se minimice el riesgo de accidentes y de contraer enfermedades profesionales, con el fin de mejorar las condiciones en los centros de trabajo.',
       credits: 3, //Creditos correctos
     },
-    { code: 'F', name: 'Electronica 1', description: '', credits: 6 }, //TODO: REVISAR, NO TIENE CODIGO
+    { code: 'F', name: 'Electronica 1', 
+      description: 'El curso de Electrónica 1 está diseñado para proporcionar a los estudiantes una comprensión fundamental de los principios y componentes básicos de la electrónica. Este curso es esencial para aquellos interesados en el diseño, análisis y aplicación de circuitos electrónicos en diversas áreas de la ingeniería. Durante el curso, los estudiantes explorarán temas como los semiconductores, los dispositivos electrónicos pasivos y activos, y los fundamentos de los circuitos eléctricos. Se hará hincapié en la teoría y práctica de los circuitos de corriente continua (CC) y corriente alterna (CA), permitiendo a los estudiantes desarrollar una base sólida en el análisis y diseño de circuitos. El curso incluirá el uso de herramientas y equipos de laboratorio para la construcción y medición de circuitos electrónicos. Los estudiantes aprenderán a utilizar instrumentos como el multímetro, el osciloscopio y la fuente de alimentación, desarrollando habilidades prácticas esenciales para el trabajo en electrónica. Además, se abordarán temas como los diodos, transistores, amplificadores operacionales y otros componentes clave en la electrónica moderna. Los estudiantes participarán en proyectos prácticos y ejercicios de laboratorio que les permitirán aplicar los conocimientos teóricos en situaciones reales, fomentando el aprendizaje activo y la resolución de problemas.', 
+      credits: 6 }, //TODO: REVISAR, NO TIENE CODIGO
     { code: '915', name: 'Vibraciones', 
       description: 'Estudio de la teoría de las vibraciones y su aplicación a problemas de Ingeniería. Técnicas analíticas, numéricas y experimentales aplicadas con uno o más grados de libertad.', 
       credits: 5 }, //creditos correctos
     { code: '790', name: 'Diseño de Maquinas 3', 
       description: 'Diseño de máquinas 3 es un curso complementario a los dos diseños anteriores, en donde se finaliza el análisis de los componentes de una maquina en términos generales. Los engranajes y la lubricación son los componentes que más énfasis reciben.', 
-      credits: 6 },
+      credits: 6 }, //creditos correctos segun pensum
     {
       code: '696',
       name: 'Motores de Combustion Interna',
@@ -934,61 +958,62 @@ export async function seed(knex: Knex): Promise<any> {
     {
       code: 'G',
       name: 'Investigacion de Operaciones 3',
-      description: '',
-      credits: 5,
+      description: 'El curso de Investigación de Operaciones 3 está diseñado para proporcionar a los estudiantes una comprensión avanzada de los métodos y técnicas utilizados en la optimización y toma de decisiones en problemas complejos de ingeniería y gestión. Este curso es esencial para aquellos interesados en aplicar modelos matemáticos y técnicas analíticas para mejorar la eficiencia y efectividad de sistemas y procesos. Durante el curso, los estudiantes explorarán temas como la programación no lineal, la teoría de juegos, la simulación de eventos discretos, y la optimización estocástica. Se hará hincapié en la aplicación de estos conceptos en diversos contextos, incluyendo la logística, la producción, y la gestión de proyectos, permitiendo a los estudiantes desarrollar habilidades críticas en la solución de problemas complejos. El curso incluirá el uso de software especializado para la modelación y resolución de problemas de investigación de operaciones, permitiendo a los estudiantes desarrollar competencias técnicas en el uso de herramientas computacionales avanzadas. Además, se abordarán temas como el análisis de sensibilidad, la toma de decisiones multicriterio, y la teoría de colas.',
+      credits: 5, //creditos correctos segun pensum
     }, //TODO: REVISAR, NO TIENE CODIGO
-    { code: 'H', name: 'Produccion Mas Limpia', description: '', credits: 4 }, //TODO: REVISAR, NO TIENE CODIGO
+    { code: 'H', name: 'Produccion Mas Limpia', 
+      description: 'El curso de Producción Más Limpia está diseñado para proporcionar a los estudiantes una comprensión integral de los principios y prácticas relacionados con la producción sostenible y la minimización del impacto ambiental en los procesos industriales. Este curso es fundamental para aquellos interesados en implementar soluciones innovadoras que mejoren la eficiencia y reduzcan el uso de recursos en la industria. Durante el curso, los estudiantes explorarán temas como la evaluación del ciclo de vida de productos, la gestión de residuos, la eficiencia energética, y el diseño de procesos industriales sostenibles. Se hará hincapié en la aplicación de técnicas de producción más limpia que permitan a las empresas reducir su huella ambiental y mejorar su competitividad. El curso incluirá el uso de herramientas y tecnologías modernas para la evaluación y optimización de procesos industriales, permitiendo a los estudiantes desarrollar habilidades técnicas en la identificación y aplicación de mejoras sostenibles. Además, se abordarán temas como la economía circular, la reducción de emisiones de gases de efecto invernadero, y la gestión de agua y materiales.', 
+      credits: 4 }, //TODO: REVISAR, NO TIENE CODIGO
     { code: '921', name: 'Econometria', 
       description: ' El curso de econometría proporciona una introducción elemental pero completa al arte y ciencia de la econometría, campo que se ha venido convirtiendo en parte integral de la formación del ingeniero industrial. El curso no exige conocimientos de Álgebra Matricial, Cálculo Diferencial e Integral o Estadística que estén por encima del nivel elemental y está dirigido fundamentalmente a estudiantes de Ingeniería Industrial que en el momento actual necesitan un conocimiento informal pero sistemático de los Métodos Econométricos. La filosofía básica del curso parte del hecho de que la Econometría, aunque fundamentada en principios de matemática superior y estadística matemática, puede enseñarse al principiante haciéndolo sentir intuitivamente la materia', 
       credits: 5 }, //creditos correctos
     { code: '938', name: 'Ingenieria Textil 2', 
       description: 'El curso de Ingeniería Textil 2 está diseñado para proporcionar a los estudiantes una comprensión avanzada de los principios y técnicas aplicadas en la industria textil. Este curso es fundamental para aquellos interesados en el diseño, producción y gestión de productos textiles, abarcando desde la selección de materias primas hasta el acabado final de los productos. Durante el curso, los estudiantes explorarán temas como las propiedades físicas y químicas de las fibras textiles, los procesos de hilatura y tejido, y las técnicas de teñido y acabado. Se hará hincapié en la aplicación de estos conceptos en la producción de textiles de alta calidad y en la mejora de la eficiencia de los procesos productivos. El curso incluirá el uso de equipos y tecnologías modernas utilizadas en la industria textil, permitiendo a los estudiantes desarrollar habilidades técnicas en la operación y control de maquinaria textil. Además, se abordarán temas como la innovación en materiales textiles, el desarrollo de productos sostenibles, y la gestión de la calidad en la producción textil.', 
-      credits: 4 },
+      credits: 4 }, //creditos correctos segun pensum
     {
       code: '910',
       name: 'Control de la Produccion',
       description: ' Las relaciones comerciales en un mundo globalizado son cada vez más complejas y las empresas necesitan ser competitivas en esos ambientes, por lo que se hace necesario administrar de otra manera. El Ingeniero@ Industrial es un@ profesional que comprende esa otra manera de administrar las empresas, dando énfasis a las operaciones, no solo, de manufactura sino de operaciones de servicio, ya que su pensamiento está basado en el control de los sistemas, sean estos complejos o sencillos, y evalúan los elementos de cualquier sistema para integrarlos a la administración y aprovechar al máximo los recursos. El curso de Control de la Producción analiza e integra todas las operaciones del sistema, para desarrollar estrategias que ayuden a la empresa a utilizar de mejor manera los recursos, agregando valor al producto que ofrece.',
-      credits: 6,
+      credits: 6, //creditos correctos segun pensum
     },
     //Sistemas
     {
       code: '2834',
       name: 'Sistemas Organizacionales y Gerenciales 2',
-      description: '',
-      credits: 4,
+      description: 'Dentro de las empresas, se observa que año con año los avances en la tecnología logran ofrecer nuevas y mejores maneras de hacer las cosas. La tecnología se va renovando cada vez más rápido y es importante mantenerse al tanto de las últimas técnicas gerenciales y de TI en las empresas, y de la misma forma de todas las posibles soluciones que se pueden plantear a distintos problemas que enfrentan las organizaciones. Durante la primera parte del curso se busca mostrar las diferentes estructuras existentes a nivel organizacional y administrativo dentro de diferentes empresas, aplicando un enfoque de sistemas, identificando componentes, interacciones y las relaciones que presentan los sistemas. Luego se revisan distintas distintas herramientas y tecnologías que son tendencia a nivel mundial que dentro de 5 o 10 años van a revolucionar la forma en que las empresas trabajan y generan valor. Los estudiantes podrán encontrar aplicaciones reales en su vida profesional para ser promotores del cambio',
+      credits: 4, //creditos correctos
     },
     {
       code: '2835',
       name: 'Modelacion y Simulacion 2',
-      description: '',
-      credits: 5,
+      description: 'Este curso busca proporcionar a los estudiantes una comprensión integral de la multitud de herramientas analíticas que se pueden utilizar para modelar, analizar, comprender y, en última instancia, diseñar procesos de negocio. La amplia gama de enfoques cubiertos incluye herramientas gráficas de diagramas de flujo, modelos deterministas para el análisis del tiempo del ciclo y las decisiones de capacidad, y métodos analíticos de teoría de colas, así como la minería de datos. Dichas tecnologías permitirán al profesional de la ingeniería en ciencias y sistemas, identificar los retos y oportunidades que se presentan en la fabricación global y la economía del conocimiento a través de la representación lo más real posible y sencilla de un proceso de negocios en una industria específica. El profesional podrá por medio del uso de un modelo, analizar el comportamiento y el rendimiento de un proceso de negocio real o teórico.',
+      credits: 5, //creditos correctos
     },
     {
       code: '2838',
       name: 'Inteligencia Artificial 2',
-      description: '',
-      credits: 4,
+      description: 'Presentar un panorama de los problemas que trata la inteligencia artificial. Conceptos avanzados y aplicaciones de la IA. Se tratarán las dos áreas básicas de la Inteligencia Artificial: la resolución de problemas, redes neuronales y teoría de juegos. Es una asignatura de aplicación a la Inteligencia Artificial. Se busca que el estudiante adquiera unos conocimientos básicos sobre sistemas y agentes inteligentes, informatización de conocimiento y razonamiento con y sin incertidumbre, y técnicas de aprendizaje automático y sus aplicaciones prácticas. Para conseguir el objetivo principal, la docencia de la asignatura se estructura de tal forma, que permita al alumno conocer en primer lugar los conceptos básicos sobre los que se cimienta la Inteligencia Artificial.',
+      credits: 4, //creditos correctos
     },
     {
       code: '2839',
       name: 'Redes de Nueva Generacion',
-      description: '',
-      credits: 4,
+      description: 'El curso de Redes de Nueva Generación está diseñado para proporcionar a los estudiantes una comprensión avanzada de los principios, tecnologías y arquitecturas que sustentan las redes de comunicación modernas. Este curso es esencial para aquellos interesados en el diseño, implementación y gestión de infraestructuras de red que soporten las demandas de conectividad y rendimiento del futuro. Durante el curso, los estudiantes explorarán temas como las tecnologías de red 5G, redes definidas por software (SDN), virtualización de funciones de red (NFV), y la Internet de las Cosas (IoT). Se hará hincapié en la aplicación de estos conceptos en el desarrollo de redes escalables, seguras y eficientes que respondan a las crecientes demandas de ancho de banda y baja latencia. El curso incluirá el uso de herramientas y tecnologías modernas para el diseño y simulación de redes de nueva generación, permitiendo a los estudiantes desarrollar habilidades técnicas en la configuración y optimización de infraestructuras de red. Además, se abordarán temas como la ciberseguridad, la gestión de tráfico, y la calidad de servicio (QoS) en redes avanzadas.',
+      credits: 4, //creditos correctos segun pensum
     },
-    { code: '2836', name: 'Software Avanzado', description: '', credits: 6 },
-    { code: '2840', name: 'Sistemas Aplicados 2', description: '', credits: 6 },
+    { code: '2836', name: 'Software Avanzado', 
+      description: 'Software Avanzado es un curso profesional tiene como finalidad cubrir sobre conceptos fundamentales de la gestión de proyectos de software, cómo dominar planificaciones ajustadas de software y en general sobre el desarrollo y gestión de proyectos informáticos. Durante el desarrollo del curso se hace énfasis en la importancia que tienen la elaboración de una adecuada planificación y seguimiento para lograr el éxito de un proyecto de software', 
+      credits: 6 }, //creditos correctos
+    { code: '2840', name: 'Sistemas Aplicados 2', 
+      description: 'El curso de Sistemas Aplicados 2 está diseñado para proporcionar a los estudiantes una comprensión avanzada y práctica de la integración, implementación y gestión de sistemas informáticos en diversos entornos. Este curso es fundamental para aquellos interesados en la optimización y el mantenimiento de infraestructuras tecnológicas complejas. Durante el curso, los estudiantes explorarán temas como la administración avanzada de redes, la seguridad informática, la gestión de servidores y la virtualización. Se hará hincapié en la aplicación de estos conceptos en la creación y mantenimiento de sistemas robustos y escalables que soporten las necesidades empresariales y tecnológicas actuales. El curso incluirá el uso de herramientas y tecnologías modernas para la configuración, monitoreo y optimización de sistemas informáticos. Los estudiantes aprenderán a implementar soluciones de virtualización, a gestionar la seguridad de la información, y a administrar redes complejas y servidores, desarrollando habilidades técnicas esenciales para el campo profesional.', 
+      credits: 6 }, //creditos correctos
     {
       code: '2841',
       name: 'Auditoria de Proyectos de Software',
-      description: '',
-      credits: 5,
+      description: 'El curso de Auditoría de Proyectos de Software está diseñado para proporcionar a los estudiantes una comprensión integral de los principios y prácticas de la auditoría en el contexto del desarrollo y gestión de proyectos de software. Este curso es esencial para aquellos interesados en asegurar la calidad, cumplimiento y eficiencia en los procesos de desarrollo de software. Durante el curso, los estudiantes explorarán temas como los fundamentos de la auditoría de software, las metodologías y técnicas de auditoría, y los estándares y normativas aplicables a la auditoría de proyectos de software. Se hará hincapié en la identificación de riesgos, la evaluación de controles y la implementación de medidas correctivas para mejorar la calidad y eficiencia de los proyectos de software. El curso incluirá el uso de herramientas y técnicas avanzadas para la auditoría de software, permitiendo a los estudiantes desarrollar habilidades técnicas en la evaluación de procesos de desarrollo, la revisión de código fuente, y la verificación de cumplimiento con los requisitos establecidos. Además, se abordarán temas como la gestión de la calidad del software, la auditoría de seguridad y la evaluación de la eficiencia de los equipos de desarrollo.',
+      credits: 5, //creditos correctos
     },
-    {
-      code: '2833-',
-      name: 'Bases de Datos Avanzadas',
-      description: '',
-      credits: 5,
-    } ///jajskja aca comienzo yooo kik3.h (Enrique Hernandez)    
+    //jajskja hasta aca termina mi chamba kik3-h (Enrique Hernandez) 
   ];
 
   return knex('courses')
