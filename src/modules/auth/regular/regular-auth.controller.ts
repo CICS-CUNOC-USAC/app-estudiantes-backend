@@ -37,20 +37,26 @@ export class RegularAuthController {
 
   @Post('password-recovery')
   async passwordRecovery(
-    @Body(new ValidationPipe({ transform: true })) passwordRecoveryRequestDto: PasswordRecoveryRequestDto,
+    @Body(new ValidationPipe({ transform: true }))
+    passwordRecoveryRequestDto: PasswordRecoveryRequestDto,
     @Response() res,
   ) {
-    const response = await this.regularAuthService.passwordRecoveryRequest(passwordRecoveryRequestDto);
-    return res.set().send({ message: "Envio exitoso"});
+    const response = await this.regularAuthService.passwordRecoveryRequest(
+      passwordRecoveryRequestDto,
+    );
+    return res.set().send({ message: 'Envio exitoso' });
   }
 
   @Post('password-reset')
   async passwordReset(
-    @Body(new ValidationPipe({ transform: true })) passwordRecoveryResetDto: PasswordRecoveryResetDto,
+    @Body(new ValidationPipe({ transform: true }))
+    passwordRecoveryResetDto: PasswordRecoveryResetDto,
     @Response() res,
   ) {
-    const response = await this.regularAuthService.passwordRecoveryReset(passwordRecoveryResetDto);
-    return res.set().send({ message: "Reset exitoso"});
+    const response = await this.regularAuthService.passwordRecoveryReset(
+      passwordRecoveryResetDto,
+    );
+    return res.set().send({ message: 'Reset exitoso' });
   }
 
   @UseGuards(RegularLoginLocalAuthGuard)
