@@ -182,7 +182,7 @@ export class RegularAuthService extends BaseService {
     //Verifies if the has is valid
     const foundEmail = await this.redisService.getDataset(getDatasetDto);
     if (!foundEmail) {
-      throw new NotFoundException('El hash ingresado es no es valido');
+      throw new NotFoundException('El hash ingresado no es valido');
     }
 
     //Verifies if the email exists on the system
