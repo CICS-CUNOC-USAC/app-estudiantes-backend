@@ -9,6 +9,8 @@ import { ProfilesModule } from 'src/modules/profiles/profiles.module';
 import { UserCoursesProgressModule } from 'src/modules/user-courses-progress/user-courses-progress.module';
 import { RedisModule } from 'src/modules/redis/redis.module';
 import { EmailModule } from 'src/modules/emails/email.module';
+import { ConsumeService } from 'src/modules/consume-service/consume-service.service';
+import { ConsumeServiceModule } from 'src/modules/consume-service/consume-service.module';
 
 @Module({
   controllers: [RegularAuthController],
@@ -20,6 +22,7 @@ import { EmailModule } from 'src/modules/emails/email.module';
     ProfilesModule,
     PassportModule,
     UserCoursesProgressModule,
+    ConsumeServiceModule
   ],
 })
 export class RegularAuthModule {}

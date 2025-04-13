@@ -29,6 +29,9 @@ import { PasswordRecoveryResetDto } from '../dto/password-recovery-reset.dto';
 import { GetDatasetDto } from 'src/modules/redis/dto/get-dataset.dto';
 import { DeleteDatasetDto } from 'src/modules/redis/dto/delete-dataset.dto';
 import { EMAIL_TEMPLATES_NAMES } from 'src/core/email/consts';
+import { UserRycaServiceDto } from '../dto/user-ryca-service.dto';
+import { ConsumeService } from 'src/modules/consume-service/consume-service.service';
+import { RycaUserServiceResponseDto } from 'src/modules/consume-service/dto/ryca-user-service-response.dto';
 
 // This class is responsible for the authentication of regular users (students)
 @Injectable()
@@ -51,8 +54,15 @@ export class RegularAuthService extends BaseService {
     private readonly dbTrxService: DatabaseTransactionService,
     private readonly redisService: RedisService,
     private readonly emailService: EmailService,
+    private readonly consumeService: ConsumeService
   ) {
     super(RegularAuthService.name);
+  }
+
+  async getStudentInfo(userRycaServiceDto: UserRycaServiceDto) {
+    //const response = await this.consumeService.getExternalData(`https://ryca.cunoc.edu.gt/serviciosweb/servicecics.php?carne=${userRycaServiceDto.ra}&key=RTs456xryca01&pin=${userRycaServiceDto.pin}`);
+    const response = await this.consumeService.getDummyXmlData();
+    return new RycaUserServiceResponseDto(response);
   }
 
   /**

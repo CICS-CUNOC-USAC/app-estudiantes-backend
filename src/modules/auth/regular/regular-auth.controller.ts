@@ -4,6 +4,7 @@ import {
   Get,
   Post,
   Put,
+  Query,
   Request,
   Response,
   UseGuards,
@@ -18,6 +19,7 @@ import { SignUpDto } from '../dto/sign-up.dto';
 import { UpdateRegularProfileDto } from '../dto/update-profile-regular.dto';
 import { PasswordRecoveryRequestDto } from '../dto/password-recovery-request.dto';
 import { PasswordRecoveryResetDto } from '../dto/password-recovery-reset.dto';
+import { UserRycaServiceDto } from '../dto/user-ryca-service.dto';
 
 @ApiTags('Regular Login')
 @Controller('auth')
@@ -33,6 +35,11 @@ export class RegularAuthController {
     const token = response['token'];
     const user = response['user'];
     return res.set({ Authorization: `Bearer ${token}` }).send({ user, token });
+  }
+
+  @Get('student-info')
+  async getStudentInfo(@Query(new ValidationPipe({ transform: true })) userRycaServiceDto: UserRycaServiceDto) {
+    return this.regularAuthService.getStudentInfo(userRycaServiceDto);
   }
 
   @Post('password-recovery')
