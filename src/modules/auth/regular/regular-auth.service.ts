@@ -59,6 +59,11 @@ export class RegularAuthService extends BaseService {
     super(RegularAuthService.name);
   }
 
+  /**
+   * @description Este método consume el servicio web de Ryca para obtener la información del estudiante, actualmente este método obtiene información dummy obtenida de un archivo XML que se encuentra en el repositorio, para la realización de pruebas deberá ser actualizado cuando se lleven a cabo las pruebas en el CUNOC
+   * @param userRycaServiceDto Mapea los atributos necesarios para realizar la petición al servicio web de Ryca
+   * @returns Información obtenida del servicio de RYCA
+   */
   async getStudentInfo(userRycaServiceDto: UserRycaServiceDto) {
     //const response = await this.consumeService.getExternalData(`https://ryca.cunoc.edu.gt/serviciosweb/servicecics.php?carne=${userRycaServiceDto.ra}&key=RTs456xryca01&pin=${userRycaServiceDto.pin}`);
     const response = await this.consumeService.getDummyXmlData();
