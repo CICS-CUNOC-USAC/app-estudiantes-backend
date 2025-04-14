@@ -5,6 +5,7 @@ import {
   IsString,
   IsNumber,
   ValidateNested,
+  IsBoolean,
 } from 'class-validator';
 
 export class PhysicalBookDto {
@@ -18,20 +19,12 @@ export class PhysicalBookDto {
   readonly reference_id: string;
 
   @IsNotEmpty()
-  @IsNumber()
+  @IsBoolean()
   @ApiProperty({
-    description: 'The number of existing units of the book',
-    example: 6,
+    description: 'If the book is available for lending',
+    example: true,
   })
-  readonly total_availability: number;
-
-  @IsNotEmpty()
-  @IsNumber()
-  @ApiProperty({
-    description: 'The number of available units of the book for lending',
-    example: 6,
-  })
-  readonly current_availability: number;
+  readonly is_available: boolean;
 
   @IsNotEmpty()
   @IsString()
