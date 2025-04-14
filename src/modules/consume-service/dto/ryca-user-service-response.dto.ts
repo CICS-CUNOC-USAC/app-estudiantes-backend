@@ -9,7 +9,6 @@ export class RycaUserServiceResponseDto {
     inscrito?: InscritoDto;
 
     constructor(data: any) {
-        console.log('Constructor de respuesta de servicio', data.datos);
         this.estatus = new EstatusDto(data.datos.estatus);
         if(this.estatus.codigo){
             this.estudiante = new EstudianteDto(data.datos.estudiante);

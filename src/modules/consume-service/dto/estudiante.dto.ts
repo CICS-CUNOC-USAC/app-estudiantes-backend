@@ -7,7 +7,6 @@ export class EstudianteDto {
     correo: string;
 
     constructor(data: any) {
-        console.log('Constructor de estudiante', data);
         this.carne = data[0].carne[0];
         this.nombres = data[0].nombres[0];
         this.apellidos = data[0].apellidos[0];
