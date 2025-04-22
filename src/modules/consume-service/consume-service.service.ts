@@ -4,6 +4,7 @@ import { lastValueFrom } from 'rxjs';
 import { parseStringPromise } from 'xml2js';
 import { readFile } from 'fs/promises';
 import { join } from 'path';
+import { wrap } from 'module';
 
 @Injectable()
 export class ConsumeService {
@@ -25,7 +26,8 @@ export class ConsumeService {
    * @returns El JSON resultante de la conversión del XML.
    */
   async parseXMLToJSON(xml: string): Promise<any> {
-    const jsonData = await parseStringPromise(xml);
+    const wrappedXml = `<datos>${xml}</datos>`; // Envolvemos en un elemento raíz sino el parser no obtiene toda la información
+    const jsonData = await parseStringPromise(wrappedXml);
     return jsonData;
   }
 

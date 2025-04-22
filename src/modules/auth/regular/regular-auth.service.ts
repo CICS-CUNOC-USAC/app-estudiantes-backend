@@ -65,9 +65,8 @@ export class RegularAuthService extends BaseService {
    * @returns Información obtenida del servicio de RYCA
    */
   async getStudentInfo(userRycaServiceDto: UserRycaServiceDto) {
-    //const response = await this.consumeService.getExternalData(`https://ryca.cunoc.edu.gt/serviciosweb/servicecics.php?carne=${userRycaServiceDto.ra}&key=${process.env.RYCA_KEY}&pin=${userRycaServiceDto.pin}`);
-    const response = await this.consumeService.getDummyXmlData();
-    return new RycaUserServiceResponseDto(response);
+    const response = await this.consumeService.getExternalData(`https://ryca.cunoc.edu.gt/serviciosweb/servicecics.php?carne=${userRycaServiceDto.ra}&key=${process.env.RYCA_KEY}&pin=${userRycaServiceDto.pin}`);
+    return new RycaUserServiceResponseDto(await this.consumeService.parseXMLToJSON(response));
   }
 
   /**
