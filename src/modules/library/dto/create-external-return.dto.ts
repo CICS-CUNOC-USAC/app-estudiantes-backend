@@ -1,20 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, IsNumber } from 'class-validator';
+import { IsNotEmpty, IsString, IsNumber, IsPositive } from 'class-validator';
 
 export class CreateExternalReturnDto {
-  @IsString()
+  @IsNumber()
+  @IsPositive()
   @ApiProperty({
-    description: 'RA of the student loaning the book',
-    example: '202010101',
+    description: 'ID of the loan to be returned',
+    example: '2',
   })
-  readonly ra: string;
-
-  @IsString()
-  @ApiProperty({
-    description: 'Personal ID of the student loaning the book',
-    example: '1234567890901',
-  })
-  readonly personal_id: string;
+  readonly loan_id: number;
 
   @IsString()
   @ApiProperty({

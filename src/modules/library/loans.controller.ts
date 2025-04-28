@@ -53,7 +53,7 @@ export class LoansController {
   @Post('external-return/:book_reference_id')
   createExternalReturn(
     @Param('book_reference_id') book_reference_id: string,
-    createExternalReturnDto: CreateExternalReturnDto,
+    @Body() createExternalReturnDto: CreateExternalReturnDto,
   ) {
     return this.libraryService.createExternalReturn(
       book_reference_id,

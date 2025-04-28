@@ -4,6 +4,7 @@ import {
   Get,
   Post,
   Put,
+  Query,
   Request,
   Response,
   UseGuards,
@@ -16,6 +17,9 @@ import { RegularLoginLocalAuthGuard } from 'src/core/guards/local-regular-auth.g
 import { RegularLoginJwtAuthGuard } from 'src/core/guards/jwt-regular-auth.guard';
 import { SignUpDto } from '../dto/sign-up.dto';
 import { UpdateRegularProfileDto } from '../dto/update-profile-regular.dto';
+import { PasswordRecoveryRequestDto } from '../dto/password-recovery-request.dto';
+import { PasswordRecoveryResetDto } from '../dto/password-recovery-reset.dto';
+import { UserRycaServiceDto } from '../dto/user-ryca-service.dto';
 
 @ApiTags('Regular Login')
 @Controller('auth')
@@ -31,6 +35,35 @@ export class RegularAuthController {
     const token = response['token'];
     const user = response['user'];
     return res.set({ Authorization: `Bearer ${token}` }).send({ user, token });
+  }
+
+  @Get('student-info')
+  async getStudentInfo(@Query(new ValidationPipe({ transform: true })) userRycaServiceDto: UserRycaServiceDto) {
+    return this.regularAuthService.getStudentInfo(userRycaServiceDto);
+  }
+
+  @Post('password-recovery')
+  async passwordRecovery(
+    @Body(new ValidationPipe({ transform: true }))
+    passwordRecoveryRequestDto: PasswordRecoveryRequestDto,
+    @Response() res,
+  ) {
+    const response = await this.regularAuthService.passwordRecoveryRequest(
+      passwordRecoveryRequestDto,
+    );
+    return res.set().send({ message: 'Envio exitoso' });
+  }
+
+  @Post('password-reset')
+  async passwordReset(
+    @Body(new ValidationPipe({ transform: true }))
+    passwordRecoveryResetDto: PasswordRecoveryResetDto,
+    @Response() res,
+  ) {
+    const response = await this.regularAuthService.passwordRecoveryReset(
+      passwordRecoveryResetDto,
+    );
+    return res.set().send({ message: 'Reset exitoso' });
   }
 
   @UseGuards(RegularLoginLocalAuthGuard)
