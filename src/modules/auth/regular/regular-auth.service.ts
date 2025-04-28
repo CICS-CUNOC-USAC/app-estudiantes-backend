@@ -29,6 +29,9 @@ import { PasswordRecoveryResetDto } from '../dto/password-recovery-reset.dto';
 import { GetDatasetDto } from 'src/modules/redis/dto/get-dataset.dto';
 import { DeleteDatasetDto } from 'src/modules/redis/dto/delete-dataset.dto';
 import { EMAIL_TEMPLATES_NAMES } from 'src/core/email/consts';
+import { UserRycaServiceDto } from '../dto/user-ryca-service.dto';
+import { ConsumeService } from 'src/modules/consume-service/consume-service.service';
+import { RycaUserServiceResponseDto } from 'src/modules/consume-service/dto/ryca-user-service-response.dto';
 
 // This class is responsible for the authentication of regular users (students)
 @Injectable()
@@ -51,8 +54,19 @@ export class RegularAuthService extends BaseService {
     private readonly dbTrxService: DatabaseTransactionService,
     private readonly redisService: RedisService,
     private readonly emailService: EmailService,
+    private readonly consumeService: ConsumeService
   ) {
     super(RegularAuthService.name);
+  }
+
+  /**
+   * @description Este método consume el servicio web de Ryca para obtener la información del estudiante, actualmente este método obtiene información dummy obtenida de un archivo XML que se encuentra en el repositorio, para la realización de pruebas deberá ser actualizado cuando se lleven a cabo las pruebas en el CUNOC
+   * @param userRycaServiceDto Mapea los atributos necesarios para realizar la petición al servicio web de Ryca
+   * @returns Información obtenida del servicio de RYCA
+   */
+  async getStudentInfo(userRycaServiceDto: UserRycaServiceDto) {
+    const response = await this.consumeService.getExternalData(`https://ryca.cunoc.edu.gt/serviciosweb/servicecics.php?carne=${userRycaServiceDto.ra}&key=${process.env.RYCA_KEY}&pin=${userRycaServiceDto.pin}`);
+    return new RycaUserServiceResponseDto(await this.consumeService.parseXMLToJSON(response));
   }
 
   /**

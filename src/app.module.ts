@@ -35,6 +35,7 @@ import { EmailModule } from './modules/emails/email.module';
 import { RedisModule } from './modules/redis/redis.module';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import appConfig from './app.config';
+import { ConsumeServiceModule } from './modules/consume-service/consume-service.module';
 
 @Module({
   imports: [
@@ -82,7 +83,7 @@ import appConfig from './app.config';
     PermissionsModule,
     CaslModule,
     RedisModule,
-    EmailModule,
+    EmailModule
   ],
 })
 export class AppModule {
