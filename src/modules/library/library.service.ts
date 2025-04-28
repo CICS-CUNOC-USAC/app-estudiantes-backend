@@ -64,8 +64,7 @@ export class LibraryService extends BaseService {
       await this.libraryReferenceModel.query(trx).insert({
         id: createPhysicalBookDto.reference_id,
         book_id: createdBook.$id(),
-        total_availability: createPhysicalBookDto.total_availability,
-        current_availability: createPhysicalBookDto.current_availability,
+        is_available: createPhysicalBookDto.is_available,
         edition: createPhysicalBookDto.edition,
         location: createPhysicalBookDto.location,
       });
@@ -80,12 +79,12 @@ export class LibraryService extends BaseService {
         .query(trx)
         .findById(book_reference_id);
       if (foundReference) {
-        if (foundReference.current_availability - 1 < 0) {
-          throw new BadRequestException('No se pueden prestar más libros');
+        if (!foundReference.is_available) {
+          throw new BadRequestException('No se puede prestar el libro indicado');
         }
         return await foundReference
           .$query(trx)
-          .decrement('current_availability', 1)
+          .update({ is_available: false })
           .returning('*');
       } else {
         throw new NotFoundException('Libro no encontrado');
@@ -99,25 +98,13 @@ export class LibraryService extends BaseService {
         .query(trx)
         .findById(book_reference_id);
       if (foundReference) {
-        if (
-          foundReference.current_availability + 1 >
-          foundReference.total_availability
-        ) {
-          throw new BadRequestException('No se pueden devolver más libros');
-        }
-
-        if (
-          foundReference.current_availability + 1 >
-          foundReference.total_availability -
-            (await this.getOutstandingExternalLoansById(book_reference_id))
-              .length
-        ) {
-          throw new BadRequestException('No se pueden devolver más libros');
+        if(foundReference.is_available) {
+          throw new BadRequestException('El libro se encuentra en biblioteca, no se puede devolver');
         }
 
         await foundReference
           .$query(trx)
-          .increment('current_availability', 1)
+          .update({ is_available: true })
           .returning('*');
         return foundReference;
       } else {
@@ -135,19 +122,17 @@ export class LibraryService extends BaseService {
         .query(trx)
         .findById(book_reference_id);
       if (foundReference) {
-        if (foundReference.current_availability - 1 < 0) {
-          throw new BadRequestException('No se pueden prestar más libros');
+        if (!foundReference.is_available) {
+          throw new BadRequestException('No se puede prestar el libro indicado');
         }
-        await foundReference.$query(trx).decrement('current_availability', 1);
-
-        console.log(`${createExternalLoanDto}, ${book_reference_id}`);
+        await foundReference.$query(trx).update({is_available: false});
         const createdReceipt = await this.libraryReceiptModel
           .query(trx)
           .insert({
             ra: createExternalLoanDto.ra,
             personal_id: createExternalLoanDto.personal_id,
             place: createExternalLoanDto.place,
-            library_reference_id: book_reference_id,
+            library_reference_id: foundReference.id,
           });
 
         return createdReceipt;
@@ -166,23 +151,21 @@ export class LibraryService extends BaseService {
         .query(trx)
         .findById(book_reference_id);
       if (foundReference) {
-        if (
-          foundReference.current_availability + 1 >
-          foundReference.total_availability
-        ) {
-          throw new BadRequestException('No se pueden devolver más libros');
-        }
-        await foundReference.$query(trx).increment('current_availability', 1);
-
+        
         const foundReceipt = await this.libraryReceiptModel
-          .query(trx)
-          .where('id', createExternalReturnDto.loan_id)
-          .where('returned_at', null)
-          .first();
-
+        .query(trx)
+        .where('id', createExternalReturnDto.loan_id)
+        .where('returned_at', null)
+        .first();
+        
         if (!foundReceipt) {
           throw new NotFoundException('No se encontro un recibo del prestamo valido');
         }
+        
+        if ( foundReference.is_available ) {
+          throw new BadRequestException('No se puede devolver el libro indicado');
+        }
+        await foundReference.$query(trx).update({ is_available: true });
 
         return await foundReceipt
           .$query(trx)

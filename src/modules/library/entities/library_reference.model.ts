@@ -6,8 +6,7 @@ export class LibraryReferenceModel extends Model {
 
   id: string;
   book_id: number;
-  total_availability: number;
-  current_availability: number;
+  is_available: boolean;
   edition: string;
   location: string;
   created_at: Date;
