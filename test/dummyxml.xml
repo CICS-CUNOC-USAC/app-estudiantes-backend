@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<datos>
+    <estatus>
+        <codigo>1</codigo>
+        <mensaje>Registro encontrado en Sireca</mensaje>
+    </estatus>
+    <estudiante>
+        <carne>202530855</carne>
+        <nombres>Pablo Andre</nombres>
+        <apellidos>Rohr Sanchez</apellidos>
+        <completos>Rohr Sanchez Pablo Andre</completos>
+        <correo>pablorohr202530855@cunoc.edu.gt</correo>
+    </estudiante>
+    <inscrito>
+        <carrera>
+            <codigo>120033</codigo>
+            <carrera>Ingeniería Civil</carrera>
+        </carrera>
+    </inscrito>
+</datos>
