@@ -22,6 +22,15 @@ export class CreateUserDto {
   readonly email: string;
 
   @IsNotEmpty()
+  @IsString()
+  @MaxLength(320)
+  @ApiProperty({
+    description: 'Username that represents the user',
+    example: 'juanfra02',
+  })
+  readonly username: string;
+
+  @IsNotEmpty()
   @IsNumberString()
   @MaxLength(20)
   @ApiProperty({
