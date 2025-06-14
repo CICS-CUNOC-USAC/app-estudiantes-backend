@@ -86,13 +86,13 @@ export class RegularAuthService extends BaseService {
       user: UserModel;
       token: string;
     }>(async (trx) => {
-      // Check if the RA is already in use
-      const user: UserModel | undefined = await this.usersService.findByRa(
+      // Check if some attributes are already in use
+      const existant: UserModel | undefined = await this.usersService.findExistant(
+        createUserDto.email,
         createUserDto.ra,
+        createUserDto.username,
         trx,
       );
-      const userByEmail: UserModel | undefined =
-        await this.usersService.findByEmail(createUserDto.email, trx);
 
       const error: IGeneralError = {
         statusCode: 400,
@@ -100,16 +100,18 @@ export class RegularAuthService extends BaseService {
         error: 'Bad Request',
       };
 
-      if (user !== undefined) {
-        (error.message as object[]).push({
-          ra: 'Registro Académico ya en uso',
-        });
+      if (existant) {
+        if (existant.ra === createUserDto.ra) {
+          (error.message as object[]).push({ ra: 'Registro Académico ya en uso' });
+        }
+        if (existant.email === createUserDto.email) {
+          (error.message as object[]).push({ email: 'Correo electrónico ya en uso' });
+        }
+        if (existant.username === createUserDto.username) {
+          (error.message as object[]).push({ username: 'Nombre de usuario ya en uso' });
+        }
       }
-      if (userByEmail !== undefined) {
-        (error.message as object[]).push({
-          email: 'Correo electrónico ya en uso',
-        });
-      }
+
       if ((error.message as object[]).length > 0) {
         throw new BadRequestException(error);
       }
