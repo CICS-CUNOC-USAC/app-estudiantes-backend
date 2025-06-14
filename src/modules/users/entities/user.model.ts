@@ -9,6 +9,7 @@ export class UserModel extends Model {
   // Attributes
   id: number;
   email: string;
+  username: string;
   ra: string;
   career_code: number;
   encrypted_password: string;

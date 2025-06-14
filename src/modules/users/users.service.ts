@@ -36,6 +36,7 @@ export class UsersService extends BaseService {
     const encryptedPassword = await this.hashPassword(createUserDto.password);
     await this.userModel.query(trx).insert({
       email: createUserDto.email,
+      username: createUserDto.username,
       ra: createUserDto.ra,
       career_code: createUserDto.career_code,
       encrypted_password: encryptedPassword,
@@ -118,6 +119,28 @@ export class UsersService extends BaseService {
       .withGraphFetched('career')
       .findOne({ ra });
     return user;
+  }
+
+  async findByUsername(username: string, trx?: Transaction): Promise<UserModel> {
+    const user = await this.userModel
+      .query(trx)
+      .withGraphFetched('profile')
+      .withGraphFetched('career')
+      .findOne({ username });
+    return user;
+  }
+
+  async findExistant(email: string, ra: string, username: string, trx?: Transaction): Promise<UserModel> {
+    return await this.userModel
+      .query(trx)
+      .withGraphFetched('profile')
+      .withGraphFetched('career')
+      .where(function() {
+        this.where('ra', ra)
+          .orWhere('email', email)
+          .orWhere('username', username);
+      })
+      .first();
   }
 
   /**
