@@ -174,6 +174,7 @@ export class RegularAuthService extends BaseService {
     emailDto.subject = 'Recuperacion de Contraseña CICS-App';
     emailDto.template = EMAIL_TEMPLATES_NAMES.RECOVERY_PASSWORD;
     emailDto.context = {
+      frontend_url: process.env.FRONTEND_HOST_URL,
       token: randomHash,
     };
 
