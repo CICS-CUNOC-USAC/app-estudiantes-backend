@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsOptional, IsString, MaxLength } from 'class-validator';
+import { IsNumber, IsOptional, IsString, MaxLength } from 'class-validator';
 import { BaseQueryDto } from 'src/core/utils/base-query.dto';
 
 export class BooksQueryDto extends BaseQueryDto {
@@ -20,4 +20,12 @@ export class BooksQueryDto extends BaseQueryDto {
     example: 'James Stewart',
   })
   author?: string | null;
+
+  @IsOptional()
+  @IsNumber()
+  @ApiProperty({
+    description: 'ID of the Category of the book',
+    example: '2',
+  })
+  category_id?: number | null;
 }

@@ -269,6 +269,12 @@ export class LibraryService extends BaseService {
         `%${this.normalizeString(queryDto.author)}%`,
       );
     }
+    if (queryDto.category_id) {
+      builder.andWhere(
+        'category_id',
+        queryDto.category_id,
+      );
+    }
 
     return builder;
   }
