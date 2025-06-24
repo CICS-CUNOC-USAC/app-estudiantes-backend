@@ -233,6 +233,26 @@ export class LibraryService extends BaseService {
     }
   }
 
+  async findOnePublic(id: number, trx?: Transaction) {
+    const bookModel = await this.bookModel.query(trx).findById(id);
+    if (bookModel.media_id) {
+      return await bookModel.$query(trx).withGraphFetched('media');
+    } else {
+      const references = await bookModel.$query(trx);
+
+      const countResult = await this.libraryReferenceModel
+        .query(trx)
+        .where('book_id', id)
+        .andWhere('is_available', true)
+        .count('id');
+
+      return {
+        ...references,
+        totalAvailable: Number((countResult[0] as any).count),
+      };
+    }
+  }
+
   async getOutstandingExternalLoansById(book_reference_id: string) {
     return await this.libraryReceiptModel
       .query()

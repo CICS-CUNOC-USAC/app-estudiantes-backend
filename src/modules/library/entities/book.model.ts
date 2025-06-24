@@ -29,7 +29,7 @@ export class BookModel extends Model {
         },
       },
       library_reference: {
-        relation: Model.HasOneRelation,
+        relation: Model.HasManyRelation,
         modelClass: LibraryReferenceModel,
         join: {
           from: 'books.id',

@@ -72,7 +72,7 @@ export class BooksController {
     @Param('id') id: string,
     @Param('type') type: 'digital' | 'physical',
   ) {
-    return this.libraryService.findOne(+id, BookType[type.toUpperCase()]);
+    return this.libraryService.findOne(+id);
   }
 
   @UseGuards(StaffLoginJwtAuthGuard)
@@ -94,6 +94,6 @@ export class BooksController {
   @UseGuards(JwtGeneralRequiredAuthGuard)
   @Get(':id')
   findOnePublic(@Param('id') id: string) {
-    return this.libraryService.findOne(+id);
+    return this.libraryService.findOnePublic(+id);
   }
 }

@@ -7,11 +7,12 @@ import {
   UseGuards,
   ValidationPipe,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { LibraryService } from './library.service';
 import { StaffLoginJwtAuthGuard } from 'src/core/guards/jwt-staff-auth.guard';
 import { CreateExternalLoanDto } from './dto/create-external-loan.dto';
 import { CreateExternalReturnDto } from './dto/create-external-return.dto';
+import { LibraryReceiptModel } from './entities/library_receipt.model';
 
 @ApiTags('Library/Loans')
 @Controller('loans')
@@ -20,6 +21,12 @@ export class LoansController {
 
   @UseGuards(StaffLoginJwtAuthGuard)
   @Get('outstanding-loans')
+  @ApiResponse({
+    status: 200,
+    description: 'List of outstanding loans',
+    type: LibraryReceiptModel,
+    isArray: true
+  })
   getOutstandingExternalLoans() {
     return this.libraryService.getOutstandingExternalLoans();
   }
