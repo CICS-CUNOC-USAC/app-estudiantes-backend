@@ -7,6 +7,7 @@ export async function up(knex: Knex.Knex) {
     '09:40',
     '10:30',
     '11:20',
+    '12:10'
   ];
 
   const hours = [];
@@ -46,6 +47,7 @@ export async function down(knex: Knex.Knex) {
     '09:40',
     '10:30',
     '11:20',
+    '12:10'
   ];
 
   const hourPairs = [];
@@ -56,13 +58,21 @@ export async function down(knex: Knex.Knex) {
     });
   }
 
-  // Get IDs to delete periods first
-  const hourIds = await knex('hours')
-    .whereIn(['start_time', 'end_time'], hourPairs)
-    .select('id');
+  // Armar un query dinámico con ORs
+  const hourIdsQuery = knex('hours')
+    .select('id')
+    .where(function () {
+      for (const pair of hourPairs) {
+        this.orWhere(function () {
+          this.where('start_time', pair.start_time).andWhere('end_time', pair.end_time);
+        });
+      }
+    });
 
-  await knex('periods').whereIn('hour_id', hourIds.map((h) => h.id)).del();
-  await knex('hours')
-    .whereIn(['start_time', 'end_time'], hourPairs)
-    .del();
+  const hourIds = (await hourIdsQuery).map((h) => h.id);
+
+  if (hourIds.length > 0) {
+    await knex('periods').whereIn('hour_id', hourIds).del();
+    await knex('hours').whereIn('id', hourIds).del();
+  }
 }
