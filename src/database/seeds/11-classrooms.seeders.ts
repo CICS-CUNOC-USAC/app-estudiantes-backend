@@ -18,7 +18,7 @@ export async function seed(knex: Knex.Knex): Promise<any> {
     { name: 'Proyecciones' },
     { name: 'TICS' },
     { name: 'Laboratorio de Ingeniería Eléctrica' },
-    { name: 'Laboratorio de Ingeniería Industrial ' },
+    { name: 'Laboratorio de Ingeniería Industrial' },
     { name: 'Hugo Pineda' },
     { name: 'Mayor' },
     { name: 'Dibujo' },

@@ -41,7 +41,8 @@ export class HoursService extends BaseService {
         raw("TO_CHAR(start_time, 'HH24:MI')").as('start_time'),
         raw("TO_CHAR(end_time, 'HH24:MI')").as('end_time'),
       )
-      .where((builder) => this.queryFilters(queryDto, builder));
+      .where((builder) => this.queryFilters(queryDto, builder))
+      .orderBy('start_time', 'asc');
   }
 
   async findOne(id: number) {
