@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Recibo {{receipt.correlativeText}}</title>
+
+  <style>
+    /* keep your CSS exactly the same */
+    @page { size: 8.5in 5.5in; margin: 0; }
+    html, body { width: 8.5in; height: 5.5in; margin: 0; padding: 0; }
+    body { font-family: 'Times New Roman', Times, serif; color:#111; background:#fff; }
+    .sheet{ width: 8.5in; height: 5.5in; padding:0; margin:0; }
+    .page-break{ page-break-after: always; }
+    .receipt{ width: 8.5in; height: 5.5in; box-sizing: border-box; padding: 18mm 15mm 6mm 15mm; border: 1px solid #ddd; position: relative; overflow: hidden; page-break-inside: avoid; }
+    .watermark{ position: absolute; top: 42%; left: 50%; transform: translate(-50%, -50%); width: 25%; height: auto; opacity: 0.12; pointer-events: none; z-index: 0; }
+    .watermark img{ width: 100%; height: auto; display: block; }
+    .content{ position: relative; z-index: 1; }
+    .header{ display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 3mm; }
+    .header__left{ flex: 1; }
+    .header__title{ font-size: 13px; font-weight: 700; letter-spacing: 0.3px; margin-bottom: 6px; text-transform: uppercase; line-height: 1.2; }
+    .header__logo{ flex: 0 0 235px; text-align: right; }
+    .header__logo img{ width: 100%; max-width: 235px; height: auto; }
+    .receipt-info{ display: flex; gap: 22px; font-size: 11px; }
+    .receipt-info__item{ display: flex; align-items: baseline; gap: 5px; }
+    .receipt-info__label{ font-weight: 600; }
+    .divider{ border: none; border-top: 1.5px solid #333; margin: 2.5mm 0; }
+    .student-info{ margin-bottom: 3mm; }
+    .form-row{ display: flex; align-items: baseline; margin-bottom: 4px; font-size: 11px; }
+    .form-label{ font-weight: 600; min-width: 85px; flex-shrink: 0; }
+    .form-value{ flex: 1; border-bottom: 1px solid #666; padding-bottom: 2px; padding-left: 4px; }
+    table{ width: 100%; border-collapse: collapse; margin: 2.5mm 0; font-size: 11px; }
+    thead th{ text-align: left; padding: 4px 4px; border-bottom: 1.5px solid #333; font-weight: 700; font-size: 10px; }
+    tbody td{ padding: 4px 4px; border-bottom: 0.5px solid #e5e5e5; }
+    tbody tr:last-child td{ border-bottom: none; }
+    tfoot td{ padding: 5px 4px; border-top: 1.5px solid #333; font-weight: 700; font-size: 12px; }
+    .text-right{ text-align: right; }
+    .text-center{ text-align: center; }
+    .amount-words{ margin: 2.5mm 0; }
+    .amount-words__row{ display: flex; align-items: baseline; font-size: 11px; }
+    .amount-words__label{ font-weight: 600; min-width: 110px; flex-shrink: 0; }
+    .amount-words__value{ flex: 1; border-bottom: 1px solid #666; padding-bottom: 2px; padding-left: 4px; }
+    .footer-message{ font-size: 10px; color: #555; margin: 2mm 0; font-style: italic; }
+    .signature{ margin-top: 8mm; display: flex; justify-content: center; }
+    .signature__box{ width: 250px; text-align: center; }
+    .signature__line{ border-top: 1.5px solid #333; padding-top: 5px; font-weight: 600; font-size: 12px; margin-top: 32px; }
+    @media print{
+      .receipt{ border: none; }
+      *{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+
+<body>
+
+{{!-- each copy is a sheet --}}
+{{#each copiesArray}}
+  <div class="sheet {{#unless @last}}page-break{{/unless}}">
+    <div class="receipt">
+
+      <!-- Watermark Logo Ingenieria -->
+      <div class="watermark">
+        <img src="{{frontend_url}}/img/logo-ingenieria.png" alt="Logo Ingeniería">
+      </div>
+
+      <div class="content">
+
+        <!-- HEADER -->
+        <div class="header">
+          <div class="header__left">
+            <div class="header__title">
+              Asociación de Estudiantes de<br>Ingeniería de Occidente
+            </div>
+
+            <div class="receipt-info">
+              <div class="receipt-info__item">
+                <span class="receipt-info__label">Recibo:</span>
+                <span>{{receipt.correlativeText}}</span>
+              </div>
+
+              <div class="receipt-info__item">
+                <span class="receipt-info__label">Fecha:</span>
+                <span>{{formatDate receipt.issuedAt "dd/MM/yyyy HH:mm"}}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="header__logo">
+            <img src="{{frontend_url}}/img/aeio.jpg" alt="AEIO">
+          </div>
+        </div>
+
+        <hr class="divider">
+
+        <!-- DATOS DEL ESTUDIANTE -->
+        <div class="student-info">
+          <div class="form-row">
+            <span class="form-label">Nombre:</span>
+            <span class="form-value">{{receipt.student.firstName}} {{receipt.student.lastName}}</span>
+          </div>
+
+          <div class="form-row">
+            <span class="form-label">No. Carné:</span>
+            <span class="form-value">{{receipt.student.carnet}}</span>
+          </div>
+
+          <div class="form-row">
+            <span class="form-label">Carrera:</span>
+            <span class="form-value">{{receipt.student.career.name}}</span>
+          </div>
+        </div>
+
+        <!-- TABLA DE CONCEPTOS -->
+        <table>
+          <thead>
+            <tr>
+              <th>Concepto</th>
+              <th class="text-center" style="width:60px;">Cant.</th>
+              <th class="text-right" style="width:85px;">Precio</th>
+              <th class="text-right" style="width:95px;">Subtotal</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {{#each receipt.items}}
+              <tr>
+                <td>{{serviceNameSnapshot}}</td>
+                <td class="text-center">{{quantity}}</td>
+                <td class="text-right">Q{{formatMoney unitPrice}}</td>
+                <td class="text-right">Q{{formatMoney lineTotal}}</td>
+              </tr>
+            {{/each}}
+          </tbody>
+
+          <tfoot>
+            <tr>
+              <td colspan="3" class="text-right">Total</td>
+              <td class="text-right">Q{{formatMoney receipt.total}}</td>
+            </tr>
+          </tfoot>
+        </table>
+
+        <!-- CANTIDAD EN LETRAS -->
+        <div class="amount-words">
+          <div class="amount-words__row">
+            <span class="amount-words__label">La Cantidad de:</span>
+            <span class="amount-words__value">{{amountInWords}}</span>
+          </div>
+        </div>
+
+        <!-- MENSAJE INSTITUCIONAL -->
+        <div class="footer-message">
+          Recuerda que con tu apoyo mantenemos los espacios estudiantiles
+        </div>
+
+        <!-- FIRMA -->
+        <div class="signature">
+          <div class="signature__box">
+            <div class="signature__line">Firma Encargado(a)</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+{{/each}}
+</body>
+</html>

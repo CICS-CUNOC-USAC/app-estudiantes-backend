@@ -32,6 +32,7 @@ import { CaslModule } from './modules/casl/casl.module';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { Transport } from './modules/emails/dto/Transport';
 import { EmailModule } from './modules/emails/email.module';
+import { PrintModule } from './modules/print/print.module';
 import { RedisModule } from './modules/redis/redis.module';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import appConfig from './app.config';
@@ -83,7 +84,8 @@ import { ConsumeServiceModule } from './modules/consume-service/consume-service.
     PermissionsModule,
     CaslModule,
     RedisModule,
-    EmailModule
+    EmailModule,
+    PrintModule
   ],
 })
 export class AppModule {
