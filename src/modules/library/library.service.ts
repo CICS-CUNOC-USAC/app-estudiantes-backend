@@ -267,6 +267,13 @@ export class LibraryService extends BaseService {
       .where('returned_at', null);
   }
 
+  async getReturnedOutstandingExternalLoans() {
+    return await this.libraryReceiptModel
+      .query()
+      .withGraphFetched('library_reference.book')
+      .whereNotNull('returned_at');
+  }
+
   async findAllCategories() {
     return await this.bookCategoryModel.query();
   }

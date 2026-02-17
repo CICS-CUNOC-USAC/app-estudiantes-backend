@@ -32,6 +32,19 @@ export class LoansController {
   }
 
   @UseGuards(StaffLoginJwtAuthGuard)
+  @Get('outstanding-loans/returned')
+  @ApiResponse({
+    status: 200,
+    description: 'List of returned outstanding loans',
+    type: LibraryReceiptModel,
+    isArray: true
+  })
+  getReturnedOutstandingExternalLoans() {
+    return this.libraryService.getReturnedOutstandingExternalLoans();
+  }
+
+
+  @UseGuards(StaffLoginJwtAuthGuard)
   @Post('simple-loan/:book_reference_id')
   createSimpleLoan(@Param('book_reference_id') book_id: string) {
     return this.libraryService.createSimpleLoan(book_id);
