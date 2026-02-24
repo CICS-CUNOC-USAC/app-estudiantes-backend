@@ -19,6 +19,8 @@ import { LibraryReceiptModel } from './entities/library_receipt.model';
 import { CreateExternalLoanDto } from './dto/create-external-loan.dto';
 import { CreateExternalReturnDto } from './dto/create-external-return.dto';
 import { BookCategoryModel } from './entities/book_category.model';
+import { UpdateReferenceDto } from './dto/update-reference.dto';
+import { CreateReferenceDto } from './dto/create-reference.dto';
 
 export enum BookType {
   DIGITAL,
@@ -98,7 +100,7 @@ export class LibraryService extends BaseService {
         .query(trx)
         .findById(book_reference_id);
       if (foundReference) {
-        if(foundReference.is_available) {
+        if (foundReference.is_available) {
           throw new BadRequestException('El libro se encuentra en biblioteca, no se puede devolver');
         }
 
@@ -125,7 +127,7 @@ export class LibraryService extends BaseService {
         if (!foundReference.is_available) {
           throw new BadRequestException('No se puede prestar el libro indicado');
         }
-        await foundReference.$query(trx).update({is_available: false});
+        await foundReference.$query(trx).update({ is_available: false });
         const createdReceipt = await this.libraryReceiptModel
           .query(trx)
           .insert({
@@ -151,18 +153,18 @@ export class LibraryService extends BaseService {
         .query(trx)
         .findById(book_reference_id);
       if (foundReference) {
-        
+
         const foundReceipt = await this.libraryReceiptModel
-        .query(trx)
-        .where('id', createExternalReturnDto.loan_id)
-        .where('returned_at', null)
-        .first();
-        
+          .query(trx)
+          .where('id', createExternalReturnDto.loan_id)
+          .where('returned_at', null)
+          .first();
+
         if (!foundReceipt) {
           throw new NotFoundException('No se encontro un recibo del prestamo valido');
         }
-        
-        if ( foundReference.is_available ) {
+
+        if (foundReference.is_available) {
           throw new BadRequestException('No se puede devolver el libro indicado');
         }
         await foundReference.$query(trx).update({ is_available: true });
@@ -184,6 +186,32 @@ export class LibraryService extends BaseService {
         await book.$query(trx).patch(updateLibraryDto);
       }
       return book;
+    }, this.logger);
+  }
+
+  async updateReference(bookId: number, referenceId: string, updateReferenceDto: UpdateReferenceDto) {
+    return this.dbTrxService.databaseTransaction(async (trx) => {
+      const reference = await this.libraryReferenceModel.query(trx).findOne({ book_id: bookId, id: referenceId });
+      if (reference) {
+        await reference.$query(trx).patch(updateReferenceDto);
+      }
+      return reference;
+    }, this.logger);
+  }
+
+  async createReference(bookId: number, referenceId: string, createReferenceDto: CreateReferenceDto) {
+    return this.dbTrxService.databaseTransaction(async (trx) => {
+      const existingReference = await this.libraryReferenceModel.query(trx).findOne({ book_id: bookId, id: referenceId });
+      if (existingReference) {
+        throw new BadRequestException("La referencia para el libro ya existe")
+      } else {
+        const createdReference = await this.libraryReferenceModel.query(trx).insert({
+          book_id: bookId,
+          edition: createReferenceDto.edition,
+          location: createReferenceDto.location
+        });
+        return this.libraryReferenceModel.query(trx).findOne(createdReference.$id);
+      }
     }, this.logger);
   }
 

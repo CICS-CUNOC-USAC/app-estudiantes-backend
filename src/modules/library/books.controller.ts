@@ -18,6 +18,7 @@ import { BooksQueryDto } from './dto/books-query.dto';
 import { JwtGeneralRequiredAuthGuard } from 'src/core/guards/jwt-general-required-auth.guard';
 import { CreatePhysicalBookDto } from './dto/create-physical-book.dto';
 import { CreateDigitalBookDto } from './dto/create-digital-book.dto';
+import { UpdateReferenceDto } from './dto/update-reference.dto';
 
 @ApiTags('Library/Books')
 @Controller('books')
@@ -83,6 +84,28 @@ export class BooksController {
     updateLibraryDto: UpdateLibraryDto,
   ) {
     return this.libraryService.update(+id, updateLibraryDto);
+  }
+
+  @UseGuards(StaffLoginJwtAuthGuard)
+  @Patch('admin/:bookId/:id')
+  updateAdminReference(
+    @Param('bookId') bookId: string,
+    @Param('id') id: string,
+    @Body(new ValidationPipe())
+    updateReferenceDto: UpdateReferenceDto,
+  ) {
+    return this.libraryService.updateReference(+bookId, id, updateReferenceDto);
+  }
+
+  @UseGuards(StaffLoginJwtAuthGuard)
+  @Post('admin/:bookId/:id')
+  createLibraryReference(
+    @Param('bookId') bookId: string,
+    @Param('id') id: string,
+    @Body(new ValidationPipe())
+    updateReferenceDto: UpdateReferenceDto,
+  ) {
+    return this.libraryService.createReference(+bookId, id, updateReferenceDto);
   }
 
   @UseGuards(StaffLoginJwtAuthGuard)
