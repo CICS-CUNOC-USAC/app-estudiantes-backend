@@ -1,8 +1,13 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsNumberString, IsOptional, IsString, MaxLength, MinLength } from "class-validator";
+import { ApiProperty } from '@nestjs/swagger';
+import {
+  IsNumberString,
+  IsOptional,
+  IsString,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 
 export class UserRycaServiceDto {
-
   @IsNumberString()
   @MaxLength(20)
   @ApiProperty({

@@ -21,7 +21,5 @@ export async function up(knex: Knex.Knex) {
 }
 
 export async function down(knex: Knex.Knex) {
-  return knex('sections')
-    .whereIn('name', ['C','D','E','F','G'])
-    .del();
+  return knex('sections').whereIn('name', ['C', 'D', 'E', 'F', 'G']).del();
 }

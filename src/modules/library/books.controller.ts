@@ -109,6 +109,12 @@ export class BooksController {
   }
 
   @UseGuards(StaffLoginJwtAuthGuard)
+  @Delete('admin/:bookId/:id')
+  deleteReference(@Param('bookId') bookId: string, @Param('id') id: string) {
+    return this.libraryService.deleteReference(+bookId, id);
+  }
+
+  @UseGuards(StaffLoginJwtAuthGuard)
   @Delete('admin/:id')
   remove(@Param('id') id: string) {
     return this.libraryService.remove(+id);

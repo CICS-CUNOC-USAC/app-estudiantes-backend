@@ -22,7 +22,7 @@ import { ConsumeServiceModule } from 'src/modules/consume-service/consume-servic
     ProfilesModule,
     PassportModule,
     UserCoursesProgressModule,
-    ConsumeServiceModule
+    ConsumeServiceModule,
   ],
 })
 export class RegularAuthModule {}

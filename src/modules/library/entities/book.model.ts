@@ -35,6 +35,7 @@ export class BookModel extends Model {
           from: 'books.id',
           to: 'library_references.book_id',
         },
+        filter: (f) => f.whereNull('deleted_at'),
       },
       category: {
         relation: Model.BelongsToOneRelation,

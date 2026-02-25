@@ -19,10 +19,7 @@ export class PrintController {
   constructor(private readonly printService: PrintService) {}
 
   @Get('/external-loan-receipt/:receiptId')
-  getHtml(
-    @Param('receiptId') receiptId: number,
-  ) {
-
+  getHtml(@Param('receiptId') receiptId: number) {
     const html = this.printService.getExternalReceiptRender(receiptId);
 
     // sending a string is enough; you can also explicitly set type('html')

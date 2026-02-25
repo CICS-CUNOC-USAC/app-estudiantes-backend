@@ -40,5 +40,4 @@ export class ConsumeService {
     const xmlData = await readFile(filePath, 'utf-8');
     return this.parseXMLToJSON(xmlData);
   }
-
 }
