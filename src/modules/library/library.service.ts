@@ -228,22 +228,38 @@ export class LibraryService extends BaseService {
     return this.dbTrxService.databaseTransaction(async (trx) => {
       const existingReference = await this.libraryReferenceModel
         .query(trx)
-        .whereNull('deleted_at')
-        .findOne({ book_id: bookId, id: referenceId });
+        .findById(referenceId);
+
+      //The reference may share id with a previously deleted reference
+      //If thats the case the previously deleted reference is patched and re-enabled, to avoid duplicate key errors
       if (existingReference) {
-        throw new BadRequestException('La referencia para el libro ya existe');
-      } else {
-        const createdReference = await this.libraryReferenceModel
-          .query(trx)
-          .insert({
+        if (!existingReference.deleted_at) {
+          throw new BadRequestException(
+            'La referencia para el libro ya existe',
+          );
+        }
+        return await existingReference
+          .$query(trx)
+          .patch({
             book_id: bookId,
             edition: createReferenceDto.edition,
             location: createReferenceDto.location,
-          });
-        return this.libraryReferenceModel
-          .query(trx)
-          .findOne(createdReference.$id);
+            deleted_at: null,
+          })
+          .returning('*');
       }
+
+      const createdReference = await this.libraryReferenceModel
+        .query(trx)
+        .insert({
+          book_id: bookId,
+          id: referenceId,
+          edition: createReferenceDto.edition,
+          location: createReferenceDto.location,
+        });
+      return this.libraryReferenceModel
+        .query(trx)
+        .findOne(createdReference.$id);
     }, this.logger);
   }
 
