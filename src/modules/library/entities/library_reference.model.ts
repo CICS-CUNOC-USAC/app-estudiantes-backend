@@ -11,6 +11,7 @@ export class LibraryReferenceModel extends Model {
   location: string;
   created_at: Date;
   updated_at: Date;
+  deleted_at: Date;
 
   static get relationMappings() {
     return {

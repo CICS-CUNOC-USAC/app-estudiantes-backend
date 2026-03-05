@@ -85,7 +85,7 @@ import { ConsumeServiceModule } from './modules/consume-service/consume-service.
     CaslModule,
     RedisModule,
     EmailModule,
-    PrintModule
+    PrintModule,
   ],
 })
 export class AppModule {

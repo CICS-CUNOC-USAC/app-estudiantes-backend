@@ -51,6 +51,42 @@ export class PrintService {
     );
   }
 
+  async getReturnedReceiptRender(receiptId: number): Promise<string> {
+    const foundReceipt = await this.libraryReceiptModel
+      .query()
+      .findById(receiptId)
+      .withGraphFetched('library_reference.book');
+
+    if (!foundReceipt) {
+      throw new NotFoundException('Prestamo externo no encontrado');
+    }
+
+    const createdAt = new Date(foundReceipt.created_at);
+    const returnedAt = new Date(foundReceipt.returned_at);
+    const loanDays = Math.ceil(
+      (returnedAt.getTime() - createdAt.getTime()) / (1000 * 60 * 60 * 24),
+    );
+
+    const templateData = {
+      copiesArray: [
+        {
+          frontend_url: 'https://cics.cunoc.edu.gt/estudiantes',
+          receipt: {
+            correlativeText: `Biblioteca-${foundReceipt.id}`,
+            issuedAt: foundReceipt.returned_at,
+            loanDays,
+            ...foundReceipt,
+          },
+        },
+      ],
+    };
+
+    return this.render(
+      PRINT_TEMPLATES_NAMES.RETURNED_LOAN_RECEIPT,
+      templateData,
+    );
+  }
+
   render(templateName: PrintTemplateName, data: unknown): string {
     registerPrintHelpersOnce();
 

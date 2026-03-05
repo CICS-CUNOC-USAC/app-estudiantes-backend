@@ -22,6 +22,8 @@ export class LibraryReceiptModel extends Model {
   updated_at: Date;
   @ApiProperty()
   returned_at: Date;
+  @ApiProperty()
+  deleted_at: Date;
 
   static get relationMappings() {
     return {

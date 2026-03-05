@@ -137,7 +137,7 @@ export async function seed(knex: Knex): Promise<any> {
     {
       career_code: 35,
       field_number: 5,
-      name: 'Area de Mecanica'
+      name: 'Area de Mecanica',
     },
     {
       career_code: 35,
@@ -165,7 +165,7 @@ export async function seed(knex: Knex): Promise<any> {
       name: 'Area Informatica',
     },
     //agregue 3 nuevas areas al pensum de industrial que hacian falta
-    { 
+    {
       career_code: 35,
       field_number: 11,
       name: 'Area Investigacion',

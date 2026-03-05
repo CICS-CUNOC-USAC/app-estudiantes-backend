@@ -25,7 +25,7 @@ export class LoansController {
     status: 200,
     description: 'List of outstanding loans',
     type: LibraryReceiptModel,
-    isArray: true
+    isArray: true,
   })
   getOutstandingExternalLoans() {
     return this.libraryService.getOutstandingExternalLoans();
@@ -37,12 +37,11 @@ export class LoansController {
     status: 200,
     description: 'List of returned outstanding loans',
     type: LibraryReceiptModel,
-    isArray: true
+    isArray: true,
   })
   getReturnedOutstandingExternalLoans() {
     return this.libraryService.getReturnedOutstandingExternalLoans();
   }
-
 
   @UseGuards(StaffLoginJwtAuthGuard)
   @Post('simple-loan/:book_reference_id')

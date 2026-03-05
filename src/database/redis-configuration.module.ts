@@ -1,5 +1,5 @@
-import { FactoryProvider } from "@nestjs/common";
-import Redis from "ioredis";
+import { FactoryProvider } from '@nestjs/common';
+import Redis from 'ioredis';
 
 export const redisClientFactory: FactoryProvider<Redis> = {
   provide: 'RedisClient',
@@ -19,11 +19,11 @@ export const redisClientFactory: FactoryProvider<Redis> = {
       reconnectOnError: () => false,
     });
 
-    redisinstance.on('error', e => {
-      console.error(`Error connecting to Redis: ${e}`)
+    redisinstance.on('error', (e) => {
+      console.error(`Error connecting to Redis: ${e}`);
     });
 
     return redisinstance;
   },
-  inject: []
-}
+  inject: [],
+};

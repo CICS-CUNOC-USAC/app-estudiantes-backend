@@ -54,7 +54,7 @@ export class RegularAuthService extends BaseService {
     private readonly dbTrxService: DatabaseTransactionService,
     private readonly redisService: RedisService,
     private readonly emailService: EmailService,
-    private readonly consumeService: ConsumeService
+    private readonly consumeService: ConsumeService,
   ) {
     super(RegularAuthService.name);
   }
@@ -65,8 +65,12 @@ export class RegularAuthService extends BaseService {
    * @returns Información obtenida del servicio de RYCA
    */
   async getStudentInfo(userRycaServiceDto: UserRycaServiceDto) {
-    const response = await this.consumeService.getExternalData(`https://ryca.cunoc.edu.gt/serviciosweb/servicecics.php?carne=${userRycaServiceDto.ra}&key=${process.env.RYCA_KEY}&pin=${userRycaServiceDto.pin}`);
-    return new RycaUserServiceResponseDto(await this.consumeService.parseXMLToJSON(response));
+    const response = await this.consumeService.getExternalData(
+      `https://ryca.cunoc.edu.gt/serviciosweb/servicecics.php?carne=${userRycaServiceDto.ra}&key=${process.env.RYCA_KEY}&pin=${userRycaServiceDto.pin}`,
+    );
+    return new RycaUserServiceResponseDto(
+      await this.consumeService.parseXMLToJSON(response),
+    );
   }
 
   /**
@@ -87,12 +91,13 @@ export class RegularAuthService extends BaseService {
       token: string;
     }>(async (trx) => {
       // Check if some attributes are already in use
-      const existant: UserModel | undefined = await this.usersService.findExistant(
-        createUserDto.email,
-        createUserDto.ra,
-        createUserDto.username,
-        trx,
-      );
+      const existant: UserModel | undefined =
+        await this.usersService.findExistant(
+          createUserDto.email,
+          createUserDto.ra,
+          createUserDto.username,
+          trx,
+        );
 
       const error: IGeneralError = {
         statusCode: 400,
@@ -102,13 +107,19 @@ export class RegularAuthService extends BaseService {
 
       if (existant) {
         if (existant.ra === createUserDto.ra) {
-          (error.message as object[]).push({ ra: 'Registro Académico ya en uso' });
+          (error.message as object[]).push({
+            ra: 'Registro Académico ya en uso',
+          });
         }
         if (existant.email === createUserDto.email) {
-          (error.message as object[]).push({ email: 'Correo electrónico ya en uso' });
+          (error.message as object[]).push({
+            email: 'Correo electrónico ya en uso',
+          });
         }
         if (existant.username === createUserDto.username) {
-          (error.message as object[]).push({ username: 'Nombre de usuario ya en uso' });
+          (error.message as object[]).push({
+            username: 'Nombre de usuario ya en uso',
+          });
         }
       }
 
