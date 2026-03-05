@@ -1,14 +1,4 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Param,
-  Post,
-  Query,
-  Res,
-  Response,
-  ValidationPipe,
-} from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { PrintService } from './print.service';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { PrintTemplateName } from 'src/core/print/consts';
@@ -19,10 +9,16 @@ export class PrintController {
   constructor(private readonly printService: PrintService) {}
 
   @Get('/external-loan-receipt/:receiptId')
-  getHtml(@Param('receiptId') receiptId: number) {
+  getHtmlExternalLoan(@Param('receiptId') receiptId: number) {
     const html = this.printService.getExternalReceiptRender(receiptId);
 
-    // sending a string is enough; you can also explicitly set type('html')
+    return html;
+  }
+
+  @Get('/returned-loan-receipt/:receiptId')
+  getHtmlReturnedLoan(@Param('receiptId') receiptId: number) {
+    const html = this.printService.getReturnedReceiptRender(receiptId);
+
     return html;
   }
 }

@@ -10,4 +10,12 @@ export const PRINT_TEMPLATE_PATHS: Record<PrintTemplateName, string> = {
     'templates',
     'external-loan-receipt.hbs',
   ),
+  [PRINT_TEMPLATES_NAMES.RETURNED_LOAN_RECEIPT]: join(
+    process.cwd(),
+    'src',
+    'core',
+    'print',
+    'templates',
+    'returned-loan-receipt.hbs',
+  ),
 };
