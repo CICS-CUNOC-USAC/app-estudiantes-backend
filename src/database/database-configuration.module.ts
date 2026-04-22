@@ -29,6 +29,8 @@ import { LibraryReferenceModel } from 'src/modules/library/entities/library_refe
 import { LibraryReceiptModel } from 'src/modules/library/entities/library_receipt.model';
 import { PermissionModel } from 'src/modules/permissions/entities/permission.model';
 import { BookCategoryModel } from 'src/modules/library/entities/book_category.model';
+import { CommentModel } from 'src/modules/comments/entities/comment.model';
+import { ReactionModel } from 'src/modules/reactions/entities/reaction.model';
 
 dotenv.config();
 
@@ -61,6 +63,8 @@ const models = [
   LibraryReferenceModel,
   LibraryReceiptModel,
   PermissionModel,
+  CommentModel,
+  ReactionModel,
 ];
 
 const modelProviders = models.map((model) => {
