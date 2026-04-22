@@ -38,7 +38,10 @@ export class RegularAuthController {
   }
 
   @Get('student-info')
-  async getStudentInfo(@Query(new ValidationPipe({ transform: true })) userRycaServiceDto: UserRycaServiceDto) {
+  async getStudentInfo(
+    @Query(new ValidationPipe({ transform: true }))
+    userRycaServiceDto: UserRycaServiceDto,
+  ) {
     return this.regularAuthService.getStudentInfo(userRycaServiceDto);
   }
 

@@ -36,14 +36,12 @@ export class ArticlesService extends BaseService {
 
     const createdMedia = await this.mediaService.create(file, createMediaDto);
     return await this.dbTrxService.databaseTransaction(async (trx) => {
-      return this.articleModel
-      .query(trx)
-      .insert({
-        "title": articleDto.name,
-        "description": articleDto.description,
-        "staff_id": staffUser.id,
-        "media_id": createdMedia.id,
-        "category_id": articleDto.category_id,
+      return this.articleModel.query(trx).insert({
+        title: articleDto.name,
+        description: articleDto.description,
+        staff_id: staffUser.id,
+        media_id: createdMedia.id,
+        category_id: articleDto.category_id,
       });
     });
   }

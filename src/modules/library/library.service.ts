@@ -19,6 +19,8 @@ import { LibraryReceiptModel } from './entities/library_receipt.model';
 import { CreateExternalLoanDto } from './dto/create-external-loan.dto';
 import { CreateExternalReturnDto } from './dto/create-external-return.dto';
 import { BookCategoryModel } from './entities/book_category.model';
+import { UpdateReferenceDto } from './dto/update-reference.dto';
+import { CreateReferenceDto } from './dto/create-reference.dto';
 
 export enum BookType {
   DIGITAL,
@@ -77,10 +79,13 @@ export class LibraryService extends BaseService {
     return this.dbTrxService.databaseTransaction(async (trx) => {
       const foundReference = await this.libraryReferenceModel
         .query(trx)
+        .whereNull('deleted_at')
         .findById(book_reference_id);
       if (foundReference) {
         if (!foundReference.is_available) {
-          throw new BadRequestException('No se puede prestar el libro indicado');
+          throw new BadRequestException(
+            'No se puede prestar el libro indicado',
+          );
         }
         return await foundReference
           .$query(trx)
@@ -96,10 +101,13 @@ export class LibraryService extends BaseService {
     return this.dbTrxService.databaseTransaction(async (trx) => {
       const foundReference = await this.libraryReferenceModel
         .query(trx)
+        .whereNull('deleted_at')
         .findById(book_reference_id);
       if (foundReference) {
-        if(foundReference.is_available) {
-          throw new BadRequestException('El libro se encuentra en biblioteca, no se puede devolver');
+        if (foundReference.is_available) {
+          throw new BadRequestException(
+            'El libro se encuentra en biblioteca, no se puede devolver',
+          );
         }
 
         await foundReference
@@ -120,12 +128,15 @@ export class LibraryService extends BaseService {
     return this.dbTrxService.databaseTransaction(async (trx) => {
       const foundReference = await this.libraryReferenceModel
         .query(trx)
+        .whereNull('deleted_at')
         .findById(book_reference_id);
       if (foundReference) {
         if (!foundReference.is_available) {
-          throw new BadRequestException('No se puede prestar el libro indicado');
+          throw new BadRequestException(
+            'No se puede prestar el libro indicado',
+          );
         }
-        await foundReference.$query(trx).update({is_available: false});
+        await foundReference.$query(trx).update({ is_available: false });
         const createdReceipt = await this.libraryReceiptModel
           .query(trx)
           .insert({
@@ -149,21 +160,26 @@ export class LibraryService extends BaseService {
     return this.dbTrxService.databaseTransaction(async (trx) => {
       const foundReference = await this.libraryReferenceModel
         .query(trx)
+        .whereNull('deleted_at')
         .findById(book_reference_id);
       if (foundReference) {
-        
         const foundReceipt = await this.libraryReceiptModel
-        .query(trx)
-        .where('id', createExternalReturnDto.loan_id)
-        .where('returned_at', null)
-        .first();
-        
+          .query(trx)
+          .whereNull('deleted_at')
+          .where('id', createExternalReturnDto.loan_id)
+          .where('returned_at', null)
+          .first();
+
         if (!foundReceipt) {
-          throw new NotFoundException('No se encontro un recibo del prestamo valido');
+          throw new NotFoundException(
+            'No se encontro un recibo del prestamo valido',
+          );
         }
-        
-        if ( foundReference.is_available ) {
-          throw new BadRequestException('No se puede devolver el libro indicado');
+
+        if (foundReference.is_available) {
+          throw new BadRequestException(
+            'No se puede devolver el libro indicado',
+          );
         }
         await foundReference.$query(trx).update({ is_available: true });
 
@@ -184,6 +200,94 @@ export class LibraryService extends BaseService {
         await book.$query(trx).patch(updateLibraryDto);
       }
       return book;
+    }, this.logger);
+  }
+
+  async updateReference(
+    bookId: number,
+    referenceId: string,
+    updateReferenceDto: UpdateReferenceDto,
+  ) {
+    return this.dbTrxService.databaseTransaction(async (trx) => {
+      const reference = await this.libraryReferenceModel
+        .query(trx)
+        .whereNull('deleted_at')
+        .findOne({ book_id: bookId, id: referenceId });
+      if (reference) {
+        await reference.$query(trx).patch(updateReferenceDto);
+      }
+      return reference;
+    }, this.logger);
+  }
+
+  async createReference(
+    bookId: number,
+    referenceId: string,
+    createReferenceDto: CreateReferenceDto,
+  ) {
+    return this.dbTrxService.databaseTransaction(async (trx) => {
+      const existingReference = await this.libraryReferenceModel
+        .query(trx)
+        .findById(referenceId);
+
+      //The reference may share id with a previously deleted reference
+      //If thats the case the previously deleted reference is patched and re-enabled, to avoid duplicate key errors
+      if (existingReference) {
+        if (!existingReference.deleted_at) {
+          throw new BadRequestException(
+            'La referencia para el libro ya existe',
+          );
+        }
+        return await existingReference
+          .$query(trx)
+          .patch({
+            book_id: bookId,
+            edition: createReferenceDto.edition,
+            location: createReferenceDto.location,
+            deleted_at: null,
+          })
+          .returning('*');
+      }
+
+      const createdReference = await this.libraryReferenceModel
+        .query(trx)
+        .insert({
+          book_id: bookId,
+          id: referenceId,
+          edition: createReferenceDto.edition,
+          location: createReferenceDto.location,
+        });
+      return this.libraryReferenceModel
+        .query(trx)
+        .findOne(createdReference.$id);
+    }, this.logger);
+  }
+
+  async deleteReference(bookId: number, referenceId: string) {
+    return this.dbTrxService.databaseTransaction(async (trx) => {
+      const reference = await this.libraryReferenceModel
+        .query(trx)
+        .whereNull('deleted_at')
+        .findOne({ book_id: bookId, id: referenceId });
+
+      if (!reference) {
+        throw new NotFoundException('Referencia no encontrada');
+      }
+
+      await this.libraryReceiptModel
+        .query(trx)
+        .where('library_reference_id', referenceId)
+        .patch({ deleted_at: new Date() });
+
+      await this.libraryReferenceModel
+        .query(trx)
+        .where('id', referenceId)
+        .patch({ deleted_at: new Date() });
+
+      return {
+        message: `Referencia ${referenceId} eliminada correctamente`,
+        reference,
+      };
     }, this.logger);
   }
 
@@ -243,6 +347,7 @@ export class LibraryService extends BaseService {
       const countResult = await this.libraryReferenceModel
         .query(trx)
         .where('book_id', id)
+        .whereNull('deleted_at')
         .andWhere('is_available', true)
         .count('id');
 
@@ -256,6 +361,7 @@ export class LibraryService extends BaseService {
   async getOutstandingExternalLoansById(book_reference_id: string) {
     return await this.libraryReceiptModel
       .query()
+      .whereNull('deleted_at')
       .where('library_reference_id', book_reference_id)
       .where('returned_at', null);
   }
@@ -263,8 +369,17 @@ export class LibraryService extends BaseService {
   async getOutstandingExternalLoans() {
     return await this.libraryReceiptModel
       .query()
+      .whereNull('deleted_at')
       .withGraphFetched('library_reference.book')
       .where('returned_at', null);
+  }
+
+  async getReturnedOutstandingExternalLoans() {
+    return await this.libraryReceiptModel
+      .query()
+      .whereNull('deleted_at')
+      .withGraphFetched('library_reference.book')
+      .whereNotNull('returned_at');
   }
 
   async findAllCategories() {
@@ -290,10 +405,7 @@ export class LibraryService extends BaseService {
       );
     }
     if (queryDto.category_id) {
-      builder.andWhere(
-        'category_id',
-        queryDto.category_id,
-      );
+      builder.andWhere('category_id', queryDto.category_id);
     }
 
     return builder;

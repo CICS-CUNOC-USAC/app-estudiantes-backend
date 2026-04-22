@@ -62,8 +62,46 @@ export class RolesService extends BaseService {
       .withGraphFetched('permissions');
   }
 
-  update(id: number, updateRoleDto: UpdateRoleDto) {
-    return `This action updates a #${id} role`;
+  async update(id: number, updateRoleDto: UpdateRoleDto) {
+    return await this.dbTrxService.databaseTransaction(async (trx) => {
+      const foundRole = await this.roleModel.query(trx).findById(id);
+
+      if (!foundRole) {
+        throw new Error(`El rol ${id} no existe`);
+      }
+
+      await this.roleModel.query(trx).findById(id).patch({
+        name: updateRoleDto.name,
+        description: updateRoleDto.description,
+        alias: updateRoleDto.alias,
+      });
+
+      if (updateRoleDto.permissions_ids) {
+        await trx('role_permissions').where('role_id', id).delete();
+
+        if (updateRoleDto.permissions_ids.length > 0) {
+          const permissionsIds = Array.from(new Set(updateRoleDto.permissions_ids));
+
+          const permissions = await this.permissionModel
+            .query(trx)
+            .select('id')
+            .whereIn('id', permissionsIds);
+
+          if (permissions.length !== permissionsIds.length) {
+            throw new Error('Uno o mas permisos no existen');
+          }
+
+          await trx('role_permissions').insert(
+            permissionsIds.map((permissionId) => ({
+              role_id: id,
+              permission_id: permissionId,
+            })),
+          );
+        }
+      }
+
+      return await this.findOne(id, trx);
+    }, this.logger);
   }
 
   remove(id: number) {

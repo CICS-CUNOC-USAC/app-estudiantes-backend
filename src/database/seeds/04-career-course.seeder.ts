@@ -23,47 +23,47 @@ export async function seed(knex: Knex): Promise<any> {
     //Civil3
 
     {
-      career_code: 33, 
+      career_code: 33,
       course_code: '028',
       semester: 1,
       field: 6,
-      mandatory: true, 
+      mandatory: true,
     },
     //sip correcto
     //Mecanica
     {
-      career_code: 34, 
+      career_code: 34,
       course_code: '028',
       semester: 1,
       field: 5,
-      mandatory: true, 
+      mandatory: true,
     },
     //Informacion correcta
     //Industrial
     {
-      career_code: 35,  
+      career_code: 35,
       course_code: '028',
       semester: 1,
       field: 4,
-      mandatory: true, 
+      mandatory: true,
     },
     //se modifico el field de 7 a 4, segun malla
     //Mecanica Industrial
     {
-      career_code: 36, 
+      career_code: 36,
       course_code: '028',
       semester: 1,
       field: 1,
-      mandatory: true, 
+      mandatory: true,
     },
     //se modifico el fiel de 8 a 1, ya que en ese pensum no tiene areas desglosadas, sino que es una unica area
-    //sistemas 
+    //sistemas
     {
-      career_code: 58, 
+      career_code: 58,
       course_code: '028',
       semester: 1,
       field: 4,
-      mandatory: true, 
+      mandatory: true,
     }, //Informacion correcta
     //Mate Basica 1 (CORRECTAMENTE INGRESADO)
     {
@@ -248,7 +248,7 @@ export async function seed(knex: Knex): Promise<any> {
     //Idioma Tecnico 1 - UNICAMENTE EXISTE EN SISTEMAS Y INDUSTRIAL (CORRECTAMENTE INGRESADO)
     //Sistemas
     {
-      career_code: 58, 
+      career_code: 58,
       course_code: '2792',
       semester: 1,
       field: 4,
@@ -256,7 +256,7 @@ export async function seed(knex: Knex): Promise<any> {
     },
     //Industrial
     {
-      career_code: 35, 
+      career_code: 35,
       course_code: '2792',
       semester: 1,
       field: 13,
@@ -265,37 +265,42 @@ export async function seed(knex: Knex): Promise<any> {
 
     //SEGUNDO SEMESTRE
     //AREA COMUN
-    
+
     //Social Humanistica 2 (CORRECTAMENTE INGRESADO)
-    {//civil
+    {
+      //civil
       career_code: 33,
       course_code: '029',
       semester: 2,
       field: 6,
       mandatory: true,
     },
-    { //mecanica
+    {
+      //mecanica
       career_code: 34,
       course_code: '029',
       semester: 2,
       field: 5,
       mandatory: true,
     },
-    { //industrial
+    {
+      //industrial
       career_code: 35,
       course_code: '029',
       semester: 2,
       field: 4,
       mandatory: true,
     },
-    { //mecanica industrial
+    {
+      //mecanica industrial
       career_code: 36,
       course_code: '029',
       semester: 2,
       field: 1,
       mandatory: true,
     },
-    { //sistemas
+    {
+      //sistemas
       career_code: 58,
       course_code: '029',
       semester: 2,
@@ -375,7 +380,7 @@ export async function seed(knex: Knex): Promise<any> {
       mandatory: true,
     },
     //Fisica Basica (CORRECTAMENTE INGRESADO)
-    { 
+    {
       career_code: 33,
       course_code: '072',
       semester: 2,
@@ -687,7 +692,7 @@ export async function seed(knex: Knex): Promise<any> {
       field: 4,
       mandatory: false,
     },
-     //Logica (CORRECTAMENTE INGRESADO)
+    //Logica (CORRECTAMENTE INGRESADO)
     {
       career_code: 33,
       course_code: '085',
@@ -711,10 +716,10 @@ export async function seed(knex: Knex): Promise<any> {
     },
     //CUARTO SEMESTRE
     //AREA COMUN
-    
+
     //Mate Intermedia 2 (CORRECTAMENTE INGRESADO)
     {
-      career_code: 33, 
+      career_code: 33,
       course_code: '291',
       semester: 4,
       field: 6,
@@ -749,7 +754,7 @@ export async function seed(knex: Knex): Promise<any> {
       mandatory: true,
     }, //correcto
     //Mate Intermedia 3 (CORRECTAMENTE INGRESADO)
-    { 
+    {
       career_code: 33,
       course_code: '292',
       semester: 4,
@@ -943,7 +948,7 @@ export async function seed(knex: Knex): Promise<any> {
       semester: 4,
       field: 5,
       mandatory: false,
-    }, //correctamente 
+    }, //correctamente
     //Introduccion a la Ingenieria Petrolera (CORRECTAMENTE INGRESADO)
     {
       career_code: 33,
@@ -1010,7 +1015,7 @@ export async function seed(knex: Knex): Promise<any> {
       field: 1,
       mandatory: false,
     },
-    //PSICOLOGIA INDUSTRIAL (CORRECTAMENTE INGRESADO) 
+    //PSICOLOGIA INDUSTRIAL (CORRECTAMENTE INGRESADO)
     {
       career_code: 33,
       course_code: '925',
@@ -1096,7 +1101,7 @@ export async function seed(knex: Knex): Promise<any> {
       semester: 5,
       field: 1,
       mandatory: true,
-    }, 
+    },
     //Resistencia de materiales 1 (CORRECTAMENTE INGRESADO)
     {
       career_code: 33,
@@ -1111,7 +1116,7 @@ export async function seed(knex: Knex): Promise<any> {
       semester: 6,
       field: 4,
       mandatory: true,
-    }, 
+    },
     {
       career_code: 35,
       course_code: '672',
@@ -1183,7 +1188,7 @@ export async function seed(knex: Knex): Promise<any> {
       semester: 5,
       field: 1,
       mandatory: true,
-    }, 
+    },
     //Geologia Estructural (CORRECTAMENTE INGRESADO)
     {
       career_code: 33,
@@ -1207,7 +1212,7 @@ export async function seed(knex: Knex): Promise<any> {
       semester: 5,
       field: 7,
       mandatory: false,
-    },    
+    },
     //Matematica Aplicada 1 (CORRECTAMENTE INGRESADO)
     {
       career_code: 33,
@@ -2234,7 +2239,7 @@ export async function seed(knex: Knex): Promise<any> {
       semester: 7,
       field: 1,
       mandatory: false,
-    },   
+    },
     //Contabilidad 3 (CORRECTAMENTE INGRESADO)
     {
       career_code: 35,
@@ -2609,7 +2614,7 @@ export async function seed(knex: Knex): Promise<any> {
       course_code: '950',
       semester: 5,
       field: 7,
-      mandatory: true
+      mandatory: true,
     },
     {
       career_code: 36,
@@ -2838,7 +2843,7 @@ export async function seed(knex: Knex): Promise<any> {
       field: 1,
       mandatory: false,
     },
-    //Mecanica 
+    //Mecanica
     //Mantenimiento de Hospitales 1 (CORRECTAMENTE INGRESADO)
     {
       career_code: 34,
@@ -2900,7 +2905,7 @@ export async function seed(knex: Knex): Promise<any> {
       field: 12,
       mandatory: false,
     },
-    //MECANICA INDUSTRIAL 
+    //MECANICA INDUSTRIAL
     // Economia Industrial (CORRECTAMENTE INGRESADO)
     {
       career_code: 36,
@@ -3229,7 +3234,7 @@ export async function seed(knex: Knex): Promise<any> {
       semester: 9,
       field: 5,
       mandatory: true,
-    }, 
+    },
     //Analisis de sistemas industriales (CORRECTAMENTE INGRESADO)
     {
       career_code: 35,
@@ -3642,7 +3647,7 @@ export async function seed(knex: Knex): Promise<any> {
       field: 1,
       mandatory: true,
     },
-    //Practica Final de Sistemas (CORRECTAMENTE INGRESADO) 
+    //Practica Final de Sistemas (CORRECTAMENTE INGRESADO)
     {
       career_code: 58,
       course_code: '2829',
@@ -3740,7 +3745,6 @@ export async function seed(knex: Knex): Promise<any> {
       mandatory: false,
     },
     //Hasta aca llego mi apoyo al cics, no creo que sepa hacer otra cosa pero fue bueno aunque sea aportar mi granito de arena F. kik3-h (Enrique Hernandez)
-
   ];
 
   return knex('career_courses')

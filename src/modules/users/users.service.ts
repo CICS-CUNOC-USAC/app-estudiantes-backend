@@ -121,7 +121,10 @@ export class UsersService extends BaseService {
     return user;
   }
 
-  async findByUsername(username: string, trx?: Transaction): Promise<UserModel> {
+  async findByUsername(
+    username: string,
+    trx?: Transaction,
+  ): Promise<UserModel> {
     const user = await this.userModel
       .query(trx)
       .withGraphFetched('profile')
@@ -130,12 +133,17 @@ export class UsersService extends BaseService {
     return user;
   }
 
-  async findExistant(email: string, ra: string, username: string, trx?: Transaction): Promise<UserModel> {
+  async findExistant(
+    email: string,
+    ra: string,
+    username: string,
+    trx?: Transaction,
+  ): Promise<UserModel> {
     return await this.userModel
       .query(trx)
       .withGraphFetched('profile')
       .withGraphFetched('career')
-      .where(function() {
+      .where(function () {
         this.where('ra', ra)
           .orWhere('email', email)
           .orWhere('username', username);
