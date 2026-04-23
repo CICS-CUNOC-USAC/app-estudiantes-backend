@@ -1,5 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Model, ModelClass, QueryBuilder } from 'objection';
+import { SanitizationService } from 'src/core/sanitization/sanitization.service';
 import { BaseQueryDto } from 'src/core/utils/base-query.dto';
 import { BaseService } from 'src/core/utils/base-service';
 import { DatabaseTransactionService } from 'src/database/transaction/database-transaction.service';
@@ -12,6 +13,7 @@ export class ReactionsService extends BaseService {
     @Inject(ReactionModel.name)
     private readonly reactionModel: ModelClass<ReactionModel>,
     private readonly dbTrxService: DatabaseTransactionService,
+    private readonly sanitizationService: SanitizationService,
   ) {
     super(ReactionsService.name);
   }
@@ -24,9 +26,13 @@ export class ReactionsService extends BaseService {
   }
 
   async toggle(userId: number, dto: ToggleReactionDto) {
+    const sanitizedPostId = this.sanitizationService.sanitizeStrapiPostId(
+      dto.strapiPostId,
+    );
+
     return this.dbTrxService.databaseTransaction(async (trx) => {
       const existingReaction = await this.reactionModel.query(trx).findOne({
-        strapi_post_id: dto.strapiPostId,
+        strapi_post_id: sanitizedPostId,
         user_id: userId,
       });
 
@@ -49,7 +55,7 @@ export class ReactionsService extends BaseService {
 
       const createdReaction = await this.reactionModel.query(trx).insert({
         type: dto.type,
-        strapi_post_id: dto.strapiPostId,
+        strapi_post_id: sanitizedPostId,
         user_id: userId,
       });
 
@@ -60,9 +66,13 @@ export class ReactionsService extends BaseService {
   }
 
   async getByPost(strapiPostId: string, userId?: number) {
+    const sanitizedPostId = this.sanitizationService.sanitizeStrapiPostId(
+      strapiPostId,
+    );
+
     const reactions = await this.reactionModel
       .query()
-      .where('strapi_post_id', strapiPostId);
+      .where('strapi_post_id', sanitizedPostId);
 
     const counts: Record<ReactionType, number> = {
       [ReactionType.LIKE]: 0,

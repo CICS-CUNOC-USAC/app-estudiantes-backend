@@ -8,6 +8,7 @@ import {
 import { Model, ModelClass, QueryBuilder } from 'objection';
 import { BaseQueryDto } from 'src/core/utils/base-query.dto';
 import { BaseService } from 'src/core/utils/base-service';
+import { SanitizationService } from 'src/core/sanitization/sanitization.service';
 import { DatabaseTransactionService } from 'src/database/transaction/database-transaction.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { CommentModel } from './entities/comment.model';
@@ -18,6 +19,7 @@ export class CommentsService extends BaseService {
     @Inject(CommentModel.name)
     private readonly commentModel: ModelClass<CommentModel>,
     private readonly dbTrxService: DatabaseTransactionService,
+    private readonly sanitizationService: SanitizationService,
   ) {
     super(CommentsService.name);
   }
@@ -31,6 +33,28 @@ export class CommentsService extends BaseService {
 
   async create(userId: number, dto: CreateCommentDto) {
     return this.dbTrxService.databaseTransaction(async (trx) => {
+      const sanitizedPostId = this.sanitizationService.sanitizeStrapiPostId(
+        dto.strapiPostId,
+      );
+      const sanitizedContent = await this.sanitizationService.sanitizeComment(
+        dto.content,
+      );
+
+      const duplicatedComment = await this.commentModel
+        .query(trx)
+        .findOne({
+          user_id: userId,
+          strapi_post_id: sanitizedPostId,
+          content: sanitizedContent,
+        })
+        .where('created_at', '>=', new Date(Date.now() - 60_000));
+
+      if (duplicatedComment) {
+        throw new BadRequestException(
+          'Ya enviaste este comentario recientemente',
+        );
+      }
+
       if (dto.parentId) {
         const parentComment = await this.commentModel
           .query(trx)
@@ -46,7 +70,7 @@ export class CommentsService extends BaseService {
           );
         }
 
-        if (parentComment.strapi_post_id !== dto.strapiPostId) {
+        if (parentComment.strapi_post_id !== sanitizedPostId) {
           throw new BadRequestException(
             'El comentario padre no pertenece al post indicado',
           );
@@ -54,8 +78,8 @@ export class CommentsService extends BaseService {
       }
 
       const createdComment = await this.commentModel.query(trx).insert({
-        content: dto.content,
-        strapi_post_id: dto.strapiPostId,
+        content: sanitizedContent,
+        strapi_post_id: sanitizedPostId,
         user_id: userId,
         parent_id: dto.parentId ?? null,
       });
@@ -70,9 +94,13 @@ export class CommentsService extends BaseService {
   }
 
   async findByPost(strapiPostId: string) {
+    const sanitizedPostId = this.sanitizationService.sanitizeStrapiPostId(
+      strapiPostId,
+    );
+
     const comments = await this.commentModel
       .query()
-      .where('strapi_post_id', strapiPostId)
+      .where('strapi_post_id', sanitizedPostId)
       .whereNull('parent_id')
       .withGraphFetched('[user.profile, replies.[user.profile]]')
       .modifyGraph('replies', (builder) => {

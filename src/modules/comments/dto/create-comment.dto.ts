@@ -1,10 +1,24 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsInt, IsNotEmpty, IsOptional, IsString, Min } from 'class-validator';
+import {
+  IsInt,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  Matches,
+  MaxLength,
+  Min,
+  MinLength,
+} from 'class-validator';
 
 export class CreateCommentDto {
   @IsString()
   @IsNotEmpty()
+  @MinLength(1)
+  @MaxLength(1000)
+  @Matches(/\S/, {
+    message: 'El comentario no puede contener solo espacios',
+  })
   @ApiProperty({
     description: 'Text content of the comment',
     example: 'Excelente post',
