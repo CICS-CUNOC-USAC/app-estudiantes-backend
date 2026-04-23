@@ -9,9 +9,11 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { Throttle } from '@nestjs/throttler';
 import { Request } from 'express';
 import { OptionalRegularLoginJwtAuthGuard } from 'src/core/guards/jwt-regular-optional-auth.guard';
 import { RegularLoginJwtAuthGuard } from 'src/core/guards/jwt-regular-auth.guard';
+import { ThrottlerUserGuard } from 'src/core/guards/throttler-user.guard';
 import { ToggleReactionDto } from './dto/toggle-reaction.dto';
 import { ReactionsService } from './reactions.service';
 
@@ -27,7 +29,13 @@ export class ReactionsController {
     return this.reactionsService.getByPost(strapiPostId, userId);
   }
 
-  @UseGuards(RegularLoginJwtAuthGuard)
+  @UseGuards(RegularLoginJwtAuthGuard, ThrottlerUserGuard)
+  @Throttle({
+    default: {
+      limit: 20,
+      ttl: 60000,
+    },
+  })
   @Post('toggle')
   toggle(
     @Req() req: Request,

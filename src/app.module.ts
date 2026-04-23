@@ -39,10 +39,18 @@ import appConfig from './app.config';
 import { ConsumeServiceModule } from './modules/consume-service/consume-service.module';
 import { CommentsModule } from './modules/comments/comments.module';
 import { ReactionsModule } from './modules/reactions/reactions.module';
+import { ThrottlerModule } from '@nestjs/throttler';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true, load: [appConfig] }),
+    ThrottlerModule.forRoot([
+      {
+        name: 'default',
+        ttl: 60000,
+        limit: 5,
+      },
+    ]),
     MailerModule.forRoot({
       transport: new Transport().configuration,
       template: {
