@@ -3,6 +3,9 @@ import { AppModule } from './app.module';
 import { NotFoundInterceptor } from './core/interceptors/not-found.interceptor';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
+import { MetricsInterceptor } from './modules/metrics/metrics.interceptor';
+import { MetricsService } from './modules/metrics/metrics.service';
+import { MetricsExceptionFilter } from './modules/metrics/metrics-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -11,6 +14,10 @@ async function bootstrap() {
   // Set up interceptor that evaluates if a response is undefined
   // for a GET / UPDATE / DELETE endpoint, and returns Not Found error
   app.useGlobalInterceptors(new NotFoundInterceptor());
+
+  const metricsService = app.get(MetricsService);
+  app.useGlobalInterceptors(new MetricsInterceptor(metricsService));
+  app.useGlobalFilters(new MetricsExceptionFilter(metricsService));
   // Set up global validation pipe for checking DTOs
   // app.useGlobalPipes(new ValidationPipe({ transform: true }));
 

@@ -6,6 +6,7 @@ import * as bcrypt from 'bcrypt';
 import { BaseService } from 'src/core/utils/base-service';
 import { QueryBuilder, Model } from 'objection';
 import { BaseQueryDto } from 'src/core/utils/base-query.dto';
+import { MetricsService } from 'src/modules/metrics/metrics.service';
 
 // This class is responsible for the authentication of staffs users (admins)
 @Injectable()
@@ -19,6 +20,7 @@ export class StaffAuthService extends BaseService {
   constructor(
     private readonly staffsService: StaffsService,
     private jwtService: JwtService,
+    private readonly metricsService: MetricsService,
   ) {
     super(StaffAuthService.name);
   }
@@ -67,9 +69,13 @@ export class StaffAuthService extends BaseService {
         staff.encrypted_password,
       );
       delete staff.encrypted_password;
-
-      return match ? staff : undefined;
+      const result = match ? staff : undefined;
+      this.metricsService.authAttemptsTotal.inc({
+        result: result ? 'success' : 'failure',
+      });
+      return result;
     }
+    this.metricsService.authAttemptsTotal.inc({ result: 'failure' });
   }
 
   /**
