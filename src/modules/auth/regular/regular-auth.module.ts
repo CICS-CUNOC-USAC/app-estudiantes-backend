@@ -11,6 +11,7 @@ import { RedisModule } from 'src/modules/redis/redis.module';
 import { EmailModule } from 'src/modules/emails/email.module';
 import { ConsumeService } from 'src/modules/consume-service/consume-service.service';
 import { ConsumeServiceModule } from 'src/modules/consume-service/consume-service.module';
+import { MetricsModule } from 'src/modules/metrics/metrics.module';
 
 @Module({
   controllers: [RegularAuthController],
@@ -23,6 +24,7 @@ import { ConsumeServiceModule } from 'src/modules/consume-service/consume-servic
     PassportModule,
     UserCoursesProgressModule,
     ConsumeServiceModule,
+    MetricsModule,
   ],
 })
 export class RegularAuthModule {}

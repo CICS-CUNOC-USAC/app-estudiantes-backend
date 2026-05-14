@@ -32,6 +32,7 @@ import { EMAIL_TEMPLATES_NAMES } from 'src/core/email/consts';
 import { UserRycaServiceDto } from '../dto/user-ryca-service.dto';
 import { ConsumeService } from 'src/modules/consume-service/consume-service.service';
 import { RycaUserServiceResponseDto } from 'src/modules/consume-service/dto/ryca-user-service-response.dto';
+import { MetricsService } from 'src/modules/metrics/metrics.service';
 
 // This class is responsible for the authentication of regular users (students)
 @Injectable()
@@ -55,6 +56,7 @@ export class RegularAuthService extends BaseService {
     private readonly redisService: RedisService,
     private readonly emailService: EmailService,
     private readonly consumeService: ConsumeService,
+    private readonly metricsService: MetricsService,
   ) {
     super(RegularAuthService.name);
   }
@@ -305,8 +307,13 @@ export class RegularAuthService extends BaseService {
         user.encrypted_password,
       );
       delete user.encrypted_password;
-      return match ? user : undefined;
+      const result = match ? user : undefined;
+      this.metricsService.authAttemptsTotal.inc({
+        result: result ? 'success' : 'failure',
+      });
+      return result;
     }
+    this.metricsService.authAttemptsTotal.inc({ result: 'failure' });
   }
 
   /**

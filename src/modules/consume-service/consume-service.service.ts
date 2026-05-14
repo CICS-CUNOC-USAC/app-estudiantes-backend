@@ -5,10 +5,14 @@ import { parseStringPromise } from 'xml2js';
 import { readFile } from 'fs/promises';
 import { join } from 'path';
 import { wrap } from 'module';
+import { HttpMetricsService } from '../metrics/http-metrics.service';
 
 @Injectable()
 export class ConsumeService {
-  constructor(private readonly httpService: HttpService) {}
+  constructor(
+    private readonly httpService: HttpService,
+    private readonly httpMetricsService: HttpMetricsService,
+  ) {}
 
   /**
    * @param url URL de la cual se desea recuperar datos

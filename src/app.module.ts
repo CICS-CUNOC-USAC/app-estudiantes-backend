@@ -1,5 +1,7 @@
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { PrometheusModule } from '@willsoto/nestjs-prometheus';
+import { MetricsModule } from './modules/metrics/metrics.module';
 import { DatabaseConfigurationModule } from './database/database-configuration.module';
 import { CourseModule } from './modules/course/course.module';
 import { CareerModule } from './modules/career/career.module';
@@ -43,6 +45,11 @@ import { ThrottlerModule } from '@nestjs/throttler';
 
 @Module({
   imports: [
+    PrometheusModule.register({
+      defaultMetrics: { enabled: true },
+      path: '/metrics',
+    }),
+    MetricsModule,
     ConfigModule.forRoot({ isGlobal: true, load: [appConfig] }),
     ThrottlerModule.forRoot([
       {

@@ -5,10 +5,11 @@ import { PassportModule } from '@nestjs/passport';
 import { StaffsModule } from 'src/modules/staffs/staffs.module';
 import { LocalStaffStrategy } from 'src/core/strategies/auth/staffs/local-staff.strategy';
 import { JwtStaffStrategy } from 'src/core/strategies/auth/staffs/jwt-staff.strategy';
+import { MetricsModule } from 'src/modules/metrics/metrics.module';
 
 @Module({
   controllers: [StaffAuthController],
   providers: [StaffAuthService, LocalStaffStrategy, JwtStaffStrategy],
-  imports: [StaffsModule, PassportModule],
+  imports: [StaffsModule, PassportModule, MetricsModule],
 })
 export class StaffAuthModule {}
