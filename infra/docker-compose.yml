@@ -27,6 +27,8 @@ services:
       - GF_USERS_ALLOW_SIGN_UP=false
       - GF_SERVER_ROOT_URL=${GF_ROOT_URL}
       - GF_SERVER_SERVE_FROM_SUB_PATH=true
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
       - grafana-data:/var/lib/grafana
 
