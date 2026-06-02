@@ -4,7 +4,6 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { CreateLibraryDto } from './dto/create-library.dto';
 import { UpdateLibraryDto } from './dto/update-library.dto';
 import { BooksQueryDto } from './dto/books-query.dto';
 import { BookModel } from './entities/book.model';
@@ -16,19 +15,12 @@ import { CreateDigitalBookDto } from './dto/create-digital-book.dto';
 import { CreatePhysicalBookDto } from './dto/create-physical-book.dto';
 import { LibraryReferenceModel } from './entities/library_reference.model';
 import { LibraryReceiptModel } from './entities/library_receipt.model';
-import { CreateExternalLoanDto } from './dto/create-external-loan.dto';
-import { CreateExternalReturnDto } from './dto/create-external-return.dto';
 import { BookCategoryModel } from './entities/book_category.model';
 import { UpdateReferenceDto } from './dto/update-reference.dto';
 import { CreateReferenceDto } from './dto/create-reference.dto';
 
-export enum BookType {
-  DIGITAL,
-  PHYSICAL,
-}
-
 @Injectable()
-export class LibraryService extends BaseService {
+export class BooksService extends BaseService {
   constructor(
     @Inject(BookModel.name)
     private readonly bookModel: ModelClass<BookModel>,
@@ -41,7 +33,7 @@ export class LibraryService extends BaseService {
     private readonly mediaService: MediaService,
     private readonly dbTrxService: DatabaseTransactionService,
   ) {
-    super(LibraryService.name);
+    super(BooksService.name);
   }
 
   async createDigital(createDigitalBookDto: CreateDigitalBookDto) {
@@ -72,124 +64,6 @@ export class LibraryService extends BaseService {
       });
 
       return await this.findOne(createdBook.$id(), trx);
-    }, this.logger);
-  }
-
-  async createSimpleLoan(book_reference_id: string) {
-    return this.dbTrxService.databaseTransaction(async (trx) => {
-      const foundReference = await this.libraryReferenceModel
-        .query(trx)
-        .whereNull('deleted_at')
-        .findById(book_reference_id);
-      if (foundReference) {
-        if (!foundReference.is_available) {
-          throw new BadRequestException(
-            'No se puede prestar el libro indicado',
-          );
-        }
-        return await foundReference
-          .$query(trx)
-          .update({ is_available: false })
-          .returning('*');
-      } else {
-        throw new NotFoundException('Libro no encontrado');
-      }
-    }, this.logger);
-  }
-
-  async createSimpleReturn(book_reference_id: string) {
-    return this.dbTrxService.databaseTransaction(async (trx) => {
-      const foundReference = await this.libraryReferenceModel
-        .query(trx)
-        .whereNull('deleted_at')
-        .findById(book_reference_id);
-      if (foundReference) {
-        if (foundReference.is_available) {
-          throw new BadRequestException(
-            'El libro se encuentra en biblioteca, no se puede devolver',
-          );
-        }
-
-        await foundReference
-          .$query(trx)
-          .update({ is_available: true })
-          .returning('*');
-        return foundReference;
-      } else {
-        throw new NotFoundException('Libro no encontrado');
-      }
-    }, this.logger);
-  }
-
-  async createExternalLoan(
-    book_reference_id: string,
-    createExternalLoanDto: CreateExternalLoanDto,
-  ) {
-    return this.dbTrxService.databaseTransaction(async (trx) => {
-      const foundReference = await this.libraryReferenceModel
-        .query(trx)
-        .whereNull('deleted_at')
-        .findById(book_reference_id);
-      if (foundReference) {
-        if (!foundReference.is_available) {
-          throw new BadRequestException(
-            'No se puede prestar el libro indicado',
-          );
-        }
-        await foundReference.$query(trx).update({ is_available: false });
-        const createdReceipt = await this.libraryReceiptModel
-          .query(trx)
-          .insert({
-            ra: createExternalLoanDto.ra,
-            personal_id: createExternalLoanDto.personal_id,
-            place: createExternalLoanDto.place,
-            library_reference_id: foundReference.id,
-          });
-
-        return createdReceipt;
-      } else {
-        throw new NotFoundException('Libro no encontrado');
-      }
-    }, this.logger);
-  }
-
-  async createExternalReturn(
-    book_reference_id: string,
-    createExternalReturnDto: CreateExternalReturnDto,
-  ) {
-    return this.dbTrxService.databaseTransaction(async (trx) => {
-      const foundReference = await this.libraryReferenceModel
-        .query(trx)
-        .whereNull('deleted_at')
-        .findById(book_reference_id);
-      if (foundReference) {
-        const foundReceipt = await this.libraryReceiptModel
-          .query(trx)
-          .whereNull('deleted_at')
-          .where('id', createExternalReturnDto.loan_id)
-          .where('returned_at', null)
-          .first();
-
-        if (!foundReceipt) {
-          throw new NotFoundException(
-            'No se encontro un recibo del prestamo valido',
-          );
-        }
-
-        if (foundReference.is_available) {
-          throw new BadRequestException(
-            'No se puede devolver el libro indicado',
-          );
-        }
-        await foundReference.$query(trx).update({ is_available: true });
-
-        return await foundReceipt
-          .$query(trx)
-          .patch({ returned_at: new Date() })
-          .returning('*');
-      } else {
-        throw new Error('Libro no encontrado');
-      }
     }, this.logger);
   }
 
@@ -230,8 +104,8 @@ export class LibraryService extends BaseService {
         .query(trx)
         .findById(referenceId);
 
-      //The reference may share id with a previously deleted reference
-      //If thats the case the previously deleted reference is patched and re-enabled, to avoid duplicate key errors
+      // The reference may share id with a previously deleted reference.
+      // If so, patch and re-enable it to avoid duplicate key errors.
       if (existingReference) {
         if (!existingReference.deleted_at) {
           throw new BadRequestException(
@@ -356,30 +230,6 @@ export class LibraryService extends BaseService {
         totalAvailable: Number((countResult[0] as any).count),
       };
     }
-  }
-
-  async getOutstandingExternalLoansById(book_reference_id: string) {
-    return await this.libraryReceiptModel
-      .query()
-      .whereNull('deleted_at')
-      .where('library_reference_id', book_reference_id)
-      .where('returned_at', null);
-  }
-
-  async getOutstandingExternalLoans() {
-    return await this.libraryReceiptModel
-      .query()
-      .whereNull('deleted_at')
-      .withGraphFetched('library_reference.book')
-      .where('returned_at', null);
-  }
-
-  async getReturnedOutstandingExternalLoans() {
-    return await this.libraryReceiptModel
-      .query()
-      .whereNull('deleted_at')
-      .withGraphFetched('library_reference.book')
-      .whereNotNull('returned_at');
   }
 
   async findAllCategories() {

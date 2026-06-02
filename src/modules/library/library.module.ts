@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
-import { LibraryService } from './library.service';
+import { BooksService } from './books.service';
+import { LoansService } from './loans.service';
 import { BooksController } from './books.controller';
 import { MediaModule } from '../media/media.module';
 import { LoansController } from './loans.controller';
@@ -9,7 +10,7 @@ import { StaffsModule } from '../staffs/staffs.module';
 
 @Module({
   controllers: [BooksController, LoansController, CategoriesController],
-  providers: [LibraryService],
+  providers: [BooksService, LoansService],
   imports: [MediaModule, CaslModule, StaffsModule],
 })
 export class LibraryModule {}

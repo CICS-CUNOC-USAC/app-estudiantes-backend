@@ -8,7 +8,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { LibraryService } from './library.service';
+import { LoansService } from './loans.service';
 import { PermissionsGuard } from 'src/core/guards/permissions/permissions.guard';
 import { CheckAbilities } from 'src/core/decorators/abilities/abilities.decorator';
 import { CreateExternalLoanDto } from './dto/create-external-loan.dto';
@@ -18,7 +18,7 @@ import { LibraryReceiptModel } from './entities/library_receipt.model';
 @ApiTags('Library/Loans')
 @Controller('loans')
 export class LoansController {
-  constructor(private readonly libraryService: LibraryService) {}
+  constructor(private readonly loansService: LoansService) {}
 
   @UseGuards(PermissionsGuard)
   @CheckAbilities({ action: 'manage', subject: 'Loan' })
@@ -30,7 +30,7 @@ export class LoansController {
     isArray: true,
   })
   getOutstandingExternalLoans() {
-    return this.libraryService.getOutstandingExternalLoans();
+    return this.loansService.getOutstandingExternalLoans();
   }
 
   @UseGuards(PermissionsGuard)
@@ -43,21 +43,21 @@ export class LoansController {
     isArray: true,
   })
   getReturnedOutstandingExternalLoans() {
-    return this.libraryService.getReturnedOutstandingExternalLoans();
+    return this.loansService.getReturnedOutstandingExternalLoans();
   }
 
   @UseGuards(PermissionsGuard)
   @CheckAbilities({ action: 'manage', subject: 'Loan' })
   @Post('simple-loan/:book_reference_id')
   createSimpleLoan(@Param('book_reference_id') book_id: string) {
-    return this.libraryService.createSimpleLoan(book_id);
+    return this.loansService.createSimpleLoan(book_id);
   }
 
   @UseGuards(PermissionsGuard)
   @CheckAbilities({ action: 'manage', subject: 'Loan' })
   @Post('simple-return/:book_reference_id')
   createSimpleReturn(@Param('book_reference_id') book_id: string) {
-    return this.libraryService.createSimpleReturn(book_id);
+    return this.loansService.createSimpleReturn(book_id);
   }
 
   @UseGuards(PermissionsGuard)
@@ -68,7 +68,7 @@ export class LoansController {
     @Body(new ValidationPipe())
     createExternalLoanDto: CreateExternalLoanDto,
   ) {
-    return this.libraryService.createExternalLoan(
+    return this.loansService.createExternalLoan(
       book_reference_id,
       createExternalLoanDto,
     );
@@ -81,7 +81,7 @@ export class LoansController {
     @Param('book_reference_id') book_reference_id: string,
     @Body() createExternalReturnDto: CreateExternalReturnDto,
   ) {
-    return this.libraryService.createExternalReturn(
+    return this.loansService.createExternalReturn(
       book_reference_id,
       createExternalReturnDto,
     );
