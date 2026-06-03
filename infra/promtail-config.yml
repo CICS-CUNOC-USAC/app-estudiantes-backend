@@ -1,0 +1,36 @@
+server:
+  http_listen_port: 9080
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: http://host.docker.internal:3100/loki/api/v1/push
+
+scrape_configs:
+  - job_name: nestjs-backend
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: nestjs-backend
+          app: backend
+          __path__: /pm2logs/CicsAppBackend*.log
+
+  - job_name: frontend
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: frontend
+          app: frontend
+          __path__: /pm2logs/CicsAppFrontend*.log
+
+  - job_name: nginx
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: nginx
+          app: nginx
+          __path__: /var/log/nginx/*.log
