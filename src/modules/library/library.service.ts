@@ -229,6 +229,7 @@ export class LibraryService extends BaseService {
       const existingReference = await this.libraryReferenceModel
         .query(trx)
         .findById(referenceId);
+      console.log('existingReference', existingReference);
 
       //The reference may share id with a previously deleted reference
       //If thats the case the previously deleted reference is patched and re-enabled, to avoid duplicate key errors
@@ -257,9 +258,10 @@ export class LibraryService extends BaseService {
           edition: createReferenceDto.edition,
           location: createReferenceDto.location,
         });
+
       return this.libraryReferenceModel
         .query(trx)
-        .findOne(createdReference.$id);
+        .findOne('id', createdReference.$id());
     }, this.logger);
   }
 

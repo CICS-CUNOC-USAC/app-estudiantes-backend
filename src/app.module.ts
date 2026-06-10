@@ -40,6 +40,7 @@ import { ConsumeServiceModule } from './modules/consume-service/consume-service.
 import { CommentsModule } from './modules/comments/comments.module';
 import { ReactionsModule } from './modules/reactions/reactions.module';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { AchievementsModule } from './modules/achievements/achievements.module';
 
 @Module({
   imports: [
@@ -98,6 +99,7 @@ import { ThrottlerModule } from '@nestjs/throttler';
     PrintModule,
     CommentsModule,
     ReactionsModule,
+    AchievementsModule,
   ],
 })
 export class AppModule {

@@ -59,7 +59,6 @@ export class StaffsController {
     @Body(new ValidationPipe({ transform: true }))
     updateStaffDto: UpdateStaffDto,
   ) {
-    console.log('updateStaffDto', updateStaffDto);
     return this.staffsService.update(+id, updateStaffDto);
   }
 

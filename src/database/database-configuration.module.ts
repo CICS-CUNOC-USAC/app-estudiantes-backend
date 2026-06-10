@@ -31,6 +31,8 @@ import { PermissionModel } from 'src/modules/permissions/entities/permission.mod
 import { BookCategoryModel } from 'src/modules/library/entities/book_category.model';
 import { CommentModel } from 'src/modules/comments/entities/comment.model';
 import { ReactionModel } from 'src/modules/reactions/entities/reaction.model';
+import { AchievementModel } from 'src/modules/achievements/entities/achievement.model';
+import { UserAchievementModel } from 'src/modules/achievements/entities/user-achievement.model';
 
 dotenv.config();
 
@@ -65,6 +67,8 @@ const models = [
   PermissionModel,
   CommentModel,
   ReactionModel,
+  AchievementModel,
+  UserAchievementModel,
 ];
 
 const modelProviders = models.map((model) => {
