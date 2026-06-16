@@ -51,6 +51,7 @@ services:
       - ./promtail-config.yml:/etc/promtail/config.yml:ro
       - /home/estingadm06/.pm2/logs:/pm2logs:ro        # PM2 log directory
       - /var/log:/var/log:ro               # system logs
+      - promtail-positions:/positions #positions
     command: -config.file=/etc/promtail/config.yml
     extra_hosts:
       - "host.docker.internal:host-gateway"
@@ -59,3 +60,4 @@ volumes:
   prometheus-data:
   grafana-data:
   loki-data:
+  promtail-positions:
