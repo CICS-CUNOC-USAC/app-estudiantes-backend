@@ -34,3 +34,31 @@ scrape_configs:
       - multiline:
           firstline: '^\[Nest\]'
           max_wait_time: 3s
+
+  - job_name: frontend
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: frontend
+          app: frontend
+          __path__: /pm2logs/CicsAppFrontend-out-*.log
+
+  - job_name: frontend-error
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: frontend
+          app: frontend
+          stream: error
+          __path__: /pm2logs/CicsAppFrontend-error-*.log
+
+  - job_name: nginx
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: nginx
+          app: nginx
+          __path__: /var/log/nginx/*.log
