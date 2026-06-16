@@ -16,6 +16,10 @@ scrape_configs:
           job: nestjs-backend
           app: backend
           __path__: /pm2logs/CicsAppBackend*.log
+    pipeline_stages:
+      - multiline:
+          firstline: '^\[Nest\]'
+          max_wait_time: 3s
 
   - job_name: frontend
     static_configs:
