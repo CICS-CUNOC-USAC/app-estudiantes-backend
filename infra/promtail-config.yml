@@ -15,26 +15,22 @@ scrape_configs:
         labels:
           job: nestjs-backend
           app: backend
-          __path__: /pm2logs/CicsAppBackend*.log
+          __path__: /pm2logs/CicsAppBackend-out-*.log
     pipeline_stages:
       - multiline:
           firstline: '^\[Nest\]'
           max_wait_time: 3s
 
-  - job_name: frontend
+  - job_name: nestjs-backend-error
     static_configs:
       - targets:
           - localhost
         labels:
-          job: frontend
-          app: frontend
-          __path__: /pm2logs/CicsAppFrontend*.log
-
-  - job_name: nginx
-    static_configs:
-      - targets:
-          - localhost
-        labels:
-          job: nginx
-          app: nginx
-          __path__: /var/log/nginx/*.log
+          job: nestjs-backend
+          app: backend
+          stream: error
+          __path__: /pm2logs/CicsAppBackend-error-*.log
+    pipeline_stages:
+      - multiline:
+          firstline: '^\[Nest\]'
+          max_wait_time: 3s
