@@ -1,6 +1,6 @@
+import * as path from 'path';
 import { ApiProperty } from '@nestjs/swagger';
 import { Model, RelationMappings, RelationMappingsThunk } from 'objection';
-import { PensumModel } from 'src/modules/pensums/entities/pensum.model';
 
 export class CareerModel extends Model {
   static tableName = 'careers';
@@ -11,13 +11,13 @@ export class CareerModel extends Model {
   @ApiProperty({ example: 'Sistemas', description: 'Name of the career' })
   name: string;
 
-  pensums?: PensumModel[];
+  pensums?: any[];
 
   static get relationMappings(): RelationMappings | RelationMappingsThunk {
     return {
       pensums: {
         relation: Model.HasManyRelation,
-        modelClass: PensumModel,
+        modelClass: path.join(__dirname, '..', '..', 'pensums', 'entities', 'pensum.model'),
         join: {
           from: 'careers.code',
           to: 'pensums.career_code',
