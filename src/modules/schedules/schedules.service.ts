@@ -75,7 +75,7 @@ export class SchedulesService extends BaseService {
         '[periods.[weekday,hour], pensum_course.[pensum.career, course], section, classroom]',
       )
       .joinRaw(
-        'LEFT JOIN career_fields ON career_fields.career_code = "pensum_course:pensum".career_code AND career_fields.field_number = "pensum_course".field',
+        'LEFT JOIN career_fields ON career_fields.pensum_id = "pensum_course".pensum_id AND career_fields.field_number = "pensum_course".field',
       )
       .modifyGraph('periods', (builder) => {
         builder.select('weekday_id');

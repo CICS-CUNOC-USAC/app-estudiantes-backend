@@ -1,8 +1,10 @@
 import * as Knex from 'knex';
 
 export async function seed(knex: Knex.Knex): Promise<any> {
-  return knex('roles')
+  return knex('role_details')
     .del()
+    .then(() => knex('role_permissions').del())
+    .then(() => knex('roles').del())
     .then(() => {
       return knex('roles').insert([
         {

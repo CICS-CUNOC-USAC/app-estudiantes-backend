@@ -1,6 +1,7 @@
 import * as Knex from 'knex';
 
 export async function seed(knex: Knex.Knex): Promise<any> {
+  await knex('periods').del();
   await knex('weekdays').del();
   return knex('weekdays').insert([
     { name: 'Lunes' },

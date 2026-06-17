@@ -1,6 +1,8 @@
 import * as Knex from 'knex';
 
 export async function seed(knex: Knex.Knex): Promise<any> {
+  await knex('period_schedule').del();
+  await knex('schedules').del();
   await knex('classrooms').del();
   return knex('classrooms').insert([
     { name: '1' },

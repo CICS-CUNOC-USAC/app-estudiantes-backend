@@ -6,78 +6,75 @@ export async function seed(knex: Knex.Knex): Promise<any> {
     pensums.map((p: any) => [p.careerCode, p.id]),
   );
 
+  const classrooms = await knex('classrooms').select('id', 'name').orderBy('id');
+  const sections = await knex('sections').select('id', 'name').orderBy('id');
+
+  const classroomByIndex = (i: number) => classrooms[i]?.id;
+  const sectionByName = (name: string) => sections.find((s: any) => s.name === name)?.id;
+
+  await knex('period_schedule').del();
   await knex('schedules').del();
   return knex('schedules').insert([
-    //IPC 1
     {
       pensum_id: pensumMap.get(58),
       course_code: '2796',
-      section_id: 1,
-      classroom_id: 1,
+      section_id: sectionByName('A'),
+      classroom_id: classroomByIndex(0),
     },
-    //Matematica Basica 1
     {
       pensum_id: pensumMap.get(58),
       course_code: '169',
-      section_id: 2,
-      classroom_id: 2,
+      section_id: sectionByName('B'),
+      classroom_id: classroomByIndex(1),
     },
-    //Orientacion y Liderazgo
     {
       pensum_id: pensumMap.get(58),
       course_code: '2666',
-      section_id: 2,
-      classroom_id: 3,
+      section_id: sectionByName('B'),
+      classroom_id: classroomByIndex(2),
     },
-    //Fisica Basica
     {
       pensum_id: pensumMap.get(58),
       course_code: '072',
-      section_id: 1,
-      classroom_id: 4,
+      section_id: sectionByName('A'),
+      classroom_id: classroomByIndex(3),
     },
-    //Quimica 1
     {
       pensum_id: pensumMap.get(58),
       course_code: '216',
-      section_id: 2,
-      classroom_id: 5,
+      section_id: sectionByName('B'),
+      classroom_id: classroomByIndex(4),
     },
-    //Planeamiento
     {
       pensum_id: pensumMap.get(33),
       course_code: '912',
-      section_id: 1,
-      classroom_id: 6,
+      section_id: sectionByName('A'),
+      classroom_id: classroomByIndex(5),
     },
-    //Practica Final
     {
       pensum_id: pensumMap.get(34),
       course_code: '2586',
-      section_id: 2,
-      classroom_id: 7,
+      section_id: sectionByName('B'),
+      classroom_id: classroomByIndex(6),
     },
-    //Preparacion y Evaluacion de Proyectos
     {
       pensum_id: pensumMap.get(35),
       course_code: '909',
-      section_id: 2,
-      classroom_id: 7,
+      section_id: sectionByName('B'),
+      classroom_id: classroomByIndex(6),
     },
-    //Laboratorio IPC 1
     {
       pensum_id: pensumMap.get(58),
       course_code: '2796',
-      section_id: 1,
-      classroom_id: 3,
+      section_id: sectionByName('A'),
+      classroom_id: classroomByIndex(2),
       type: 'laboratory',
     },
-    //Laboratorio Matematica Basica 1
     {
       pensum_id: pensumMap.get(58),
       course_code: '169',
-      section_id: 1,
-      classroom_id: 1,
+      section_id: sectionByName('A'),
+      classroom_id: classroomByIndex(0),
       type: 'laboratory',
     },
   ]);
