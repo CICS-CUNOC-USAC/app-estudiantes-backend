@@ -2,7 +2,8 @@ import { Inject, Injectable } from '@nestjs/common';
 import { UpdateUserCoursesProgressDto } from './dto/update-user-courses-progress.dto';
 import { BaseService } from 'src/core/utils/base-service';
 import { Model, ModelClass, QueryBuilder, Transaction } from 'objection';
-import { CareerCoursesService } from '../career_courses/career_courses.service';
+import { PensumCoursesService } from '../pensum_courses/pensum_courses.service';
+import { PensumsService } from '../pensums/pensums.service';
 import { DatabaseTransactionService } from 'src/database/transaction/database-transaction.service';
 import { CareerProgressModel } from './entities/career-progress.model';
 import { SemesterProgressModel } from './entities/semester-progress.model';
@@ -27,55 +28,58 @@ export class UserCoursesProgressService extends BaseService {
     private readonly semesterProgressModel: ModelClass<SemesterProgressModel>,
     @Inject(CourseSemesterProgressModel.name)
     private readonly courseSemesterProgressModel: ModelClass<CourseSemesterProgressModel>,
-    private careerCoursesService: CareerCoursesService,
+    private pensumCoursesService: PensumCoursesService,
+    private pensumsService: PensumsService,
     private readonly dbTrxService: DatabaseTransactionService,
   ) {
     super(UserCoursesProgressService.name);
   }
+
   async findUserProgress(
     userId: number,
     careerCode: number,
     onlyCredits = false,
   ) {
+    const pensum = await this.pensumsService.findActiveByCareer(careerCode);
+
     const data = await this.careerProgressModel
       .query()
       .where('user_id', userId)
       .withGraphFetched(
-        'semester_progress.courses_semester_progress.career_course.course',
+        'semester_progress.courses_semester_progress.pensum_course.course',
       )
-      // .joinRaw(
-      //   'JOIN career_fields ON (career_courses.career_code = career_fields.career_code AND career_courses.field = career_fields.field_number)',
-      // )
       .modifyGraph('semester_progress.courses_semester_progress', (builder) => {
         builder.orderBy('id');
       })
       .modifyGraph(
-        'semester_progress.courses_semester_progress.career_course',
+        'semester_progress.courses_semester_progress.pensum_course',
         (builder) => {
           builder
-            // .where('career_code', careerCode)
             .joinRaw(
-              'JOIN career_fields ON (career_fields.career_code = career_courses.career_code  AND career_courses.field = career_fields.field_number)',
+              'JOIN pensums ON pensums.id = pensum_courses.pensum_id',
             )
-            .andWhere('career_courses.career_code', careerCode)
-            .select('career_fields.name as field_name', 'career_courses.*');
+            .joinRaw(
+              'JOIN career_fields ON (career_fields.career_code = pensums.career_code AND pensum_courses.field = career_fields.field_number)',
+            )
+            .andWhere('pensum_courses.pensum_id', pensum.id)
+            .select('career_fields.name as field_name', 'pensum_courses.*');
         },
       )
       .first();
 
     const credits =
-      await this.careerCoursesService.findTotalCreditsByCareer(careerCode);
+      await this.pensumCoursesService.findTotalCreditsByPensum(pensum.id);
     let currentMandatoryCredsAccum = 0;
     let currentNotMandatoryCredsAccum = 0;
     let currentTotalCredsAccum = 0;
     data.semester_progress.forEach(({ courses_semester_progress }) => {
-      courses_semester_progress.forEach(({ approved, career_course }) => {
-        if (approved && career_course.mandatory) {
-          currentMandatoryCredsAccum += career_course.course.credits;
-          currentTotalCredsAccum += career_course.course.credits;
+      courses_semester_progress.forEach(({ approved, pensum_course }) => {
+        if (approved && pensum_course.mandatory) {
+          currentMandatoryCredsAccum += pensum_course.course.credits;
+          currentTotalCredsAccum += pensum_course.course.credits;
         } else if (approved) {
-          currentNotMandatoryCredsAccum += career_course.course.credits;
-          currentTotalCredsAccum += career_course.course.credits;
+          currentNotMandatoryCredsAccum += pensum_course.course.credits;
+          currentTotalCredsAccum += pensum_course.course.credits;
         }
       });
     });
@@ -97,17 +101,19 @@ export class UserCoursesProgressService extends BaseService {
   }
 
   async create(userId: number, careerCode: number, trx?: Transaction) {
-    const semesters =
-      await this.careerCoursesService.getCareerSemesters(careerCode);
-    const courses =
-      await this.careerCoursesService.findCoursesByCareer(careerCode);
+    const pensum = await this.pensumsService.findActiveByCareer(careerCode);
 
-    // return this.dbTrxService.databaseTransaction(async (trx) => {
+    const semesters =
+      await this.pensumCoursesService.getPensumSemesters(pensum.id);
+    const courses =
+      await this.pensumCoursesService.findCoursesByPensum(pensum.id);
+
     const careerProgressRecord = await this.careerProgressModel
       .query(trx)
       .insert({
         user_id: userId,
         career_code: careerCode,
+        pensum_id: pensum.id,
       });
 
     const semesterProgressRecords = await this.semesterProgressModel
@@ -149,7 +155,6 @@ export class UserCoursesProgressService extends BaseService {
       );
 
     return courseSemesterProgressRecords;
-    // }, this.logger);
   }
 
   findAll() {
@@ -167,7 +172,6 @@ export class UserCoursesProgressService extends BaseService {
   ) {
     const { course_semester_progress_id: courseSemesterProgressId, approved } =
       updateUserCoursesProgressDto;
-    // First we have to check if the userIds match the careerProgressId's userId and the courseSemesterProgressId exists
     const careerProgressRecord = await this.careerProgressModel
       .query()
       .findOne({ id: careerProgressId, user_id: userId });
@@ -176,9 +180,8 @@ export class UserCoursesProgressService extends BaseService {
       .query()
       .findOne({ id: courseSemesterProgressId });
 
-    // If there is no record found, then the user is not allowed to update this
     if (!careerProgressRecord || !courseSemesterProgressRecord) {
-      return undefined; // Interceptor will handle the response (as not found)
+      return undefined;
     }
 
     return this.dbTrxService.databaseTransaction(async (trx) => {

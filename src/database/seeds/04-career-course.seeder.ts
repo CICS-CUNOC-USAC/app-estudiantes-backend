@@ -3747,7 +3747,19 @@ export async function seed(knex: Knex): Promise<any> {
     //Hasta aca llego mi apoyo al cics, no creo que sepa hacer otra cosa pero fue bueno aunque sea aportar mi granito de arena F. kik3-h (Enrique Hernandez)
   ];
 
-  return knex('career_courses')
+  const pensums = await knex('pensums').select('id', 'career_code');
+  const pensumMap = new Map(
+    pensums.map((p: any) => [p.careerCode, p.id]),
+  );
+
+  const pensum_courses = career_courses.map(
+    ({ career_code, ...rest }) => ({
+      ...rest,
+      pensum_id: pensumMap.get(career_code),
+    }),
+  );
+
+  return knex('pensum_courses')
     .del()
-    .then(() => knex('career_courses').insert(career_courses));
+    .then(() => knex('pensum_courses').insert(pensum_courses));
 }

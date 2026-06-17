@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Model } from 'objection';
-import { CareerCourseModel } from 'src/modules/career_courses/entities/career_course.entity';
+import { PensumCourseModel } from 'src/modules/pensum_courses/entities/pensum_course.entity';
 import { ClassroomModel } from 'src/modules/classrooms/entities/classroom.entity';
 import { PeriodModel } from 'src/modules/periods/entities/period.entity';
 import { SectionModel } from 'src/modules/sections/entities/section.entity';
@@ -11,8 +11,8 @@ export class ScheduleModel extends Model {
   @ApiProperty({ example: 1, description: 'ID of the Schedule' })
   id: number;
 
-  @ApiProperty({ example: '58', description: 'Code of the career' })
-  career_code: number;
+  @ApiProperty({ example: 1, description: 'ID of the pensum' })
+  pensum_id: number;
 
   @ApiProperty({ example: '2804', description: 'Code of the course' })
   course_code: string;
@@ -29,12 +29,11 @@ export class ScheduleModel extends Model {
   })
   type: string;
 
-  // Documentation of relations
   @ApiProperty({
-    description: 'Career and course details',
-    type: () => CareerCourseModel,
+    description: 'Pensum course details',
+    type: () => PensumCourseModel,
   })
-  career_course?: CareerCourseModel;
+  pensum_course?: PensumCourseModel;
 
   @ApiProperty({
     type: () => [PeriodModel],
@@ -56,12 +55,12 @@ export class ScheduleModel extends Model {
 
   static get relationMappings() {
     return {
-      career_course: {
+      pensum_course: {
         relation: Model.BelongsToOneRelation,
-        modelClass: CareerCourseModel,
+        modelClass: PensumCourseModel,
         join: {
-          from: ['schedules.career_code', 'schedules.course_code'],
-          to: ['career_courses.career_code', 'career_courses.course_code'],
+          from: ['schedules.pensum_id', 'schedules.course_code'],
+          to: ['pensum_courses.pensum_id', 'pensum_courses.course_code'],
         },
       },
       periods: {

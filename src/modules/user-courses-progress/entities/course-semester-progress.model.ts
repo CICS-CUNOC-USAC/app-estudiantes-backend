@@ -1,7 +1,7 @@
 import { Model, RelationMappings, RelationMappingsThunk } from 'objection';
 import { SemesterProgressModel } from './semester-progress.model';
 import { CourseModel } from 'src/modules/course/entities/course.model';
-import { CareerCourseModel } from 'src/modules/career_courses/entities/career_course.entity';
+import { PensumCourseModel } from 'src/modules/pensum_courses/entities/pensum_course.entity';
 
 export class CourseSemesterProgressModel extends Model {
   static tableName = 'courses_semester_progress';
@@ -14,7 +14,7 @@ export class CourseSemesterProgressModel extends Model {
 
   // Relations
   course: CourseModel | null;
-  career_course: CareerCourseModel | null;
+  pensum_course: PensumCourseModel | null;
 
   static get relationMappings(): RelationMappings | RelationMappingsThunk {
     return {
@@ -34,12 +34,12 @@ export class CourseSemesterProgressModel extends Model {
           to: 'courses.code',
         },
       },
-      career_course: {
+      pensum_course: {
         relation: Model.HasOneRelation,
-        modelClass: CareerCourseModel,
+        modelClass: PensumCourseModel,
         join: {
           from: 'courses_semester_progress.course_code',
-          to: 'career_courses.course_code',
+          to: 'pensum_courses.course_code',
         },
       },
     };
