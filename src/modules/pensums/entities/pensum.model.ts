@@ -1,6 +1,7 @@
-import * as path from 'path';
 import { ApiProperty } from '@nestjs/swagger';
 import { Model, RelationMappings, RelationMappingsThunk } from 'objection';
+import { CareerModel } from 'src/modules/career/entities/career.model';
+import { PensumCourseModel } from 'src/modules/pensum_courses/entities/pensum_course.entity';
 
 export class PensumModel extends Model {
   static tableName = 'pensums';
@@ -17,13 +18,13 @@ export class PensumModel extends Model {
   @ApiProperty({ example: true, description: 'Whether the pensum is active' })
   active: boolean;
 
-  career?: any;
+  career?: CareerModel;
 
   static get relationMappings(): RelationMappings | RelationMappingsThunk {
     return {
       career: {
         relation: Model.BelongsToOneRelation,
-        modelClass: path.join(__dirname, '..', '..', 'career', 'entities', 'career.model'),
+        modelClass: CareerModel,
         join: {
           from: 'pensums.career_code',
           to: 'careers.code',
@@ -31,7 +32,7 @@ export class PensumModel extends Model {
       },
       pensum_courses: {
         relation: Model.HasManyRelation,
-        modelClass: path.join(__dirname, '..', '..', 'pensum_courses', 'entities', 'pensum_course.entity'),
+        modelClass: PensumCourseModel,
         join: {
           from: 'pensums.id',
           to: 'pensum_courses.pensum_id',
