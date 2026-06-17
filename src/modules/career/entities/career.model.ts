@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Model, RelationMappings, RelationMappingsThunk } from 'objection';
-import { CareerCourseModel } from 'src/modules/career_courses/entities/career_course.entity';
-import { CourseModel } from 'src/modules/course/entities/course.model';
+import { PensumModel } from 'src/modules/pensums/entities/pensum.model';
 
 export class CareerModel extends Model {
   static tableName = 'careers';
@@ -12,19 +11,16 @@ export class CareerModel extends Model {
   @ApiProperty({ example: 'Sistemas', description: 'Name of the career' })
   name: string;
 
+  pensums?: PensumModel[];
+
   static get relationMappings(): RelationMappings | RelationMappingsThunk {
     return {
-      courses: {
-        relation: Model.ManyToManyRelation,
-        modelClass: CourseModel,
+      pensums: {
+        relation: Model.HasManyRelation,
+        modelClass: PensumModel,
         join: {
           from: 'careers.code',
-          through: {
-            modelClass: CareerCourseModel,
-            from: 'career_courses.career_code',
-            to: 'career_courses.course_code',
-          },
-          to: 'courses.code',
+          to: 'pensums.career_code',
         },
       },
     };

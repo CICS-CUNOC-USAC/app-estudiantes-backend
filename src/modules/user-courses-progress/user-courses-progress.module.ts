@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
 import { UserCoursesProgressService } from './user-courses-progress.service';
 import { UserCoursesProgressController } from './user-courses-progress.controller';
-import { CareerCoursesModule } from '../career_courses/career_courses.module';
+import { PensumCoursesModule } from '../pensum_courses/pensum_courses.module';
+import { PensumsModule } from '../pensums/pensums.module';
 
 @Module({
   controllers: [UserCoursesProgressController],
   providers: [UserCoursesProgressService],
-  imports: [CareerCoursesModule],
+  imports: [PensumCoursesModule, PensumsModule],
   exports: [UserCoursesProgressService],
 })
 export class UserCoursesProgressModule {}
