@@ -1,5 +1,4 @@
 import { Model, RelationMappings, RelationMappingsThunk } from 'objection';
-import { CareerCourseModel } from './career_course.entity';
 import { CareerModel } from 'src/modules/career/entities/career.model';
 
 export class CareerFieldModel extends Model {
@@ -8,6 +7,7 @@ export class CareerFieldModel extends Model {
   career_code: number;
   field_number: number;
   name: string;
+  common_field: boolean;
 
   static get relationMappings(): RelationMappings | RelationMappingsThunk {
     return {
@@ -17,14 +17,6 @@ export class CareerFieldModel extends Model {
         join: {
           from: 'career_fields.career_code',
           to: 'careers.code',
-        },
-      },
-      career_course: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: CareerCourseModel,
-        join: {
-          from: 'career_fields.field_number',
-          to: 'career_courses.field',
         },
       },
     };

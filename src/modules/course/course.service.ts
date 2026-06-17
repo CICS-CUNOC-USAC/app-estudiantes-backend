@@ -3,7 +3,7 @@ import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 import { CourseModel } from './entities/course.model';
 import { Model, ModelClass, QueryBuilder } from 'objection';
-import { CareerCourseModel } from '../career_courses/entities/career_course.entity';
+import { PensumCourseModel } from '../pensum_courses/entities/pensum_course.entity';
 import { BaseService } from 'src/core/utils/base-service';
 import { BaseQueryDto } from 'src/core/utils/base-query.dto';
 
@@ -15,27 +15,33 @@ export class CourseService extends BaseService {
   ): QueryBuilder<Model, Model[]> {
     throw new Error('Method not implemented.');
   }
-  async findOneWithCareer(code: string, careerCode: number) {
-    return await this.careerCourseModel
+
+  async findOneWithPensum(code: string, pensumId: number) {
+    return await this.pensumCourseModel
       .query()
-      .select('career_courses.*', 'career_fields.name as field_name')
+      .select('pensum_courses.*', 'career_fields.name as field_name')
       .findOne({
-        'career_courses.course_code': code, // Specify the table for course_code
-        'career_courses.career_code': careerCode, // Specify the table for career_code
+        'pensum_courses.course_code': code,
+        'pensum_courses.pensum_id': pensumId,
       })
       .joinRaw(
-        'JOIN career_fields ON (career_courses.career_code = career_fields.career_code AND career_courses.field = career_fields.field_number)',
+        'JOIN pensums ON pensum_courses.pensum_id = pensums.id',
+      )
+      .joinRaw(
+        'JOIN career_fields ON (pensums.career_code = career_fields.career_code AND pensum_courses.field = career_fields.field_number)',
       )
       .withGraphFetched('course');
   }
+
   constructor(
     @Inject(CourseModel.name)
     private courseModel: ModelClass<CourseModel>,
-    @Inject(CareerCourseModel.name)
-    private careerCourseModel: ModelClass<CareerCourseModel>,
+    @Inject(PensumCourseModel.name)
+    private pensumCourseModel: ModelClass<PensumCourseModel>,
   ) {
     super(CourseService.name);
   }
+
   create(createCourseDto: CreateCourseDto) {
     return 'This action adds a new course';
   }
@@ -44,11 +50,10 @@ export class CourseService extends BaseService {
     return await this.courseModel.query().select('*');
   }
 
-  async findAllByCareerAndSemester(semesterNumber: number, carrerCode: number) {
-    return await this.careerCourseModel
+  async findAllByPensumAndSemester(semesterNumber: number, pensumId: number) {
+    return await this.pensumCourseModel
       .query()
-      // .select('*')
-      .where('career_code', carrerCode)
+      .where('pensum_id', pensumId)
       .where('semester', semesterNumber)
       .withGraphFetched('course')
       .modifyGraph('course', (builder) => {
@@ -57,12 +62,15 @@ export class CourseService extends BaseService {
   }
 
   async findOne(code: string) {
-    return await this.careerCourseModel
+    return await this.pensumCourseModel
       .query()
       .joinRaw(
-        'JOIN career_fields ON (career_courses.career_code = career_fields.career_code AND career_courses.field = career_fields.field_number)',
+        'JOIN pensums ON pensum_courses.pensum_id = pensums.id',
       )
-      .select('career_courses.*', 'career_fields.name as field_name')
+      .joinRaw(
+        'JOIN career_fields ON (pensums.career_code = career_fields.career_code AND pensum_courses.field = career_fields.field_number)',
+      )
+      .select('pensum_courses.*', 'career_fields.name as field_name')
       .findOne('course_code', code)
       .withGraphFetched('course');
   }

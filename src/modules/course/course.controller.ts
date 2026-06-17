@@ -36,22 +36,22 @@ export class CourseController {
     return this.courseService.findOne(code);
   }
 
-  @Get(':code/:careerCode')
-  findOneWithCareer(
+  @Get(':code/pensum/:pensumId')
+  findOneWithPensum(
     @Param('code') code: string,
-    @Param('careerCode') careerCode: number,
+    @Param('pensumId') pensumId: number,
   ) {
-    return this.courseService.findOneWithCareer(code, careerCode);
+    return this.courseService.findOneWithPensum(code, pensumId);
   }
 
-  @Get(':semesterNumber')
-  findAllByCareerAndSemester(
+  @Get('pensum/:pensumId/semester/:semesterNumber')
+  findAllByPensumAndSemester(
     @Param('semesterNumber') semesterNumber: string,
-    @Param('careerCode') careerCode: string,
+    @Param('pensumId') pensumId: string,
   ) {
-    return this.courseService.findAllByCareerAndSemester(
+    return this.courseService.findAllByPensumAndSemester(
       +semesterNumber,
-      +careerCode,
+      +pensumId,
     );
   }
 

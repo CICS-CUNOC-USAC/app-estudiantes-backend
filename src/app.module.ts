@@ -6,7 +6,8 @@ import { DatabaseConfigurationModule } from './database/database-configuration.m
 import { CourseModule } from './modules/course/course.module';
 import { CareerModule } from './modules/career/career.module';
 import { DatabaseTransactionModule } from './database/transaction/database-transaction.module';
-import { CareerCoursesModule } from './modules/career_courses/career_courses.module';
+import { PensumCoursesModule } from './modules/pensum_courses/pensum_courses.module';
+import { PensumsModule } from './modules/pensums/pensums.module';
 import { RegularAuthModule } from './modules/auth/regular/regular-auth.module';
 import { UsersModule } from './modules/users/users.module';
 import { ProfilesModule } from './modules/profiles/profiles.module';
@@ -79,7 +80,8 @@ import { ThrottlerModule } from '@nestjs/throttler';
     // Modules
     CourseModule,
     CareerModule,
-    CareerCoursesModule,
+    PensumsModule,
+    PensumCoursesModule,
     UsersModule,
     ProfilesModule,
     StaffsModule,

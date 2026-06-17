@@ -22,11 +22,11 @@ export class SchedulesService extends BaseService {
     if (queryDto.career) {
       const selectedCareer = Number.parseInt(queryDto.career as any);
       if (selectedCareer === 0) {
-        builder.andWhere('career_course:career_field.common_field', true);
+        builder.andWhere('career_fields.common_field', true);
       } else {
         builder
-          .andWhere('schedules.career_code', selectedCareer)
-          .andWhere('career_course:career_field.common_field', false);
+          .andWhere('pensum_course:pensum.career_code', selectedCareer)
+          .andWhere('career_fields.common_field', false);
       }
     }
     return builder;
@@ -52,15 +52,15 @@ export class SchedulesService extends BaseService {
       .query()
       .findById(id)
       .withGraphFetched(
-        '[periods.weekday, periods.hour, career_course, career_course.course, section, classroom]',
+        '[periods.weekday, periods.hour, pensum_course.[pensum, course], section, classroom]',
       )
       .modifyGraph('periods', (builder) => {
         builder.select('weekday_id', 'hour_id');
       })
-      .modifyGraph('career_course', (builder) => {
+      .modifyGraph('pensum_course', (builder) => {
         builder.select('semester', 'field');
       })
-      .modifyGraph('career_course.course', (builder) => {
+      .modifyGraph('pensum_course.course', (builder) => {
         builder.select('name');
       })
       .modifyGraph('[periods.weekday, section, classroom]', (builder) => {
@@ -72,7 +72,10 @@ export class SchedulesService extends BaseService {
     const schedules = await this.scheduleModel
       .query()
       .withGraphJoined(
-        '[periods.[weekday,hour], career_course.[career, course, career_field], section, classroom]',
+        '[periods.[weekday,hour], pensum_course.[pensum.career, course], section, classroom]',
+      )
+      .joinRaw(
+        'LEFT JOIN career_fields ON career_fields.career_code = "pensum_course:pensum".career_code AND career_fields.field_number = "pensum_course".field',
       )
       .modifyGraph('periods', (builder) => {
         builder.select('weekday_id');
@@ -84,10 +87,10 @@ export class SchedulesService extends BaseService {
           raw("TO_CHAR(end_time, 'HH24:MI')").as('end_time'),
         );
       })
-      .modifyGraph('career_course', (builder) => {
+      .modifyGraph('pensum_course', (builder) => {
         builder.select('semester', 'field');
       })
-      .modifyGraph('career_course.course', (builder) => {
+      .modifyGraph('pensum_course.course', (builder) => {
         builder.select('name');
       })
       .modifyGraph('[periods.weekday, section, classroom]', (builder) => {

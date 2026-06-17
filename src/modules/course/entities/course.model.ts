@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Model, RelationMappings, RelationMappingsThunk } from 'objection';
-import { CareerModel } from 'src/modules/career/entities/career.model';
+import { PensumCourseModel } from 'src/modules/pensum_courses/entities/pensum_course.entity';
 import { CourseSemesterProgressModel } from 'src/modules/user-courses-progress/entities/course-semester-progress.model';
 
 export class CourseModel extends Model {
@@ -33,16 +33,12 @@ export class CourseModel extends Model {
 
   static get relationMappings(): RelationMappings | RelationMappingsThunk {
     return {
-      careers: {
-        relation: Model.ManyToManyRelation,
-        modelClass: CareerModel,
+      pensum_courses: {
+        relation: Model.HasManyRelation,
+        modelClass: PensumCourseModel,
         join: {
           from: 'courses.code',
-          through: {
-            from: 'career_courses.course_code',
-            to: 'career_courses.career_code',
-          },
-          to: 'careers.code',
+          to: 'pensum_courses.course_code',
         },
       },
       courses_semester_progress: {
