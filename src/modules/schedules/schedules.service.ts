@@ -22,11 +22,15 @@ export class SchedulesService extends BaseService {
     if (queryDto.career) {
       const selectedCareer = Number.parseInt(queryDto.career as any);
       if (selectedCareer === 0) {
-        builder.andWhere('career_fields.common_field', true);
+        builder.whereRaw(
+          `EXISTS (SELECT 1 FROM career_fields cf WHERE cf.pensum_id = "pensum_course".pensum_id AND cf.field_number = "pensum_course".field AND cf.common_field = true)`,
+        );
       } else {
         builder
           .andWhere('pensum_course:pensum.career_code', selectedCareer)
-          .andWhere('career_fields.common_field', false);
+          .whereRaw(
+            `EXISTS (SELECT 1 FROM career_fields cf WHERE cf.pensum_id = "pensum_course".pensum_id AND cf.field_number = "pensum_course".field AND cf.common_field = false)`,
+          );
       }
     }
     return builder;
@@ -68,14 +72,27 @@ export class SchedulesService extends BaseService {
       });
   }
 
+  async findByDayNames(dayNames: string[], queryDto: ScheduleQueryDto) {
+    const weekdays = await this.scheduleModel
+      .knex()('weekdays')
+      .whereIn('name', dayNames)
+      .select('id');
+    const dayIds = weekdays.map((w) => w.id);
+    return this.findByDays(dayIds, queryDto);
+  }
+
   async findByDays(days, queryDto: ScheduleQueryDto) {
+    try {
     const schedules = await this.scheduleModel
       .query()
       .withGraphJoined(
         '[periods.[weekday,hour], pensum_course.[pensum.career, course], section, classroom]',
       )
-      .joinRaw(
-        'LEFT JOIN career_fields ON career_fields.pensum_id = "pensum_course".pensum_id AND career_fields.field_number = "pensum_course".field',
+      .select(
+        'schedules.*',
+        raw(
+          `(SELECT cf.name FROM career_fields cf WHERE cf.pensum_id = "pensum_course".pensum_id AND cf.field_number = "pensum_course".field LIMIT 1) as field_name`,
+        ),
       )
       .modifyGraph('periods', (builder) => {
         builder.select('weekday_id');
@@ -117,6 +134,10 @@ export class SchedulesService extends BaseService {
     });
 
     return schedules;
+    } catch (error) {
+      console.error('DEBUG findByDays error:', error);
+      throw error;
+    }
   }
 
   update(id: number, updateScheduleDto: UpdateScheduleDto) {
