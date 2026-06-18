@@ -59,7 +59,7 @@ export class UserCoursesProgressService extends BaseService {
               'JOIN pensums ON pensums.id = pensum_courses.pensum_id',
             )
             .joinRaw(
-              'JOIN career_fields ON (career_fields.career_code = pensums.career_code AND pensum_courses.field = career_fields.field_number)',
+              'JOIN career_fields ON (pensum_courses.pensum_id = career_fields.pensum_id AND pensum_courses.field = career_fields.field_number)',
             )
             .andWhere('pensum_courses.pensum_id', pensum.id)
             .select('career_fields.name as field_name', 'pensum_courses.*');

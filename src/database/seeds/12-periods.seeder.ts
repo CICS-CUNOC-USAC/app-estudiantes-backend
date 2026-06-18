@@ -2,16 +2,19 @@ import * as Knex from 'knex';
 
 export async function seed(knex: Knex.Knex): Promise<any> {
   await knex('periods').del();
+
+  const hours = await knex('hours').select('id').orderBy('id');
+  const weekdays = await knex('weekdays').select('id').orderBy('id');
+
   const periods: any[] = [];
-  //Create the same periods for all weekdays
-  [1, 2, 3, 4, 5].forEach((weekday) => {
-    for (let index = 1; index < 12; index++) {
+  for (const weekday of weekdays) {
+    for (const hour of hours) {
       periods.push({
-        hour_id: index,
-        weekday_id: weekday,
+        hour_id: hour.id,
+        weekday_id: weekday.id,
       });
     }
-  });
+  }
 
   return knex('periods').insert(periods);
 }

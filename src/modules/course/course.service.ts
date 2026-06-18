@@ -28,7 +28,7 @@ export class CourseService extends BaseService {
         'JOIN pensums ON pensum_courses.pensum_id = pensums.id',
       )
       .joinRaw(
-        'JOIN career_fields ON (pensums.career_code = career_fields.career_code AND pensum_courses.field = career_fields.field_number)',
+        'JOIN career_fields ON (pensum_courses.pensum_id = career_fields.pensum_id AND pensum_courses.field = career_fields.field_number)',
       )
       .withGraphFetched('course');
   }
@@ -42,8 +42,8 @@ export class CourseService extends BaseService {
     super(CourseService.name);
   }
 
-  create(createCourseDto: CreateCourseDto) {
-    return 'This action adds a new course';
+  async create(createCourseDto: CreateCourseDto) {
+    return this.courseModel.query().insert(createCourseDto);
   }
 
   async findAll() {
@@ -68,18 +68,18 @@ export class CourseService extends BaseService {
         'JOIN pensums ON pensum_courses.pensum_id = pensums.id',
       )
       .joinRaw(
-        'JOIN career_fields ON (pensums.career_code = career_fields.career_code AND pensum_courses.field = career_fields.field_number)',
+        'JOIN career_fields ON (pensum_courses.pensum_id = career_fields.pensum_id AND pensum_courses.field = career_fields.field_number)',
       )
       .select('pensum_courses.*', 'career_fields.name as field_name')
       .findOne('course_code', code)
       .withGraphFetched('course');
   }
 
-  update(id: number, updateCourseDto: UpdateCourseDto) {
-    return `This action updates a #${id} course`;
+  async update(code: string, updateCourseDto: UpdateCourseDto) {
+    return this.courseModel.query().patchAndFetchById(code, updateCourseDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} course`;
+  async remove(code: string) {
+    return this.courseModel.query().deleteById(code);
   }
 }

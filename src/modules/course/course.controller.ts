@@ -6,12 +6,15 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
   ValidationPipe,
 } from '@nestjs/common';
 import { CourseService } from './course.service';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { PermissionsGuard } from 'src/core/guards/permissions/permissions.guard';
+import { CheckAbilities } from 'src/core/decorators/abilities/abilities.decorator';
 
 @ApiTags('Courses')
 @Controller('courses')
@@ -19,6 +22,8 @@ export class CourseController {
   constructor(private readonly courseService: CourseService) {}
 
   @Post()
+  @UseGuards(PermissionsGuard)
+  @CheckAbilities({ action: 'manage', subject: 'Course' })
   create(
     @Body(new ValidationPipe({ transform: true }))
     createCourseDto: CreateCourseDto,
@@ -55,17 +60,21 @@ export class CourseController {
     );
   }
 
-  @Patch(':id')
+  @Patch(':code')
+  @UseGuards(PermissionsGuard)
+  @CheckAbilities({ action: 'manage', subject: 'Course' })
   update(
-    @Param('id') id: string,
+    @Param('code') code: string,
     @Body(new ValidationPipe({ transform: true }))
     updateCourseDto: UpdateCourseDto,
   ) {
-    return this.courseService.update(+id, updateCourseDto);
+    return this.courseService.update(code, updateCourseDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.courseService.remove(+id);
+  @Delete(':code')
+  @UseGuards(PermissionsGuard)
+  @CheckAbilities({ action: 'manage', subject: 'Course' })
+  remove(@Param('code') code: string) {
+    return this.courseService.remove(code);
   }
 }

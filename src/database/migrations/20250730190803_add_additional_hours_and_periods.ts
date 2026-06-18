@@ -1,6 +1,17 @@
 import * as Knex from 'knex';
 
 export async function up(knex: Knex.Knex) {
+  const existingWeekdays = await knex('weekdays').select('id');
+  if (existingWeekdays.length === 0) {
+    await knex('weekdays').insert([
+      { name: 'Lunes' },
+      { name: 'Martes' },
+      { name: 'Miercoles' },
+      { name: 'Jueves' },
+      { name: 'Viernes' },
+    ]);
+  }
+
   const times = ['08:00', '08:50', '09:40', '10:30', '11:20', '12:10'];
 
   const hours = [];

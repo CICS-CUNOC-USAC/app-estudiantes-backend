@@ -2,101 +2,54 @@ import * as Knex from 'knex';
 
 export async function seed(knex: Knex.Knex): Promise<any> {
   await knex('period_schedule').del();
-  const periods_schedules = [];
-  [0, 1, 2].forEach((i) => {
-    //IPC 1
-    periods_schedules.push({
-      schedule_id: 1,
-      //Lunes,Miercoles,Viernes 13:40-14:30
-      period_id: 3 + 22 * i,
-    });
 
-    //Matematica Basica 1 (doble periodo)
-    periods_schedules.push({
-      schedule_id: 2,
-      //Lunes,Miercoles,Viernes 13:40-14:30
-      period_id: 3 + 22 * i,
-    });
-    periods_schedules.push({
-      schedule_id: 2,
-      //Lunes,Miercoles,Viernes 14:30-15:20
-      period_id: 4 + 22 * i,
-    });
+  const schedules = await knex('schedules').select('id').orderBy('id');
+  const periods = await knex('periods').select('id', 'hour_id', 'weekday_id').orderBy('id');
+  const weekdays = await knex('weekdays').select('id', 'name').orderBy('id');
+  const hours = await knex('hours').select('id', 'start_time').orderBy('id');
 
-    //Orientacion y Liderazgo
-    periods_schedules.push({
-      schedule_id: 3,
-      //Lunes,Miercoles,Viernes 19:30-20:20
-      period_id: 10 + 22 * i,
-    });
+  const weekdayIdByName = (name: string) => weekdays.find((w: any) => w.name === name)?.id;
+  const hourIdByTime = (time: string) => hours.find((h: any) => String(h.startTime).startsWith(time))?.id;
+  const periodId = (weekdayName: string, startTime: string) => {
+    const wId = weekdayIdByName(weekdayName);
+    const hId = hourIdByTime(startTime);
+    return periods.find((p: any) => p.weekdayId === wId && p.hourId === hId)?.id;
+  };
 
-    //Fisica Basica
-    periods_schedules.push({
-      schedule_id: 4,
-      //Lunes,Miercoles,Viernes 17:50-18:40
-      period_id: 8 + 22 * i,
-    });
+  const scheduleId = (index: number) => schedules[index]?.id;
 
-    //Quimica 1 (mismos horarios que Fisica Basica)
-    periods_schedules.push({
-      schedule_id: 5,
-      //Lunes,Miercoles,Viernes 17:50-18:40
-      period_id: 8 + 22 * i,
-    });
+  const periods_schedules: any[] = [];
+  const mwf = ['Lunes', 'Miercoles', 'Viernes'];
 
-    //Planeamiento
-    periods_schedules.push({
-      schedule_id: 6,
-      //Lunes,Miercoles,Viernes 16:10-17:00
-      period_id: 6 + 22 * i,
-    });
+  for (const day of mwf) {
+    // IPC 1 - 13:40
+    periods_schedules.push({ schedule_id: scheduleId(0), period_id: periodId(day, '13:40') });
+    // Matematica Basica 1 - 13:40 + 14:30
+    periods_schedules.push({ schedule_id: scheduleId(1), period_id: periodId(day, '13:40') });
+    periods_schedules.push({ schedule_id: scheduleId(1), period_id: periodId(day, '14:30') });
+    // Orientacion y Liderazgo - 19:30
+    periods_schedules.push({ schedule_id: scheduleId(2), period_id: periodId(day, '19:30') });
+    // Fisica Basica - 17:50
+    periods_schedules.push({ schedule_id: scheduleId(3), period_id: periodId(day, '17:50') });
+    // Quimica 1 - 17:50
+    periods_schedules.push({ schedule_id: scheduleId(4), period_id: periodId(day, '17:50') });
+    // Planeamiento - 16:10
+    periods_schedules.push({ schedule_id: scheduleId(5), period_id: periodId(day, '16:10') });
+    // Practica Final - 15:20
+    periods_schedules.push({ schedule_id: scheduleId(6), period_id: periodId(day, '15:20') });
+    // Preparacion y Evaluacion de Proyectos - 12:10
+    periods_schedules.push({ schedule_id: scheduleId(7), period_id: periodId(day, '12:10') });
+  }
 
-    //Practica Final
-    periods_schedules.push({
-      schedule_id: 7,
-      //Lunes,Miercoles,Viernes 15:20-16:10
-      period_id: 5 + 22 * i,
-    });
+  // Laboratorio IPC 1
+  periods_schedules.push({ schedule_id: scheduleId(8), period_id: periodId('Martes', '13:40') });
+  periods_schedules.push({ schedule_id: scheduleId(8), period_id: periodId('Martes', '14:30') });
+  periods_schedules.push({ schedule_id: scheduleId(8), period_id: periodId('Jueves', '13:40') });
 
-    //Preparacion y Evaluacion de Proyectos
-    periods_schedules.push({
-      schedule_id: 8,
-      //Lunes,Miercoles,Viernes 12:10-13:00
-      period_id: 2 + 22 * i,
-    });
-  });
-  //Laboratorio IPC 1
-  periods_schedules.push({
-    schedule_id: 9,
-    //Martes 13:40-14:30
-    period_id: 14,
-  });
-  periods_schedules.push({
-    schedule_id: 9,
-    //Martes 14:30-15:20
-    period_id: 15,
-  });
-  periods_schedules.push({
-    schedule_id: 9,
-    //Jueves 13:40-14:30
-    period_id: 36,
-  });
+  // Laboratorio Matematica Basica 1
+  periods_schedules.push({ schedule_id: scheduleId(9), period_id: periodId('Martes', '13:40') });
+  periods_schedules.push({ schedule_id: scheduleId(9), period_id: periodId('Martes', '14:30') });
+  periods_schedules.push({ schedule_id: scheduleId(9), period_id: periodId('Martes', '15:20') });
 
-  //Laboratorio Matematica Basica 1 (doble periodo)
-  periods_schedules.push({
-    schedule_id: 10,
-    //Martes 13:40-14:30
-    period_id: 14,
-  });
-  periods_schedules.push({
-    schedule_id: 10,
-    //Martes 14:30-15:20
-    period_id: 15,
-  });
-  periods_schedules.push({
-    schedule_id: 10,
-    //Martes 15:20-16:10
-    period_id: 16,
-  });
   return knex('period_schedule').insert(periods_schedules);
 }
