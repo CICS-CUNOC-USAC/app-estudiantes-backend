@@ -38,7 +38,10 @@ export class SchedulesController {
     type: ScheduleModel,
   })
   findCourses(@Query() queryDto: ScheduleQueryDto) {
-    return this.schedulesService.findByDays([1, 3, 5], queryDto);
+    return this.schedulesService.findByDayNames(
+      ['Lunes', 'Miercoles', 'Viernes'],
+      queryDto,
+    );
   }
 
   @Get('laboratories')
@@ -49,7 +52,10 @@ export class SchedulesController {
     type: ScheduleModel,
   })
   findLaboratories(@Query() queryDto: ScheduleQueryDto) {
-    return this.schedulesService.findByDays([2, 4], queryDto);
+    return this.schedulesService.findByDayNames(
+      ['Martes', 'Jueves'],
+      queryDto,
+    );
   }
 
   @Get(':id')
