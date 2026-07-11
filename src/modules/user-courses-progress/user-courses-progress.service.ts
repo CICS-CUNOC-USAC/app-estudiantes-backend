@@ -46,7 +46,7 @@ export class UserCoursesProgressService extends BaseService {
       .query()
       .where('user_id', userId)
       .withGraphFetched(
-        'semester_progress.courses_semester_progress.pensum_course.course',
+        'semester_progress.courses_semester_progress.pensum_course',
       )
       .modifyGraph('semester_progress.courses_semester_progress', (builder) => {
         builder.orderBy('id');
@@ -75,11 +75,11 @@ export class UserCoursesProgressService extends BaseService {
     data.semester_progress.forEach(({ courses_semester_progress }) => {
       courses_semester_progress.forEach(({ approved, pensum_course }) => {
         if (approved && pensum_course.mandatory) {
-          currentMandatoryCredsAccum += pensum_course.course.credits;
-          currentTotalCredsAccum += pensum_course.course.credits;
+          currentMandatoryCredsAccum += pensum_course.credits;
+          currentTotalCredsAccum += pensum_course.credits;
         } else if (approved) {
-          currentNotMandatoryCredsAccum += pensum_course.course.credits;
-          currentTotalCredsAccum += pensum_course.course.credits;
+          currentNotMandatoryCredsAccum += pensum_course.credits;
+          currentTotalCredsAccum += pensum_course.credits;
         }
       });
     });

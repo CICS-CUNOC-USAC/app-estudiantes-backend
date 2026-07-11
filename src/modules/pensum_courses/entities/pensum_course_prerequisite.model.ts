@@ -1,6 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Model, RelationMappings, RelationMappingsThunk } from 'objection';
-import { CourseModel } from 'src/modules/course/entities/course.model';
 import { CoursePrerequisiteModel } from './course_prerequisite.model';
 import { CreditsPrerequisiteModel } from './credits_prerequisite.model';
 
@@ -21,18 +20,9 @@ export class PensumCoursePrerequisiteModel extends Model {
 
   coursePrerequisites?: CoursePrerequisiteModel[];
   creditsPrerequisites?: CreditsPrerequisiteModel[];
-  course?: CourseModel;
 
   static get relationMappings(): RelationMappings | RelationMappingsThunk {
     return {
-      course: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: CourseModel,
-        join: {
-          from: 'pensum_courses_prerequisites.course_code',
-          to: 'courses.code',
-        },
-      },
       coursePrerequisites: {
         relation: Model.HasManyRelation,
         modelClass: CoursePrerequisiteModel,

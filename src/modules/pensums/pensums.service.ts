@@ -102,6 +102,9 @@ export class PensumsService extends BaseService {
             semester: c.semester,
             field: c.field,
             mandatory: c.mandatory,
+            name: c.name,
+            description: c.description,
+            credits: c.credits,
           } as any)),
         );
       }
@@ -120,6 +123,7 @@ export class PensumsService extends BaseService {
         if (prereq.coursePrerequisites?.length > 0) {
           await this.coursePrerequisiteModel.query(trx).insert(
             prereq.coursePrerequisites.map((cp) => ({
+              pensum_id: newPensum.id,
               course_code: cp.course_code,
               career_course_prerequisite_id: newPrereq.id,
             } as any)),
