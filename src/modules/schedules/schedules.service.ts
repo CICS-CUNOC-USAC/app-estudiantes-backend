@@ -52,24 +52,32 @@ export class SchedulesService extends BaseService {
   }
 
   async findOne(id: number) {
-    return await this.scheduleModel
+    const schedule = await this.scheduleModel
       .query()
       .findById(id)
       .withGraphFetched(
-        '[periods.weekday, periods.hour, pensum_course.[pensum, course], section, classroom]',
+        '[periods.weekday, periods.hour, pensum_course.pensum, section, classroom]',
       )
       .modifyGraph('periods', (builder) => {
         builder.select('weekday_id', 'hour_id');
       })
       .modifyGraph('pensum_course', (builder) => {
-        builder.select('semester', 'field');
-      })
-      .modifyGraph('pensum_course.course', (builder) => {
-        builder.select('name');
+        builder.select('semester', 'field', 'name');
       })
       .modifyGraph('[periods.weekday, section, classroom]', (builder) => {
         builder.select('name');
       });
+
+    // `pensum_course.course` used to be a relation to the now-decommissioned
+    // global `courses` table; course name lives inline on pensum_course
+    // now, but the frontend still reads it from a nested `course` object.
+    if (schedule?.pensum_course) {
+      (schedule.pensum_course as any).course = {
+        name: schedule.pensum_course.name,
+      };
+    }
+
+    return schedule;
   }
 
   async findByDayNames(dayNames: string[], queryDto: ScheduleQueryDto) {
@@ -86,7 +94,7 @@ export class SchedulesService extends BaseService {
     const schedules = await this.scheduleModel
       .query()
       .withGraphJoined(
-        '[periods.[weekday,hour], pensum_course.[pensum.career, course], section, classroom]',
+        '[periods.[weekday,hour], pensum_course.pensum.career, section, classroom]',
       )
       .select(
         'schedules.*',
@@ -105,10 +113,7 @@ export class SchedulesService extends BaseService {
         );
       })
       .modifyGraph('pensum_course', (builder) => {
-        builder.select('semester', 'field');
-      })
-      .modifyGraph('pensum_course.course', (builder) => {
-        builder.select('name');
+        builder.select('semester', 'field', 'name');
       })
       .modifyGraph('[periods.weekday, section, classroom]', (builder) => {
         builder.select('name');
@@ -117,6 +122,14 @@ export class SchedulesService extends BaseService {
       .where((builder) => this.queryFilters(queryDto, builder));
 
     schedules.forEach((schedule) => {
+      // `pensum_course.course` used to be a relation to the now-decommissioned
+      // global `courses` table; course name lives inline on pensum_course
+      // now, but the frontend still reads it from a nested `course` object.
+      if (schedule.pensum_course) {
+        (schedule.pensum_course as any).course = {
+          name: schedule.pensum_course.name,
+        };
+      }
       const groupedPeriods = schedule.periods.reduce((acc, period: any) => {
         const existing = acc.find((p) => p.weekday_id === period.weekday_id);
         if (existing) {

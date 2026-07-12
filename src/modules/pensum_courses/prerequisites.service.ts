@@ -20,12 +20,54 @@ export class PrerequisitesService {
     private pensumCourseModel: ModelClass<PensumCourseModel>,
   ) {}
 
+  // `coursePrerequisites.course` used to be a relation to the now-decommissioned
+  // global `courses` table; the prerequisite course's content now lives on
+  // the *target* pensum's pensum_courses row, so it must be looked up by
+  // (pensum_id, course_code) instead of a bare global course_code. The
+  // frontend still reads it from a nested `course` object.
+  private async attachCourseInfo(rules: PensumCoursePrerequisiteModel[]) {
+    const pairs = rules.flatMap((rule) =>
+      (rule.coursePrerequisites ?? []).map((cp) => ({
+        pensum_id: rule.pensum_id,
+        course_code: cp.course_code,
+      })),
+    );
+    if (pairs.length === 0) {
+      return rules;
+    }
+
+    const courses = await this.pensumCourseModel
+      .query()
+      .where((builder) => {
+        pairs.forEach(({ pensum_id, course_code }) => {
+          builder.orWhere((b) =>
+            b.where('pensum_id', pensum_id).andWhere('course_code', course_code),
+          );
+        });
+      });
+    const courseMap = new Map(
+      courses.map((c) => [`${c.pensum_id}:${c.course_code}`, c]),
+    );
+
+    rules.forEach((rule) => {
+      rule.coursePrerequisites?.forEach((cp) => {
+        const match = courseMap.get(`${rule.pensum_id}:${cp.course_code}`);
+        (cp as any).course = match
+          ? { code: match.course_code, name: match.name, credits: match.credits }
+          : null;
+      });
+    });
+
+    return rules;
+  }
+
   async findByPensumAndCourse(pensumId: number, courseCode: string) {
-    return this.prerequisiteModel
+    const rules = await this.prerequisiteModel
       .query()
       .where('pensum_id', pensumId)
       .andWhere('course_code', courseCode)
       .withGraphFetched('[coursePrerequisites, creditsPrerequisites]');
+    return this.attachCourseInfo(rules);
   }
 
   async create(pensumId: number, courseCode: string, dto: CreatePrerequisiteDto) {
@@ -73,10 +115,12 @@ export class PrerequisitesService {
       } as any);
     }
 
-    return this.prerequisiteModel
+    const created = await this.prerequisiteModel
       .query()
       .findById(rule.id)
       .withGraphFetched('[coursePrerequisites, creditsPrerequisites]');
+    const [withCourse] = await this.attachCourseInfo([created]);
+    return withCourse;
   }
 
   async update(id: number, dto: UpdatePrerequisiteDto) {
@@ -106,10 +150,12 @@ export class PrerequisitesService {
         .patch({ credits: dto.credits });
     }
 
-    return this.prerequisiteModel
+    const updated = await this.prerequisiteModel
       .query()
       .findById(id)
       .withGraphFetched('[coursePrerequisites, creditsPrerequisites]');
+    const [withCourse] = await this.attachCourseInfo([updated]);
+    return withCourse;
   }
 
   async remove(id: number) {
