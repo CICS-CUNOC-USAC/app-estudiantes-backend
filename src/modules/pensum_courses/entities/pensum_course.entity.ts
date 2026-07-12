@@ -1,5 +1,4 @@
 import { Model, RelationMappings, RelationMappingsThunk } from 'objection';
-import { CourseModel } from 'src/modules/course/entities/course.model';
 import { ApiProperty } from '@nestjs/swagger';
 import { PensumModel } from 'src/modules/pensums/entities/pensum.model';
 
@@ -31,16 +30,28 @@ export class PensumCourseModel extends Model {
   mandatory: boolean;
 
   @ApiProperty({
+    example: 'Introduccion a la Programacion y Computacion 1',
+    description: 'Name of the course',
+  })
+  name: string;
+
+  @ApiProperty({
+    example: '',
+    description: 'Description of the course',
+  })
+  description: string;
+
+  @ApiProperty({
+    example: 3,
+    description: 'Credits given by the course',
+  })
+  credits: number;
+
+  @ApiProperty({
     description: 'Pensum details',
     type: () => PensumModel,
   })
   pensum?: PensumModel;
-
-  @ApiProperty({
-    description: 'Course details',
-    type: () => CourseModel,
-  })
-  course?: CourseModel;
 
   static get idColumn() {
     return ['pensum_id', 'course_code'];
@@ -54,14 +65,6 @@ export class PensumCourseModel extends Model {
         join: {
           from: 'pensum_courses.pensum_id',
           to: 'pensums.id',
-        },
-      },
-      course: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: CourseModel,
-        join: {
-          from: 'pensum_courses.course_code',
-          to: 'courses.code',
         },
       },
     };

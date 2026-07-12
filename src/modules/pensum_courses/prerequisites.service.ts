@@ -5,7 +5,6 @@ import { CoursePrerequisiteModel } from './entities/course_prerequisite.model';
 import { CreditsPrerequisiteModel } from './entities/credits_prerequisite.model';
 import { CreatePrerequisiteDto } from './dto/create-prerequisite.dto';
 import { UpdatePrerequisiteDto } from './dto/update-prerequisite.dto';
-import { CourseModel } from '../course/entities/course.model';
 import { PensumCourseModel } from './entities/pensum_course.entity';
 
 @Injectable()
@@ -17,8 +16,6 @@ export class PrerequisitesService {
     private coursePrerequisiteModel: ModelClass<CoursePrerequisiteModel>,
     @Inject(CreditsPrerequisiteModel.name)
     private creditsPrerequisiteModel: ModelClass<CreditsPrerequisiteModel>,
-    @Inject(CourseModel.name)
-    private courseModel: ModelClass<CourseModel>,
     @Inject(PensumCourseModel.name)
     private pensumCourseModel: ModelClass<PensumCourseModel>,
   ) {}
@@ -28,7 +25,7 @@ export class PrerequisitesService {
       .query()
       .where('pensum_id', pensumId)
       .andWhere('course_code', courseCode)
-      .withGraphFetched('[coursePrerequisites.course, creditsPrerequisites]');
+      .withGraphFetched('[coursePrerequisites, creditsPrerequisites]');
   }
 
   async create(pensumId: number, courseCode: string, dto: CreatePrerequisiteDto) {
@@ -46,7 +43,6 @@ export class PrerequisitesService {
       if (dto.prerequisiteCourseCode === courseCode) {
         throw new BadRequestException('A course cannot be a prerequisite of itself');
       }
-      await this.validateCourseExists(dto.prerequisiteCourseCode);
       await this.validatePrerequisiteSemester(pensumId, courseCode, dto.prerequisiteCourseCode);
       await this.validateNoDuplicateCoursePrerequisite(pensumId, courseCode, dto.prerequisiteCourseCode);
     } else {
@@ -66,6 +62,7 @@ export class PrerequisitesService {
 
     if (dto.isCourse) {
       await this.coursePrerequisiteModel.query().insert({
+        pensum_id: pensumId,
         course_code: dto.prerequisiteCourseCode,
         career_course_prerequisite_id: rule.id,
       } as any);
@@ -79,7 +76,7 @@ export class PrerequisitesService {
     return this.prerequisiteModel
       .query()
       .findById(rule.id)
-      .withGraphFetched('[coursePrerequisites.course, creditsPrerequisites]');
+      .withGraphFetched('[coursePrerequisites, creditsPrerequisites]');
   }
 
   async update(id: number, dto: UpdatePrerequisiteDto) {
@@ -92,7 +89,6 @@ export class PrerequisitesService {
       if (dto.prerequisiteCourseCode === rule.course_code) {
         throw new BadRequestException('A course cannot be a prerequisite of itself');
       }
-      await this.validateCourseExists(dto.prerequisiteCourseCode);
       await this.validatePrerequisiteSemester(rule.pensum_id, rule.course_code, dto.prerequisiteCourseCode);
       await this.coursePrerequisiteModel
         .query()
@@ -113,7 +109,7 @@ export class PrerequisitesService {
     return this.prerequisiteModel
       .query()
       .findById(id)
-      .withGraphFetched('[coursePrerequisites.course, creditsPrerequisites]');
+      .withGraphFetched('[coursePrerequisites, creditsPrerequisites]');
   }
 
   async remove(id: number) {
@@ -122,13 +118,6 @@ export class PrerequisitesService {
       throw new NotFoundException(`Prerequisite with id ${id} not found`);
     }
     return this.prerequisiteModel.query().deleteById(id);
-  }
-
-  private async validateCourseExists(courseCode: string) {
-    const course = await this.courseModel.query().findById(courseCode);
-    if (!course) {
-      throw new BadRequestException(`Course ${courseCode} does not exist`);
-    }
   }
 
   private async validatePrerequisiteSemester(
