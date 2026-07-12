@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Transform } from 'class-transformer';
 import {
   IsEmail,
   IsIn,
@@ -30,11 +31,14 @@ export class CreateUserDto {
   })
   readonly username: string;
 
+  @Transform(({ value }) =>
+    value == null ? value : String(value),
+  )
   @IsNotEmpty()
   @IsNumberString()
   @MaxLength(20)
   @ApiProperty({
-    description: 'RA (Registro acadêmico) related to the user',
+    description: 'RA (Registro academico) related to the user',
     example: '202131249',
   })
   readonly ra: string;
