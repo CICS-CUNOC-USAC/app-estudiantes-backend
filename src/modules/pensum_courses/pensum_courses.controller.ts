@@ -18,6 +18,7 @@ import { CheckAbilities } from 'src/core/decorators/abilities/abilities.decorato
 import { CreatePrerequisiteDto } from './dto/create-prerequisite.dto';
 import { UpdatePrerequisiteDto } from './dto/update-prerequisite.dto';
 import { AddPensumCourseDto } from './dto/add-pensum-course.dto';
+import { UpdatePensumCourseDto } from './dto/update-pensum_course.dto';
 
 @ApiTags('Pensum Courses')
 @Controller('pensums/:pensumId/courses')
@@ -53,6 +54,22 @@ export class PensumCoursesController {
     dto: AddPensumCourseDto,
   ) {
     return this.pensumCoursesService.addCourseToPensum(+pensumId, dto);
+  }
+
+  @Patch(':courseCode')
+  @UseGuards(PermissionsGuard)
+  @CheckAbilities({ action: 'manage', subject: 'Pensum' })
+  updateCourseInPensum(
+    @Param('pensumId') pensumId: string,
+    @Param('courseCode') courseCode: string,
+    @Body(new ValidationPipe({ transform: true }))
+    dto: UpdatePensumCourseDto,
+  ) {
+    return this.pensumCoursesService.updateCourseInPensum(
+      +pensumId,
+      courseCode,
+      dto,
+    );
   }
 
   @Delete(':courseCode')

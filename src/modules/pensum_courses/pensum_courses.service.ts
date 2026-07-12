@@ -5,9 +5,9 @@ import { PensumCourseModel } from './entities/pensum_course.entity';
 import { BaseService } from 'src/core/utils/base-service';
 import { BaseQueryDto } from 'src/core/utils/base-query.dto';
 import { PensumModel } from '../pensums/entities/pensum.model';
-import { CourseModel } from '../course/entities/course.model';
 import { CareerFieldModel } from './entities/career_field.model';
 import { AddPensumCourseDto } from './dto/add-pensum-course.dto';
+import { UpdatePensumCourseDto } from './dto/update-pensum_course.dto';
 
 @Injectable()
 export class PensumCoursesService extends BaseService {
@@ -16,8 +16,6 @@ export class PensumCoursesService extends BaseService {
     private pensumCourseModel: ModelClass<PensumCourseModel>,
     @Inject(PensumModel.name)
     private pensumModel: ModelClass<PensumModel>,
-    @Inject(CourseModel.name)
-    private courseModel: ModelClass<CourseModel>,
     @Inject(CareerFieldModel.name)
     private careerFieldModel: ModelClass<CareerFieldModel>,
   ) {
@@ -32,24 +30,21 @@ export class PensumCoursesService extends BaseService {
 
     const onlyMandatoryCreds = await this.pensumCourseModel
       .query()
-      .sum('courses.credits as total_credits')
-      .join('courses', 'pensum_courses.course_code', 'courses.code')
+      .sum('pensum_courses.credits as total_credits')
       .where('pensum_courses.pensum_id', pensumId)
       .andWhere('pensum_courses.mandatory', true)
       .first();
 
     const onlyNotMandatoryCreds = await this.pensumCourseModel
       .query()
-      .sum('courses.credits as total_credits')
-      .join('courses', 'pensum_courses.course_code', 'courses.code')
+      .sum('pensum_courses.credits as total_credits')
       .where('pensum_courses.pensum_id', pensumId)
       .andWhere('pensum_courses.mandatory', false)
       .first();
 
     const totalCredits = await this.pensumCourseModel
       .query()
-      .sum('courses.credits as total_credits')
-      .join('courses', 'pensum_courses.course_code', 'courses.code')
+      .sum('pensum_courses.credits as total_credits')
       .where('pensum_courses.pensum_id', pensumId)
       .first();
 
@@ -79,11 +74,7 @@ export class PensumCoursesService extends BaseService {
       )
       .select('pensum_courses.*', 'career_fields.name as field_name')
       .orderBy('semester')
-      .where('pensum_courses.pensum_id', pensumId)
-      .withGraphFetched('course')
-      .modifyGraph('course', (builder) => {
-        builder.select('name', 'credits');
-      });
+      .where('pensum_courses.pensum_id', pensumId);
 
     return courses;
   }
@@ -108,11 +99,7 @@ export class PensumCoursesService extends BaseService {
       )
       .select('pensum_courses.*', 'career_fields.name as field_name')
       .orderBy('semester')
-      .where('pensum_courses.pensum_id', pensumId)
-      .withGraphFetched('course')
-      .modifyGraph('course', (builder) => {
-        builder.select('name', 'credits');
-      });
+      .where('pensum_courses.pensum_id', pensumId);
 
     const groupedCourses = groupBy(courses, 'semester');
     const result = Object.keys(groupedCourses).map((key) => {
@@ -145,11 +132,6 @@ export class PensumCoursesService extends BaseService {
       throw new NotFoundException(`Pensum ${pensumId} not found`);
     }
 
-    const existingCourse = await this.courseModel.query().findById(dto.courseCode);
-    if (existingCourse) {
-      throw new BadRequestException(`Course with code ${dto.courseCode} already exists`);
-    }
-
     const validField = await this.careerFieldModel
       .query()
       .where('pensum_id', pensumId)
@@ -172,26 +154,55 @@ export class PensumCoursesService extends BaseService {
       );
     }
 
-    await this.courseModel.query().insert({
-      code: dto.courseCode,
-      name: dto.courseName,
-      description: dto.courseDescription,
-      credits: dto.courseCredits,
-    } as any);
-
     await this.pensumCourseModel.query().insert({
       pensum_id: pensumId,
       course_code: dto.courseCode,
       semester: dto.semester,
       field: dto.field,
       mandatory: dto.mandatory,
+      name: dto.courseName,
+      description: dto.courseDescription,
+      credits: dto.courseCredits,
     } as any);
 
     return this.pensumCourseModel
       .query()
       .where('pensum_id', pensumId)
       .andWhere('course_code', dto.courseCode)
-      .withGraphFetched('course')
+      .first();
+  }
+
+  async updateCourseInPensum(
+    pensumId: number,
+    courseCode: string,
+    dto: UpdatePensumCourseDto,
+  ) {
+    const entry = await this.pensumCourseModel
+      .query()
+      .where('pensum_id', pensumId)
+      .andWhere('course_code', courseCode)
+      .first();
+    if (!entry) {
+      throw new NotFoundException(
+        `Course ${courseCode} not found in pensum ${pensumId}`,
+      );
+    }
+
+    return this.pensumCourseModel
+      .query()
+      .where('pensum_id', pensumId)
+      .andWhere('course_code', courseCode)
+      .patch({
+        ...(dto.courseName !== undefined && { name: dto.courseName }),
+        ...(dto.courseDescription !== undefined && {
+          description: dto.courseDescription,
+        }),
+        ...(dto.courseCredits !== undefined && { credits: dto.courseCredits }),
+        ...(dto.semester !== undefined && { semester: dto.semester }),
+        ...(dto.field !== undefined && { field: dto.field }),
+        ...(dto.mandatory !== undefined && { mandatory: dto.mandatory }),
+      } as any)
+      .returning('*')
       .first();
   }
 
