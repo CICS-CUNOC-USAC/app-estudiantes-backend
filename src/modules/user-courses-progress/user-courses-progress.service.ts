@@ -74,6 +74,18 @@ export class UserCoursesProgressService extends BaseService {
     let currentTotalCredsAccum = 0;
     data.semester_progress.forEach(({ courses_semester_progress }) => {
       courses_semester_progress.forEach(({ approved, pensum_course }) => {
+        if (!pensum_course) {
+          return;
+        }
+        // `pensum_course.course` used to be a relation to the now-decommissioned
+        // global `courses` table; course name/credits live inline on
+        // pensum_course now, but the frontend still reads them from a
+        // nested `course` object.
+        (pensum_course as any).course = {
+          name: pensum_course.name,
+          description: pensum_course.description,
+          credits: pensum_course.credits,
+        };
         if (approved && pensum_course.mandatory) {
           currentMandatoryCredsAccum += pensum_course.credits;
           currentTotalCredsAccum += pensum_course.credits;

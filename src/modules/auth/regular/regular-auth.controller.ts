@@ -24,7 +24,9 @@ import { UserRycaServiceDto } from '../dto/user-ryca-service.dto';
 @ApiTags('Regular Login')
 @Controller('auth')
 export class RegularAuthController {
-  constructor(private readonly regularAuthService: RegularAuthService) {}
+
+  constructor(private readonly regularAuthService: RegularAuthService) { }
+
 
   @Post('sign-up')
   async create(
