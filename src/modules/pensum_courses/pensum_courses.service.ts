@@ -63,6 +63,19 @@ export class PensumCoursesService extends BaseService {
     return this.pensumCourseModel.query().select('*');
   }
 
+  // Course content used to live on a joined `courses` row and was exposed
+  // to clients as a nested `course` object; it now lives inline on
+  // pensum_courses, but existing frontend clients still read it from
+  // `course.name`/`course.credits`, so keep emitting that shape too.
+  private withNestedCourse<
+    T extends { name: string; description: string; credits: number },
+  >(row: T) {
+    return {
+      ...row,
+      course: { name: row.name, description: row.description, credits: row.credits },
+    };
+  }
+
   async findCoursesByPensum(pensumId: number) {
     const courses = await this.pensumCourseModel
       .query()
@@ -76,7 +89,7 @@ export class PensumCoursesService extends BaseService {
       .orderBy('semester')
       .where('pensum_courses.pensum_id', pensumId);
 
-    return courses;
+    return courses.map((c) => this.withNestedCourse(c));
   }
 
   async findCoursesByPensumAndSemester(pensumId: number) {
@@ -105,7 +118,7 @@ export class PensumCoursesService extends BaseService {
     const result = Object.keys(groupedCourses).map((key) => {
       return {
         semester: key,
-        courses: groupedCourses[key],
+        courses: groupedCourses[key].map((c) => this.withNestedCourse(c)),
       };
     });
 
@@ -165,11 +178,12 @@ export class PensumCoursesService extends BaseService {
       credits: dto.courseCredits,
     } as any);
 
-    return this.pensumCourseModel
+    const inserted = await this.pensumCourseModel
       .query()
       .where('pensum_id', pensumId)
       .andWhere('course_code', dto.courseCode)
       .first();
+    return inserted && this.withNestedCourse(inserted);
   }
 
   async updateCourseInPensum(
@@ -188,7 +202,7 @@ export class PensumCoursesService extends BaseService {
       );
     }
 
-    return this.pensumCourseModel
+    const updated = await this.pensumCourseModel
       .query()
       .where('pensum_id', pensumId)
       .andWhere('course_code', courseCode)
@@ -204,6 +218,7 @@ export class PensumCoursesService extends BaseService {
       } as any)
       .returning('*')
       .first();
+    return updated && this.withNestedCourse(updated);
   }
 
   async removeCourseFromPensum(pensumId: number, courseCode: string) {
