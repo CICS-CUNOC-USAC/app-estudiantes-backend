@@ -7,6 +7,11 @@ import { ApiTags } from '@nestjs/swagger';
 export class CourseController {
   constructor(private readonly courseService: CourseService) {}
 
+  @Get()
+  findAll() {
+    return this.courseService.findAll();
+  }
+
   @Get(':code')
   findOne(@Param('code') code: string) {
     return this.courseService.findOne(code);
