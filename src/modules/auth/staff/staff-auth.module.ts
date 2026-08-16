@@ -6,10 +6,11 @@ import { StaffsModule } from 'src/modules/staffs/staffs.module';
 import { LocalStaffStrategy } from 'src/core/strategies/auth/staffs/local-staff.strategy';
 import { JwtStaffStrategy } from 'src/core/strategies/auth/staffs/jwt-staff.strategy';
 import { MetricsModule } from 'src/modules/metrics/metrics.module';
+import { RefreshTokensModule } from '../refresh-tokens/refresh-tokens.module';
 
 @Module({
   controllers: [StaffAuthController],
   providers: [StaffAuthService, LocalStaffStrategy, JwtStaffStrategy],
-  imports: [StaffsModule, PassportModule, MetricsModule],
+  imports: [StaffsModule, PassportModule, MetricsModule, RefreshTokensModule],
 })
 export class StaffAuthModule {}
