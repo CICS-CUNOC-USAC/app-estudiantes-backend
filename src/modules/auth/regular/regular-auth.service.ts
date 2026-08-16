@@ -33,6 +33,8 @@ import { UserRycaServiceDto } from '../dto/user-ryca-service.dto';
 import { ConsumeService } from 'src/modules/consume-service/consume-service.service';
 import { RycaUserServiceResponseDto } from 'src/modules/consume-service/dto/ryca-user-service-response.dto';
 import { MetricsService } from 'src/modules/metrics/metrics.service';
+import { RefreshTokensService } from '../refresh-tokens/refresh-tokens.service';
+import { RefreshTokenModel } from '../refresh-tokens/entities/refresh-token.model';
 
 // This class is responsible for the authentication of regular users (students)
 @Injectable()
@@ -57,6 +59,7 @@ export class RegularAuthService extends BaseService {
     private readonly emailService: EmailService,
     private readonly consumeService: ConsumeService,
     private readonly metricsService: MetricsService,
+    private readonly refreshTokensService: RefreshTokensService,
   ) {
     super(RegularAuthService.name);
   }
@@ -78,11 +81,16 @@ export class RegularAuthService extends BaseService {
   /**
    * Creates a new profile with its user and logs the user in
    * @param {SignUpDto} Data to create the new profile with
-   * @returns {Promise<object>} User and token
+   * @returns {Promise<object>} User, access_token and refresh_token
    */
-  async signUp(signUpDto: SignUpDto): Promise<{
+  async signUp(
+    signUpDto: SignUpDto,
+    deviceInfo?: string,
+    ipAddress?: string,
+  ): Promise<{
     user: UserModel;
-    token: string;
+    access_token: string;
+    refresh_token: string;
   }> {
     // Deconstruct the DTO
     const { user: createUserDto, ...profileDto } = signUpDto;
@@ -90,7 +98,8 @@ export class RegularAuthService extends BaseService {
     // Save the profile and user
     return this.dbTrxService.databaseTransaction<{
       user: UserModel;
-      token: string;
+      access_token: string;
+      refresh_token: string;
     }>(async (trx) => {
       // Check if some attributes are already in use
       const existant: UserModel | undefined =
@@ -148,10 +157,15 @@ export class RegularAuthService extends BaseService {
         createdUser.career_code,
         trx,
       );
-      // Return the auth token and the user
-      const token = await this.jwtService.signAsync(createdUser.toJSON());
 
-      return { user: createdUser, token };
+      // Return the auth tokens
+      const { access_token, refresh_token } = await this.generateTokenPair(
+        createdUser,
+        deviceInfo,
+        ipAddress,
+      );
+
+      return { user: createdUser, access_token, refresh_token };
     }, this.logger);
   }
 
@@ -235,12 +249,70 @@ export class RegularAuthService extends BaseService {
   }
 
   /**
-   * Generates a JWT token for the user and returns it along with the user
-   * @param user User to generate the token for
+   * Generates access and refresh tokens for the user and returns them along with the user
+   * @param user User to generate tokens for
+   * @param deviceInfo Optional device info from User-Agent header
+   * @param ipAddress Optional IP address
    */
-  async login(user: UserModel) {
-    const token = await this.jwtService.signAsync(user.toJSON());
-    return { user, token };
+  async login(user: UserModel, deviceInfo?: string, ipAddress?: string) {
+    const { access_token, refresh_token } = await this.generateTokenPair(
+      user,
+      deviceInfo,
+      ipAddress,
+    );
+    return { user, access_token, refresh_token };
+  }
+
+  /**
+   * Issues a new access/refresh token pair by validating the given refresh token (rotation)
+   * @param rawRefreshToken Opaque refresh token from the client
+   * @param deviceInfo Optional device info
+   * @param ipAddress Optional IP address
+   */
+  async refresh(
+    rawRefreshToken: string,
+    deviceInfo?: string,
+    ipAddress?: string,
+  ): Promise<{ access_token: string; refresh_token: string }> {
+    const record = await this.refreshTokensService.verify(rawRefreshToken);
+    const user = await this.usersService.findAndReturnById(record.entity_id);
+
+    // Rotate: revoke old token, issue new pair
+    await this.refreshTokensService.revoke(rawRefreshToken);
+    return this.generateTokenPair(user, deviceInfo, ipAddress);
+  }
+
+  /**
+   * Revokes the given refresh token (logout current session)
+   * @param rawRefreshToken Opaque refresh token to invalidate
+   */
+  async logout(rawRefreshToken: string): Promise<void> {
+    await this.refreshTokensService.revoke(rawRefreshToken);
+  }
+
+  /**
+   * Revokes all refresh tokens for the user (logout all sessions)
+   * @param userId ID of the user
+   */
+  async logoutAll(userId: number): Promise<void> {
+    await this.refreshTokensService.revokeAll('user', userId);
+  }
+
+  /**
+   * Returns all active sessions for the user
+   * @param userId ID of the user
+   */
+  async listSessions(userId: number): Promise<RefreshTokenModel[]> {
+    return this.refreshTokensService.listActive('user', userId);
+  }
+
+  /**
+   * Revokes a specific session by its ID, ensuring it belongs to the user
+   * @param sessionId ID of the refresh_token record
+   * @param userId ID of the authenticated user
+   */
+  async revokeSession(sessionId: number, userId: number): Promise<void> {
+    await this.refreshTokensService.revokeById(sessionId, 'user', userId);
   }
 
   /**
@@ -332,5 +404,25 @@ export class RegularAuthService extends BaseService {
       hashedPassword || '',
     );
     return match;
+  }
+
+  private async generateTokenPair(
+    user: UserModel,
+    deviceInfo?: string,
+    ipAddress?: string,
+  ): Promise<{ access_token: string; refresh_token: string }> {
+    const jti = crypto.randomUUID();
+    const payload = { sub: user.id, type: 'user', jti };
+    const access_token = await this.jwtService.signAsync(payload, {
+      expiresIn: process.env.ACCESS_TOKEN_EXPIRATION,
+    });
+    const refresh_token = await this.refreshTokensService.create(
+      'user',
+      user.id,
+      deviceInfo ?? null,
+      ipAddress ?? null,
+      jti,
+    );
+    return { access_token, refresh_token };
   }
 }

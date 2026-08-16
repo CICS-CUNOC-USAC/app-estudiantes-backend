@@ -1,0 +1,6 @@
+allowBuilds:
+  '@nestjs/core': set this to true or false
+  aws-sdk: set this to true or false
+  bcrypt: set this to true or false
+  es5-ext: set this to true or false
+  serverless: set this to true or false

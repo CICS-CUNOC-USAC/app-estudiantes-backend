@@ -1,7 +1,9 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
+  Param,
   Post,
   Put,
   Query,
@@ -20,6 +22,7 @@ import { UpdateRegularProfileDto } from '../dto/update-profile-regular.dto';
 import { PasswordRecoveryRequestDto } from '../dto/password-recovery-request.dto';
 import { PasswordRecoveryResetDto } from '../dto/password-recovery-reset.dto';
 import { UserRycaServiceDto } from '../dto/user-ryca-service.dto';
+import { RefreshTokenDto } from '../dto/refresh-token.dto';
 
 @ApiTags('Regular Login')
 @Controller('auth')
@@ -31,12 +34,18 @@ export class RegularAuthController {
   @Post('sign-up')
   async create(
     @Body(new ValidationPipe({ transform: true })) signUpDto: SignUpDto,
+    @Request() req,
     @Response() res,
   ) {
-    const response = await this.regularAuthService.signUp(signUpDto);
-    const token = response['token'];
-    const user = response['user'];
-    return res.set({ Authorization: `Bearer ${token}` }).send({ user, token });
+    const response = await this.regularAuthService.signUp(
+      signUpDto,
+      req.headers['user-agent'],
+      req.ip,
+    );
+    const { access_token, refresh_token, user } = response;
+    return res
+      .set({ Authorization: `Bearer ${access_token}` })
+      .send({ user, access_token, refresh_token });
   }
 
   @Get('student-info')
@@ -53,7 +62,7 @@ export class RegularAuthController {
     passwordRecoveryRequestDto: PasswordRecoveryRequestDto,
     @Response() res,
   ) {
-    const response = await this.regularAuthService.passwordRecoveryRequest(
+    await this.regularAuthService.passwordRecoveryRequest(
       passwordRecoveryRequestDto,
     );
     return res.set().send({ message: 'Envio exitoso' });
@@ -65,7 +74,7 @@ export class RegularAuthController {
     passwordRecoveryResetDto: PasswordRecoveryResetDto,
     @Response() res,
   ) {
-    const response = await this.regularAuthService.passwordRecoveryReset(
+    await this.regularAuthService.passwordRecoveryReset(
       passwordRecoveryResetDto,
     );
     return res.set().send({ message: 'Reset exitoso' });
@@ -75,8 +84,54 @@ export class RegularAuthController {
   @ApiBody({ type: LoginDto })
   @Post('login')
   async login(@Request() req, @Response() res) {
-    const { user, token } = await this.regularAuthService.login(req.user);
-    return res.set({ Authorization: `Bearer ${token}` }).send({ user, token });
+    const { user, access_token, refresh_token } =
+      await this.regularAuthService.login(
+        req.user,
+        req.headers['user-agent'],
+        req.ip,
+      );
+    return res
+      .set({ Authorization: `Bearer ${access_token}` })
+      .send({ user, access_token, refresh_token });
+  }
+
+  @Post('refresh')
+  async refresh(
+    @Body(new ValidationPipe()) body: RefreshTokenDto,
+    @Request() req,
+  ) {
+    return this.regularAuthService.refresh(
+      body.refresh_token,
+      req.headers['user-agent'],
+      req.ip,
+    );
+  }
+
+  @UseGuards(RegularLoginJwtAuthGuard)
+  @Post('logout')
+  async logout(@Body(new ValidationPipe()) body: RefreshTokenDto) {
+    await this.regularAuthService.logout(body.refresh_token);
+    return { message: 'Sesión cerrada exitosamente' };
+  }
+
+  @UseGuards(RegularLoginJwtAuthGuard)
+  @Post('logout-all')
+  async logoutAll(@Request() req) {
+    await this.regularAuthService.logoutAll(req.user.id);
+    return { message: 'Todas las sesiones cerradas exitosamente' };
+  }
+
+  @UseGuards(RegularLoginJwtAuthGuard)
+  @Get('sessions')
+  async sessions(@Request() req) {
+    return this.regularAuthService.listSessions(req.user.id);
+  }
+
+  @UseGuards(RegularLoginJwtAuthGuard)
+  @Delete('sessions/:id')
+  async revokeSession(@Param('id') id: string, @Request() req) {
+    await this.regularAuthService.revokeSession(+id, req.user.id);
+    return { message: 'Sesión cerrada exitosamente' };
   }
 
   @UseGuards(RegularLoginJwtAuthGuard)
@@ -97,6 +152,5 @@ export class RegularAuthController {
       req.user['profile_id'],
       body,
     );
-    // return this.regularAuthService.updateProfile(req.user, body);
   }
 }

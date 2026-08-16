@@ -1,6 +1,7 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { Model, ModelClass, QueryBuilder } from 'objection';
 import { PensumCourseModel } from '../pensum_courses/entities/pensum_course.entity';
+import { CourseModel } from './entities/course.model';
 import { BaseService } from 'src/core/utils/base-service';
 import { BaseQueryDto } from 'src/core/utils/base-query.dto';
 
@@ -46,8 +47,17 @@ export class CourseService extends BaseService {
   constructor(
     @Inject(PensumCourseModel.name)
     private pensumCourseModel: ModelClass<PensumCourseModel>,
+    @Inject(CourseModel.name)
+    private courseModel: ModelClass<CourseModel>,
   ) {
     super(CourseService.name);
+  }
+
+  async findAll() {
+    return this.courseModel
+      .query()
+      .select('code', 'name', 'description', 'credits')
+      .orderBy('name');
   }
 
   async findAllByPensumAndSemester(semesterNumber: number, pensumId: number) {
@@ -63,16 +73,13 @@ export class CourseService extends BaseService {
   }
 
   async findOne(code: string) {
-    const course = await this.pensumCourseModel
+    const course = await this.courseModel
       .query()
-      .joinRaw(
-        'JOIN pensums ON pensum_courses.pensum_id = pensums.id',
-      )
-      .joinRaw(
-        'JOIN career_fields ON (pensum_courses.pensum_id = career_fields.pensum_id AND pensum_courses.field = career_fields.field_number)',
-      )
-      .select('pensum_courses.*', 'career_fields.name as field_name')
-      .findOne('course_code', code);
-    return course && this.withNestedCourse(course);
+      .select('code', 'name', 'description', 'credits')
+      .findById(code);
+    if (!course) {
+      throw new NotFoundException(`Course ${code} not found`);
+    }
+    return course;
   }
 }

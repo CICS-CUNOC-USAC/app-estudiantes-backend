@@ -3,10 +3,13 @@ import { JwtService } from '@nestjs/jwt';
 import { StaffModel } from 'src/modules/staffs/entities/staff.model';
 import { StaffsService } from 'src/modules/staffs/staffs.service';
 import * as bcrypt from 'bcrypt';
+import * as crypto from 'crypto';
 import { BaseService } from 'src/core/utils/base-service';
 import { QueryBuilder, Model } from 'objection';
 import { BaseQueryDto } from 'src/core/utils/base-query.dto';
 import { MetricsService } from 'src/modules/metrics/metrics.service';
+import { RefreshTokensService } from '../refresh-tokens/refresh-tokens.service';
+import { RefreshTokenModel } from '../refresh-tokens/entities/refresh-token.model';
 
 // This class is responsible for the authentication of staffs users (admins)
 @Injectable()
@@ -21,15 +24,18 @@ export class StaffAuthService extends BaseService {
     private readonly staffsService: StaffsService,
     private jwtService: JwtService,
     private readonly metricsService: MetricsService,
+    private readonly refreshTokensService: RefreshTokensService,
   ) {
     super(StaffAuthService.name);
   }
 
   /**
-   * Generates a JWT token for the staff user and returns it along with the user
-   * @param staff Staff to generate the token for
+   * Generates access and refresh tokens for the staff user and returns them along with the user
+   * @param staff Staff to generate tokens for
+   * @param deviceInfo Optional device info from User-Agent header
+   * @param ipAddress Optional IP address
    */
-  async login(staff: StaffModel) {
+  async login(staff: StaffModel, deviceInfo?: string, ipAddress?: string) {
     if (staff.roles.length <= 0) {
       throw new UnauthorizedException({
         statusCode: 403,
@@ -38,8 +44,64 @@ export class StaffAuthService extends BaseService {
         error: 'Forbidden',
       });
     }
-    const token = await this.jwtService.signAsync(staff.toJSON());
-    return { staff, token };
+    const { access_token, refresh_token } = await this.generateTokenPair(
+      staff,
+      deviceInfo,
+      ipAddress,
+    );
+    return { staff, access_token, refresh_token };
+  }
+
+  /**
+   * Issues a new access/refresh token pair by validating the given refresh token (rotation)
+   * @param rawRefreshToken Opaque refresh token from the client
+   * @param deviceInfo Optional device info
+   * @param ipAddress Optional IP address
+   */
+  async refresh(
+    rawRefreshToken: string,
+    deviceInfo?: string,
+    ipAddress?: string,
+  ): Promise<{ access_token: string; refresh_token: string }> {
+    const record = await this.refreshTokensService.verify(rawRefreshToken);
+    const staff = await this.staffsService.findAndReturnById(record.entity_id);
+
+    // Rotate: revoke old token, issue new pair
+    await this.refreshTokensService.revoke(rawRefreshToken);
+    return this.generateTokenPair(staff, deviceInfo, ipAddress);
+  }
+
+  /**
+   * Revokes the given refresh token (logout current session)
+   * @param rawRefreshToken Opaque refresh token to invalidate
+   */
+  async logout(rawRefreshToken: string): Promise<void> {
+    await this.refreshTokensService.revoke(rawRefreshToken);
+  }
+
+  /**
+   * Revokes all refresh tokens for the staff user (logout all sessions)
+   * @param staffId ID of the staff user
+   */
+  async logoutAll(staffId: number): Promise<void> {
+    await this.refreshTokensService.revokeAll('staff', staffId);
+  }
+
+  /**
+   * Returns all active sessions for the staff user
+   * @param staffId ID of the staff user
+   */
+  async listSessions(staffId: number): Promise<RefreshTokenModel[]> {
+    return this.refreshTokensService.listActive('staff', staffId);
+  }
+
+  /**
+   * Revokes a specific session by its ID, ensuring it belongs to the staff user
+   * @param sessionId ID of the refresh_token record
+   * @param staffId ID of the authenticated staff user
+   */
+  async revokeSession(sessionId: number, staffId: number): Promise<void> {
+    await this.refreshTokensService.revokeById(sessionId, 'staff', staffId);
   }
 
   /**
@@ -94,5 +156,25 @@ export class StaffAuthService extends BaseService {
       hashedPassword || '',
     );
     return match;
+  }
+
+  private async generateTokenPair(
+    staff: StaffModel,
+    deviceInfo?: string,
+    ipAddress?: string,
+  ): Promise<{ access_token: string; refresh_token: string }> {
+    const jti = crypto.randomUUID();
+    const payload = { sub: staff.id, type: 'staff', jti };
+    const access_token = await this.jwtService.signAsync(payload, {
+      expiresIn: process.env.ACCESS_TOKEN_EXPIRATION,
+    });
+    const refresh_token = await this.refreshTokensService.create(
+      'staff',
+      staff.id,
+      deviceInfo ?? null,
+      ipAddress ?? null,
+      jti,
+    );
+    return { access_token, refresh_token };
   }
 }

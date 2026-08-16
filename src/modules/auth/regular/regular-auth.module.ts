@@ -12,6 +12,7 @@ import { EmailModule } from 'src/modules/emails/email.module';
 import { ConsumeService } from 'src/modules/consume-service/consume-service.service';
 import { ConsumeServiceModule } from 'src/modules/consume-service/consume-service.module';
 import { MetricsModule } from 'src/modules/metrics/metrics.module';
+import { RefreshTokensModule } from '../refresh-tokens/refresh-tokens.module';
 
 @Module({
   controllers: [RegularAuthController],
@@ -25,6 +26,7 @@ import { MetricsModule } from 'src/modules/metrics/metrics.module';
     UserCoursesProgressModule,
     ConsumeServiceModule,
     MetricsModule,
+    RefreshTokensModule,
   ],
 })
 export class RegularAuthModule {}

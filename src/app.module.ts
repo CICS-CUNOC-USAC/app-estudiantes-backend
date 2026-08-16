@@ -43,6 +43,8 @@ import { ConsumeServiceModule } from './modules/consume-service/consume-service.
 import { CommentsModule } from './modules/comments/comments.module';
 import { ReactionsModule } from './modules/reactions/reactions.module';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { ScheduleModule } from '@nestjs/schedule';
+import { TasksModule } from './modules/tasks/tasks.module';
 
 @Module({
   imports: [
@@ -52,6 +54,7 @@ import { ThrottlerModule } from '@nestjs/throttler';
     }),
     MetricsModule,
     ConfigModule.forRoot({ isGlobal: true, load: [appConfig] }),
+    ScheduleModule.forRoot(),
     ThrottlerModule.forRoot([
       {
         name: 'default',
@@ -107,6 +110,7 @@ import { ThrottlerModule } from '@nestjs/throttler';
     PrintModule,
     CommentsModule,
     ReactionsModule,
+    TasksModule,
   ],
 })
 export class AppModule {

@@ -36,6 +36,7 @@ import { CareerFieldModel } from 'src/modules/pensum_courses/entities/career_fie
 import { PensumCoursePrerequisiteModel } from 'src/modules/pensum_courses/entities/pensum_course_prerequisite.model';
 import { CoursePrerequisiteModel } from 'src/modules/pensum_courses/entities/course_prerequisite.model';
 import { CreditsPrerequisiteModel } from 'src/modules/pensum_courses/entities/credits_prerequisite.model';
+import { RefreshTokenModel } from 'src/modules/auth/refresh-tokens/entities/refresh-token.model';
 
 dotenv.config();
 
@@ -75,6 +76,7 @@ const models = [
   PensumCoursePrerequisiteModel,
   CoursePrerequisiteModel,
   CreditsPrerequisiteModel,
+  RefreshTokenModel,
 ];
 
 const modelProviders = models.map((model) => {
